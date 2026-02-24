@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Check, Calendar, Home, MapPin, Users, Plus, CheckCircle2 } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 import './Voting.css';
 
 interface VotingOption {

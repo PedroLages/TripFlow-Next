@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Reorder } from 'framer-motion';
 import './Itinerary.css';
 import { Card, CardContent } from '../ui/Card';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 import { ErrorBoundary } from '../ui/ErrorBoundary';
 import { AISuggestionsPanel } from '../AIGenerator/AISuggestionsPanel';
 import { Plane, Hotel, Utensils, Camera, MapPin, Sparkles, Plus, Compass, ThumbsUp, ThumbsDown, MessageSquare, Send, ShoppingBag, Map, Train, Footprints, CheckCircle2, AlertCircle } from 'lucide-react';

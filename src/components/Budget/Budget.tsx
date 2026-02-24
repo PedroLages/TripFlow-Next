@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Budget.css';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 import { PieChart, DollarSign, TrendingUp, Plus, Plane, Hotel, Utensils, ShoppingBag, ArrowUpRight, ArrowDownRight, CreditCard, Wallet, Lock, EyeOff, Eye } from 'lucide-react';
 
 const expenses = [

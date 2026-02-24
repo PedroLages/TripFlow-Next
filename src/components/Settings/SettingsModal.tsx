@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Globe, Bell, Shield } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 import './SettingsModal.css';
 
 interface SettingsModalProps {

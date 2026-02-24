@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ExpenseSplitter.css';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 import { Receipt, ArrowRight, Plus, CheckCircle2, ChevronDown, SplitSquareVertical } from 'lucide-react';
 
 // Mock Data

@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Clock, MessageSquare, ListTodo, UploadCloud } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 import './NotificationsPanel.css';
 
 interface Notification {
