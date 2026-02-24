@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
+@theme {
+  /* Map existing CSS variables to Tailwind tokens */
+  --color-teal: #0D9488;
+  --color-teal-light: #14B8A6;
+  --color-coral: #FF5A5F;
+  --color-coral-light: #FF767A;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+  --color-info: #3B82F6;
+  --color-purple: #8b5cf6;
+
+  /* Semantic tokens for blind budgeting */
+  --color-privacy: #0D9488;
+  --color-privacy-light: rgba(13, 148, 136, 0.15);
+
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+}
+
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/500.css';
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 2026 Cinematic Travel System - Light Mode First */
+  --bg-base: #fcfcfc;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f5f5f5;
+  --bg-surface-subtle: rgba(0, 0, 0, 0.02);
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #5e5e5e;
+
+  /* Semantic Colors */
+  --color-green: #10B981;
+  --color-amber: #F59E0B;
+  --color-red: #EF4444;
+  --color-blue: #3B82F6;
+
+  /* Accents */
+  --accent-primary: #0D9488;
+  --accent-glow: rgba(13, 148, 136, 0.15);
+  --accent-secondary: #FF5A5F;
+
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --shimmer-bg: rgba(0, 0, 0, 0.04);
+  --overlay-bg: rgba(0, 0, 0, 0.1);
+
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-focus: rgba(13, 148, 136, 0.3);
+  --border-gradient: transparent;
+
+  /* Depth */
+  --glass-blur: blur(0px);
+  --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --glass-inner-shadow: none;
+
+  /* Layout */
+  --sidebar-width: 280px;
+
+  /* Typography */
+  --font-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Playfair Display", Georgia, serif;
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root[data-theme="dark"] {
+  --bg-base: #121212;
+  --bg-surface: #1E1E1E;
+  --bg-surface-hover: #2A2A2A;
+
+  --text-primary: #F5F5F5;
+  --text-secondary: #A3A3A3;
+
+  --accent-primary: #14B8A6;
+  --accent-glow: rgba(20, 184, 166, 0.3);
+  --accent-secondary: #FF767A;
+
+  --bg-glass: rgba(18, 18, 18, 0.85);
+  --shimmer-bg: rgba(255, 255, 255, 0.04);
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(20, 184, 166, 0.4);
+  --border-gradient: transparent;
+
+  --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --glass-inner-shadow: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-base);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+/* Glassmorphic Panel Utility */
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  transition: all var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  background: var(--bg-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-hover);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Interactive Elements Base */
+button {
+  font-family: var(--font-base);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
