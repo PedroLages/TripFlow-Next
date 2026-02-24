@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Share2, FileText, Download, Calendar as CalendarIcon, Link2 } from 'lucide-react';
-import { Button } from '../ui/Button';
+import { Button } from '../ui/ButtonLegacy';
 
 export const ExportMenu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
