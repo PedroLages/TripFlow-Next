@@ -1,65 +1,76 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Sparkles } from 'lucide-react'
+import { Dashboard } from '@/components/Dashboard/Dashboard'
+import { AIGeneratorWizard } from '@/components/AIGenerator/AIGeneratorWizard'
+import { ThemeToggle } from '@/components/layout/ThemeProvider'
+
+const MOCK_TRIPS = [
+  {
+    id: 1,
+    destination: 'Japan Circuit',
+    dates: 'Oct 12 - Oct 26, 2026',
+    status: 'PLANNING',
+    progress: 45,
+    imageUrl: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1600&auto=format&fit=crop',
+    collaborators: 2,
+    accentColor: 'var(--color-blue)',
+  },
+  {
+    id: 2,
+    destination: 'Amalfi Coast Escape',
+    dates: 'Jun 05 - Jun 15, 2026',
+    status: 'BOOKED',
+    progress: 100,
+    imageUrl: 'https://images.unsplash.com/photo-1533050487297-09b450131914?q=80&w=1600&auto=format&fit=crop',
+    collaborators: 4,
+    accentColor: 'var(--color-green)',
+  },
+]
+
+export default function HomePage() {
+  const router = useRouter()
+  const [isWizardOpen, setIsWizardOpen] = useState(false)
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <header className="top-header" style={{ flexDirection: 'column', alignItems: 'stretch', gap: '16px', paddingBottom: '24px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+          <div>
+            <h1 style={{ marginBottom: '4px' }}>Good afternoon, Pedro.</h1>
+            <p>Ready for your next adventure?</p>
+          </div>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <ThemeToggle />
+            <div className="search-container" style={{ position: 'relative', cursor: 'text' }} onClick={() => setIsWizardOpen(true)}>
+              <Sparkles size={16} className="search-icon" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-primary)', zIndex: 1 }} />
+              <input type="text" className="search-bar" placeholder="Ask AI to plan a trip..." readOnly style={{ paddingLeft: '40px', cursor: 'pointer', outline: 'none' }} />
+            </div>
+            <div className="user-profile">
+              <img src="https://i.pravatar.cc/150?u=1" alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <Dashboard
+        trips={MOCK_TRIPS}
+        onTripClick={(tripData) => {
+          router.push(`/trips/${tripData.id}`)
+        }}
+      />
+
+      {isWizardOpen && (
+        <AIGeneratorWizard
+          onClose={() => setIsWizardOpen(false)}
+          onComplete={(data) => {
+            console.log('Trip Generated', data)
+            setIsWizardOpen(false)
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+      )}
+    </>
+  )
 }
