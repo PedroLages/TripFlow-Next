@@ -10,11 +10,10 @@ interface GlobeProps {
 
 export const Globe: React.FC<GlobeProps> = ({ className, size = 1000 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [isDark, setIsDark] = useState(
-    document.documentElement.getAttribute('data-theme') === 'dark'
-  );
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
+    setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
     const observer = new MutationObserver(() => {
       setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
     });
