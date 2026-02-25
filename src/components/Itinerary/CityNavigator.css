@@ -12,6 +12,7 @@
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
+  touch-action: pan-x manipulation;
 }
 
 .city-pills-scroll::-webkit-scrollbar {

@@ -66,7 +66,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
         style={{ height: `${Math.max(60, activity.duration * 0.8)}px` }}
       ></div>
 
-      <div className="timeline-time">{activity.time}</div>
+      <div className="timeline-time" style={{ fontVariantNumeric: 'tabular-nums' }}>{activity.time}</div>
 
       <div className="timeline-node">
         <div className="node-icon">{getIconForType(activity.type)}</div>
@@ -75,12 +75,23 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
       <Card
         className={cn('timeline-content-card', isExpanded && 'expanded')}
         onClick={onToggleExpand}
+        aria-expanded={isExpanded}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e: React.KeyboardEvent) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            onToggleExpand();
+          }
+        }}
       >
         {activity.imageUrl && (
           <div
             className="activity-card-image"
+            role="img"
+            aria-label={activity.title}
             style={{ backgroundImage: `url(${activity.imageUrl})` }}
-          ></div>
+          />
         )}
         {activity.status && (
           <div className={cn('status-badge', `badge-${activity.status.replace(/\s+/g, '-').toLowerCase()}`)}>
@@ -119,14 +130,14 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
               className="activity-discussion-panel"
             >
               <div className="expansion-actions" style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-                <Button size="sm" variant="ghost" className="vote-btn active">
+                <Button size="sm" variant="ghost" className="vote-btn active" aria-label={`Upvote (${activity.votes.up})`}>
                   <ThumbsUp size={16} /> {activity.votes.up}
                 </Button>
-                <Button size="sm" variant="ghost" className="vote-btn">
+                <Button size="sm" variant="ghost" className="vote-btn" aria-label={`Downvote (${activity.votes.down})`}>
                   <ThumbsDown size={16} /> {activity.votes.down}
                 </Button>
                 <div style={{ flex: 1 }}></div>
-                <Button size="sm" variant="secondary" icon={<Camera size={14} />}>Add Photo</Button>
+                <Button size="sm" variant="secondary" icon={<Camera size={14} />} aria-label="Add photo">Add Photo</Button>
               </div>
 
               <div className="comments-section">
@@ -153,7 +164,7 @@ export const ActivityCard: React.FC<ActivityCardProps> = ({
                     className="glass-input full-width-input"
                     onClick={(e) => e.stopPropagation()}
                   />
-                  <button className="send-btn" onClick={(e) => e.stopPropagation()}>
+                  <button className="send-btn" onClick={(e) => e.stopPropagation()} aria-label="Send comment">
                     <Send size={14} />
                   </button>
                 </div>

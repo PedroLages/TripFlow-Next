@@ -34,16 +34,16 @@ export const TransitConnector: React.FC<TransitConnectorProps> = ({
         {getTransitIcon(method)}
         <span>{duration}m {method}</span>
       </div>
-      <div
+      <button
         className="inline-add-btn"
-        title="Add activity here"
+        aria-label="Add activity here"
         onClick={(e) => {
           e.stopPropagation();
           onAddActivity?.();
         }}
       >
         <Plus size={14} strokeWidth={3} />
-      </div>
+      </button>
     </div>
   );
 };
