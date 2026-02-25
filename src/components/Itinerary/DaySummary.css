@@ -1,0 +1,164 @@
+.day-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 80px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--city-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+}
+
+/* City Hero */
+.day-summary-hero {
+  position: relative;
+  padding: 24px 20px;
+  overflow: hidden;
+}
+
+.day-summary-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--city-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.day-summary-hero-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--city-color);
+}
+
+.day-summary-city {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.day-summary-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Stats Grid */
+.day-summary-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 0 20px;
+}
+
+.day-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 4px;
+  border-radius: 8px;
+  background: var(--bg-surface-hover);
+}
+
+.day-stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.day-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+/* Activity Type Breakdown */
+.day-summary-breakdown {
+  padding: 0 20px;
+}
+
+.day-summary-section-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  font-family: var(--font-base);
+  font-weight: 600;
+}
+
+.type-breakdown-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.type-breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.type-count {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.type-label {
+  text-transform: capitalize;
+}
+
+/* Weather */
+.day-summary-weather {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--bg-surface-hover);
+  margin: 0 20px;
+  border-radius: 8px;
+}
+
+.day-summary-weather svg {
+  color: var(--city-color);
+}
+
+.weather-temp {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+.weather-condition {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Quick Actions */
+.day-summary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px 20px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .day-summary {
+    transition: none;
+  }
+}
