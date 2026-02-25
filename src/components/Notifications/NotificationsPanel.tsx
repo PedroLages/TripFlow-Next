@@ -1,90 +1,81 @@
 "use client"
 
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, Clock, MessageSquare, ListTodo, UploadCloud } from 'lucide-react';
-import { Button } from '../ui/ButtonLegacy';
-import './NotificationsPanel.css';
-
-interface Notification {
-  id: string;
-  user: {
-    name: string;
-    avatar: string;
-    color: string;
-  };
-  action: string;
-  target: string;
-  time: string;
-  type: 'comment' | 'task' | 'upload' | 'default';
-  isRead: boolean;
-}
-
-const mockNotifications: Notification[] = [
-  {
-    id: 'n1',
-    user: { name: 'Sarah J.', avatar: 'https://i.pravatar.cc/150?img=47', color: 'var(--color-purple)' },
-    action: 'commented on',
-    target: 'Day 2 Itinerary',
-    time: '10m ago',
-    type: 'comment',
-    isRead: false
-  },
-  {
-    id: 'n2',
-    user: { name: 'Alex C.', avatar: 'https://i.pravatar.cc/150?img=33', color: 'var(--color-blue)' },
-    action: 'assigned a task to you:',
-    target: 'Book Kyoto Train Tickets',
-    time: '2h ago',
-    type: 'task',
-    isRead: false
-  },
-  {
-    id: 'n3',
-    user: { name: 'Jessica L.', avatar: 'https://i.pravatar.cc/150?img=5', color: 'var(--color-green)' },
-    action: 'uploaded',
-    target: 'Hotel Reservation PDF',
-    time: 'Yesterday',
-    type: 'upload',
-    isRead: true
-  }
-];
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Check, X, Clock, MessageSquare, ListTodo, UploadCloud } from 'lucide-react'
+import { Button } from '../ui/ButtonLegacy'
+import { mockNotifications } from '@/lib/mock-notifications'
+import type { Notification } from '@/types/notification'
+import './NotificationsPanel.css'
 
 interface NotificationsPanelProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
+  onUnreadCountChange?: (count: number) => void
 }
 
-export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose }) => {
-  const [notifications, setNotifications] = React.useState<Notification[]>(mockNotifications);
+function getIconForType(type: Notification['type'], color: string) {
+  switch (type) {
+    case 'comment': return <MessageSquare size={14} color={color} />
+    case 'task': return <ListTodo size={14} color={color} />
+    case 'upload': return <UploadCloud size={14} color={color} />
+    default: return <Clock size={14} color={color} />
+  }
+}
 
-  const getIconForType = (type: string, color: string) => {
-    switch (type) {
-      case 'comment': return <MessageSquare size={14} color={color} />;
-      case 'task': return <ListTodo size={14} color={color} />;
-      case 'upload': return <UploadCloud size={14} color={color} />;
-      default: return <Clock size={14} color={color} />;
+export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, onClose, onUnreadCountChange }) => {
+  const [notifications, setNotifications] = useState<Notification[]>(mockNotifications)
+  const panelRef = useRef<HTMLDivElement>(null)
+
+  const unreadCount = notifications.filter(n => !n.isRead).length
+
+  useEffect(() => {
+    onUnreadCountChange?.(unreadCount)
+  }, [unreadCount, onUnreadCountChange])
+
+  // Escape key to close
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
     }
-  };
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, onClose])
 
-  const markAllRead = () => {
-    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })));
-  };
+  // Focus trap: return focus when panel closes
+  useEffect(() => {
+    if (isOpen && panelRef.current) {
+      panelRef.current.focus()
+    }
+  }, [isOpen])
 
-  const removeNotification = (id: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    setNotifications(prev => prev.filter(n => n.id !== id));
-  };
+  const markAllRead = useCallback(() => {
+    setNotifications(prev => prev.map(n => ({ ...n, isRead: true })))
+  }, [])
+
+  const removeNotification = useCallback((id: string, e: React.MouseEvent) => {
+    e.stopPropagation()
+    setNotifications(prev => prev.filter(n => n.id !== id))
+  }, [])
 
   return (
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Invisible backdrop to catch clicks outside the panel */}
-          <div className="notifications-backdrop" onClick={onClose} />
+          <div
+            className="notifications-backdrop"
+            onClick={onClose}
+            role="presentation"
+          />
 
           <motion.div
+            ref={panelRef}
             className="notifications-panel glass-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Notifications panel"
+            tabIndex={-1}
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
@@ -93,7 +84,13 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, 
             <div className="notifications-header">
               <h3>Notifications</h3>
               <div className="header-actions">
-                <Button variant="ghost" size="sm" onClick={markAllRead} className="mark-read-btn">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={markAllRead}
+                  className="mark-read-btn"
+                  disabled={unreadCount === 0}
+                >
                   <Check size={14} /> Mark all read
                 </Button>
               </div>
@@ -117,7 +114,13 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, 
                   >
                     {!notif.isRead && <div className="unread-dot" />}
 
-                    <div className="notif-avatar" style={{ backgroundImage: `url(${notif.user.avatar})` }}>
+                    <div className="notif-avatar-wrapper">
+                      <img
+                        className="notif-avatar"
+                        src={notif.user.avatar}
+                        alt={notif.user.name}
+                        loading="lazy"
+                      />
                       <div className="notif-icon-badge" style={{ backgroundColor: 'var(--bg-surface)' }}>
                         {getIconForType(notif.type, notif.user.color)}
                       </div>
@@ -133,6 +136,7 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, 
                     <button
                       className="notif-clear-btn"
                       onClick={(e) => removeNotification(notif.id, e)}
+                      aria-label={`Remove notification from ${notif.user.name}`}
                     >
                       <X size={14} />
                     </button>
@@ -142,11 +146,13 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, 
             </div>
 
             <div className="notifications-footer">
-              <span className="view-all-link">View Activity History</span>
+              <button className="view-all-link" type="button">
+                View Activity History
+              </button>
             </div>
           </motion.div>
         </>
       )}
     </AnimatePresence>
-  );
-};
+  )
+}
