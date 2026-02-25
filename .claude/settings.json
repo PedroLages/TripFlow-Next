@@ -1,0 +1,6 @@
+{
+    "env": {
+
+        "CLAUDE_FLOW_DAEMON_SMART_MODE": "true"
+    }
+}
