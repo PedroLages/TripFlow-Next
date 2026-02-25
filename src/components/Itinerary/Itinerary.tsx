@@ -8,6 +8,7 @@ import { AISuggestionsPanel } from '../AIGenerator/AISuggestionsPanel';
 import CityNavigator from './CityNavigator';
 import DayNavigator from './DayNavigator';
 import { DayTimeline } from './DayTimeline';
+import { CityOverview } from './CityOverview';
 import DaySummary from './DaySummary';
 import { AddActivityModal } from './AddActivityModal';
 import {
@@ -77,7 +78,7 @@ export const Itinerary: React.FC = () => {
 
   // State
   const [activeCity, setActiveCity] = useState<CitySlug>('shanghai');
-  const [activeDay, setActiveDay] = useState(0);
+  const [activeDay, setActiveDay] = useState(-1);
   const [activities, setActivities] = useState<Activity[]>(() =>
     allDays.flatMap((d) => d.activities)
   );
@@ -123,7 +124,7 @@ export const Itinerary: React.FC = () => {
   const handleCityChange = useCallback(
     (city: CitySlug) => {
       setActiveCity(city);
-      setActiveDay(getFirstDayOfCity(city));
+      setActiveDay(-1); // Show overview on city switch
       setExpandedActivity(null);
     },
     []
@@ -255,32 +256,48 @@ export const Itinerary: React.FC = () => {
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.div
-              key={activeDay}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.25 }}
-            >
-              <DayTimeline
-                activities={dayActivities}
-                citySlug={activeCity}
-                dayLabel={dayLabel}
-                onReorder={handleReorder}
-                onAutoFill={handleAutoFillDay}
-                onOpenSuggestions={() => setIsSuggestionsOpen(true)}
-                onAddActivity={() => setIsAddActivityOpen(true)}
-                isGenerating={isGeneratingDay}
-                expandedActivity={expandedActivity}
-                onToggleExpand={setExpandedActivity}
-              />
-            </motion.div>
+            {activeDay === -1 ? (
+              <motion.div
+                key={`overview-${activeCity}`}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+              >
+                <CityOverview
+                  citySlug={activeCity}
+                  cityDays={cityDays}
+                  onDaySelect={(dayIndex: number) => setActiveDay(dayIndex)}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key={activeDay}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.25 }}
+              >
+                <DayTimeline
+                  activities={dayActivities}
+                  citySlug={activeCity}
+                  dayLabel={dayLabel}
+                  onReorder={handleReorder}
+                  onAutoFill={handleAutoFillDay}
+                  onOpenSuggestions={() => setIsSuggestionsOpen(true)}
+                  onAddActivity={() => setIsAddActivityOpen(true)}
+                  isGenerating={isGeneratingDay}
+                  expandedActivity={expandedActivity}
+                  onToggleExpand={setExpandedActivity}
+                />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
 
         {/* Right Panel: Day Summary */}
         <div className="itinerary-right-panel">
-          {currentDay && (
+          {activeDay >= 0 && currentDay && (
             <DaySummary
               day={{
                 ...currentDay,
