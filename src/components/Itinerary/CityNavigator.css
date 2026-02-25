@@ -1,0 +1,129 @@
+.city-navigator {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.city-pills-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+
+.city-pills-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.city-pill {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: var(--font-base);
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  white-space: nowrap;
+  scroll-snap-align: center;
+  min-height: 44px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.city-pill:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+  border-color: var(--pill-color);
+}
+
+.city-pill:focus-visible {
+  outline: 2px solid var(--pill-color);
+  outline-offset: 2px;
+}
+
+.city-pill-active {
+  color: var(--pill-color);
+  background: var(--pill-glow);
+  border-color: var(--pill-color);
+  font-weight: 600;
+}
+
+.city-pill-active svg {
+  color: var(--pill-color);
+}
+
+.city-pill-indicator {
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  border: 2px solid var(--pill-color);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.city-pill-name {
+  font-family: var(--font-base);
+}
+
+.city-pill-nights {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  padding: 2px 6px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  color: var(--text-secondary);
+}
+
+.city-pill-active .city-pill-nights {
+  background: var(--pill-color);
+  color: white;
+}
+
+/* Trip Progress Bar */
+.trip-progress-bar {
+  display: flex;
+  height: 6px;
+  border-radius: 100px;
+  overflow: hidden;
+  background: var(--bg-surface-hover);
+  gap: 2px;
+}
+
+.progress-segment {
+  height: 100%;
+  border-radius: 100px;
+  background: var(--segment-color);
+  opacity: 0.3;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.progress-segment:hover {
+  opacity: 0.5;
+}
+
+.progress-segment-active {
+  opacity: 1;
+  transform: scaleY(1.5);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .city-pill,
+  .progress-segment {
+    transition: none;
+  }
+}
