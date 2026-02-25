@@ -21,6 +21,7 @@ export default function DayNavigator({
   const activeTabRef = useRef<HTMLButtonElement>(null);
   const cityDays = getDaysForCity(citySlug);
   const config = CITY_CONFIGS[citySlug];
+  const CityIcon = config.icon;
 
   useEffect(() => {
     activeTabRef.current?.scrollIntoView({
@@ -31,17 +32,24 @@ export default function DayNavigator({
   }, [activeDay]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    const currentLocalIndex = days.findIndex((d) => d.dayIndex === activeDay);
-    if (currentLocalIndex === -1) return;
-
     if (e.key === 'ArrowRight') {
       e.preventDefault();
-      if (currentLocalIndex < days.length - 1) {
-        onDayChange(days[currentLocalIndex + 1].dayIndex);
+      if (activeDay === -1) {
+        // From Overview, go to first day
+        onDayChange(days[0].dayIndex);
+      } else {
+        const currentLocalIndex = days.findIndex((d) => d.dayIndex === activeDay);
+        if (currentLocalIndex < days.length - 1) {
+          onDayChange(days[currentLocalIndex + 1].dayIndex);
+        }
       }
     } else if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      if (currentLocalIndex > 0) {
+      if (activeDay === -1) return; // Already on Overview
+      const currentLocalIndex = days.findIndex((d) => d.dayIndex === activeDay);
+      if (currentLocalIndex === 0) {
+        onDayChange(-1); // Go to Overview
+      } else if (currentLocalIndex > 0) {
         onDayChange(days[currentLocalIndex - 1].dayIndex);
       }
     }
@@ -54,6 +62,22 @@ export default function DayNavigator({
       aria-label={`${config.name} days`}
       onKeyDown={handleKeyDown}
     >
+      <button
+        role="tab"
+        aria-selected={activeDay === -1}
+        tabIndex={activeDay === -1 ? 0 : -1}
+        ref={activeDay === -1 ? activeTabRef : null}
+        className={cn('day-tab overview-tab', activeDay === -1 && 'day-tab-active')}
+        style={{
+          '--tab-color': `var(${config.cssVar})`,
+          '--tab-glow': `var(${config.glowVar})`,
+        } as React.CSSProperties}
+        onClick={() => onDayChange(-1)}
+      >
+        <CityIcon size={16} />
+        <span className="day-tab-number">Overview</span>
+        {activeDay === -1 && <span className="day-tab-bar" />}
+      </button>
       {days.map((day, localIndex) => {
         const isActive = activeDay === day.dayIndex;
         const activityCount = day.activities.length;
