@@ -121,6 +121,23 @@
   transform: scaleY(1.5);
 }
 
+/* Mobile: compact pills */
+@media (max-width: 768px) {
+  .city-pill {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .city-pill-name {
+    display: none; /* Show icon + nights only */
+  }
+
+  .trip-progress-bar {
+    height: 4px;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .city-pill,

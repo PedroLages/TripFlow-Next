@@ -91,6 +91,21 @@
   transform: translateY(-50%) scale(1.1) !important;
 }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .transit-connector {
+    padding-left: 90px;
+  }
+
+  .transit-connector::before {
+    left: 79px;
+  }
+
+  .inline-add-btn {
+    left: 72px;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .transit-pill,

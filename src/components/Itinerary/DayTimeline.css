@@ -178,6 +178,26 @@
   100% { opacity: 0.4; transform: scale(0.98); }
 }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 70px;
+  }
+
+  .timeline-item {
+    gap: 12px;
+  }
+
+  .skeleton-item {
+    padding-left: 50px;
+  }
+
+  .empty-day-state,
+  .generating-day-state {
+    padding: 40px 16px;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .skel-icon,
