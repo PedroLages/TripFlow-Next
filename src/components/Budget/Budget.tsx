@@ -7,7 +7,6 @@ import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/ButtonLegacy';
 import { PieChart, DollarSign, TrendingUp, Plus, Plane, Hotel, Utensils, ShoppingBag, ArrowUpRight, CreditCard, HelpCircle } from 'lucide-react';
 import { useBlindBudget } from '@/hooks/use-blind-budget';
-import { useMockAuth } from '@/lib/mock-auth';
 import { BlindBudgetForm } from '../BlindBudget/BlindBudgetForm';
 import { GroupLimitDisplay } from '../BlindBudget/GroupLimitDisplay';
 import { BudgetExplainerCarousel } from '../BlindBudget/BudgetExplainerCarousel';
@@ -28,10 +27,8 @@ export const Budget: React.FC = () => {
   const [isAddExpenseOpen, setIsAddExpenseOpen] = useState(false);
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
 
-  const { user } = useMockAuth();
   const {
     myBudget,
-    myBudgetLoading,
     groupLimitCents,
     budgetCount,
     memberCount,

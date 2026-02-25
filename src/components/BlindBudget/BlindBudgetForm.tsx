@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Lock, Check, Pencil } from 'lucide-react'
 import { PrivacyIndicator } from './PrivacyIndicator'
@@ -22,20 +22,13 @@ export function BlindBudgetForm({
   onSubmit,
 }: BlindBudgetFormProps) {
   const hasExisting = currentAmountCents !== null
-  const [isEditing, setIsEditing] = useState(!hasExisting)
-  const [inputValue, setInputValue] = useState(
-    hasExisting ? String(centsToDollars(currentAmountCents)) : ''
-  )
+  const [isEditing, setIsEditing] = useState(false)
+  const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {
-    if (currentAmountCents !== null) {
-      setInputValue(String(centsToDollars(currentAmountCents)))
-      setIsEditing(false)
-    } else {
-      setInputValue('')
-      setIsEditing(true)
-    }
-  }, [currentAmountCents])
+  const handleEdit = () => {
+    setInputValue(hasExisting ? String(centsToDollars(currentAmountCents)) : '')
+    setIsEditing(true)
+  }
 
   const handleSave = () => {
     const dollars = parseFloat(inputValue)
@@ -45,7 +38,7 @@ export function BlindBudgetForm({
     setIsEditing(false)
   }
 
-  // Locked display state
+  // Locked display state — show when user has a budget and isn't editing
   if (hasExisting && !isEditing) {
     return (
       <div className="flex flex-col gap-3">
@@ -59,10 +52,10 @@ export function BlindBudgetForm({
 
         <div className="flex items-center justify-between rounded-xl p-4" style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)' }}>
           <span className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
-            {formatBudgetAmount(currentAmountCents!, currencyCode)}
+            {formatBudgetAmount(currentAmountCents, currencyCode)}
           </span>
           <button
-            onClick={() => setIsEditing(true)}
+            onClick={handleEdit}
             className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-colors hover:bg-teal/10 text-teal"
           >
             <Pencil size={14} /> Edit
@@ -84,6 +77,7 @@ export function BlindBudgetForm({
   }
 
   // Editing / new budget state
+  const showInput = isEditing || !hasExisting
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
@@ -96,33 +90,35 @@ export function BlindBudgetForm({
         <PrivacyIndicator />
       </div>
 
-      <div className="flex gap-3">
-        <div className="relative flex-1">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg font-semibold" style={{ color: 'var(--text-secondary)' }}>$</span>
-          <input
-            type="number"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            placeholder="0"
-            min={0}
-            max={100000}
-            step={100}
-            className="w-full rounded-xl py-3 pl-8 pr-4 text-xl font-semibold outline-none transition-colors"
-            style={{ background: 'var(--bg-surface)', border: '2px solid var(--accent-primary)', color: 'var(--text-primary)' }}
-            autoFocus
-            onKeyDown={(e) => e.key === 'Enter' && handleSave()}
-          />
+      {showInput && (
+        <div className="flex gap-3">
+          <div className="relative flex-1">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-lg font-semibold" style={{ color: 'var(--text-secondary)' }}>$</span>
+            <input
+              type="number"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              placeholder="0"
+              min={0}
+              max={100000}
+              step={100}
+              className="w-full rounded-xl py-3 pl-8 pr-4 text-xl font-semibold outline-none transition-colors"
+              style={{ background: 'var(--bg-surface)', border: '2px solid var(--accent-primary)', color: 'var(--text-primary)' }}
+              autoFocus
+              onKeyDown={(e) => e.key === 'Enter' && handleSave()}
+            />
+          </div>
+          <button
+            onClick={handleSave}
+            disabled={isPending || !inputValue}
+            className="flex items-center gap-2 rounded-xl px-5 py-3 font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+            style={{ background: 'var(--accent-primary)' }}
+          >
+            <Check size={16} />
+            {isPending ? 'Saving...' : 'Save'}
+          </button>
         </div>
-        <button
-          onClick={handleSave}
-          disabled={isPending || !inputValue}
-          className="flex items-center gap-2 rounded-xl px-5 py-3 font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
-          style={{ background: 'var(--accent-primary)' }}
-        >
-          <Check size={16} />
-          {isPending ? 'Saving...' : 'Save'}
-        </button>
-      </div>
+      )}
 
       <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
         Only you can see this amount. It will never be shared with other members.
