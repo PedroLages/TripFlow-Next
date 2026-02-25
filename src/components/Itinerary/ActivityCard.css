@@ -333,6 +333,37 @@
   outline-offset: 2px;
 }
 
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .timeline-time {
+    width: 60px;
+    font-size: 0.8rem;
+  }
+
+  .duration-bar {
+    left: 81px;
+  }
+
+  .activity-card-image {
+    height: 120px;
+  }
+
+  .timeline-card-inner {
+    padding: 12px 14px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .activity-title {
+    font-size: 1rem;
+  }
+
+  .interaction-stats {
+    font-size: 0.8rem;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .timeline-content-card,

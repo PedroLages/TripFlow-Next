@@ -88,6 +88,22 @@
   background: var(--tab-color);
 }
 
+/* Mobile: full-width scroll */
+@media (max-width: 768px) {
+  .day-navigator {
+    gap: 2px;
+  }
+
+  .day-tab {
+    padding: 6px 12px 10px;
+    min-width: 64px;
+  }
+
+  .day-tab-date {
+    font-size: 0.65rem;
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .day-tab {
