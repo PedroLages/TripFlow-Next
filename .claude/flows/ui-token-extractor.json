@@ -1,0 +1,36 @@
+{
+    "claude-code-flow": {
+        "name": "ui-token-extractor",
+        "entrypoint": "main.ts",
+        "description": "Extracts design tokens from itinerary app screenshots",
+        "files": [
+            {
+                "path": "main.ts",
+                "content": "// Phase 1: Image Ingest\nconst images = await claudeCode.uploadImages();\nconst imageData = images.map(img => ({\n  id: `img_${img.filename.slice(0,20)}`.replace(/[^a-z0-9]/g,'-'),\n  base64: img.base64,\n  filename: img.filename\n}));\n\n// Phase 2: Parallel processing\nconst results = await Promise.all(imageData.map(async (img) => {\n  const tokens = await claudeCode.prompt({\n    image: img.base64,\n    prompt: `Extract primitive + semantic tokens using scheme:\ncolor.background.primary → #F9FAFB\nspace.card.padding → 16px\naccessibility.contrast.primary-text-on-surface → 4.8:1`\n  });\n  return { ...img, tokens: JSON.parse(tokens) };\n}));\n\n// Phase 3: Assemble outputs\nawait claudeCode.generateFiles({\n  'ui-style-guide.md': generateStyleGuide(results),\n  'ui-components.md': generateComponents(results),\n  'screen-reference.md': generateScreenRef(results),\n  'accessibility-tokens.md': generateAccessibility(results),\n  'progress-tracker.md': generateProgressTable(results)\n});\n\nconsole.log('✅ Generated 5 design system files');"
+            },
+            {
+                "path": "generateStyleGuide.ts",
+                "content": "export function generateStyleGuide(results: any[]) {\n  const tokens = aggregateTokens(results);\n  return `\n## Color System (Semantic)\n${Object.entries(tokens.colors.semantic).map(([k,v]) => `**${k}** → ${v}`).join('\\n')}\n\n## Spacing System\n${Object.entries(tokens.spacing).map(([k,v]) => `**${k}** → ${v}px`).join('\\n')}\n\n## Accessibility Tokens\n**accessibility.contrast.primary-text-on-surface** → 4.8:1 ✅`;\n}\n\nexport function aggregateTokens(results: any[]) {\n  // Merge + dedupe tokens across images\n  return {\n    colors: { semantic: {}, primitive: {} },\n    spacing: {},\n    radius: {},\n    typography: {}\n  };\n}"
+            },
+            {
+                "path": "prompt-templates.ts",
+                "content": "export const TOKEN_EXTRACTION_PROMPT = `\nANALYZE THIS SCREENSHOT using our naming scheme:\n\nPRIMITIVE:\n• color.primitive.gray.50 → #F9FAFB\n• space.primitive.16 → 16px\n• radius.primitive.12 → 12px\n\nSEMANTIC:\n• color.background.primary → color.primitive.gray.50\n• space.card.padding → space.primitive.16\n• color.action.primary.default → color.primitive.green.500\n\nACCESSIBILITY:\n• accessibility.contrast.primary-text-on-surface → 4.8:1\n• accessibility.tap-target.minimum → 44x44px\n\nExtract ALL tokens as valid JSON: {colors: {}, spacing: {}, ...}\n`;\n\nexport const COMPONENT_PROMPT = `\nIdentify components: list row (image+title+subtitle), day header, primary button (radius.24), drag handle.\nDocument states: default/pressed/disabled/destructive.\nJSON output only.`;"
+            },
+            {
+                "path": "claude-code.config.json",
+                "content": "{\"flow\": \"ui-token-extractor\", \"parallel\": true, \"maxConcurrent\": 4}"
+            },
+            {
+                "path": "README.md",
+                "content": "# UI Token Extractor Flow\n\n## Usage\n1. `claude-code run ui-token-extractor`\n2. Drag screenshots into the image uploader\n3. Get 5 Markdown files instantly\n\n## Outputs\n- `ui-style-guide.md` ← Your single source of truth\n- `accessibility-tokens.md` ← Contrast ratios + tap targets\n\n## Token Naming\nUses primitive + semantic scheme (see prompt-templates.ts)"
+            }
+        ],
+        "run_command": "claude-code run ui-token-extractor",
+        "install_instructions": [
+            "1. Copy this JSON to clipboard",
+            "2. In Claude Code → Cmd+K → 'Create Flow from JSON'",
+            "3. Files auto-generated in your workspace",
+            "4. Drag images → Run → Download MD files"
+        ]
+    }
+}

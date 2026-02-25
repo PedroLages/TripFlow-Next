@@ -1,0 +1,18 @@
+Type,Hotel,Area,Price/Couple/Night,Cultural_Experience,Value,Location,Comfort,Food,Uniqueness,Total_Points,Stars,Who_It_For,Pros,Cons,Book_On
+RYOKAN,Gion Hatanaka,Kyoto Gion,$500-700,10,7,10,9,10,10,56,★★★★★,Luxury seekers,Traditional ryokan in geisha district,Excellent kaiseki,Private onsen,Expensive,Booking.com
+RYOKAN,Kyoto Ryokan Kinoe,Kyoto Higashiyama,$400-560,9,8,8,8,9,9,51,★★★★★,Couples wanting intimacy,Smaller intimate ryokan,Great service,Good value,Popular books early,Booking.com
+RYOKAN,Hoshinoya Kyoto,Kyoto Arashiyama,$800-1200,10,5,8,10,10,10,53,★★★★★,Ultra-luxury,Private villas in bamboo,River views,Very exclusive,Very expensive,Booking.com
+RYOKAN,Yachiyo,Kyoto Higashiyama,$360-500,8,8,9,7,8,8,48,★★★★☆,Value-conscious,Good value traditional,Near temples,Older building,Rakuten
+RYOKAN,Seikoro,Kyoto Higashiyama,$440-640,9,7,8,8,10,8,50,★★★★★,Food lovers,Excellent kaiseki, Historic building,Far from metro,Booking.com
+RYOKAN,Ryokan Sakanoue,Kyoto Higashiyama,$300-400,8,9,8,7,7,8,47,★★★★☆,Budget ryokan,Most affordable option,Good first experience,Basic amenities,Rakuten
+RYOKAN,Kyoto Umekoji,Kyoto Station,$240-360,7,8,6,7,7,7,42,★★★★☆,Ryokan beginners,Near station,Budget option,Less atmospheric,Rakuten
+RYOKAN,Matsui Honkan,Kyoto Higashiyama,$400-600,9,7,10,7,9,9,51,★★★★★,History buffs,Beautiful historic building,Great location,Smaller rooms,Booking.com
+CAPSULE,First Cabin Namba,Osaka,$35-50,7,9,8,5,6,9,44,★★★★☆,Unique experience seekers,First-class cabin style,Clean,Separate cabins not ideal for couples,Booking.com
+CAPSULE,Capsule Hotel An,Kyoto/Tokyo,$35-45,7,8,8,5,5,8,41,★★★★☆,Solo travelers or 1 night,Cheap unique experience,Clean,Very small,Booking.com
+TEMPLE,Koyasan Temple Stay,Koyasan,$50-100,10,9,5,5,8,10,47,★★★★★,Cultural immersion,Morning prayers,Vegetarian cuisine,Remote location,Various
+MACHIYA,Kyoto Machiya,Kyoto,$150-300,9,7,8,8,7,9,48,★★★★☆,Families/groups,Entire house,Authentic wooden house,More expensive,Various
+ONSEN,Hakone Ryokan,Hakone,$400-800,10,6,7,9,9,9,50,★★★★★,Onsen lovers,Hot spring experience,Great Fuji views,Crowded on weekends,Various
+,,,,,,,,
+,,,,Scoring System (1-10 each),,,,,,,
+,,,,Cultural_Experience = How traditional/authentic,Food = Kaiseki dinner quality,Uniqueness = How special/different,,,,,,
+,,,,Total = Sum of all 7 categories (max 70),Stars = 50+ ★★★★★ / 45-49 ★★★★☆ / 40-44 ★★★☆☆,,,,,,
