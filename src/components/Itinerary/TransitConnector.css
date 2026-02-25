@@ -1,0 +1,83 @@
+/* Transit Connector between activities */
+.transit-connector {
+  width: 100%;
+  padding-left: 120px; /* Offset to sit nicely under the card, avoiding the timeline line */
+  margin: 4px 0 12px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.transit-connector::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 109px; /* Align with timeline node */
+  bottom: -4px;
+  width: 2px;
+  border-left: 2px dashed var(--border-focus);
+  z-index: 1;
+}
+
+.transit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  border: 1px dashed var(--border-focus);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.transit-connector:hover .transit-pill {
+  background: var(--bg-surface);
+  border-style: solid;
+  transform: scale(1.05);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.transit-pill svg {
+  color: var(--accent-primary);
+}
+
+.transit-line {
+  /* Placeholder for potential line styling between pill elements */
+}
+
+/* Inline Add Button appearing on hover */
+.inline-add-btn {
+  position: absolute;
+  left: 102px; /* Centered precisely on the timeline line */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.4);
+  cursor: pointer;
+}
+
+.transit-connector:hover .inline-add-btn {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.inline-add-btn:hover {
+  background: var(--accent-primary-hover);
+  transform: translateY(-50%) scale(1.1) !important;
+}
