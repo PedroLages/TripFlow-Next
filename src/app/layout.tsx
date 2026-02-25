@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Providers } from '@/components/layout/Providers'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
-import { Sidebar } from '@/components/layout/Sidebar'
+import { AppShell } from '@/components/layout/AppShell'
 import './globals.css'
 import './app.css'
 
@@ -20,12 +20,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <Providers>
-            <div className="app-container">
-              <Sidebar />
-              <main className="main-content">
-                {children}
-              </main>
-            </div>
+            <AppShell>{children}</AppShell>
           </Providers>
         </ThemeProvider>
       </body>

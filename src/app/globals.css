@@ -138,6 +138,16 @@
   --glass-inner-shadow: none;
 }
 
+/* Sync color-scheme for native dark mode elements */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="light"],
+:root:not([data-theme]) {
+  color-scheme: light;
+}
+
 /* Base Reset */
 *,
 *::before,
@@ -298,5 +308,14 @@ button {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
