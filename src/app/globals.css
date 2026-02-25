@@ -16,6 +16,13 @@
   --color-privacy: #0D9488;
   --color-privacy-light: rgba(13, 148, 136, 0.15);
 
+  --color-city-shanghai: var(--city-shanghai);
+  --color-city-hongkong: var(--city-hongkong);
+  --color-city-osaka: var(--city-osaka);
+  --color-city-kyoto: var(--city-kyoto);
+  --color-city-tokyo: var(--city-tokyo);
+  --color-city-beijing: var(--city-beijing);
+
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
@@ -63,6 +70,31 @@
   --border-subtle: rgba(0, 0, 0, 0.06);
   --border-focus: rgba(13, 148, 136, 0.3);
   --border-gradient: transparent;
+
+  /* City Color System */
+  --city-shanghai: #C2185B;
+  --city-shanghai-glow: rgba(194, 24, 91, 0.15);
+  --city-shanghai-muted: rgba(194, 24, 91, 0.08);
+
+  --city-hongkong: #E65100;
+  --city-hongkong-glow: rgba(230, 81, 0, 0.15);
+  --city-hongkong-muted: rgba(230, 81, 0, 0.08);
+
+  --city-osaka: #00838F;
+  --city-osaka-glow: rgba(0, 131, 143, 0.15);
+  --city-osaka-muted: rgba(0, 131, 143, 0.08);
+
+  --city-kyoto: #558B2F;
+  --city-kyoto-glow: rgba(85, 139, 47, 0.15);
+  --city-kyoto-muted: rgba(85, 139, 47, 0.08);
+
+  --city-tokyo: #283593;
+  --city-tokyo-glow: rgba(40, 53, 147, 0.15);
+  --city-tokyo-muted: rgba(40, 53, 147, 0.08);
+
+  --city-beijing: #BF360C;
+  --city-beijing-glow: rgba(191, 54, 12, 0.15);
+  --city-beijing-muted: rgba(191, 54, 12, 0.08);
 
   /* Depth */
   --glass-blur: blur(0px);
@@ -133,6 +165,19 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(20, 184, 166, 0.4);
   --border-gradient: transparent;
+
+  --city-shanghai: #E91E63;
+  --city-shanghai-glow: rgba(233, 30, 99, 0.20);
+  --city-hongkong: #FF6D00;
+  --city-hongkong-glow: rgba(255, 109, 0, 0.20);
+  --city-osaka: #00ACC1;
+  --city-osaka-glow: rgba(0, 172, 193, 0.20);
+  --city-kyoto: #7CB342;
+  --city-kyoto-glow: rgba(124, 179, 66, 0.20);
+  --city-tokyo: #3F51B5;
+  --city-tokyo-glow: rgba(63, 81, 181, 0.20);
+  --city-beijing: #E64A19;
+  --city-beijing-glow: rgba(230, 74, 25, 0.20);
 
   --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   --glass-inner-shadow: none;
