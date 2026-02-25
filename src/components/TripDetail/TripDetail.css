@@ -12,7 +12,7 @@
 .td-hero-sandbox {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 280px;
   padding: 0 40px;
   display: flex;
   align-items: center;
@@ -70,20 +70,20 @@
   padding: 6px 14px;
   border-radius: 100px;
   backdrop-filter: blur(4px);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .td-cd-value {
   font-family: var(--font-heading);
-  font-size: 5.5rem;
+  font-size: 4rem;
   font-weight: 600;
   line-height: 1.1;
-  margin: 8px 0;
+  margin: 4px 0;
   text-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
 .td-cd-value span {
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   font-weight: 400;
   font-family: var(--font-body);
 }
@@ -138,10 +138,29 @@
   color: var(--text-secondary);
 }
 
+/* Stat card interactive states */
+.td-small-stat {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.td-small-stat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-primary);
+}
+
+.td-small-stat:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
 /* MODULAR GRID */
 .td-widgets-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   gap: 24px;
 }
 
@@ -151,9 +170,20 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow);
   overflow: hidden;
-  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.activity-feed-widget {
+  border-top: 3px solid var(--color-blue);
+}
+
+.tasks-widget {
+  border-top: 3px solid var(--color-amber);
+}
+
+.readiness-widget {
+  border-top: 3px solid var(--color-green);
 }
 
 .widget-header {
@@ -215,6 +245,37 @@
 .activity-dot.purple { background: var(--color-purple); }
 .activity-dot.blue { background: var(--color-blue); }
 .activity-dot.green { background: var(--color-green); }
+
+.activity-type-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.activity-type-label.vote {
+  color: var(--color-purple);
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.activity-type-label.suggestion {
+  color: var(--color-blue);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.activity-type-label.budget {
+  color: var(--color-green);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.activity-type-label.comment {
+  color: var(--text-secondary);
+  background: var(--bg-surface-hover);
+}
 
 .activity-item:not(:last-child)::before {
   content: '';
@@ -289,10 +350,10 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
   border: 2px solid var(--bg-surface);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex-shrink: 0;
 }
 
 .task-add-row {
@@ -332,6 +393,10 @@
   background-size: cover;
   background-position: center;
   position: relative;
+}
+
+img.r-avatar {
+  object-fit: cover;
 }
 
 .owner-badge {
@@ -417,4 +482,27 @@
 .w-day span {
   font-size: 0.8rem;
   opacity: 0.8;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .trip-detail-voyage,
+  .td-hero-image,
+  .td-hero-overlay,
+  .td-content-layer,
+  .td-small-stat,
+  .td-widget-card,
+  .task-item,
+  .task-checkbox {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .td-hero-image {
+    transform: none !important;
+  }
+
+  .td-content-layer {
+    transform: none !important;
+  }
 }

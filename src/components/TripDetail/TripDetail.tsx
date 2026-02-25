@@ -1,11 +1,12 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Map, CheckSquare, Lock, CloudRain, Sun, Clock, Crown, ListTodo, CheckCircle2, Circle, Plus } from 'lucide-react';
 import { Card } from '../ui/Card';
-import { Button } from '../ui/ButtonLegacy';
 import './TripDetail.css';
 
 interface TripDetailProps {
@@ -22,6 +23,7 @@ interface TripDetailProps {
 
 export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { tripId } = useParams<{ tripId: string }>();
 
   // Mock tasks state
   const [tasks, setTasks] = useState([
@@ -32,6 +34,37 @@ export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
 
   const toggleTask = (id: string) => {
     setTasks(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
+  };
+
+  // Calculate real countdown from trip dates
+  const daysUntilTrip = useMemo(() => {
+    if (!trip.dates) return null;
+    const monthMap: Record<string, number> = {
+      Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+      Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+    };
+    // Parse "Oct 12 - Oct 26, 2026" format
+    const match = trip.dates.match(/(\w+)\s+(\d+)\s*-\s*\w+\s+\d+,\s*(\d+)/);
+    if (!match) return null;
+    const [, monthStr, dayStr, yearStr] = match;
+    const startDate = new Date(parseInt(yearStr), monthMap[monthStr], parseInt(dayStr));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const diffTime = startDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  }, [trip.dates]);
+
+  // Task input handler
+  const handleAddTask = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      const input = e.currentTarget;
+      const title = input.value.trim();
+      if (title) {
+        setTasks(prev => [...prev, { id: `t${Date.now()}`, title, completed: false }]);
+        input.value = '';
+      }
+    }
   };
 
   // Parallax calculations
@@ -88,7 +121,7 @@ export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
           <div className="td-countdown-center">
             <motion.div variants={itemVariants} className="td-countdown-container">
               <span className="td-cd-label">TRIP COUNTDOWN</span>
-              <div className="td-cd-value">24 <span>Days</span></div>
+              <div className="td-cd-value">{daysUntilTrip !== null ? daysUntilTrip : '—'} <span>{daysUntilTrip === 1 ? 'Day' : 'Days'}</span></div>
               <div className="td-cd-dates">{trip.dates}</div>
             </motion.div>
           </div>
@@ -99,103 +132,131 @@ export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
       <motion.div className="td-content-layer" style={{ y: yContent }}>
         {/* Stat Widgets */}
         <div className="td-stats-row">
-           <Card className="td-small-stat">
-              <CheckSquare size={20} color="var(--color-purple)" />
-              <div className="stat-text">
-                <strong>3</strong>
-                <span>Active Polls</span>
-              </div>
-           </Card>
-           <Card className="td-small-stat">
-              <Lock size={20} color="var(--color-green)" />
-              <div className="stat-text">
-                <strong>Locked</strong>
-                <span>Budget Status</span>
-              </div>
-           </Card>
-           <Card className="td-small-stat">
-              <Map size={20} color="var(--color-blue)" />
-              <div className="stat-text">
-                <strong>5</strong>
-                <span>Confirmed Spots</span>
-              </div>
-           </Card>
+           <Link href={`/trips/${tripId}/voting`} style={{ textDecoration: 'none' }}>
+             <Card className="td-small-stat" role="link" tabIndex={0}>
+                <CheckSquare size={20} color="var(--color-purple)" aria-hidden="true" />
+                <div className="stat-text">
+                  <strong>3</strong>
+                  <span>Active Polls</span>
+                </div>
+             </Card>
+           </Link>
+           <Link href={`/trips/${tripId}/budget`} style={{ textDecoration: 'none' }}>
+             <Card className="td-small-stat" role="link" tabIndex={0}>
+                <Lock size={20} color="var(--color-green)" aria-hidden="true" />
+                <div className="stat-text">
+                  <strong>Locked</strong>
+                  <span>Budget Status</span>
+                </div>
+             </Card>
+           </Link>
+           <Link href={`/trips/${tripId}/itinerary`} style={{ textDecoration: 'none' }}>
+             <Card className="td-small-stat" role="link" tabIndex={0}>
+                <Map size={20} color="var(--color-blue)" aria-hidden="true" />
+                <div className="stat-text">
+                  <strong>5</strong>
+                  <span>Confirmed Spots</span>
+                </div>
+             </Card>
+           </Link>
         </div>
 
         {/* Modular Grid */}
         <div className="td-widgets-grid">
-           {/* Left Column: Recent Activity */}
+           {/* Left Column: Tasks & Activity (wider) */}
            <div className="td-widget-col tdw-left">
-              <Card className="td-widget-card activity-feed-widget">
+              {/* Tasks & Checklists Widget */}
+              <Card className="td-widget-card tasks-widget">
                  <div className="widget-header">
                    <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
-                     <Clock size={16} color="var(--text-secondary)" /> <h3>Recent Activity</h3>
+                     <ListTodo size={16} color="var(--text-secondary)" aria-hidden="true" /> <h3>Tasks &amp; Checklists</h3>
                    </div>
-                   <span className="widget-link">View All</span>
+                   <span className="widget-meta">{tasks.filter(t => t.completed).length}/{tasks.length} Done</span>
+                 </div>
+                 <div className="widget-content pad-body">
+                    {tasks.map(task => (
+                      <div
+                        key={task.id}
+                        className={`task-item ${task.completed ? 'completed' : ''}`}
+                        role="checkbox"
+                        aria-checked={task.completed}
+                        aria-label={`${task.title}${task.completed ? ' (completed)' : ''}`}
+                        tabIndex={0}
+                        onClick={() => toggleTask(task.id)}
+                        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTask(task.id); } }}
+                      >
+                         <span className="task-checkbox" aria-hidden="true">
+                           {task.completed ? <CheckCircle2 size={18} color="var(--color-green)" /> : <Circle size={18} color="var(--text-tertiary)" />}
+                         </span>
+                         <span className="task-title">{task.title}</span>
+                         {task.assignee && (
+                           <img
+                             className="task-assignee"
+                             src={task.assignee}
+                             alt="Assigned team member"
+                             width={24}
+                             height={24}
+                             loading="lazy"
+                           />
+                         )}
+                      </div>
+                    ))}
+
+                    <div className="task-add-row">
+                      <Plus size={16} color="var(--text-tertiary)" aria-hidden="true" />
+                      <input
+                        type="text"
+                        placeholder="Add a new task..."
+                        className="task-input"
+                        aria-label="Add a new task"
+                        onKeyDown={handleAddTask}
+                      />
+                    </div>
+                 </div>
+              </Card>
+
+              <Card className="td-widget-card activity-feed-widget" style={{ marginTop: '24px' }}>
+                 <div className="widget-header">
+                   <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
+                     <Clock size={16} color="var(--text-secondary)" aria-hidden="true" /> <h3>Recent Activity</h3>
+                   </div>
+                   <button className="widget-link" type="button" aria-label="View all activity">View All</button>
                  </div>
                  <div className="widget-content pad-body">
                     <div className="activity-item">
-                       <div className="activity-dot purple"></div>
+                       <div className="activity-dot purple" aria-hidden="true"></div>
                        <div className="activity-text">
                           <span className="time">2h ago</span>
-                          <p><strong>Sarah J</strong> voted on <strong>Accommodation Preference</strong></p>
+                          <p><span className="activity-type-label vote">Vote</span> <strong>Sarah J</strong> voted on <strong>Accommodation Preference</strong></p>
                        </div>
                     </div>
                     <div className="activity-item">
-                       <div className="activity-dot blue"></div>
+                       <div className="activity-dot blue" aria-hidden="true"></div>
                        <div className="activity-text">
                           <span className="time">5h ago</span>
-                          <p><strong>Mike T</strong> suggested Kichi Kichi Omurice</p>
+                          <p><span className="activity-type-label suggestion">Suggestion</span> <strong>Mike T</strong> suggested Kichi Kichi Omurice</p>
                        </div>
                     </div>
                     <div className="activity-item">
-                       <div className="activity-dot green"></div>
+                       <div className="activity-dot green" aria-hidden="true"></div>
                        <div className="activity-text">
                           <span className="time">1d ago</span>
-                          <p><strong>Alex Chen</strong> locked Blind Budget</p>
+                          <p><span className="activity-type-label budget">Budget</span> <strong>Alex Chen</strong> locked Blind Budget</p>
                        </div>
                     </div>
                      <div className="activity-item">
-                       <div className="activity-dot"></div>
+                       <div className="activity-dot" aria-hidden="true"></div>
                        <div className="activity-text">
                           <span className="time">1d ago</span>
-                          <p><strong>Sarah J</strong> commented on <strong>Day 2 Itinerary</strong></p>
+                          <p><span className="activity-type-label comment">Comment</span> <strong>Sarah J</strong> commented on <strong>Day 2 Itinerary</strong></p>
                        </div>
                     </div>
                  </div>
               </Card>
            </div>
 
-           {/* Right Column: Readiness & Tasks & Weather */}
+           {/* Right Column: Team & Weather */}
            <div className="td-widget-col tdw-right">
-              {/* Tasks & Checklists Widget */}
-              <Card className="td-widget-card tasks-widget">
-                 <div className="widget-header">
-                   <div style={{display:'flex', alignItems:'center', gap:'8px'}}>
-                     <ListTodo size={16} color="var(--text-secondary)" /> <h3>Tasks & Checklists</h3>
-                   </div>
-                   <span className="widget-meta">{tasks.filter(t => t.completed).length}/{tasks.length} Done</span>
-                 </div>
-                 <div className="widget-content pad-body">
-                    {tasks.map(task => (
-                      <div key={task.id} className={`task-item ${task.completed ? 'completed' : ''}`} onClick={() => toggleTask(task.id)}>
-                         <button className="task-checkbox">
-                           {task.completed ? <CheckCircle2 size={18} color="var(--color-green)" /> : <Circle size={18} color="var(--text-tertiary)" />}
-                         </button>
-                         <span className="task-title">{task.title}</span>
-                         {task.assignee && (
-                           <div className="task-assignee" style={{ backgroundImage: `url(${task.assignee})` }} title="Assigned"></div>
-                         )}
-                      </div>
-                    ))}
-
-                    <div className="task-add-row">
-                      <Plus size={16} color="var(--text-tertiary)" />
-                      <input type="text" placeholder="Add a new task..." className="task-input" />
-                    </div>
-                 </div>
-              </Card>
-
               <Card className="td-widget-card readiness-widget">
                  <div className="widget-header">
                    <h3>Team Readiness</h3>
@@ -203,25 +264,25 @@ export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
                  </div>
                  <div className="widget-content">
                     <div className="readiness-item">
-                       <div className="r-avatar" style={{backgroundImage: 'url(https://i.pravatar.cc/100?img=33)'}}></div>
+                       <img className="r-avatar" src="https://i.pravatar.cc/100?img=33" alt="Alex Chen" width={40} height={40} loading="lazy" />
                        <div className="r-info">
                           <strong>Alex Chen</strong>
                           <span>Member</span>
                        </div>
-                       <div className="r-status"><CheckSquare size={16} color="var(--color-green)" /></div>
+                       <div className="r-status"><CheckSquare size={16} color="var(--color-green)" aria-label="Ready" /></div>
                     </div>
                     <div className="readiness-item">
-                       <div className="r-avatar" style={{backgroundImage: 'url(https://i.pravatar.cc/100?img=47)'}}>
-                         <div className="owner-badge"><Crown size={10} color="white" /></div>
+                       <div className="r-avatar" style={{backgroundImage: 'url(https://i.pravatar.cc/100?img=47)', position: 'relative'}}>
+                         <div className="owner-badge"><Crown size={10} color="white" aria-hidden="true" /></div>
                        </div>
                        <div className="r-info">
                           <strong>Jessica L.</strong>
                           <span>Owner</span>
                        </div>
-                       <div className="r-status"><CheckSquare size={16} color="var(--color-green)" /></div>
+                       <div className="r-status"><CheckSquare size={16} color="var(--color-green)" aria-label="Ready" /></div>
                     </div>
                     <div style={{padding: '16px'}}>
-                      <Button variant="ghost" className="invite-btn" size="sm" fullWidth>+ Invite Friend</Button>
+                      <button className="invite-btn" style={{ width: '100%', padding: '8px 16px', borderRadius: 'var(--radius-lg)', border: '1px dashed var(--border-subtle)', background: 'transparent', color: 'var(--text-secondary)', fontSize: '0.85rem', cursor: 'pointer' }} aria-label="Invite a friend to this trip">+ Invite Friend</button>
                     </div>
                  </div>
               </Card>
@@ -229,7 +290,7 @@ export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
               <Card className="td-widget-card weather-widget blue-gradient">
                  <div className="widget-header weather-header">
                     <h3>Weather Forecast</h3>
-                    <CloudRain size={20} color="white" />
+                    <CloudRain size={20} color="white" aria-hidden="true" />
                  </div>
                  <div className="weather-content">
                    <p className="weather-location">{trip.destination}</p>
@@ -237,11 +298,11 @@ export const TripDetail: React.FC<TripDetailProps> = ({ trip }) => {
                       <h2>18°</h2>
                       <span>Partly Cloudy</span>
                    </div>
-                   <div className="weather-forecast-row">
-                      <div className="w-day"><span>Mon</span><Sun size={14}/></div>
-                      <div className="w-day"><span>Tue</span><CloudRain size={14}/></div>
-                      <div className="w-day"><span>Wed</span><Sun size={14}/></div>
-                      <div className="w-day"><span>Thu</span><Sun size={14}/></div>
+                   <div className="weather-forecast-row" role="list" aria-label="4-day weather forecast">
+                      <div className="w-day" role="listitem"><span>Mon</span><Sun size={14} aria-label="Sunny" /></div>
+                      <div className="w-day" role="listitem"><span>Tue</span><CloudRain size={14} aria-label="Rainy" /></div>
+                      <div className="w-day" role="listitem"><span>Wed</span><Sun size={14} aria-label="Sunny" /></div>
+                      <div className="w-day" role="listitem"><span>Thu</span><Sun size={14} aria-label="Sunny" /></div>
                    </div>
                  </div>
               </Card>
