@@ -5,7 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import './Budget.css';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
 import { Button } from '../ui/ButtonLegacy';
-import { PieChart, DollarSign, TrendingUp, Plus, Plane, Hotel, Utensils, ShoppingBag, ArrowUpRight, ArrowDownRight, CreditCard, Wallet, Lock, EyeOff, Eye } from 'lucide-react';
+import { PieChart, DollarSign, TrendingUp, Plus, Plane, Hotel, Utensils, ShoppingBag, ArrowUpRight, CreditCard, HelpCircle } from 'lucide-react';
+import { useBlindBudget } from '@/hooks/use-blind-budget';
+import { useMockAuth } from '@/lib/mock-auth';
+import { BlindBudgetForm } from '../BlindBudget/BlindBudgetForm';
+import { GroupLimitDisplay } from '../BlindBudget/GroupLimitDisplay';
+import { BudgetExplainerCarousel } from '../BlindBudget/BudgetExplainerCarousel';
+import { MockUserSwitcher } from '../BlindBudget/MockUserSwitcher';
+import { centsToDollars } from '@/lib/blind-budget';
 
 const expenses = [
   { id: 1, title: 'ANA Flights to NRT', category: 'transport', amount: 1250.00, currency: 'USD', date: '2026-02-15', paidBy: 'Alex' },
@@ -19,14 +26,24 @@ const expenses = [
 export const Budget: React.FC = () => {
   const [currency, setCurrency] = useState('USD');
   const [isAddExpenseOpen, setIsAddExpenseOpen] = useState(false);
+  const [isExplainerOpen, setIsExplainerOpen] = useState(false);
 
-  // Blind Budgeting state
-  const [isSetupOpen, setIsSetupOpen] = useState(false);
-  const [isBlindMode, setIsBlindMode] = useState(true);
+  const { user } = useMockAuth();
+  const {
+    myBudget,
+    myBudgetLoading,
+    groupLimitCents,
+    budgetCount,
+    memberCount,
+    allBudgetsReady,
+    isSettingGroupMin,
+    setBudget,
+    setBudgetPending,
+  } = useBlindBudget();
 
-  const totalBudget = 5000;
   const totalSpent = expenses.reduce((sum, exp) => sum + exp.amount, 0);
-  const percentSpent = (totalSpent / totalBudget) * 100;
+  const totalBudget = groupLimitCents !== null ? centsToDollars(groupLimitCents) : null;
+  const percentSpent = totalBudget ? (totalSpent / totalBudget) * 100 : 0;
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
@@ -59,53 +76,53 @@ export const Budget: React.FC = () => {
       <div className="budget-header">
         <div>
           <h2>Trip Budget Tracker</h2>
-          <p className="text-secondary">Monitor your spending across multiple currencies</p>
+          <p className="text-secondary">Blind budgeting — your amount stays private</p>
         </div>
-        <div style={{ display: 'flex', gap: '12px' }}>
+        <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <MockUserSwitcher />
           <select className="currency-selector" value={currency} onChange={(e) => setCurrency(e.target.value)}>
             <option value="USD">USD ($)</option>
             <option value="EUR">EUR (€)</option>
             <option value="JPY">JPY (¥)</option>
             <option value="GBP">GBP (£)</option>
           </select>
-          <Button variant="ghost" onClick={() => setIsSetupOpen(true)}>
-            {isBlindMode ? <EyeOff size={16} /> : <Eye size={16} />}
-            {isBlindMode ? 'Blind Mode On' : 'Budget Revealed'}
+          <Button variant="ghost" onClick={() => setIsExplainerOpen(true)}>
+            <HelpCircle size={16} />
+            How it works
           </Button>
           <Button icon={<Plus size={16} />} onClick={() => setIsAddExpenseOpen(true)}>Add Expense</Button>
         </div>
       </div>
 
-      {/* Top Metrics Row */}
-      <div className="budget-metrics-grid">
-        <Card className="metric-card emphasis">
-          <CardContent style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div className="metric-header">
-              <span className="metric-label">{isBlindMode ? 'Target Budget' : 'Remaining Budget'}</span>
-              <div className="metric-icon">{isBlindMode ? <Lock size={16} /> : <Wallet size={16} />}</div>
-            </div>
-
-            {isBlindMode ? (
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                 <div className="metric-value" style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
-                   <span style={{ fontSize: '1.5rem' }}>••••••</span>
-                 </div>
-                 <div className="metric-trend" style={{ color: 'var(--text-tertiary)', background: 'var(--bg-hover)' }}>
-                   Hidden by Host until Feb 28
-                 </div>
-               </div>
-            ) : (
-              <>
-                <div className="metric-value highlight">${(totalBudget - totalSpent).toLocaleString()}</div>
-                <div className="metric-trend positive">
-                  <ArrowDownRight size={14} /> 12% under projected pace
-                </div>
-              </>
-            )}
-
+      {/* Blind Budgeting Section */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+        <Card className="metric-card">
+          <CardContent style={{ padding: '24px' }}>
+            <BlindBudgetForm
+              currentAmountCents={myBudget?.amount_cents ?? null}
+              currencyCode={currency}
+              isPending={setBudgetPending}
+              isSettingGroupMin={isSettingGroupMin}
+              onSubmit={setBudget}
+            />
           </CardContent>
         </Card>
 
+        <Card className="metric-card">
+          <CardContent style={{ padding: '24px' }}>
+            <GroupLimitDisplay
+              groupLimitCents={groupLimitCents}
+              budgetCount={budgetCount}
+              memberCount={memberCount}
+              currencyCode={currency}
+              allReady={allBudgetsReady}
+            />
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Spending Summary */}
+      <div className="budget-metrics-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
         <Card className="metric-card">
           <CardContent style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div className="metric-header">
@@ -113,17 +130,13 @@ export const Budget: React.FC = () => {
               <div className="metric-icon"><CreditCard size={16} /></div>
             </div>
             <div className="metric-value">${totalSpent.toLocaleString()}</div>
-
-            {!isBlindMode && (
+            {totalBudget && (
               <>
                 <div className="progress-bar-container small" style={{ marginTop: '8px' }}>
-                  <div className="progress-bar-fill gradient" style={{ width: `${percentSpent}%` }}></div>
+                  <div className="progress-bar-fill gradient" style={{ width: `${Math.min(percentSpent, 100)}%` }}></div>
                 </div>
-                <div className="metric-subtext">{percentSpent.toFixed(1)}% of ${totalBudget.toLocaleString()} total</div>
+                <div className="metric-subtext">{percentSpent.toFixed(1)}% of group limit</div>
               </>
-            )}
-            {isBlindMode && (
-              <div className="metric-subtext" style={{ marginTop: 'auto' }}>All tracked expenses to date</div>
             )}
           </CardContent>
         </Card>
@@ -268,60 +281,11 @@ export const Budget: React.FC = () => {
         </Card>
       </div>
 
-      {/* Blind Budget Setup Modal */}
-      <AnimatePresence>
-        {isSetupOpen && (
-          <motion.div
-            className="wizard-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            onClick={() => setIsSetupOpen(false)}
-          >
-            <motion.div
-              className="wizard-container glass-panel"
-              initial={{ scale: 0.95, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 20 }}
-              onClick={e => e.stopPropagation()}
-              style={{ padding: '32px', borderRadius: '16px', width: '100%', maxWidth: '500px' }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
-                <EyeOff size={24} color="var(--accent-primary)" />
-                <h2 style={{ margin: 0 }}>Blind Budget Setting</h2>
-              </div>
-
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '24px', lineHeight: 1.5 }}>
-                Set a secret target budget for the trip. Group members will track their expenses normally, but the total goal will remain hidden until you reveal it, preventing the "spend up to the limit" psychological effect.
-              </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px' }}>
-                <div>
-                  <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Target Budget ({currency})</label>
-                  <input type="number" className="glass-input full-width-input" defaultValue={5000} style={{ width: '100%', padding: '12px', border: '1px solid var(--border-subtle)', borderRadius: '8px', background: 'var(--bg-surface)', fontSize: '1.2rem', fontWeight: 600 }} />
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', background: 'rgba(var(--accent-primary-rgb), 0.1)', borderRadius: '8px', border: '1px solid rgba(var(--accent-primary-rgb), 0.2)' }}>
-                  <input
-                    type="checkbox"
-                    id="blindToggle"
-                    checked={isBlindMode}
-                    onChange={(e) => setIsBlindMode(e.target.checked)}
-                    style={{ width: '18px', height: '18px', accentColor: 'var(--accent-primary)' }}
-                  />
-                  <label htmlFor="blindToggle" style={{ fontSize: '0.9rem', fontWeight: 500, cursor: 'pointer' }}>Keep target budget hidden from members</label>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
-                <Button variant="ghost" onClick={() => setIsSetupOpen(false)}>Cancel</Button>
-                <Button onClick={() => setIsSetupOpen(false)}>Save Settings</Button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <BudgetExplainerCarousel
+        open={isExplainerOpen}
+        onClose={() => setIsExplainerOpen(false)}
+        onComplete={() => setIsExplainerOpen(false)}
+      />
 
       {/* Add Expense Modal */}
       <AnimatePresence>
