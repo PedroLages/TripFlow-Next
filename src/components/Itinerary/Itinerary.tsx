@@ -113,10 +113,14 @@ export const Itinerary: React.FC = () => {
   );
 
   const dayActivities = useMemo(
-    () => activities.filter((a) => {
+    () => {
+      if (activeDay < 0) return [];
       const dayData = allDays[activeDay];
-      return dayData.activities.some((da) => da.id === a.id);
-    }),
+      if (!dayData) return [];
+      return activities.filter((a) =>
+        dayData.activities.some((da) => da.id === a.id)
+      );
+    },
     [activities, allDays, activeDay]
   );
 
