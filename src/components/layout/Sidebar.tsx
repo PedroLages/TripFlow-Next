@@ -23,6 +23,7 @@ export function Sidebar() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(2) // initial mock unread count
 
   const isActive = (path: string) => pathname === path
 
@@ -49,10 +50,14 @@ export function Sidebar() {
           style={{ position: 'relative' }}
         >
           <Bell size={18} /> {!isSidebarCollapsed && <span>Notifications</span>}
-          {!isSidebarCollapsed && (
-            <span style={{ marginLeft: 'auto', background: 'var(--color-red)', color: 'white', padding: '2px 8px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 600 }}>3</span>
+          {!isSidebarCollapsed && unreadCount > 0 && (
+            <span style={{ marginLeft: 'auto', background: 'var(--color-red)', color: 'white', padding: '2px 8px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 600 }}>{unreadCount}</span>
           )}
-          <NotificationsPanel isOpen={isNotificationsOpen} onClose={() => setIsNotificationsOpen(false)} />
+          <NotificationsPanel
+            isOpen={isNotificationsOpen}
+            onClose={() => setIsNotificationsOpen(false)}
+            onUnreadCountChange={setUnreadCount}
+          />
         </div>
 
         {!isSidebarCollapsed && (
