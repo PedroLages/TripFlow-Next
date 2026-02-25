@@ -17,6 +17,7 @@ export interface Database {
           display_name?: string
           avatar_url?: string | null
         }
+        Relationships: []
       }
       trips: {
         Row: {
@@ -43,6 +44,7 @@ export interface Database {
           end_date?: string | null
           currency_code?: string
         }
+        Relationships: []
       }
       trip_members: {
         Row: {
@@ -59,6 +61,22 @@ export interface Database {
         Update: {
           role?: 'owner' | 'organizer' | 'member' | 'guest'
         }
+        Relationships: [
+          {
+            foreignKeyName: 'trip_members_trip_id_fkey'
+            columns: ['trip_id']
+            isOneToOne: false
+            referencedRelation: 'trips'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'trip_members_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+        ]
       }
       blind_budgets: {
         Row: {
@@ -81,7 +99,35 @@ export interface Database {
           amount_cents?: number
           currency_code?: string
         }
+        Relationships: [
+          {
+            foreignKeyName: 'blind_budgets_trip_id_fkey'
+            columns: ['trip_id']
+            isOneToOne: false
+            referencedRelation: 'trips'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'blind_budgets_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+        ]
       }
+    }
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      [_ in never]: never
+    }
+    Enums: {
+      [_ in never]: never
+    }
+    CompositeTypes: {
+      [_ in never]: never
     }
   }
 }
