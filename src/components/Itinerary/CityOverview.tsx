@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useRef, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { MapPin, Calendar, Moon, Sun, TrainFront, Wallet, Languages } from 'lucide-react';
 import { CITY_CONFIGS, getCityStyle, type CitySlug } from '@/lib/city-colors';
 import { useCountUp } from '@/hooks/useCountUp';
@@ -32,6 +32,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
   const config = CITY_CONFIGS[citySlug];
   const CityIcon = config.icon;
   const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -89,7 +90,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
         <div className="co-hero-content">
           <motion.div
             className="co-hero-icon"
-            initial={{ opacity: 0, scale: 0.6 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.6 }}
             animate={{ opacity: 0.8, scale: 1 }}
             transition={{ delay: 0.1, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
@@ -97,7 +98,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
           </motion.div>
           <motion.h2
             className="co-hero-title"
-            initial={{ opacity: 0, y: 16 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
@@ -105,7 +106,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
           </motion.h2>
           <motion.p
             className="co-hero-tagline"
-            initial={{ opacity: 0, y: 12 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 0.85, y: 0 }}
             transition={{ delay: 0.25, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
@@ -113,7 +114,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
           </motion.p>
           <motion.div
             className="co-hero-meta"
-            initial={{ opacity: 0, y: 8 }}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
@@ -144,10 +145,10 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
               <motion.div
                 key={photo.imageUrl}
                 className="co-photo-item"
-                initial={{ opacity: 0, y: 20 }}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ delay: i * 0.08, duration: 0.5 }}
+                transition={shouldReduceMotion ? { duration: 0 } : { delay: i * 0.08, duration: 0.5 }}
                 onClick={() => onDaySelect(photo.dayIndex)}
                 role="button"
                 tabIndex={0}
