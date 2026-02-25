@@ -1,0 +1,179 @@
+/* Interactive Timeline Container */
+.timeline-container {
+  position: relative;
+  padding: 24px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-glow) 0%, rgba(99, 102, 241, 0.1) 100%);
+  z-index: 1;
+}
+
+.reorder-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Reduced gap to accommodate transit connectors tightly */
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: stretch;
+  gap: 20px;
+  position: relative;
+  flex-wrap: wrap; /* Allow transit connector to push below the main row */
+}
+
+/* Empty Day State */
+.empty-day-state {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-day-state h3 {
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+/* Generating Day State */
+.generating-day-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 60px 0;
+  background: var(--bg-surface-hover);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--border-focus);
+  position: relative;
+  overflow: hidden;
+}
+
+.generating-day-state::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, var(--accent-glow) 0%, transparent 100%);
+  z-index: 0;
+}
+
+.magic-wand-spinner {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.magic-wand-btn {
+  background: linear-gradient(135deg, var(--accent-glow) 0%, var(--bg-surface) 100%) !important;
+  border: 1px solid var(--border-focus) !important;
+  color: var(--accent-primary) !important;
+  box-shadow: 0 0 15px var(--accent-glow) !important;
+  transition: all 0.3s ease !important;
+}
+
+.magic-wand-btn:hover {
+  background: var(--bg-surface-hover) !important;
+  box-shadow: 0 0 20px var(--border-focus) !important;
+  transform: translateY(-2px) !important;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.generating-day-state .text-secondary {
+  position: relative;
+  z-index: 1;
+}
+
+/* Skeleton Loading Animation */
+.skeleton-timeline {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.skeleton-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-left: 80px; /* Offset to match timeline */
+}
+
+.skel-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-surface-hover);
+  animation: pulse 1.5s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.skel-card {
+  flex: 1;
+  height: 80px;
+  background: var(--bg-surface-hover);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skel-card::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--shimmer-bg) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite ease-out;
+}
+
+.skel-card.half {
+  flex: none;
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; transform: scale(0.98); }
+  50% { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0.4; transform: scale(0.98); }
+}
