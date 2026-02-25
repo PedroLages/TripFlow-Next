@@ -1,0 +1,138 @@
+.city-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+
+.co-hero {
+  position: relative;
+  height: 350px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.co-hero-image {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-size: cover;
+  background-position: center;
+}
+
+.co-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    var(--city-color) 0%,
+    color-mix(in srgb, var(--city-color) 40%, rgba(0, 0, 0, 0.5)) 40%,
+    rgba(0, 0, 0, 0.15) 70%,
+    transparent 100%
+  );
+}
+
+.co-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32px;
+  color: white;
+  z-index: 2;
+}
+
+.co-hero-icon {
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.co-hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  margin: 0 0 4px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.co-hero-tagline {
+  font-size: 1.05rem;
+  opacity: 0.85;
+  margin: 0 0 16px;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.01em;
+}
+
+.co-hero-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.co-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .co-hero {
+    height: 280px;
+  }
+
+  .co-hero-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .city-overview {
+    gap: 24px;
+  }
+
+  .co-hero {
+    height: 220px;
+  }
+
+  .co-hero-content {
+    padding: 16px;
+  }
+
+  .co-hero-tagline {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .co-hero-image {
+    transform: none !important;
+  }
+}
