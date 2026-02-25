@@ -42,7 +42,7 @@ export default function HomePage() {
             <h1 style={{ marginBottom: '4px' }}>Good afternoon, Pedro.</h1>
             <p>Ready for your next adventure?</p>
           </div>
-          <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
             <ThemeToggle />
             <div className="search-container" style={{ position: 'relative', cursor: 'text' }} onClick={() => setIsWizardOpen(true)}>
               <Sparkles size={16} className="search-icon" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-primary)', zIndex: 1 }} />
