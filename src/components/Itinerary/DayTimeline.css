@@ -177,3 +177,17 @@
   50% { opacity: 0.8; transform: scale(1); }
   100% { opacity: 0.4; transform: scale(0.98); }
 }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .skel-icon,
+  .skel-card::after {
+    animation: none;
+  }
+
+  .magic-wand-btn,
+  .magic-wand-btn:hover {
+    transition: none;
+    transform: none !important;
+  }
+}
