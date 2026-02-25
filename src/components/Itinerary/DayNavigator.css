@@ -104,6 +104,23 @@
   }
 }
 
+/* Overview Tab */
+.overview-tab {
+  gap: 4px;
+  flex-direction: row;
+  font-weight: 600;
+  padding: 8px 20px 12px;
+}
+
+.overview-tab svg {
+  opacity: 0.7;
+}
+
+.overview-tab.day-tab-active svg {
+  opacity: 1;
+  color: var(--tab-color);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .day-tab {
