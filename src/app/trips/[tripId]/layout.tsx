@@ -48,13 +48,14 @@ export default function TripLayout({ children }: { children: React.ReactNode }) 
               className="glass-panel"
               style={{ padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', cursor: 'pointer', borderRadius: '100px' }}
               onClick={() => setIsCollabOpen(true)}
+              aria-label={`View collaborators (${trip.collaborators} members)`}
             >
               <Users size={18} />
               <span style={{ fontWeight: 500 }}>Collaborators ({trip.collaborators})</span>
             </button>
             <ExportMenu />
             <div className="user-profile">
-              <img src="https://i.pravatar.cc/150?u=1" alt="Profile" style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover' }} />
+              <img src="https://i.pravatar.cc/150?u=1" alt="Your profile" width={40} height={40} style={{ borderRadius: '50%', objectFit: 'cover' }} loading="lazy" />
             </div>
           </div>
         </div>
