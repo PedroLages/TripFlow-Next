@@ -50,6 +50,11 @@ export interface ItineraryDay {
   activities: Activity[];
 }
 
+export interface LightboxSlide {
+  src: string;
+  title?: string;
+}
+
 // ---------------------------------------------------------------------------
 // Trip metadata
 // ---------------------------------------------------------------------------

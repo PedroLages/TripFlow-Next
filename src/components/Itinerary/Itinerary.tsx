@@ -27,6 +27,7 @@ import {
   TRIP_DATES,
   type Activity,
   type ItineraryDay,
+  type LightboxSlide,
 } from '@/lib/itinerary-data';
 import './Itinerary.css';
 
@@ -106,10 +107,10 @@ export const Itinerary: React.FC = () => {
 
   // Lightbox state
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
+  const [lightboxPhotos, setLightboxPhotos] = useState<LightboxSlide[]>([]);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
-  const openLightbox = useCallback((photos: string[], startIndex: number) => {
+  const openLightbox = useCallback((photos: LightboxSlide[], startIndex: number) => {
     setLightboxPhotos(photos);
     setLightboxIndex(startIndex);
     setLightboxOpen(true);
@@ -403,7 +404,7 @@ export const Itinerary: React.FC = () => {
       {/* Lightbox */}
       <Lightbox
         isOpen={lightboxOpen}
-        photos={lightboxPhotos}
+        slides={lightboxPhotos}
         initialIndex={lightboxIndex}
         onClose={() => setLightboxOpen(false)}
         onIndexChange={setLightboxIndex}
