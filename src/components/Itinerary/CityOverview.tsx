@@ -5,13 +5,14 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import { MapPin, Calendar, Moon, Sun, TrainFront, Wallet, Languages } from 'lucide-react';
 import { CITY_CONFIGS, getCityStyle, type CitySlug } from '@/lib/city-colors';
 import { useCountUp } from '@/hooks/useCountUp';
-import type { ItineraryDay } from '@/lib/itinerary-data';
+import { resizeItineraryImage, type ItineraryDay } from '@/lib/itinerary-data';
 import './CityOverview.css';
 
 interface CityOverviewProps {
   citySlug: CitySlug;
   cityDays: ItineraryDay[];
   onDaySelect: (dayIndex: number) => void;
+  onOpenLightbox?: (photos: string[], startIndex: number) => void;
 }
 
 function StatCounter({ label, value, suffix = '' }: { label: string; value: number; suffix?: string }) {
@@ -28,6 +29,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
   citySlug,
   cityDays,
   onDaySelect,
+  onOpenLightbox,
 }) => {
   const config = CITY_CONFIGS[citySlug];
   const CityIcon = config.icon;
@@ -149,24 +151,32 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={shouldReduceMotion ? { duration: 0 } : { delay: i * 0.08, duration: 0.5 }}
-                onClick={() => onDaySelect(photo.dayIndex)}
+                onClick={() => onOpenLightbox?.(
+                  photoHighlights.map(p => p.imageUrl),
+                  i,
+                )}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    onDaySelect(photo.dayIndex);
+                    onOpenLightbox?.(photoHighlights.map(p => p.imageUrl), i);
                   }
                 }}
-                aria-label={`${photo.title} — click to view ${photo.dayLabel}`}
+                aria-label={`${photo.title} — click to view photo`}
               >
                 <div
                   className="co-photo-img"
-                  style={{ backgroundImage: `url(${photo.imageUrl})` }}
+                  style={{ backgroundImage: `url(${resizeItineraryImage(photo.imageUrl, 1200)})` }}
                 />
                 <div className="co-photo-overlay">
                   <span className="co-photo-title">{photo.title}</span>
-                  <span className="co-photo-day">{photo.dayLabel}</span>
+                  <button
+                    className="co-photo-day-btn"
+                    onClick={(e) => { e.stopPropagation(); onDaySelect(photo.dayIndex); }}
+                  >
+                    {photo.dayLabel} →
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -179,7 +189,8 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
         <h3 className="co-section-title">Your Days</h3>
         <div className="co-day-cards-scroll">
           {cityDays.map((day, localIndex) => {
-            const thumb = day.activities.find(a => a.imageUrl)?.imageUrl;
+            const rawThumb = day.activities.find(a => a.imageUrl)?.imageUrl;
+            const thumb = rawThumb ? resizeItineraryImage(rawThumb, 400) : undefined;
             return (
               <button
                 key={day.dayIndex}
@@ -206,46 +217,58 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
         </div>
       </div>
 
-      {/* Section 5: Quick Info Bar */}
-      <div className="co-quick-info">
-        <div className="co-info-item">
-          <Sun size={16} />
-          <div>
-            <span className="co-info-label">Climate</span>
-            <span className="co-info-value">{config.climate}</span>
-          </div>
-        </div>
-        <div className="co-info-item">
-          <TrainFront size={16} />
-          <div>
-            <span className="co-info-label">Getting Around</span>
-            <span className="co-info-value">{config.transitTip}</span>
-          </div>
-        </div>
-        <div className="co-info-item">
-          <Wallet size={16} />
-          <div>
-            <span className="co-info-label">Budget</span>
-            <span className="co-info-value">{config.budgetRange}</span>
-          </div>
-        </div>
-        <div className="co-info-item">
-          <Languages size={16} />
-          <div>
-            <span className="co-info-label">Language</span>
-            <span className="co-info-value">{config.languageTip}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Highlights */}
-      <div className="co-highlights">
-        {config.highlights.map(h => (
-          <span key={h} className="co-highlight-pill">
-            <MapPin size={12} /> {h}
-          </span>
+      {/* Section 5: Quick Info Bar — stagger reveal */}
+      <motion.div
+        className="co-quick-info"
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={{ once: true, margin: '-40px' }}
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+      >
+        {[
+          { icon: <Sun size={16} />, label: 'Climate', value: config.climate },
+          { icon: <TrainFront size={16} />, label: 'Getting Around', value: config.transitTip },
+          { icon: <Wallet size={16} />, label: 'Budget', value: config.budgetRange },
+          { icon: <Languages size={16} />, label: 'Language', value: config.languageTip },
+        ].map((info) => (
+          <motion.div
+            key={info.label}
+            className="co-info-item"
+            variants={shouldReduceMotion ? undefined : {
+              hidden: { opacity: 0, y: 16 },
+              visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+            }}
+          >
+            {info.icon}
+            <div>
+              <span className="co-info-label">{info.label}</span>
+              <span className="co-info-value">{info.value}</span>
+            </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
+
+      {/* Highlights — cascade reveal */}
+      <motion.div
+        className="co-highlights"
+        initial={shouldReduceMotion ? false : "hidden"}
+        whileInView="visible"
+        viewport={{ once: true, margin: '-30px' }}
+        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
+      >
+        {config.highlights.map(h => (
+          <motion.span
+            key={h}
+            className="co-highlight-pill"
+            variants={shouldReduceMotion ? undefined : {
+              hidden: { opacity: 0, scale: 0.85 },
+              visible: { opacity: 1, scale: 1, transition: { duration: 0.35 } },
+            }}
+          >
+            <MapPin size={12} /> {h}
+          </motion.span>
+        ))}
+      </motion.div>
     </div>
   );
 };
