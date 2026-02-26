@@ -1,15 +1,17 @@
 "use client"
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
-import { Sparkles, Plus } from 'lucide-react';
+import { Sparkles, Plus, Map as MapIcon } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { Button } from '../ui/ButtonLegacy';
 import { AISuggestionsPanel } from '../AIGenerator/AISuggestionsPanel';
 import CityNavigator from './CityNavigator';
 import DayNavigator from './DayNavigator';
 import { DayTimeline } from './DayTimeline';
 import { CityOverview } from './CityOverview';
-import DaySummary from './DaySummary';
+import { Lightbox } from './Lightbox';
+import { MobileMapSheet } from './MobileMapSheet';
 import { AddActivityModal } from './AddActivityModal';
 import {
   type CitySlug,
@@ -27,6 +29,11 @@ import {
   type ItineraryDay,
 } from '@/lib/itinerary-data';
 import './Itinerary.css';
+
+const MapPanel = dynamic(
+  () => import('./MapPanel').then(mod => ({ default: mod.MapPanel })),
+  { ssr: false, loading: () => <div className="map-panel-skeleton">Loading map...</div> }
+);
 
 // ---------------------------------------------------------------------------
 // Animation variants (matching Dashboard patterns)
@@ -73,6 +80,16 @@ export const Itinerary: React.FC = () => {
 
   const motionVariants = prefersReducedMotion ? reducedMotionVariants : itemVariants;
 
+  // Content transition for city/day switching (cinematic blur + scale)
+  const contentTransition = prefersReducedMotion
+    ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.1 } }
+    : {
+        initial: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(4px)' },
+        animate: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
+        exit: { opacity: 0, y: -16, scale: 0.98, filter: 'blur(4px)' },
+        transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const },
+      };
+
   // Trip data
   const allDays = useMemo(() => generateItineraryDays(), []);
 
@@ -87,6 +104,68 @@ export const Itinerary: React.FC = () => {
   const [isAddActivityOpen, setIsAddActivityOpen] = useState(false);
   const [expandedActivity, setExpandedActivity] = useState<string | null>(null);
 
+  // Lightbox state
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxPhotos, setLightboxPhotos] = useState<string[]>([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((photos: string[], startIndex: number) => {
+    setLightboxPhotos(photos);
+    setLightboxIndex(startIndex);
+    setLightboxOpen(true);
+  }, []);
+
+  // Map state
+  const [hoveredActivityId, setHoveredActivityId] = useState<string | null>(null);
+  const [selectedPinId, setSelectedPinId] = useState<string | null>(null);
+  const [isMapSheetOpen, setIsMapSheetOpen] = useState(false);
+  const activityRefs = useRef<Map<string, HTMLElement>>(new Map());
+
+  const handlePinClick = useCallback((activityId: string) => {
+    setSelectedPinId(activityId);
+    setExpandedActivity(activityId);
+    const el = activityRefs.current.get(activityId);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, []);
+
+  const handleActivityHover = useCallback((activityId: string | null) => {
+    setHoveredActivityId(activityId);
+  }, []);
+
+  // URL state sync — deep-linking support
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlCity = params.get('city');
+    if (urlCity && urlCity in CITY_CONFIGS) {
+      setActiveCity(urlCity as CitySlug);
+      const urlDay = params.get('day');
+      if (urlDay) {
+        const dayNum = parseInt(urlDay, 10);
+        const days = getDaysForCity(urlCity as CitySlug);
+        if (!isNaN(dayNum) && dayNum >= 1 && dayNum <= days.length) {
+          setActiveDay(days[dayNum - 1]);
+        }
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+    const params = new URLSearchParams();
+    params.set('city', activeCity);
+    if (activeDay >= 0) {
+      const days = getDaysForCity(activeCity);
+      const localDay = days.indexOf(activeDay) + 1;
+      if (localDay > 0) params.set('day', String(localDay));
+    }
+    window.history.replaceState(null, '', `?${params.toString()}`);
+  }, [activeCity, activeDay]);
+
   // Derived state
   const cityDayIndices = useMemo(() => getDaysForCity(activeCity), [activeCity]);
   const cityDays: ItineraryDay[] = useMemo(
@@ -97,7 +176,6 @@ export const Itinerary: React.FC = () => {
           ...base,
           activities: activities.filter(
             (a) => {
-              // Match activities to day by checking if they're in the original day
               const dayActivities = allDays[idx].activities;
               return dayActivities.some((da) => da.id === a.id);
             }
@@ -122,6 +200,11 @@ export const Itinerary: React.FC = () => {
       );
     },
     [activities, allDays, activeDay]
+  );
+
+  const allCityActivities = useMemo(
+    () => cityDays.flatMap(d => d.activities),
+    [cityDays]
   );
 
   // Handlers
@@ -187,7 +270,6 @@ export const Itinerary: React.FC = () => {
           comments: [],
         },
       ];
-      // Inject into the current day's data
       const dayData = allDays[activeDay];
       dayData.activities.push(...newActivities);
       setActivities((prev) => [...prev, ...newActivities]);
@@ -263,24 +345,19 @@ export const Itinerary: React.FC = () => {
             {activeDay === -1 ? (
               <motion.div
                 key={`overview-${activeCity}`}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.25 }}
+                {...contentTransition}
               >
                 <CityOverview
                   citySlug={activeCity}
                   cityDays={cityDays}
                   onDaySelect={(dayIndex: number) => setActiveDay(dayIndex)}
+                  onOpenLightbox={openLightbox}
                 />
               </motion.div>
             ) : (
               <motion.div
                 key={activeDay}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.25 }}
+                {...contentTransition}
               >
                 <DayTimeline
                   activities={dayActivities}
@@ -290,31 +367,72 @@ export const Itinerary: React.FC = () => {
                   onAutoFill={handleAutoFillDay}
                   onOpenSuggestions={() => setIsSuggestionsOpen(true)}
                   onAddActivity={() => setIsAddActivityOpen(true)}
+                  onOpenLightbox={openLightbox}
                   isGenerating={isGeneratingDay}
                   expandedActivity={expandedActivity}
                   onToggleExpand={setExpandedActivity}
+                  hoveredActivityId={hoveredActivityId}
+                  selectedPinId={selectedPinId}
+                  onActivityHover={handleActivityHover}
+                  activityRefs={activityRefs}
                 />
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* Right Panel: Day Summary */}
+        {/* Right Panel: Map */}
         <div className="itinerary-right-panel">
-          {activeDay >= 0 && currentDay && (
-            <DaySummary
-              day={{
-                ...currentDay,
-                activities: dayActivities,
-              }}
-              citySlug={activeCity}
-              onAutoFill={handleAutoFillDay}
-              onAddActivity={() => setIsAddActivityOpen(true)}
-              isGenerating={isGeneratingDay}
-            />
-          )}
+          <MapPanel
+            activities={dayActivities}
+            allCityActivities={allCityActivities}
+            citySlug={activeCity}
+            activeDay={activeDay}
+            day={currentDay ? { ...currentDay, activities: dayActivities } : undefined}
+            hoveredActivityId={hoveredActivityId}
+            selectedPinId={selectedPinId}
+            onPinClick={handlePinClick}
+            onPinHover={setHoveredActivityId}
+            onAutoFill={handleAutoFillDay}
+            onAddActivity={() => setIsAddActivityOpen(true)}
+            isGenerating={isGeneratingDay}
+          />
         </div>
       </motion.div>
+
+      {/* Lightbox */}
+      <Lightbox
+        isOpen={lightboxOpen}
+        photos={lightboxPhotos}
+        initialIndex={lightboxIndex}
+        onClose={() => setLightboxOpen(false)}
+        onIndexChange={setLightboxIndex}
+      />
+
+      {/* Mobile Map FAB + Bottom Sheet */}
+      <button
+        className="map-fab"
+        onClick={() => setIsMapSheetOpen(true)}
+        aria-label="Show map"
+      >
+        <MapIcon size={22} />
+      </button>
+      <MobileMapSheet isOpen={isMapSheetOpen} onClose={() => setIsMapSheetOpen(false)}>
+        <MapPanel
+          activities={dayActivities}
+          allCityActivities={allCityActivities}
+          citySlug={activeCity}
+          activeDay={activeDay}
+          day={currentDay ? { ...currentDay, activities: dayActivities } : undefined}
+          hoveredActivityId={hoveredActivityId}
+          selectedPinId={selectedPinId}
+          onPinClick={handlePinClick}
+          onPinHover={setHoveredActivityId}
+          onAutoFill={handleAutoFillDay}
+          onAddActivity={() => setIsAddActivityOpen(true)}
+          isGenerating={isGeneratingDay}
+        />
+      </MobileMapSheet>
 
       {/* AI Suggestions Panel (existing) */}
       <AISuggestionsPanel
