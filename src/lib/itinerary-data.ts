@@ -23,6 +23,23 @@ export interface Activity {
   imageUrl?: string;
   status?: 'Booked' | 'Must Do' | 'Optional';
   transitToNext?: { method: 'walk' | 'train' | 'car' | 'metro' | 'ferry'; duration: number };
+  photos?: string[];          // multiple image URLs for carousel
+  coordinates?: Coordinates;  // GPS for map pins
+  place?: PlaceMetadata;      // enrichment data
+}
+
+export interface PlaceMetadata {
+  rating?: number;          // 1.0 - 5.0
+  reviewCount?: number;
+  openingHours?: string;    // "9:00 AM - 6:00 PM"
+  address?: string;
+  priceLevel?: 1 | 2 | 3 | 4;
+  placeCategory?: string;   // "Temple", "Market", etc.
+}
+
+export interface Coordinates {
+  lat: number;
+  lng: number;
 }
 
 export interface ItineraryDay {
@@ -42,22 +59,52 @@ export const TRIP_SUBTITLE = 'Shanghai \u2192 Hong Kong \u2192 Osaka \u2192 Kyot
 export const TRIP_DATES = 'Aug 27 - Sep 18, 2026';
 
 // ---------------------------------------------------------------------------
-// Image URLs (Unsplash)
+// Local responsive images (WebP, processed from Unsplash originals)
+// Sizes: 400w (thumbs), 800w (cards), 1200w (medium), 1600w (hero)
 // ---------------------------------------------------------------------------
 
+type ImageSize = 400 | 800 | 1200 | 1600;
+
+/** Returns the local path for a responsive image at the given size. */
+export function itineraryImage(name: string, size: ImageSize = 800): string {
+  return `/images/itinerary/${name}-${size}.webp`;
+}
+
+/** Returns a CSS image-set() value for responsive background images. */
+export function responsiveBgImage(name: string): string {
+  return `image-set(url("/images/itinerary/${name}-800.webp") 1x, url("/images/itinerary/${name}-1600.webp") 2x)`;
+}
+
+/** Swaps an itinerary image path to a different size. Falls back to original if not a local image. */
+export function resizeItineraryImage(imageUrl: string, size: ImageSize): string {
+  const match = imageUrl.match(/^\/images\/itinerary\/(.+)-\d+\.webp$/);
+  return match ? itineraryImage(match[1], size) : imageUrl;
+}
+
 const IMG = {
-  bund: 'https://images.unsplash.com/photo-1537531383496-47a782e39c1e?w=800&auto=format&fit=crop',
-  yuGarden: 'https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=800&auto=format&fit=crop',
-  victoriaPeak: 'https://images.unsplash.com/photo-1536599018102-9f803c140fc1?w=800&auto=format&fit=crop',
-  starFerry: 'https://images.unsplash.com/photo-1563172444-a2860c3a7480?w=800&auto=format&fit=crop',
-  dotonbori: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800&auto=format&fit=crop',
-  osakaCastle: 'https://images.unsplash.com/photo-1589452271712-64b8a66c3929?w=800&auto=format&fit=crop',
-  fushimiInari: 'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=800&auto=format&fit=crop',
-  arashiyama: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&auto=format&fit=crop',
-  shibuya: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&auto=format&fit=crop',
-  teamLab: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&auto=format&fit=crop',
-  greatWall: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&auto=format&fit=crop',
-  forbiddenCity: 'https://images.unsplash.com/photo-1584646098378-0874589d76b1?w=800&auto=format&fit=crop',
+  bund:           itineraryImage('bund'),
+  yuGarden:       itineraryImage('yu-garden'),
+  victoriaPeak:   itineraryImage('victoria-peak'),
+  starFerry:      itineraryImage('star-ferry'),
+  dotonbori:      itineraryImage('dotonbori'),
+  osakaCastle:    itineraryImage('osaka-castle'),
+  fushimiInari:   itineraryImage('fushimi-inari'),
+  arashiyama:     itineraryImage('arashiyama'),
+  shibuya:        itineraryImage('shibuya'),
+  teamLab:        itineraryImage('teamlab'),
+  greatWall:      itineraryImage('great-wall'),
+  forbiddenCity:  itineraryImage('forbidden-city'),
+  // Additional activity images
+  nanjingRoad:    itineraryImage('nanjing-road'),
+  shanghaiSkyline: itineraryImage('shanghai-skyline'),
+  dimSum:         itineraryImage('dim-sum'),
+  bigBuddha:     itineraryImage('big-buddha'),
+  nightMarket:    itineraryImage('night-market'),
+  kinkakuji:     itineraryImage('kinkakuji'),
+  teaCeremony:   itineraryImage('tea-ceremony'),
+  tsukiji:       itineraryImage('tsukiji'),
+  shinsekai:     itineraryImage('shinsekai'),
+  kuromonMarket: itineraryImage('kuromon-market'),
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -108,6 +155,7 @@ function shanghaiDay0(): Activity[] {
       comments: [],
       status: 'Booked',
       transitToNext: { method: 'metro', duration: 45 },
+      coordinates: { lat: 31.1443, lng: 121.8083 },
     },
     {
       id: 'sh-d0-2',
@@ -119,6 +167,7 @@ function shanghaiDay0(): Activity[] {
       comments: [],
       status: 'Booked',
       transitToNext: { method: 'walk', duration: 15 },
+      coordinates: { lat: 31.2400, lng: 121.4900 },
     },
     {
       id: 'sh-d0-3',
@@ -129,8 +178,17 @@ function shanghaiDay0(): Activity[] {
       votes: { up: 12, down: 1 },
       comments: [],
       imageUrl: IMG.bund,
+      photos: [IMG.bund, itineraryImage('shanghai-skyline'), itineraryImage('nanjing-road')],
       status: 'Must Do',
       transitToNext: { method: 'walk', duration: 10 },
+      coordinates: { lat: 31.2400, lng: 121.4900 },
+      place: {
+        rating: 4.7,
+        reviewCount: 12400,
+        openingHours: 'Open 24 hours',
+        address: 'Zhongshan East 1st Rd, Huangpu',
+        placeCategory: 'Waterfront Promenade',
+      },
     },
     {
       id: 'sh-d0-4',
@@ -140,7 +198,18 @@ function shanghaiDay0(): Activity[] {
       duration: 90,
       votes: { up: 6, down: 2 },
       comments: [],
+      imageUrl: IMG.nanjingRoad,
+      photos: [IMG.nanjingRoad],
       status: 'Optional',
+      coordinates: { lat: 31.2350, lng: 121.4740 },
+      place: {
+        rating: 4.3,
+        reviewCount: 8200,
+        openingHours: '10:00 AM - 10:00 PM',
+        address: 'Nanjing East Rd, Huangpu',
+        priceLevel: 2,
+        placeCategory: 'Shopping Street',
+      },
     },
   ];
 }
@@ -159,8 +228,17 @@ function shanghaiDay1(): Activity[] {
         comment(2, GUIDE.user, GUIDE.avatar, 'Entry is 40 CNY. The bazaar outside is free and great for souvenirs.', '1 day ago'),
       ],
       imageUrl: IMG.yuGarden,
+      photos: [IMG.yuGarden],
       status: 'Must Do',
       transitToNext: { method: 'metro', duration: 20 },
+      coordinates: { lat: 31.2272, lng: 121.4920 },
+      place: {
+        rating: 4.6,
+        reviewCount: 15800,
+        openingHours: '8:30 AM - 5:00 PM',
+        address: '218 Anren St, Huangpu',
+        placeCategory: 'Classical Garden',
+      },
     },
     {
       id: 'sh-d1-2',
@@ -172,6 +250,15 @@ function shanghaiDay1(): Activity[] {
       comments: [],
       status: 'Must Do',
       transitToNext: { method: 'metro', duration: 30 },
+      coordinates: { lat: 31.2355, lng: 121.4688 },
+      place: {
+        rating: 4.5,
+        reviewCount: 3200,
+        openingHours: '7:30 AM - 8:00 PM',
+        address: '90 Maoming North Rd, Jing\'an',
+        priceLevel: 1,
+        placeCategory: 'Dumpling Restaurant',
+      },
     },
     {
       id: 'sh-d1-3',
@@ -183,6 +270,14 @@ function shanghaiDay1(): Activity[] {
       comments: [],
       status: 'Optional',
       transitToNext: { method: 'walk', duration: 15 },
+      coordinates: { lat: 31.2100, lng: 121.4400 },
+      place: {
+        rating: 4.4,
+        reviewCount: 5600,
+        openingHours: 'Open 24 hours',
+        address: 'Former French Concession, Xuhui',
+        placeCategory: 'Historic Neighborhood',
+      },
     },
     {
       id: 'sh-d1-4',
@@ -193,6 +288,15 @@ function shanghaiDay1(): Activity[] {
       votes: { up: 7, down: 1 },
       comments: [],
       status: 'Optional',
+      coordinates: { lat: 31.2150, lng: 121.4450 },
+      place: {
+        rating: 4.3,
+        reviewCount: 1800,
+        openingHours: '11:30 AM - 10:30 PM',
+        address: '38 Gaoyou Rd, Xuhui',
+        priceLevel: 3,
+        placeCategory: 'Yunnan Restaurant',
+      },
     },
   ];
 }
@@ -209,6 +313,7 @@ function shanghaiDay2(): Activity[] {
       comments: [],
       status: 'Booked',
       transitToNext: { method: 'walk', duration: 10 },
+      coordinates: { lat: 31.2565, lng: 121.4581 },
     },
     {
       id: 'sh-d2-2',
@@ -220,6 +325,14 @@ function shanghaiDay2(): Activity[] {
       comments: [],
       status: 'Must Do',
       transitToNext: { method: 'walk', duration: 20 },
+      coordinates: { lat: 31.3238, lng: 120.6220 },
+      place: {
+        rating: 4.7,
+        reviewCount: 9400,
+        openingHours: '7:30 AM - 5:30 PM',
+        address: '178 Dongbei St, Gusu, Suzhou',
+        placeCategory: 'UNESCO Garden',
+      },
     },
     {
       id: 'sh-d2-3',
@@ -231,6 +344,15 @@ function shanghaiDay2(): Activity[] {
       comments: [],
       status: 'Optional',
       transitToNext: { method: 'train', duration: 30 },
+      coordinates: { lat: 31.3180, lng: 120.6320 },
+      place: {
+        rating: 4.4,
+        reviewCount: 4100,
+        openingHours: 'Open 24 hours',
+        address: 'Pingjiang Rd, Gusu, Suzhou',
+        priceLevel: 1,
+        placeCategory: 'Historic Street Food',
+      },
     },
     {
       id: 'sh-d2-4',
@@ -241,6 +363,15 @@ function shanghaiDay2(): Activity[] {
       votes: { up: 13, down: 2 },
       comments: [],
       status: 'Optional',
+      coordinates: { lat: 31.2335, lng: 121.5016 },
+      place: {
+        rating: 4.6,
+        reviewCount: 7200,
+        openingHours: '8:30 AM - 9:30 PM',
+        address: '501 Yincheng Middle Rd, Pudong',
+        priceLevel: 3,
+        placeCategory: 'Observation Deck',
+      },
     },
   ];
 }
@@ -257,6 +388,7 @@ function hongKongDay3(): Activity[] {
       comments: [],
       status: 'Booked',
       transitToNext: { method: 'train', duration: 25 },
+      coordinates: { lat: 22.3080, lng: 113.9185 },
     },
     {
       id: 'hk-d3-2',
@@ -268,6 +400,7 @@ function hongKongDay3(): Activity[] {
       comments: [],
       status: 'Booked',
       transitToNext: { method: 'ferry', duration: 10 },
+      coordinates: { lat: 22.2988, lng: 114.1722 },
     },
     {
       id: 'hk-d3-3',
@@ -278,8 +411,18 @@ function hongKongDay3(): Activity[] {
       votes: { up: 15, down: 0 },
       comments: [],
       imageUrl: IMG.starFerry,
+      photos: [IMG.starFerry],
       status: 'Must Do',
       transitToNext: { method: 'walk', duration: 15 },
+      coordinates: { lat: 22.2867, lng: 114.1610 },
+      place: {
+        rating: 4.6,
+        reviewCount: 8900,
+        openingHours: '6:30 AM - 11:30 PM',
+        address: 'Star Ferry Pier, Central',
+        priceLevel: 1,
+        placeCategory: 'Ferry',
+      },
     },
     {
       id: 'hk-d3-4',
@@ -294,7 +437,17 @@ function hongKongDay3(): Activity[] {
         comment(5, GUIDE.user, GUIDE.avatar, 'Consider walking down via Old Peak Road for scenic views. Takes about 45 min.', '1 day ago'),
       ],
       imageUrl: IMG.victoriaPeak,
+      photos: [IMG.victoriaPeak],
       status: 'Must Do',
+      coordinates: { lat: 22.2759, lng: 114.1455 },
+      place: {
+        rating: 4.7,
+        reviewCount: 21000,
+        openingHours: '10:00 AM - 11:00 PM',
+        address: '33 Garden Rd, Central',
+        priceLevel: 2,
+        placeCategory: 'Scenic Viewpoint',
+      },
     },
   ];
 }
@@ -309,8 +462,19 @@ function hongKongDay4(): Activity[] {
       duration: 90,
       votes: { up: 16, down: 1 },
       comments: [],
+      imageUrl: IMG.dimSum,
+      photos: [IMG.dimSum],
       status: 'Must Do',
       transitToNext: { method: 'metro', duration: 25 },
+      coordinates: { lat: 22.3210, lng: 114.1690 },
+      place: {
+        rating: 4.4,
+        reviewCount: 6800,
+        openingHours: '9:00 AM - 9:00 PM',
+        address: '2-20 Kwong Wa St, Mong Kok',
+        priceLevel: 1,
+        placeCategory: 'Dim Sum Restaurant',
+      },
     },
     {
       id: 'hk-d4-2',
@@ -320,8 +484,18 @@ function hongKongDay4(): Activity[] {
       duration: 240,
       votes: { up: 14, down: 3 },
       comments: [],
+      imageUrl: IMG.bigBuddha,
+      photos: [IMG.bigBuddha],
       status: 'Optional',
       transitToNext: { method: 'metro', duration: 45 },
+      coordinates: { lat: 22.2540, lng: 113.9050 },
+      place: {
+        rating: 4.5,
+        reviewCount: 11200,
+        openingHours: '10:00 AM - 5:30 PM',
+        address: 'Ngong Ping, Lantau Island',
+        placeCategory: 'Temple & Monument',
+      },
     },
     {
       id: 'hk-d4-3',
@@ -331,7 +505,18 @@ function hongKongDay4(): Activity[] {
       duration: 120,
       votes: { up: 10, down: 2 },
       comments: [],
+      imageUrl: IMG.nightMarket,
+      photos: [IMG.nightMarket],
       status: 'Optional',
+      coordinates: { lat: 22.3050, lng: 114.1700 },
+      place: {
+        rating: 4.1,
+        reviewCount: 5400,
+        openingHours: '4:00 PM - 12:00 AM',
+        address: 'Temple St, Yau Ma Tei',
+        priceLevel: 1,
+        placeCategory: 'Night Market',
+      },
     },
   ];
 }
@@ -348,6 +533,14 @@ function hongKongDay5(): Activity[] {
       comments: [],
       status: 'Optional',
       transitToNext: { method: 'metro', duration: 40 },
+      coordinates: { lat: 22.2517, lng: 113.8622 },
+      place: {
+        rating: 4.3,
+        reviewCount: 3200,
+        openingHours: 'Open 24 hours',
+        address: 'Tai O, Lantau Island',
+        placeCategory: 'Fishing Village',
+      },
     },
     {
       id: 'hk-d5-2',
@@ -359,6 +552,14 @@ function hongKongDay5(): Activity[] {
       comments: [],
       status: 'Optional',
       transitToNext: { method: 'walk', duration: 10 },
+      coordinates: { lat: 22.2933, lng: 114.1717 },
+      place: {
+        rating: 4.4,
+        reviewCount: 2800,
+        openingHours: '10:00 AM - 6:00 PM',
+        address: '10 Salisbury Rd, Tsim Sha Tsui',
+        placeCategory: 'Art Museum',
+      },
     },
     {
       id: 'hk-d5-3',
@@ -369,6 +570,15 @@ function hongKongDay5(): Activity[] {
       votes: { up: 11, down: 2 },
       comments: [],
       status: 'Optional',
+      coordinates: { lat: 22.3035, lng: 114.1603 },
+      place: {
+        rating: 4.2,
+        reviewCount: 2100,
+        openingHours: '5:00 PM - 1:00 AM',
+        address: 'ICC, 1 Austin Rd W, Tsim Sha Tsui',
+        priceLevel: 4,
+        placeCategory: 'Rooftop Bar',
+      },
     },
   ];
 }
@@ -384,6 +594,7 @@ function osakaDay6(): Activity[] {
       votes: { up: 4, down: 0 },
       comments: [],
       status: 'Booked',
+      coordinates: { lat: 34.4347, lng: 135.2440 },
     },
     {
       id: 'os-d6-2',
@@ -394,7 +605,17 @@ function osakaDay6(): Activity[] {
       votes: { up: 19, down: 1 },
       comments: [],
       imageUrl: IMG.dotonbori,
+      photos: [IMG.dotonbori],
       status: 'Must Do',
+      coordinates: { lat: 34.6687, lng: 135.5019 },
+      place: {
+        rating: 4.5,
+        reviewCount: 18600,
+        openingHours: 'Open 24 hours',
+        address: 'Dotonbori, Chuo Ward',
+        priceLevel: 2,
+        placeCategory: 'Street Food District',
+      },
     },
   ];
 }
@@ -410,7 +631,17 @@ function osakaDay7(): Activity[] {
       votes: { up: 15, down: 2 },
       comments: [],
       imageUrl: IMG.osakaCastle,
+      photos: [IMG.osakaCastle],
       status: 'Must Do',
+      coordinates: { lat: 34.6873, lng: 135.5262 },
+      place: {
+        rating: 4.5,
+        reviewCount: 14200,
+        openingHours: '9:00 AM - 5:00 PM',
+        address: '1-1 Osakajo, Chuo Ward',
+        priceLevel: 1,
+        placeCategory: 'Castle',
+      },
     },
     {
       id: 'os-d7-2',
@@ -420,7 +651,18 @@ function osakaDay7(): Activity[] {
       duration: 120,
       votes: { up: 9, down: 1 },
       comments: [],
+      imageUrl: IMG.shinsekai,
+      photos: [IMG.shinsekai],
       status: 'Optional',
+      coordinates: { lat: 34.6524, lng: 135.5063 },
+      place: {
+        rating: 4.2,
+        reviewCount: 6800,
+        openingHours: '10:00 AM - 8:00 PM',
+        address: 'Ebisuhigashi, Naniwa Ward',
+        priceLevel: 1,
+        placeCategory: 'Retro District',
+      },
     },
   ];
 }
@@ -435,7 +677,18 @@ function osakaDay8(): Activity[] {
       duration: 120,
       votes: { up: 13, down: 1 },
       comments: [],
+      imageUrl: IMG.kuromonMarket,
+      photos: [IMG.kuromonMarket],
       status: 'Must Do',
+      coordinates: { lat: 34.6627, lng: 135.5070 },
+      place: {
+        rating: 4.3,
+        reviewCount: 9100,
+        openingHours: '8:00 AM - 5:00 PM',
+        address: '2-4-1 Nipponbashi, Chuo Ward',
+        priceLevel: 2,
+        placeCategory: 'Food Market',
+      },
     },
     {
       id: 'os-d8-2',
@@ -446,6 +699,15 @@ function osakaDay8(): Activity[] {
       votes: { up: 7, down: 2 },
       comments: [],
       status: 'Optional',
+      coordinates: { lat: 34.6625, lng: 135.5010 },
+      place: {
+        rating: 4.3,
+        reviewCount: 7600,
+        openingHours: '10:00 AM - 9:00 PM',
+        address: 'Shinsaibashisuji, Chuo Ward',
+        priceLevel: 2,
+        placeCategory: 'Shopping Arcade',
+      },
     },
   ];
 }
@@ -461,6 +723,7 @@ function kyotoDay9(): Activity[] {
       votes: { up: 5, down: 0 },
       comments: [],
       status: 'Booked',
+      coordinates: { lat: 34.9856, lng: 135.7588 },
     },
     {
       id: 'ky-d9-2',
@@ -475,7 +738,16 @@ function kyotoDay9(): Activity[] {
         comment(8, SARAH.user, SARAH.avatar, 'Night visits are also possible and incredibly atmospheric. The shrine is open 24/7!', '1 day ago'),
       ],
       imageUrl: IMG.fushimiInari,
+      photos: [IMG.fushimiInari],
       status: 'Must Do',
+      coordinates: { lat: 34.9671, lng: 135.7727 },
+      place: {
+        rating: 4.8,
+        reviewCount: 32000,
+        openingHours: 'Open 24 hours',
+        address: '68 Fukakusa Yabunouchicho, Fushimi',
+        placeCategory: 'Shinto Shrine',
+      },
     },
   ];
 }
@@ -491,7 +763,16 @@ function kyotoDay10(): Activity[] {
       votes: { up: 20, down: 1 },
       comments: [],
       imageUrl: IMG.arashiyama,
+      photos: [IMG.arashiyama],
       status: 'Must Do',
+      coordinates: { lat: 35.0170, lng: 135.6713 },
+      place: {
+        rating: 4.6,
+        reviewCount: 19500,
+        openingHours: 'Open 24 hours',
+        address: 'Sagaogurayama, Ukyo Ward',
+        placeCategory: 'Natural Landmark',
+      },
     },
     {
       id: 'ky-d10-2',
@@ -501,7 +782,18 @@ function kyotoDay10(): Activity[] {
       duration: 90,
       votes: { up: 17, down: 1 },
       comments: [],
+      imageUrl: IMG.kinkakuji,
+      photos: [IMG.kinkakuji],
       status: 'Must Do',
+      coordinates: { lat: 35.0394, lng: 135.7292 },
+      place: {
+        rating: 4.7,
+        reviewCount: 24800,
+        openingHours: '9:00 AM - 5:00 PM',
+        address: '1 Kinkakujicho, Kita Ward',
+        priceLevel: 1,
+        placeCategory: 'Temple',
+      },
     },
   ];
 }
@@ -517,6 +809,15 @@ function kyotoDay11(): Activity[] {
       votes: { up: 12, down: 1 },
       comments: [],
       status: 'Optional',
+      coordinates: { lat: 35.0050, lng: 135.7648 },
+      place: {
+        rating: 4.4,
+        reviewCount: 11200,
+        openingHours: '9:00 AM - 6:00 PM',
+        address: 'Nishikikoji-dori, Nakagyo Ward',
+        priceLevel: 2,
+        placeCategory: 'Food Market',
+      },
     },
   ];
 }
@@ -531,7 +832,18 @@ function kyotoDay12(): Activity[] {
       duration: 90,
       votes: { up: 10, down: 0 },
       comments: [],
+      imageUrl: IMG.teaCeremony,
+      photos: [IMG.teaCeremony],
       status: 'Optional',
+      coordinates: { lat: 35.0032, lng: 135.7780 },
+      place: {
+        rating: 4.8,
+        reviewCount: 1400,
+        openingHours: '10:00 AM - 4:00 PM',
+        address: 'Gion, Higashiyama Ward',
+        priceLevel: 2,
+        placeCategory: 'Cultural Experience',
+      },
     },
   ];
 }
@@ -547,6 +859,7 @@ function tokyoDay13(): Activity[] {
       votes: { up: 8, down: 0 },
       comments: [],
       status: 'Booked',
+      coordinates: { lat: 35.6812, lng: 139.7671 },
     },
     {
       id: 'tk-d13-2',
@@ -557,7 +870,16 @@ function tokyoDay13(): Activity[] {
       votes: { up: 16, down: 1 },
       comments: [],
       imageUrl: IMG.shibuya,
+      photos: [IMG.shibuya],
       status: 'Must Do',
+      coordinates: { lat: 35.6595, lng: 139.7004 },
+      place: {
+        rating: 4.5,
+        reviewCount: 28000,
+        openingHours: 'Open 24 hours',
+        address: 'Dogenzaka, Shibuya',
+        placeCategory: 'Iconic Crossing',
+      },
     },
   ];
 }
@@ -577,7 +899,17 @@ function tokyoDay14(): Activity[] {
         comment(11, GUIDE.user, GUIDE.avatar, 'The new Azabudai Hills location opened in 2024. It is a completely reimagined experience from the Odaiba original.', '2 days ago'),
       ],
       imageUrl: IMG.teamLab,
+      photos: [IMG.teamLab],
       status: 'Booked',
+      coordinates: { lat: 35.6601, lng: 139.7301 },
+      place: {
+        rating: 4.8,
+        reviewCount: 16400,
+        openingHours: '10:00 AM - 7:00 PM',
+        address: 'Azabudai Hills, 1-2-4 Azabudai, Minato',
+        priceLevel: 3,
+        placeCategory: 'Digital Art Museum',
+      },
     },
   ];
 }
@@ -592,7 +924,18 @@ function tokyoDay15(): Activity[] {
       duration: 120,
       votes: { up: 14, down: 1 },
       comments: [],
+      imageUrl: IMG.tsukiji,
+      photos: [IMG.tsukiji],
       status: 'Must Do',
+      coordinates: { lat: 35.6654, lng: 139.7707 },
+      place: {
+        rating: 4.4,
+        reviewCount: 13800,
+        openingHours: '5:00 AM - 2:00 PM',
+        address: '4-16-2 Tsukiji, Chuo',
+        priceLevel: 2,
+        placeCategory: 'Food Market',
+      },
     },
   ];
 }
@@ -621,6 +964,7 @@ function beijingDay19(): Activity[] {
       votes: { up: 4, down: 0 },
       comments: [],
       status: 'Booked',
+      coordinates: { lat: 40.0799, lng: 116.6031 },
     },
   ];
 }
@@ -636,7 +980,17 @@ function beijingDay20(): Activity[] {
       votes: { up: 26, down: 0 },
       comments: [],
       imageUrl: IMG.greatWall,
+      photos: [IMG.greatWall],
       status: 'Must Do',
+      coordinates: { lat: 40.4319, lng: 116.5604 },
+      place: {
+        rating: 4.9,
+        reviewCount: 45000,
+        openingHours: '7:30 AM - 5:30 PM',
+        address: 'Mutianyu, Huairou District',
+        priceLevel: 2,
+        placeCategory: 'UNESCO World Heritage',
+      },
     },
   ];
 }
@@ -652,7 +1006,17 @@ function beijingDay21(): Activity[] {
       votes: { up: 21, down: 1 },
       comments: [],
       imageUrl: IMG.forbiddenCity,
+      photos: [IMG.forbiddenCity],
       status: 'Must Do',
+      coordinates: { lat: 39.9163, lng: 116.3972 },
+      place: {
+        rating: 4.8,
+        reviewCount: 38000,
+        openingHours: '8:30 AM - 5:00 PM',
+        address: '4 Jingshan Front St, Dongcheng',
+        priceLevel: 1,
+        placeCategory: 'Palace Museum',
+      },
     },
   ];
 }
