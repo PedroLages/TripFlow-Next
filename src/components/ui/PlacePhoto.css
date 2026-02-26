@@ -1,0 +1,112 @@
+.place-photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius, 12px);
+}
+
+.place-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.place-photo:hover .place-photo-img {
+  transform: scale(1.03);
+}
+
+/* Loading shimmer */
+.place-photo--loading {
+  background: var(--bg-surface, #1a1a2e);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.place-photo-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.04) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: photo-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes photo-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.place-photo-loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-secondary, #888);
+  opacity: 0.15;
+}
+
+/* Fallback gradient */
+.place-photo--fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--city-color, #14b8a6) 12%, var(--bg-surface, #1a1a2e)) 0%,
+    color-mix(in srgb, var(--city-color, #14b8a6) 4%, var(--bg-surface, #1a1a2e)) 100%
+  );
+}
+
+.place-photo-fallback-icon {
+  color: var(--city-color, #14b8a6);
+  opacity: 0.4;
+}
+
+.place-photo-fallback-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #888);
+  opacity: 0.6;
+  text-align: center;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Attribution overlay */
+.place-photo-attribution {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4px 10px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.7);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.place-photo:hover .place-photo-attribution {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.place-photo-attribution a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (hover: none) {
+  .place-photo-attribution {
+    opacity: 0.5;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .place-photo-shimmer { animation: none; }
+  .place-photo:hover .place-photo-img { transform: none; }
+}
