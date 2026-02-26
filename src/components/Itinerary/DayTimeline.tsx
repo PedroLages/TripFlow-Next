@@ -6,7 +6,7 @@ import { Sparkles, Compass } from 'lucide-react';
 import { Button } from '../ui/ButtonLegacy';
 import { getCityStyle } from '@/lib/city-colors';
 import type { CitySlug } from '@/lib/city-colors';
-import type { Activity } from '@/lib/itinerary-data';
+import type { Activity, LightboxSlide } from '@/lib/itinerary-data';
 import { ActivityCard } from './ActivityCard';
 import { TransitConnector } from './TransitConnector';
 import './DayTimeline.css';
@@ -19,7 +19,7 @@ interface DayTimelineProps {
   onAutoFill: () => void;
   onOpenSuggestions: () => void;
   onAddActivity: () => void;
-  onOpenLightbox?: (photos: string[], startIndex: number) => void;
+  onOpenLightbox?: (slides: LightboxSlide[], startIndex: number) => void;
   isGenerating: boolean;
   expandedActivity: string | null;
   onToggleExpand: (id: string | null) => void;

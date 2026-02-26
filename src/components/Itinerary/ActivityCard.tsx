@@ -13,7 +13,7 @@ import { Button } from '../ui/ButtonLegacy';
 import { cn } from '@/lib/utils';
 import { getCityStyle } from '@/lib/city-colors';
 import type { CitySlug } from '@/lib/city-colors';
-import type { Activity } from '@/lib/itinerary-data';
+import type { Activity, LightboxSlide } from '@/lib/itinerary-data';
 import { PhotoCarousel } from './PhotoCarousel';
 import './ActivityCard.css';
 
@@ -25,7 +25,7 @@ interface ActivityCardProps {
   isHighlighted?: boolean;
   onToggleExpand: () => void;
   onOpenSuggestions: () => void;
-  onOpenLightbox?: (photos: string[], startIndex: number) => void;
+  onOpenLightbox?: (slides: LightboxSlide[], startIndex: number) => void;
   onHover?: (activityId: string | null) => void;
   index: number;
 }
@@ -105,7 +105,8 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
             alt={activity.title}
             onPhotoClick={(photoIndex) => {
               const allPhotos = activity.photos ?? (activity.imageUrl ? [activity.imageUrl] : []);
-              onOpenLightbox?.(allPhotos, photoIndex);
+              const slides = allPhotos.map(src => ({ src, title: activity.title }));
+              onOpenLightbox?.(slides, photoIndex);
             }}
           />
         )}
