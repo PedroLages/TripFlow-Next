@@ -1,4 +1,4 @@
-/* PhotoCarousel – inline image carousel for ActivityCard */
+/* PhotoCarousel – Embla-powered image carousel for ActivityCard */
 
 .photo-carousel {
   position: relative;
@@ -9,44 +9,46 @@
 }
 
 .photo-carousel-single {
+  position: relative;
   width: 100%;
   height: 180px;
-  background-size: cover;
-  background-position: center;
   border-radius: var(--radius-md) var(--radius-md) 0 0;
   cursor: pointer;
+  overflow: hidden;
+}
+
+.photo-carousel-single img {
   transition: transform 0.3s ease;
 }
 
-.photo-carousel-single:hover {
+.photo-carousel-single:hover img {
   transform: scale(1.03);
 }
 
-.photo-carousel-track {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+/* Embla container structure */
+.photo-carousel-viewport {
+  overflow: hidden;
   height: 100%;
 }
 
-.photo-carousel-track::-webkit-scrollbar {
-  display: none;
+.photo-carousel-container {
+  display: flex;
+  height: 100%;
 }
 
 .photo-carousel-slide {
+  position: relative;
   flex: 0 0 100%;
+  min-width: 0;
   height: 100%;
-  background-size: cover;
-  background-position: center;
-  scroll-snap-align: center;
   cursor: pointer;
+}
+
+.photo-carousel-slide img {
   transition: transform 0.3s ease;
 }
 
-.photo-carousel-slide:hover {
+.photo-carousel-slide:hover img {
   transform: scale(1.03);
 }
 
@@ -106,4 +108,11 @@
 .carousel-dot.active {
   background: white;
   transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-carousel-single img,
+  .photo-carousel-slide img {
+    transition: none;
+  }
 }
