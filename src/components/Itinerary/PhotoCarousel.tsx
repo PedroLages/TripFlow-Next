@@ -1,7 +1,10 @@
 "use client"
 
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { getBlurDataURL } from '@/lib/blur-data';
 import './PhotoCarousel.css';
 
 interface PhotoCarouselProps {
@@ -11,75 +14,103 @@ interface PhotoCarouselProps {
 }
 
 export const PhotoCarousel: React.FC<PhotoCarouselProps> = ({ photos, alt, onPhotoClick }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: 'start' });
   const [activeIndex, setActiveIndex] = useState(0);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const scrollTo = useCallback((index: number) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const child = el.children[index] as HTMLElement;
-    if (child) {
-      child.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-      setActiveIndex(index);
-    }
-  }, []);
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setActiveIndex(emblaApi.selectedScrollSnap());
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
 
-  const handleScroll = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const scrollLeft = el.scrollLeft;
-    const width = el.clientWidth;
-    const newIndex = Math.round(scrollLeft / width);
-    setActiveIndex(Math.min(newIndex, photos.length - 1));
-  }, [photos.length]);
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => {
+      emblaApi.off('select', onSelect);
+      emblaApi.off('reInit', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   if (photos.length === 0) return null;
 
+  // Single photo — no carousel UI needed
   if (photos.length === 1) {
+    const blur = getBlurDataURL(photos[0]);
     return (
       <div
         className="photo-carousel-single"
-        role="img"
-        aria-label={alt}
-        style={{ backgroundImage: `url(${photos[0]})` }}
         onClick={(e) => { e.stopPropagation(); onPhotoClick(0); }}
-      />
+        role="button"
+        aria-label={`${alt} — click to view photo`}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPhotoClick(0); }
+        }}
+      >
+        <Image
+          src={photos[0]}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, 600px"
+          style={{ objectFit: 'cover' }}
+          {...(blur ? { placeholder: 'blur', blurDataURL: blur } : {})}
+        />
+      </div>
     );
   }
 
   return (
     <div className="photo-carousel" onClick={(e) => e.stopPropagation()}>
-      <div
-        className="photo-carousel-track"
-        ref={scrollRef}
-        onScroll={handleScroll}
-      >
-        {photos.map((photo, i) => (
-          <div
-            key={i}
-            className="photo-carousel-slide"
-            role="img"
-            aria-label={`${alt} — photo ${i + 1} of ${photos.length}`}
-            style={{ backgroundImage: `url(${photo})` }}
-            onClick={() => onPhotoClick(i)}
-          />
-        ))}
+      <div className="photo-carousel-viewport" ref={emblaRef}>
+        <div className="photo-carousel-container">
+          {photos.map((photo, i) => {
+            const blur = getBlurDataURL(photo);
+            return (
+              <div
+                key={i}
+                className="photo-carousel-slide"
+                role="button"
+                aria-label={`${alt} — photo ${i + 1} of ${photos.length}`}
+                tabIndex={0}
+                onClick={() => onPhotoClick(i)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onPhotoClick(i); }
+                }}
+              >
+                <Image
+                  src={photo}
+                  alt={`${alt} — photo ${i + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 600px"
+                  style={{ objectFit: 'cover' }}
+                  {...(blur ? { placeholder: 'blur', blurDataURL: blur } : {})}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Chevron buttons */}
-      {activeIndex > 0 && (
+      {canScrollPrev && (
         <button
           className="carousel-btn carousel-btn-prev"
-          onClick={() => scrollTo(activeIndex - 1)}
+          onClick={() => emblaApi?.scrollPrev()}
           aria-label="Previous photo"
         >
           <ChevronLeft size={18} />
         </button>
       )}
-      {activeIndex < photos.length - 1 && (
+      {canScrollNext && (
         <button
           className="carousel-btn carousel-btn-next"
-          onClick={() => scrollTo(activeIndex + 1)}
+          onClick={() => emblaApi?.scrollNext()}
           aria-label="Next photo"
         >
           <ChevronRight size={18} />
@@ -92,7 +123,7 @@ export const PhotoCarousel: React.FC<PhotoCarouselProps> = ({ photos, alt, onPho
           <button
             key={i}
             className={`carousel-dot ${i === activeIndex ? 'active' : ''}`}
-            onClick={() => scrollTo(i)}
+            onClick={() => emblaApi?.scrollTo(i)}
             aria-label={`Go to photo ${i + 1}`}
           />
         ))}
