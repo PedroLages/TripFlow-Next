@@ -1,0 +1,77 @@
+/* CompactDaySummary – glass stats strip overlaid on map panel */
+
+.compact-day-summary {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: color-mix(in srgb, var(--bg-base) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.compact-stats-row {
+  display: flex;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.compact-stat strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.compact-weather {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.compact-actions {
+  position: absolute;
+  bottom: auto;
+  right: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.compact-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-base) 90%, transparent);
+  backdrop-filter: blur(8px);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.compact-action-btn:hover {
+  background: var(--city-color, var(--accent-primary));
+  color: white;
+  border-color: transparent;
+}
+
+.compact-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive — in mobile bottom sheet, make stats wrap */
+@media (max-width: 500px) {
+  .compact-stats-row {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+}
