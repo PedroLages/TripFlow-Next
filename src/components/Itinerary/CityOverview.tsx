@@ -3,16 +3,18 @@
 import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { MapPin, Calendar, Moon, Sun, TrainFront, Wallet, Languages } from 'lucide-react';
+import Image from 'next/image';
 import { CITY_CONFIGS, getCityStyle, type CitySlug } from '@/lib/city-colors';
 import { useCountUp } from '@/hooks/useCountUp';
-import { resizeItineraryImage, type ItineraryDay } from '@/lib/itinerary-data';
+import { resizeItineraryImage, type ItineraryDay, type LightboxSlide } from '@/lib/itinerary-data';
+import { getBlurDataURL } from '@/lib/blur-data';
 import './CityOverview.css';
 
 interface CityOverviewProps {
   citySlug: CitySlug;
   cityDays: ItineraryDay[];
   onDaySelect: (dayIndex: number) => void;
-  onOpenLightbox?: (photos: string[], startIndex: number) => void;
+  onOpenLightbox?: (slides: LightboxSlide[], startIndex: number) => void;
 }
 
 function StatCounter({ label, value, suffix = '' }: { label: string; value: number; suffix?: string }) {
@@ -83,11 +85,17 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
       >
         <motion.div
           className="co-hero-image"
-          style={{
-            backgroundImage: `url(${config.heroImage})`,
-            y: yImage,
-          }}
-        />
+          style={{ y: yImage }}
+        >
+          <Image
+            src={config.heroImage}
+            alt={`${config.name} hero`}
+            fill
+            sizes="100vw"
+            priority
+            style={{ objectFit: 'cover' }}
+          />
+        </motion.div>
         <motion.div className="co-hero-overlay" style={{ opacity: opacityOverlay }} />
         <div className="co-hero-content">
           <motion.div
@@ -152,7 +160,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
                 viewport={{ once: true, margin: '-50px' }}
                 transition={shouldReduceMotion ? { duration: 0 } : { delay: i * 0.08, duration: 0.5 }}
                 onClick={() => onOpenLightbox?.(
-                  photoHighlights.map(p => p.imageUrl),
+                  photoHighlights.map(p => ({ src: p.imageUrl, title: p.title })),
                   i,
                 )}
                 role="button"
@@ -160,14 +168,19 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    onOpenLightbox?.(photoHighlights.map(p => p.imageUrl), i);
+                    onOpenLightbox?.(photoHighlights.map(p => ({ src: p.imageUrl, title: p.title })), i);
                   }
                 }}
                 aria-label={`${photo.title} — click to view photo`}
               >
-                <div
+                <Image
+                  src={resizeItineraryImage(photo.imageUrl, 1200)}
+                  alt={photo.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="co-photo-img"
-                  style={{ backgroundImage: `url(${resizeItineraryImage(photo.imageUrl, 1200)})` }}
+                  style={{ objectFit: 'cover' }}
+                  {...(getBlurDataURL(photo.imageUrl) ? { placeholder: 'blur', blurDataURL: getBlurDataURL(photo.imageUrl) } : {})}
                 />
                 <div className="co-photo-overlay">
                   <span className="co-photo-title">{photo.title}</span>
@@ -199,10 +212,16 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
                 aria-label={`Day ${localIndex + 1} — ${day.fullDate}, ${day.activities.length} activities`}
               >
                 {thumb && (
-                  <div
-                    className="co-day-card-thumb"
-                    style={{ backgroundImage: `url(${thumb})` }}
-                  />
+                  <div className="co-day-card-thumb">
+                    <Image
+                      src={thumb}
+                      alt=""
+                      fill
+                      sizes="160px"
+                      style={{ objectFit: 'cover' }}
+                      {...(getBlurDataURL(thumb) ? { placeholder: 'blur', blurDataURL: getBlurDataURL(thumb) } : {})}
+                    />
+                  </div>
                 )}
                 <div className="co-day-card-info">
                   <span className="co-day-card-number">Day {localIndex + 1}</span>
