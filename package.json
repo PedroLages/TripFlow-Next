@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
@@ -19,6 +21,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cobe": "^0.6.5",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.34.3",
     "lucide-react": "^0.575.0",
     "mapbox-gl": "^3.19.0",
@@ -28,9 +31,11 @@
     "react-dom": "19.2.3",
     "react-map-gl": "^8.1.0",
     "tailwind-merge": "^3.5.0",
+    "yet-another-react-lightbox": "^3.29.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
