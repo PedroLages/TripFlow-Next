@@ -19,9 +19,14 @@ interface DayTimelineProps {
   onAutoFill: () => void;
   onOpenSuggestions: () => void;
   onAddActivity: () => void;
+  onOpenLightbox?: (photos: string[], startIndex: number) => void;
   isGenerating: boolean;
   expandedActivity: string | null;
   onToggleExpand: (id: string | null) => void;
+  hoveredActivityId?: string | null;
+  selectedPinId?: string | null;
+  onActivityHover?: (activityId: string | null) => void;
+  activityRefs?: React.MutableRefObject<Map<string, HTMLElement>>;
 }
 
 export const DayTimeline: React.FC<DayTimelineProps> = ({
@@ -32,9 +37,14 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
   onAutoFill,
   onOpenSuggestions,
   onAddActivity,
+  onOpenLightbox,
   isGenerating,
   expandedActivity,
   onToggleExpand,
+  hoveredActivityId,
+  selectedPinId,
+  onActivityHover,
+  activityRefs,
 }) => {
   const cityStyle = getCityStyle(citySlug);
 
@@ -50,7 +60,6 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
       >
         {activities.map((activity, index) => {
           const isExpanded = expandedActivity === activity.id;
-          // Mocking the live indicator on the second item for demonstration
           const isLiveNow = index === 1 && activities.length > 1;
 
           return (
@@ -67,12 +76,17 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
                 citySlug={citySlug}
                 isExpanded={isExpanded}
                 isLiveNow={isLiveNow}
+                isHighlighted={selectedPinId === activity.id || hoveredActivityId === activity.id}
                 onToggleExpand={() => onToggleExpand(isExpanded ? null : activity.id)}
                 onOpenSuggestions={onOpenSuggestions}
+                onOpenLightbox={onOpenLightbox}
+                onHover={onActivityHover}
+                ref={(el) => {
+                  if (el && activityRefs?.current) activityRefs.current.set(activity.id, el);
+                }}
                 index={index}
               />
 
-              {/* Transit Connector between items */}
               {activity.transitToNext && (
                 <TransitConnector
                   method={activity.transitToNext.method}
@@ -92,9 +106,9 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
             className="magic-wand-spinner"
           >
-            <Sparkles size={48} color="var(--accent-primary)" />
+            <Sparkles size={48} color="var(--accent-primary)" aria-hidden="true" />
           </motion.div>
-          <h3 className="gradient-text">AI is crafting your perfect sequence...</h3>
+          <h3 className="gradient-text">AI is crafting your perfect sequence\u2026</h3>
           <p className="text-secondary">Analyzing local transit times and crowd patterns.</p>
 
           <div className="skeleton-timeline">
@@ -105,7 +119,7 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
         </div>
       ) : activities.length === 0 ? (
         <div className="empty-day-state">
-          <div className="empty-icon"><Compass size={48} /></div>
+          <div className="empty-icon"><Compass size={48} aria-hidden="true" /></div>
           <h3>Nothing planned yet</h3>
           <p>Use AI to quickly build a smart itinerary for this day, or add locations manually.</p>
           <Button
