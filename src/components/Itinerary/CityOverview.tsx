@@ -194,6 +194,17 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
               </motion.div>
             ))}
           </div>
+          {photoHighlights.length >= 8 && (
+            <button
+              className="co-photo-view-all"
+              onClick={() => onOpenLightbox?.(
+                photoHighlights.map(p => ({ src: p.imageUrl, title: p.title })),
+                0,
+              )}
+            >
+              View all photos
+            </button>
+          )}
         </div>
       )}
 
