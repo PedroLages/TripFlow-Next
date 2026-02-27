@@ -150,7 +150,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
       {photoHighlights.length > 0 && (
         <div className="co-section">
           <h3 className="co-section-title">Highlights</h3>
-          <div className="co-photo-grid">
+          <div className="co-photo-grid" data-count={photoHighlights.length}>
             {photoHighlights.map((photo, i) => (
               <motion.div
                 key={photo.imageUrl}
