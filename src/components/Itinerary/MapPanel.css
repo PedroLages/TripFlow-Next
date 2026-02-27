@@ -10,7 +10,7 @@
   border: 1px solid var(--border-subtle);
 }
 
-.map-panel .mapboxgl-map {
+.map-panel .maplibregl-map {
   border-radius: var(--radius-lg);
 }
 
