@@ -1,15 +1,17 @@
 "use client"
 
 import React, { useMemo, useEffect, useRef } from 'react';
-import Map, { Marker, Source, Layer, NavigationControl } from 'react-map-gl/mapbox';
-import type { MapRef } from 'react-map-gl/mapbox';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import Map, { Marker, Source, Layer, NavigationControl } from 'react-map-gl/maplibre';
+import type { MapRef } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import type { CitySlug } from '@/lib/city-colors';
 import type { Activity, ItineraryDay } from '@/lib/itinerary-data';
 import { CITY_CENTERS, CITY_COLOR_HEX, activitiesWithCoords, routeLineGeoJSON, getBoundsForActivities } from '@/lib/map-utils';
 import { CompactDaySummary } from './CompactDaySummary';
 import { MapPin } from './MapPin';
 import './MapPanel.css';
+
+const MAPTILER_KEY = process.env.NEXT_PUBLIC_MAPTILER_KEY;
 
 interface MapPanelProps {
   activities: Activity[];
@@ -77,15 +79,17 @@ export const MapPanel: React.FC<MapPanelProps> = ({
   }, [visibleActivities, activeDay, citySlug, allCityActivities, activities, center]);
 
   // Dark mode detection
-  const [mapStyle, setMapStyle] = React.useState('mapbox://styles/mapbox/light-v11');
+  const [mapStyle, setMapStyle] = React.useState(
+    `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`
+  );
 
   useEffect(() => {
     const updateStyle = () => {
       const theme = document.documentElement.getAttribute('data-theme');
       setMapStyle(
         theme === 'dark'
-          ? 'mapbox://styles/mapbox/dark-v11'
-          : 'mapbox://styles/mapbox/light-v11'
+          ? `https://api.maptiler.com/maps/streets-v2-dark/style.json?key=${MAPTILER_KEY}`
+          : `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`
       );
     };
     updateStyle();
@@ -109,7 +113,6 @@ export const MapPanel: React.FC<MapPanelProps> = ({
 
       <Map
         ref={mapRef}
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
         initialViewState={{
           longitude: center.lng,
           latitude: center.lat,
