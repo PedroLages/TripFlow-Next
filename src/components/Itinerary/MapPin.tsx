@@ -1,12 +1,15 @@
 "use client"
 
 import React from 'react';
-import { Plane, Hotel, Utensils, Camera, ShoppingBag, Train } from 'lucide-react';
+import { Plane, Hotel, Utensils, Camera, ShoppingBag, Train, Bus } from 'lucide-react';
 import type { Activity } from '@/lib/itinerary-data';
+import { PIN_SIZES } from '@/lib/map-tokens';
 
 interface MapPinProps {
   activity: Activity;
   color: string;
+  /** Visit order number within the day (1, 2, 3...) */
+  orderIndex?: number;
   isSelected: boolean;
   isHovered: boolean;
   onClick: () => void;
@@ -14,31 +17,31 @@ interface MapPinProps {
   onMouseLeave: () => void;
 }
 
-function getSmallIcon(type: Activity['type']) {
-  const size = 14;
+function getIcon(type: Activity['type'], size: number) {
   switch (type) {
-    case 'flight': return <Plane size={size} />;
-    case 'hotel': return <Hotel size={size} />;
-    case 'food': return <Utensils size={size} />;
-    case 'activity': return <Camera size={size} />;
-    case 'shopping': return <ShoppingBag size={size} />;
+    case 'flight':    return <Plane size={size} />;
+    case 'hotel':     return <Hotel size={size} />;
+    case 'food':      return <Utensils size={size} />;
+    case 'activity':  return <Camera size={size} />;
+    case 'shopping':  return <ShoppingBag size={size} />;
     case 'transport': return <Train size={size} />;
-    default: return <Camera size={size} />;
+    default:          return <Camera size={size} />;
   }
 }
 
 export const MapPin: React.FC<MapPinProps> = ({
   activity,
   color,
+  orderIndex,
   isSelected,
   isHovered,
   onClick,
   onMouseEnter,
   onMouseLeave,
 }) => {
-  const scale = isSelected ? 1.3 : isHovered ? 1.15 : 1;
+  const scale = isSelected ? 1.3 : isHovered ? 1.1 : 1;
   const shadow = isSelected || isHovered
-    ? `0 0 12px ${color}66`
+    ? `0 0 0 3px white, 0 0 12px ${color}66`
     : '0 2px 6px rgba(0,0,0,0.3)';
 
   return (
@@ -47,8 +50,8 @@ export const MapPin: React.FC<MapPinProps> = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       style={{
-        width: 32,
-        height: 32,
+        width: PIN_SIZES.default,
+        height: PIN_SIZES.default,
         borderRadius: '50%',
         background: color,
         border: '2.5px solid white',
@@ -60,11 +63,36 @@ export const MapPin: React.FC<MapPinProps> = ({
         transform: `scale(${scale}) translateY(${isSelected ? '-4px' : '0'})`,
         transition: 'transform 0.2s ease, box-shadow 0.2s ease',
         boxShadow: shadow,
+        position: 'relative',
+        opacity: isSelected || isHovered ? 1 : 0.85,
       }}
       role="button"
-      aria-label={`${activity.title} — ${activity.type}`}
+      aria-label={`${orderIndex ? `Stop ${orderIndex}: ` : ''}${activity.title} — ${activity.type}`}
     >
-      {getSmallIcon(activity.type)}
+      {getIcon(activity.type, 14)}
+
+      {orderIndex != null && (
+        <span
+          style={{
+            position: 'absolute',
+            top: -6,
+            right: -6,
+            width: 18,
+            height: 18,
+            borderRadius: '50%',
+            background: 'white',
+            color: color,
+            fontSize: 10,
+            fontWeight: 700,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+          }}
+        >
+          {orderIndex}
+        </span>
+      )}
     </div>
   );
 };
