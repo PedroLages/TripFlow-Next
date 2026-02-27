@@ -13,6 +13,7 @@ import { CityOverview } from './CityOverview';
 import { Lightbox } from './Lightbox';
 import { MobileMapSheet } from './MobileMapSheet';
 import { AddActivityModal } from './AddActivityModal';
+import { MapProvider, useMapContext } from '@/components/Map/MapProvider';
 import {
   type CitySlug,
   CITY_CONFIGS,
@@ -31,9 +32,9 @@ import {
 } from '@/lib/itinerary-data';
 import './Itinerary.css';
 
-const MapPanel = dynamic(
-  () => import('./MapPanel').then(mod => ({ default: mod.MapPanel })),
-  { ssr: false, loading: () => <div className="map-panel-skeleton">Loading map...</div> }
+const MapContainer = dynamic(
+  () => import('@/components/Map/MapContainer').then(mod => ({ default: mod.MapContainer })),
+  { ssr: false, loading: () => <div className="map-container-skeleton">Loading map...</div> }
 );
 
 // ---------------------------------------------------------------------------
@@ -63,6 +64,43 @@ const reducedMotionVariants: Variants = {
   hidden: { opacity: 1 },
   visible: { opacity: 1 },
 };
+
+// ---------------------------------------------------------------------------
+// Bridge: bidirectional sync between Itinerary local state ↔ MapProvider
+// ---------------------------------------------------------------------------
+
+function MapIntegrationBridge({
+  hoveredActivityId,
+  selectedPinId,
+  onHover,
+  onSelect,
+}: {
+  hoveredActivityId: string | null;
+  selectedPinId: string | null;
+  onHover: (id: string | null) => void;
+  onSelect: (id: string) => void;
+}) {
+  const {
+    setSelectedActivityId,
+    setHoveredActivityId,
+    selectedActivityId,
+    hoveredActivityId: mapHoveredId,
+  } = useMapContext();
+
+  // Sync from Itinerary → Map
+  useEffect(() => { setHoveredActivityId(hoveredActivityId); }, [hoveredActivityId, setHoveredActivityId]);
+  useEffect(() => { setSelectedActivityId(selectedPinId); }, [selectedPinId, setSelectedActivityId]);
+
+  // Sync from Map → Itinerary
+  useEffect(() => {
+    if (mapHoveredId !== hoveredActivityId) onHover(mapHoveredId);
+  }, [mapHoveredId]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (selectedActivityId && selectedActivityId !== selectedPinId) onSelect(selectedActivityId);
+  }, [selectedActivityId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return null;
+}
 
 // ---------------------------------------------------------------------------
 // Component
@@ -325,81 +363,86 @@ export const Itinerary: React.FC = () => {
         />
       </motion.div>
 
-      {/* Content Split */}
-      <motion.div
-        className="itinerary-content-split"
-        variants={motionVariants}
-        style={getCityStyle(activeCity)}
-      >
-        {/* Left Panel: Day Navigator + Timeline */}
-        <div className="itinerary-left-panel">
-          <div className="sticky-nav-area">
-            <DayNavigator
-              days={cityDays}
-              activeDay={activeDay}
-              onDayChange={handleDayChange}
-              citySlug={activeCity}
-            />
+      {/* Content Split — wrapped in MapProvider for shared map state */}
+      <MapProvider>
+        <MapIntegrationBridge
+          hoveredActivityId={hoveredActivityId}
+          selectedPinId={selectedPinId}
+          onHover={handleActivityHover}
+          onSelect={handlePinClick}
+        />
+
+        <motion.div
+          className="itinerary-content-split"
+          variants={motionVariants}
+          style={getCityStyle(activeCity)}
+        >
+          {/* Left Panel: Day Navigator + Timeline */}
+          <div className="itinerary-left-panel">
+            <div className="sticky-nav-area">
+              <DayNavigator
+                days={cityDays}
+                activeDay={activeDay}
+                onDayChange={handleDayChange}
+                citySlug={activeCity}
+              />
+            </div>
+
+            <AnimatePresence mode="wait">
+              {activeDay === -1 ? (
+                <motion.div
+                  key={`overview-${activeCity}`}
+                  {...contentTransition}
+                >
+                  <CityOverview
+                    citySlug={activeCity}
+                    cityDays={cityDays}
+                    onDaySelect={(dayIndex: number) => setActiveDay(dayIndex)}
+                    onOpenLightbox={openLightbox}
+                  />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={activeDay}
+                  {...contentTransition}
+                >
+                  <DayTimeline
+                    activities={dayActivities}
+                    citySlug={activeCity}
+                    dayLabel={dayLabel}
+                    onReorder={handleReorder}
+                    onAutoFill={handleAutoFillDay}
+                    onOpenSuggestions={() => setIsSuggestionsOpen(true)}
+                    onAddActivity={() => setIsAddActivityOpen(true)}
+                    onOpenLightbox={openLightbox}
+                    isGenerating={isGeneratingDay}
+                    expandedActivity={expandedActivity}
+                    onToggleExpand={setExpandedActivity}
+                    hoveredActivityId={hoveredActivityId}
+                    selectedPinId={selectedPinId}
+                    onActivityHover={handleActivityHover}
+                    activityRefs={activityRefs}
+                  />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          <AnimatePresence mode="wait">
-            {activeDay === -1 ? (
-              <motion.div
-                key={`overview-${activeCity}`}
-                {...contentTransition}
-              >
-                <CityOverview
-                  citySlug={activeCity}
-                  cityDays={cityDays}
-                  onDaySelect={(dayIndex: number) => setActiveDay(dayIndex)}
-                  onOpenLightbox={openLightbox}
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                key={activeDay}
-                {...contentTransition}
-              >
-                <DayTimeline
-                  activities={dayActivities}
-                  citySlug={activeCity}
-                  dayLabel={dayLabel}
-                  onReorder={handleReorder}
-                  onAutoFill={handleAutoFillDay}
-                  onOpenSuggestions={() => setIsSuggestionsOpen(true)}
-                  onAddActivity={() => setIsAddActivityOpen(true)}
-                  onOpenLightbox={openLightbox}
-                  isGenerating={isGeneratingDay}
-                  expandedActivity={expandedActivity}
-                  onToggleExpand={setExpandedActivity}
-                  hoveredActivityId={hoveredActivityId}
-                  selectedPinId={selectedPinId}
-                  onActivityHover={handleActivityHover}
-                  activityRefs={activityRefs}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Right Panel: Map */}
-        <div className="itinerary-right-panel">
-          <MapPanel
-            activities={dayActivities}
-            allCityActivities={allCityActivities}
-            citySlug={activeCity}
-            activeDay={activeDay}
-            day={currentDay ? { ...currentDay, activities: dayActivities } : undefined}
-            hoveredActivityId={hoveredActivityId}
-            selectedPinId={selectedPinId}
-            onPinClick={handlePinClick}
-            onPinHover={setHoveredActivityId}
-            onAutoFill={handleAutoFillDay}
-            onAddActivity={() => setIsAddActivityOpen(true)}
-            isGenerating={isGeneratingDay}
-          />
-        </div>
-      </motion.div>
+          {/* Right Panel: Map */}
+          <div className="itinerary-right-panel">
+            <MapContainer
+              activities={dayActivities}
+              allCityActivities={allCityActivities}
+              citySlug={activeCity}
+              activeDay={activeDay}
+              day={currentDay ? { ...currentDay, activities: dayActivities } : undefined}
+              onAutoFill={handleAutoFillDay}
+              onAddActivity={() => setIsAddActivityOpen(true)}
+              isGenerating={isGeneratingDay}
+            />
+          </div>
+        </motion.div>
+      </MapProvider>
 
       {/* Lightbox */}
       <Lightbox
@@ -419,20 +462,18 @@ export const Itinerary: React.FC = () => {
         <MapIcon size={22} />
       </button>
       <MobileMapSheet isOpen={isMapSheetOpen} onClose={() => setIsMapSheetOpen(false)}>
-        <MapPanel
-          activities={dayActivities}
-          allCityActivities={allCityActivities}
-          citySlug={activeCity}
-          activeDay={activeDay}
-          day={currentDay ? { ...currentDay, activities: dayActivities } : undefined}
-          hoveredActivityId={hoveredActivityId}
-          selectedPinId={selectedPinId}
-          onPinClick={handlePinClick}
-          onPinHover={setHoveredActivityId}
-          onAutoFill={handleAutoFillDay}
-          onAddActivity={() => setIsAddActivityOpen(true)}
-          isGenerating={isGeneratingDay}
-        />
+        <MapProvider>
+          <MapContainer
+            activities={dayActivities}
+            allCityActivities={allCityActivities}
+            citySlug={activeCity}
+            activeDay={activeDay}
+            day={currentDay ? { ...currentDay, activities: dayActivities } : undefined}
+            onAutoFill={handleAutoFillDay}
+            onAddActivity={() => setIsAddActivityOpen(true)}
+            isGenerating={isGeneratingDay}
+          />
+        </MapProvider>
       </MobileMapSheet>
 
       {/* AI Suggestions Panel (existing) */}
