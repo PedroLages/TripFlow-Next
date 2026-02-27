@@ -11,6 +11,7 @@ import { getMapStyleUrl } from '@/lib/map-tokens';
 import { useMapContext } from './MapProvider';
 import { DayRouteLayer } from './layers/DayRouteLayer';
 import { ActivityMarkerLayer } from './layers/ActivityMarkerLayer';
+import { TripOverviewLayer } from './layers/TripOverviewLayer';
 import { CompactDaySummary } from '@/components/Itinerary/CompactDaySummary';
 import './MapContainer.css';
 
@@ -143,6 +144,10 @@ export function MapContainer({
         cooperativeGestures
       >
         <NavigationControl position="bottom-right" showCompass={false} />
+
+        {activeDay === -1 && (
+          <TripOverviewLayer activeCity={citySlug} />
+        )}
 
         {activeDay !== -1 && (
           <DayRouteLayer activities={activities} />
