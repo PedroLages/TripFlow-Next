@@ -45,17 +45,24 @@
 29. [Screen Reader Support](#29-screen-reader-support)
 30. [ARIA Patterns](#30-aria-patterns)
 
-### VI. Cross-Functional Collaboration
+### VI. shadcn/ui Component Standards
+35. [Using shadcn Components](#35-using-shadcn-components)
+36. [Component Composition](#36-component-composition)
+37. [Customization Guidelines](#37-customization-guidelines)
+38. [Form Patterns with shadcn](#38-form-patterns-with-shadcn)
+39. [Accessibility with shadcn](#39-accessibility-with-shadcn)
+40. [TripFlow-Specific Extensions](#40-tripflow-specific-extensions)
+
+### VII. Cross-Functional Collaboration
 31. [Designer Workflow](#31-designer-workflow)
 32. [Developer Workflow](#32-developer-workflow)
 33. [Contributing Guidelines](#33-contributing-guidelines)
 34. [Component Lifecycle](#34-component-lifecycle)
-35. [Version Control & Documentation](#35-version-control--documentation)
 
-### VII. Quick Reference
-36. [Design Tokens Quick Reference](#36-design-tokens-quick-reference)
-37. [Component Checklist](#37-component-checklist)
-38. [Common Patterns](#38-common-patterns)
+### VIII. Quick Reference
+41. [Design Tokens Quick Reference](#41-design-tokens-quick-reference)
+42. [Component Checklist](#42-component-checklist)
+43. [Common Patterns](#43-common-patterns)
 
 ---
 
@@ -2818,7 +2825,304 @@ Implement common ARIA patterns for complex widgets.
 
 ---
 
-## VI. Cross-Functional Collaboration
+## VI. shadcn/ui Component Standards
+
+### 35. Using shadcn Components
+
+**Always prefer shadcn/ui over custom implementations** for:
+- Forms (use `Form` + `react-hook-form` + `zod`)
+- Modals (use `Dialog` or `Sheet`)
+- Buttons (use `Button` with variants)
+- Navigation (use `Tabs`, `Accordion`)
+- Feedback (use `Toast`, `Alert`)
+
+**Import pattern:**
+```tsx
+// ✅ Correct - Named imports
+import { Button } from '@/components/ui/button'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
+
+// ❌ Avoid - Default imports
+import Button from '@/components/ui/button'
+```
+
+**Why shadcn?**
+- **Type-safe**: Full TypeScript support
+- **Accessible**: WCAG 2.1 AA compliant out of the box
+- **Customizable**: Uses CSS variables, easy to theme
+- **Composable**: Build complex UIs from simple primitives
+- **Tree-shakeable**: Only bundle what you use
+
+---
+
+### 36. Component Composition
+
+shadcn components are designed to be composed, not configured.
+
+**✅ Compose shadcn components:**
+```tsx
+<Dialog>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Add Activity</DialogTitle>
+      <DialogDescription>Fill in the details below</DialogDescription>
+    </DialogHeader>
+    <Form>
+      {/* Form fields */}
+    </Form>
+    <DialogFooter>
+      <Button variant="outline">Cancel</Button>
+      <Button type="submit">Save</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+**❌ Don't recreate from scratch:**
+```tsx
+<div className="modal-overlay">
+  <div className="modal-content">
+    <div className="modal-header">
+      <h2>Add Activity</h2>
+    </div>
+    {/* ... */}
+  </div>
+</div>
+```
+
+**Composition Benefits:**
+- Accessibility built-in (focus management, ARIA attributes)
+- Keyboard navigation (Tab, Escape, Enter)
+- Consistent styling across the app
+- Less code to maintain
+
+---
+
+### 37. Customization Guidelines
+
+**Use variants, not className overrides:**
+
+```tsx
+// ✅ Preferred - Use built-in variants
+<Button variant="destructive" size="sm">Delete</Button>
+<Button variant="shanghai">Book Shanghai Hotel</Button>
+
+// ⚠️ Acceptable for one-offs
+<Button className="bg-[hsl(var(--chart-shanghai))]">Custom Color</Button>
+
+// ❌ Don't override core styles with !important
+<Button className="!bg-red-500 !p-10 !rounded-none">Bad</Button>
+```
+
+**When to extend vs. use className:**
+
+**Extend the component** if you'll reuse it 3+ times:
+```tsx
+// src/components/tripflow/CityCard.tsx
+import { Card } from '@/components/ui/card'
+
+export function CityCard({ city, ...props }) {
+  return (
+    <Card
+      className={cn(
+        "border-l-4",
+        `border-l-[var(--city-${city})]`
+      )}
+      {...props}
+    />
+  )
+}
+```
+
+**Use className** for one-offs:
+```tsx
+<Card className="border-l-4 border-l-[var(--city-shanghai)]">
+  {/* Content */}
+</Card>
+```
+
+---
+
+### 38. Form Patterns with shadcn
+
+All forms in TripFlow use shadcn Form + react-hook-form + Zod.
+
+**Standard Form Pattern:**
+
+```tsx
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+
+// 1. Define schema with Zod
+const formSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  cost: z.number().min(0, "Cost cannot be negative").optional(),
+})
+
+type FormData = z.infer<typeof formSchema>
+
+// 2. Create form with react-hook-form
+function MyForm() {
+  const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: '',
+      cost: undefined,
+    },
+  })
+
+  const onSubmit = (data: FormData) => {
+    // Data is type-safe and validated
+    console.log(data)
+  }
+
+  // 3. Render form with shadcn Form components
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Title</FormLabel>
+              <FormControl>
+                <Input placeholder="Enter title" {...field} />
+              </FormControl>
+              <FormDescription>
+                This will be displayed in your itinerary
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
+  )
+}
+```
+
+**Benefits:**
+- ✅ **Type-safe**: Zod infers TypeScript types
+- ✅ **Validated**: Client-side validation before submit
+- ✅ **Accessible**: FormDescription auto-generates aria-describedby
+- ✅ **Consistent**: All forms follow same pattern
+
+---
+
+### 39. Accessibility with shadcn
+
+shadcn components are WCAG 2.1 AA compliant by default.
+
+**Built-in Accessibility Features:**
+
+1. **Keyboard Navigation**
+   - All interactive elements are keyboard accessible
+   - Proper tab order
+   - Escape closes dialogs/sheets
+   - Enter/Space activates buttons
+
+2. **Screen Readers**
+   - ARIA attributes automatically added
+   - Semantic HTML elements used
+   - Live regions for dynamic content
+
+3. **Focus Management**
+   - Focus trapped in modals
+   - Focus returns to trigger after close
+   - Visible focus indicators
+
+**Your Responsibilities:**
+
+Even with shadcn, you must:
+
+```tsx
+// ✅ Add labels to form fields
+<FormLabel htmlFor="title">Activity Title</FormLabel>
+
+// ✅ Add aria-label to icon-only buttons
+<Button variant="ghost" aria-label="Close">
+  <X size={16} />
+</Button>
+
+// ✅ Add descriptions to complex inputs
+<FormDescription>
+  Choose a category to organize your itinerary
+</FormDescription>
+
+// ✅ Use semantic HTML
+<Sheet>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Settings</SheetTitle> {/* <h2> semantically */}
+      <SheetDescription>Manage preferences</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+---
+
+### 40. TripFlow-Specific Extensions
+
+TripFlow extends shadcn with custom variants and wrappers.
+
+**City Button Variants:**
+
+```tsx
+<Button variant="shanghai">Shanghai</Button>
+<Button variant="hongkong">Hong Kong</Button>
+<Button variant="osaka">Osaka</Button>
+<Button variant="kyoto">Kyoto</Button>
+<Button variant="tokyo">Tokyo</Button>
+<Button variant="beijing">Beijing</Button>
+```
+
+These use shadcn chart tokens (`--chart-shanghai`, etc.) that automatically adjust for dark mode.
+
+**City Components:**
+
+```tsx
+import { CityCard } from '@/components/tripflow'
+import { BudgetProgressCard } from '@/components/tripflow'
+import { CityTabs } from '@/components/Itinerary/CityTabs'
+
+// CityCard - Wrapper around shadcn Card
+<CityCard city="tokyo" title="Tokyo Itinerary">
+  {/* Content */}
+</CityCard>
+
+// BudgetProgressCard - Budget visualization
+<BudgetProgressCard
+  city="shanghai"
+  totalBudget={5000}
+  spent={3200}
+/>
+
+// CityTabs - Navigation with city indicators
+<CityTabs cities={['shanghai', 'tokyo', 'kyoto']}>
+  {(city) => <CityContent city={city} />}
+</CityTabs>
+```
+
+See [Component Documentation](./components/tripflow-components.md) for full details.
+
+---
+
+## VII. Cross-Functional Collaboration
 
 ### 31. Designer Workflow
 
@@ -3140,9 +3444,9 @@ Keeping the design system documented and versioned.
 
 ---
 
-## VII. Quick Reference
+## VIII. Quick Reference
 
-### 36. Design Tokens Quick Reference
+### 41. Design Tokens Quick Reference
 
 **Colors:**
 ```css
@@ -3197,7 +3501,7 @@ xl: 16px
 
 ---
 
-### 37. Component Checklist
+### 42. Component Checklist
 
 **When Creating a New Component:**
 
@@ -3235,7 +3539,7 @@ xl: 16px
 
 ---
 
-### 38. Common Patterns
+### 43. Common Patterns
 
 **Conditional Rendering:**
 ```tsx
