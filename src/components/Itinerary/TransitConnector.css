@@ -95,14 +95,25 @@
 @media (max-width: 768px) {
   .transit-connector {
     padding-left: 90px;
+    margin: 6px 0 14px 0;
   }
 
   .transit-connector::before {
     left: 79px;
   }
 
+  /* Task 13: Touch target enforcement — 44px minimum */
+  .transit-pill {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+  }
+
   .inline-add-btn {
     left: 72px;
+    width: 36px;
+    height: 36px;
   }
 }
 
