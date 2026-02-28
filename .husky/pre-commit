@@ -1,0 +1,54 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# TripFlow Style Guide Pre-Commit Hook
+# Reminds developers to follow the style guide before committing
+
+echo ""
+echo "🎨 TripFlow Style Guide Reminder"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+
+# Check if this is a code change (not just docs)
+if git diff --cached --name-only | grep -qE '\.(tsx?|jsx?|css)$'; then
+  echo "✓ Code changes detected. Please verify:"
+  echo ""
+  echo "  1. Component Checklist (Style Guide §37):"
+  echo "     □ TypeScript strict types"
+  echo "     □ Design tokens (no hardcoded colors)"
+  echo "     □ Responsive (mobile-first)"
+  echo "     □ Accessible (keyboard + screen reader)"
+  echo "     □ Dark mode support"
+  echo "     □ Tests written"
+  echo ""
+  echo "  2. Code Quality:"
+  echo "     □ npm run lint (passes)"
+  echo "     □ npm run test (passes)"
+  echo "     □ npm run build (compiles)"
+  echo ""
+  echo "  3. Accessibility:"
+  echo "     □ Keyboard navigation works"
+  echo "     □ Color contrast ≥ 4.5:1 for text"
+  echo "     □ ARIA labels on icon buttons"
+  echo ""
+  echo "📖 Full guide: tripflow-next/docs/TRIPFLOW-STYLE-GUIDE.md"
+  echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo ""
+
+  # Optional: Uncomment to require confirmation
+  # read -p "Have you verified the above? (y/N) " -n 1 -r
+  # echo
+  # if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  #   echo "❌ Commit cancelled. Review the style guide and try again."
+  #   exit 1
+  # fi
+fi
+
+# Run linter (if you want to enforce)
+# npm run lint --quiet || {
+#   echo "❌ ESLint errors detected. Fix them before committing."
+#   exit 1
+# }
+
+exit 0

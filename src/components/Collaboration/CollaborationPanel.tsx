@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Users, UserPlus, Settings2, MoreHorizontal, ShieldAlert, X, BellDot } from 'lucide-react';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import './CollaborationPanel.css';
 
 interface CollaborationPanelProps {

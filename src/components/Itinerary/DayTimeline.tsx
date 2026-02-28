@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, Reorder } from 'framer-motion';
 import { Sparkles, Compass, Plane, Train, ArrowRight, AlertTriangle, TreePalm, Navigation } from 'lucide-react';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { getCityStyle } from '@/lib/city-colors';
 import type { CitySlug } from '@/lib/city-colors';
 import type { Activity, LightboxSlide } from '@/lib/itinerary-data';

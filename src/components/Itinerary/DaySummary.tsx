@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CITY_CONFIGS, type CitySlug, getCityStyle } from '@/lib/city-colors';
 import type { ItineraryDay } from '@/lib/itinerary-data';
 import { Card, CardContent } from '../ui/Card';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { Sparkles, Plus, Clock, Plane, Hotel, Utensils, Camera, ShoppingBag, Train, CheckCircle2, Cloud, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import './DaySummary.css';

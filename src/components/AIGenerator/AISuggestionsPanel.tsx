@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, MapPin, Navigation, Clock, ThumbsUp, Plus } from 'lucide-react';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import './AISuggestionsPanel.css';
 
 interface AISuggestionsPanelProps {
