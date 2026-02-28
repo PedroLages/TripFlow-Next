@@ -123,6 +123,9 @@ export const AddActivityModal: React.FC<AddActivityModalProps> = ({
                         <SelectItem value="other">📌 Other</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormDescription>
+                      Helps organize your itinerary
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -145,6 +148,9 @@ export const AddActivityModal: React.FC<AddActivityModalProps> = ({
                         onChange={(e) => field.onChange(e.target.valueAsNumber)}
                       />
                     </FormControl>
+                    <FormDescription>
+                      Optional: helps track total trip expenses
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
