@@ -1,133 +1,244 @@
 "use client"
 
-import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '../ui/dialog';
-import { CITY_CONFIGS, type CitySlug } from '@/lib/city-colors';
-import { Camera } from 'lucide-react';
+import React from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+} from '@/components/ui/form'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
+import { CITY_CONFIGS, type CitySlug } from '@/lib/city-colors'
+import { activitySchema, defaultActivityValues, type ActivityFormData } from '@/lib/schemas/activity-schema'
+import { toasts } from '@/lib/toast-helpers'
+import { Camera, MapPin, Clock, DollarSign } from 'lucide-react'
 
 interface AddActivityModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  dayLabel: string;   // e.g. "Day 1 — Aug 27"
-  citySlug: CitySlug;
+  isOpen: boolean
+  onClose: () => void
+  dayLabel: string
+  citySlug: CitySlug
+  onSubmit?: (data: ActivityFormData) => void | Promise<void>
 }
 
-export const AddActivityModal: React.FC<AddActivityModalProps> = ({ isOpen, onClose, dayLabel, citySlug }) => {
-  const [newActivityImage, setNewActivityImage] = useState<string | null>(null);
-  const config = CITY_CONFIGS[citySlug];
-  const Icon = config.icon;
+export const AddActivityModal: React.FC<AddActivityModalProps> = ({
+  isOpen,
+  onClose,
+  dayLabel,
+  citySlug,
+  onSubmit: onSubmitProp,
+}) => {
+  const config = CITY_CONFIGS[citySlug]
+  const Icon = config.icon
+
+  const form = useForm<ActivityFormData>({
+    resolver: zodResolver(activitySchema),
+    defaultValues: defaultActivityValues,
+  })
+
+  const handleSubmit = async (data: ActivityFormData) => {
+    try {
+      if (onSubmitProp) {
+        await onSubmitProp(data)
+      }
+      toasts.activityAdded(data.title)
+      form.reset()
+      onClose()
+    } catch (error) {
+      toasts.error("Failed to add activity", "Please try again.")
+    }
+  }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose(); }}>
-      <DialogContent className="sm:max-w-[500px]">
+    <Dialog open={isOpen} onOpenChange={(open) => { if (!open) onClose() }}>
+      <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Add Activity</DialogTitle>
           <DialogDescription>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <span className="inline-flex items-center gap-1.5">
               <Icon size={14} style={{ color: `var(${config.cssVar})` }} />
               <span>{config.name} — {dayLabel}</span>
             </span>
           </DialogDescription>
         </DialogHeader>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {/* Title */}
-          <div>
-            <label
-              htmlFor="activity-title"
-              style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}
-            >
-              Activity Title
-            </label>
-            <input
-              id="activity-title"
-              type="text"
-              className="glass-input full-width-input"
-              placeholder="e.g., Visit The Bund"
-              style={{ width: '100%', padding: '12px' }}
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+            {/* Title Field */}
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Activity Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., Visit The Bund" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </div>
 
-          {/* Time + Type row */}
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <div style={{ flex: 1 }}>
-              <label
-                htmlFor="activity-time"
-                style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}
-              >
-                Time
-              </label>
-              <input
-                id="activity-time"
-                type="time"
-                className="glass-input full-width-input"
-                style={{ width: '100%', padding: '12px' }}
+            {/* Category & Cost Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="sightseeing">🏛️ Sightseeing</SelectItem>
+                        <SelectItem value="dining">🍜 Dining</SelectItem>
+                        <SelectItem value="transport">🚇 Transport</SelectItem>
+                        <SelectItem value="accommodation">🏨 Accommodation</SelectItem>
+                        <SelectItem value="other">📌 Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="estimatedCost"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center gap-1">
+                      <DollarSign size={14} />
+                      Estimated Cost (USD)
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        placeholder="25.00"
+                        {...field}
+                        onChange={(e) => field.onChange(e.target.valueAsNumber)}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
             </div>
-            <div style={{ flex: 1 }}>
-              <label
-                htmlFor="activity-type"
-                style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}
-              >
-                Type
-              </label>
-              <select
-                id="activity-type"
-                className="glass-input full-width-input"
-                style={{ width: '100%', padding: '12px', appearance: 'auto' }}
-              >
-                <option value="activity">Sightseeing</option>
-                <option value="food">Food & Dining</option>
-                <option value="transport">Transport</option>
-                <option value="shopping">Shopping</option>
-                <option value="hotel">Accommodation</option>
-                <option value="flight">Flight</option>
-              </select>
+
+            {/* Location & Time */}
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center gap-1">
+                      <MapPin size={14} />
+                      Location (optional)
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="The Bund, Shanghai" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="startTime"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center gap-1">
+                      <Clock size={14} />
+                      Start Time (optional)
+                    </FormLabel>
+                    <FormControl>
+                      <Input type="time" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
-          </div>
 
-          {/* Cover Image */}
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              Cover Image
-            </label>
-            {newActivityImage ? (
-              <div style={{ position: 'relative', width: '100%', height: '140px', borderRadius: '8px', overflow: 'hidden', backgroundImage: `url(${newActivityImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                <button
-                  style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(0,0,0,0.5)', color: 'white', border: 'none', padding: '4px 12px', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem' }}
-                  onClick={() => setNewActivityImage(null)}
-                >
-                  Remove
-                </button>
-              </div>
-            ) : (
-              <div
-                style={{ border: '2px dashed var(--border-subtle)', borderRadius: '8px', padding: '24px', textAlign: 'center', cursor: 'pointer' }}
-                onClick={() => setNewActivityImage('https://images.unsplash.com/photo-1537531383496-47a782e39c1e?w=800&auto=format&fit=crop')}
-              >
-                <Camera size={24} style={{ margin: '0 auto 8px', color: 'var(--text-secondary)', display: 'block' }} />
-                <div style={{ fontSize: '0.9rem' }}>Click to browse photos</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Simulated upload</div>
-              </div>
-            )}
-          </div>
-        </div>
+            {/* Notes */}
+            <FormField
+              control={form.control}
+              name="notes"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Notes (optional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Add any additional notes about this activity..."
+                      rows={3}
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormDescription>
+                    Max 500 characters
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <DialogFooter>
-          <button
-            onClick={onClose}
-            style={{ padding: '10px 20px', borderRadius: '8px', background: 'var(--bg-surface-hover)', color: 'var(--text-secondary)', border: 'none', cursor: 'pointer' }}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={onClose}
-            style={{ padding: '10px 20px', borderRadius: '8px', background: 'var(--accent-primary)', color: 'white', border: 'none', cursor: 'pointer', fontWeight: 600 }}
-          >
-            Add Activity
-          </button>
-        </DialogFooter>
+            {/* Image Upload Placeholder */}
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="flex items-center gap-1">
+                    <Camera size={14} />
+                    Photo URL (optional)
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://example.com/photo.jpg" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={onClose}>
+                Cancel
+              </Button>
+              <Button type="submit" disabled={form.formState.isSubmitting}>
+                {form.formState.isSubmitting ? "Adding..." : "Add Activity"}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
-  );
-};
+  )
+}
