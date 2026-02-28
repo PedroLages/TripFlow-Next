@@ -3,7 +3,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CITY_CONFIGS, type CitySlug, getCityStyle } from '@/lib/city-colors';
 import type { ItineraryDay } from '@/lib/itinerary-data';
-import { Card, CardContent } from '../ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Plus, Clock, Plane, Hotel, Utensils, Camera, ShoppingBag, Train, CheckCircle2, Cloud, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -132,7 +132,7 @@ export default function DaySummary({
         {/* Quick Actions */}
         <div className="day-summary-actions">
           <Button
-            fullWidth
+            className="w-full"
             variant="secondary"
             onClick={onAutoFill}
             disabled={isGenerating}
@@ -141,7 +141,7 @@ export default function DaySummary({
             {isGenerating ? 'Generating...' : 'AI Auto-fill Day'}
           </Button>
           <Button
-            fullWidth
+            className="w-full"
             onClick={onAddActivity}
           >
             <Plus size={16} />

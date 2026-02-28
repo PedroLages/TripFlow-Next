@@ -9,7 +9,7 @@ import {
   Star, Clock, MapPin as MapPinIcon,
   CreditCard, HelpCircle, XCircle, StickyNote, GripVertical,
 } from 'lucide-react';
-import { Card, CardContent } from '../ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getCityStyle } from '@/lib/city-colors';

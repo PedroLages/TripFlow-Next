@@ -142,7 +142,7 @@ export const CollaborationPanel: React.FC<CollaborationPanelProps> = ({ isOpen, 
             </div>
 
             <div className="panel-footer">
-              <Button variant="ghost" fullWidth><Settings2 size={16} style={{marginRight: '8px'}}/> Advanced Permissions</Button>
+              <Button variant="ghost" className="w-full"><Settings2 size={16} style={{marginRight: '8px'}}/> Advanced Permissions</Button>
             </div>
           </motion.div>
         </>

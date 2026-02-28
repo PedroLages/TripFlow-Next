@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Map, CheckSquare, Lock, CloudRain, Sun, Clock, Crown, ListTodo, CheckCircle2, Circle, Plus } from 'lucide-react';
-import { Card } from '../ui/Card';
+import { Card } from '@/components/ui/card';
 import './TripDetail.css';
 
 interface TripDetailProps {
