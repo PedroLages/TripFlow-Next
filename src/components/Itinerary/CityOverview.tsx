@@ -2,12 +2,179 @@
 
 import React, { useMemo } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { MapPin, Calendar, Moon, Sun, TrainFront, Wallet, Languages, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
+import {
+  MapPin, Calendar, Moon, Sun, TrainFront, Wallet, Languages,
+  CheckCircle2, AlertCircle, Clock, ChevronRight, Utensils,
+  Ticket, Bus, CloudSun, Thermometer, Droplets,
+} from 'lucide-react';
 import Image from 'next/image';
 import { CITY_CONFIGS, getCityStyle, type CitySlug } from '@/lib/city-colors';
 import { resizeItineraryImage, type ItineraryDay, type LightboxSlide } from '@/lib/itinerary-data';
 import { getBlurDataURL } from '@/lib/blur-data';
 import './CityOverview.css';
+
+// ---------------------------------------------------------------------------
+// Density helpers (mirroring TripOverview)
+// ---------------------------------------------------------------------------
+
+function getDensityLevel(totalMinutes: number): 'light' | 'moderate' | 'heavy' | 'over' {
+  const hours = totalMinutes / 60;
+  if (hours <= 4) return 'light';
+  if (hours <= 8) return 'moderate';
+  if (hours <= 12) return 'heavy';
+  return 'over';
+}
+
+function getDensityColor(level: ReturnType<typeof getDensityLevel>): string {
+  switch (level) {
+    case 'light': return 'var(--density-light, #22c55e)';
+    case 'moderate': return 'var(--density-moderate, #22c55e)';
+    case 'heavy': return 'var(--density-heavy, #f59e0b)';
+    case 'over': return 'var(--density-over, #ef4444)';
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Weather mock data (late Aug - mid Sep 2026)
+// ---------------------------------------------------------------------------
+
+const CITY_WEATHER: Record<CitySlug, { temp: string; high: number; low: number; condition: string; humidity: string }> = {
+  shanghai:  { temp: '28-33°C', high: 33, low: 28, condition: 'Hot & Humid',       humidity: '80%' },
+  hongkong:  { temp: '28-31°C', high: 31, low: 28, condition: 'Tropical Showers',  humidity: '82%' },
+  osaka:     { temp: '26-30°C', high: 30, low: 26, condition: 'Warm & Sunny',      humidity: '65%' },
+  kyoto:     { temp: '24-28°C', high: 28, low: 24, condition: 'Pleasant',          humidity: '60%' },
+  tokyo:     { temp: '24-27°C', high: 27, low: 24, condition: 'Clear Skies',       humidity: '55%' },
+  beijing:   { temp: '22-26°C', high: 26, low: 22, condition: 'Dry & Clear',       humidity: '45%' },
+};
+
+// ---------------------------------------------------------------------------
+// Budget mock data (per-day estimates by category)
+// ---------------------------------------------------------------------------
+
+const CITY_BUDGET: Record<CitySlug, { total: number; food: number; activities: number; transport: number }> = {
+  shanghai:  { total: 80,  food: 30, activities: 25, transport: 25 },
+  hongkong:  { total: 120, food: 45, activities: 40, transport: 35 },
+  osaka:     { total: 100, food: 40, activities: 30, transport: 30 },
+  kyoto:     { total: 90,  food: 30, activities: 35, transport: 25 },
+  tokyo:     { total: 110, food: 40, activities: 40, transport: 30 },
+  beijing:   { total: 70,  food: 25, activities: 25, transport: 20 },
+};
+
+// ---------------------------------------------------------------------------
+// Sub-component: MiniRouteSummary
+// ---------------------------------------------------------------------------
+
+const MiniRouteSummary: React.FC<{
+  cityDays: ItineraryDay[];
+  onDaySelect: (dayIndex: number) => void;
+}> = ({ cityDays, onDaySelect }) => (
+  <div className="co-route-summary">
+    <h3 className="co-section-title">Route at a Glance</h3>
+    <div className="co-route-flow">
+      {cityDays.map((day, i) => {
+        const totalMin = day.activities.reduce((s, a) => s + a.duration, 0);
+        const density = getDensityLevel(totalMin);
+        const count = day.activities.length;
+        return (
+          <React.Fragment key={day.dayIndex}>
+            {i > 0 && <ChevronRight size={12} className="co-route-arrow" />}
+            <button
+              className="co-route-day"
+              onClick={() => onDaySelect(day.dayIndex)}
+              title={`Day ${i + 1}: ${count} activities, ~${Math.round(totalMin / 60)}h`}
+            >
+              <span className="co-route-day-num">D{i + 1}</span>
+              <span
+                className="co-route-density"
+                style={{
+                  backgroundColor: count > 0 ? getDensityColor(density) : 'var(--border-subtle)',
+                }}
+              />
+              <span className="co-route-day-count">{count}</span>
+            </button>
+          </React.Fragment>
+        );
+      })}
+    </div>
+  </div>
+);
+
+// ---------------------------------------------------------------------------
+// Sub-component: BudgetSummary
+// ---------------------------------------------------------------------------
+
+const BudgetSummary: React.FC<{
+  citySlug: CitySlug;
+  nights: number;
+  activityCount: number;
+}> = ({ citySlug, nights, activityCount }) => {
+  const budget = CITY_BUDGET[citySlug];
+  const totalEstimate = budget.total * nights;
+  const categories = [
+    { label: 'Food',       value: budget.food,       icon: <Utensils size={12} /> },
+    { label: 'Activities', value: budget.activities,  icon: <Ticket size={12} /> },
+    { label: 'Transport',  value: budget.transport,   icon: <Bus size={12} /> },
+  ];
+
+  return (
+    <div className="co-budget-summary">
+      <div className="co-budget-header">
+        <Wallet size={14} className="co-budget-icon" />
+        <div className="co-budget-headline">
+          <span className="co-budget-total">~${totalEstimate}</span>
+          <span className="co-budget-sub">est. for {nights} nights</span>
+        </div>
+        <span className="co-budget-per-day">~${budget.total}/day</span>
+      </div>
+      <div className="co-budget-categories">
+        {categories.map(c => (
+          <div key={c.label} className="co-budget-cat">
+            {c.icon}
+            <span className="co-budget-cat-label">{c.label}</span>
+            <span className="co-budget-cat-value">${c.value}</span>
+          </div>
+        ))}
+      </div>
+      <div className="co-budget-bar">
+        {categories.map(c => (
+          <div
+            key={c.label}
+            className="co-budget-bar-seg"
+            style={{ flex: c.value }}
+            title={`${c.label}: $${c.value}/day`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
+// Sub-component: WeatherStrip
+// ---------------------------------------------------------------------------
+
+const WeatherStrip: React.FC<{ citySlug: CitySlug }> = ({ citySlug }) => {
+  const weather = CITY_WEATHER[citySlug];
+  return (
+    <div className="co-weather-strip">
+      <CloudSun size={16} className="co-weather-icon" />
+      <div className="co-weather-info">
+        <span className="co-weather-condition">{weather.condition}</span>
+        <span className="co-weather-detail">
+          <Thermometer size={11} /> {weather.temp}
+          <span className="co-weather-sep" />
+          <Droplets size={11} /> {weather.humidity}
+        </span>
+      </div>
+      <div className="co-weather-bar" title={`${weather.low}°C — ${weather.high}°C`}>
+        <div
+          className="co-weather-bar-fill"
+          style={{ width: `${Math.min(100, ((weather.high - 15) / 25) * 100)}%` }}
+        />
+      </div>
+    </div>
+  );
+};
 
 interface CityOverviewProps {
   citySlug: CitySlug;
@@ -178,7 +345,18 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
         </div>
       </div>
 
-      {/* Section 3: Day Preview Cards — enhanced with status + preview */}
+      {/* Section 3: Mini Route + Budget + Weather */}
+      <div className="co-glance-row">
+        <MiniRouteSummary cityDays={cityDays} onDaySelect={onDaySelect} />
+        <BudgetSummary
+          citySlug={citySlug}
+          nights={config.nights}
+          activityCount={totalActivities}
+        />
+      </div>
+      <WeatherStrip citySlug={citySlug} />
+
+      {/* Section 4: Day Preview Cards — enhanced with status + preview */}
       <div className="co-section">
         <h3 className="co-section-title">Your Days</h3>
         <div className="co-day-cards-scroll">
@@ -238,7 +416,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
         </div>
       </div>
 
-      {/* Section 4: Photo Strip */}
+      {/* Section 5: Photo Strip */}
       {photoHighlights.length > 0 && (
         <div className="co-section">
           <div className="co-section-header">
@@ -299,7 +477,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
         </div>
       )}
 
-      {/* Section 5: Quick Info Bar — stagger reveal */}
+      {/* Section 6: Quick Info Bar — stagger reveal */}
       <motion.div
         className="co-quick-info"
         initial={shouldReduceMotion ? false : "hidden"}
