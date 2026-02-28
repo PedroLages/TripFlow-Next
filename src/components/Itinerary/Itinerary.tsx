@@ -10,10 +10,15 @@ import CityNavigator from './CityNavigator';
 import DayNavigator from './DayNavigator';
 import { DayTimeline } from './DayTimeline';
 import { CityOverview } from './CityOverview';
+import { TripOverview } from './TripOverview';
+import TripContextBar from './TripContextBar';
+import { ActivitySearch } from './ActivitySearch';
+import { TravelDayView } from './TravelDayView';
 import { Lightbox } from './Lightbox';
 import { MobileMapSheet } from './MobileMapSheet';
 import { AddActivityModal } from './AddActivityModal';
 import { MapProvider, useMapContext } from '@/components/Map/MapProvider';
+import { cn } from '@/lib/utils';
 import {
   type CitySlug,
   CITY_CONFIGS,
@@ -133,6 +138,8 @@ export const Itinerary: React.FC = () => {
   const allDays = useMemo(() => generateItineraryDays(), []);
 
   // State
+  type ViewMode = 'city' | 'trip';
+  const [viewMode, setViewMode] = useState<ViewMode>('city');
   const [activeCity, setActiveCity] = useState<CitySlug>('shanghai');
   const [activeDay, setActiveDay] = useState(-1);
   const [activities, setActivities] = useState<Activity[]>(() =>
@@ -141,6 +148,7 @@ export const Itinerary: React.FC = () => {
   const [isGeneratingDay, setIsGeneratingDay] = useState(false);
   const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
   const [isAddActivityOpen, setIsAddActivityOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [expandedActivity, setExpandedActivity] = useState<string | null>(null);
 
   // Lightbox state
@@ -169,6 +177,18 @@ export const Itinerary: React.FC = () => {
 
   const handleActivityHover = useCallback((activityId: string | null) => {
     setHoveredActivityId(activityId);
+  }, []);
+
+  // Cmd+K search shortcut
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
   }, []);
 
   // URL state sync — deep-linking support
@@ -249,9 +269,35 @@ export const Itinerary: React.FC = () => {
   // Handlers
   const handleCityChange = useCallback(
     (city: CitySlug) => {
+      setViewMode('city');
       setActiveCity(city);
       setActiveDay(-1); // Show overview on city switch
       setExpandedActivity(null);
+    },
+    []
+  );
+
+  const handleTripOverviewNavigate = useCallback(
+    (city: CitySlug, dayIndex: number) => {
+      setViewMode('city');
+      setActiveCity(city);
+      setActiveDay(dayIndex);
+      setExpandedActivity(null);
+    },
+    []
+  );
+
+  const handleSearchNavigate = useCallback(
+    (city: CitySlug, dayIndex: number, activityId: string) => {
+      setViewMode('city');
+      setActiveCity(city);
+      setActiveDay(dayIndex);
+      setExpandedActivity(activityId);
+      // Scroll to the activity after a tick to let the view render
+      setTimeout(() => {
+        const el = activityRefs.current.get(activityId);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 400);
     },
     []
   );
@@ -355,15 +401,42 @@ export const Itinerary: React.FC = () => {
         </div>
       </motion.div>
 
-      {/* City Navigator */}
+      {/* View Toggle + City Navigator */}
       <motion.div variants={motionVariants}>
-        <CityNavigator
-          activeCity={activeCity}
-          onCityChange={handleCityChange}
-        />
+        <div className="view-mode-toggle">
+          <button
+            className={cn('view-mode-btn', viewMode === 'trip' && 'view-mode-active')}
+            onClick={() => setViewMode('trip')}
+          >
+            Full Trip
+          </button>
+          <button
+            className={cn('view-mode-btn', viewMode === 'city' && 'view-mode-active')}
+            onClick={() => setViewMode('city')}
+          >
+            By City
+          </button>
+        </div>
+        {viewMode === 'city' && (
+          <CityNavigator
+            activeCity={activeCity}
+            onCityChange={handleCityChange}
+          />
+        )}
       </motion.div>
 
+      {/* Trip Overview (Full Trip mode) */}
+      {viewMode === 'trip' && (
+        <motion.div variants={motionVariants}>
+          <TripOverview
+            allDays={allDays}
+            onNavigateToDay={handleTripOverviewNavigate}
+          />
+        </motion.div>
+      )}
+
       {/* Content Split — wrapped in MapProvider for shared map state */}
+      {viewMode === 'city' && (
       <MapProvider>
         <MapIntegrationBridge
           hoveredActivityId={hoveredActivityId}
@@ -386,6 +459,12 @@ export const Itinerary: React.FC = () => {
                 onDayChange={handleDayChange}
                 citySlug={activeCity}
               />
+              <TripContextBar
+                viewMode={viewMode}
+                activeCity={activeCity}
+                activeDay={activeDay}
+                allDays={allDays}
+              />
             </div>
 
             <AnimatePresence mode="wait">
@@ -398,6 +477,18 @@ export const Itinerary: React.FC = () => {
                     citySlug={activeCity}
                     cityDays={cityDays}
                     onDaySelect={(dayIndex: number) => setActiveDay(dayIndex)}
+                    onOpenLightbox={openLightbox}
+                  />
+                </motion.div>
+              ) : currentDay?.intention === 'travel' ? (
+                <motion.div
+                  key={`travel-${activeDay}`}
+                  {...contentTransition}
+                >
+                  <TravelDayView
+                    activities={dayActivities}
+                    citySlug={activeCity}
+                    dayLabel={dayLabel}
                     onOpenLightbox={openLightbox}
                   />
                 </motion.div>
@@ -422,6 +513,7 @@ export const Itinerary: React.FC = () => {
                     selectedPinId={selectedPinId}
                     onActivityHover={handleActivityHover}
                     activityRefs={activityRefs}
+                    intention={currentDay?.intention}
                   />
                 </motion.div>
               )}
@@ -443,6 +535,7 @@ export const Itinerary: React.FC = () => {
           </div>
         </motion.div>
       </MapProvider>
+      )}
 
       {/* Lightbox */}
       <Lightbox
@@ -453,15 +546,17 @@ export const Itinerary: React.FC = () => {
         onIndexChange={setLightboxIndex}
       />
 
-      {/* Mobile Map FAB + Bottom Sheet */}
-      <button
-        className="map-fab"
-        onClick={() => setIsMapSheetOpen(true)}
-        aria-label="Show map"
-      >
-        <MapIcon size={22} />
-      </button>
-      <MobileMapSheet isOpen={isMapSheetOpen} onClose={() => setIsMapSheetOpen(false)}>
+      {/* Mobile Map FAB + Bottom Sheet (city view only) */}
+      {viewMode === 'city' && (
+        <>
+        <button
+          className="map-fab"
+          onClick={() => setIsMapSheetOpen(true)}
+          aria-label="Show map"
+        >
+          <MapIcon size={22} />
+        </button>
+        <MobileMapSheet isOpen={isMapSheetOpen} onClose={() => setIsMapSheetOpen(false)}>
         <MapProvider>
           <MapContainer
             activities={dayActivities}
@@ -475,6 +570,8 @@ export const Itinerary: React.FC = () => {
           />
         </MapProvider>
       </MobileMapSheet>
+        </>
+      )}
 
       {/* AI Suggestions Panel (existing) */}
       <AISuggestionsPanel
@@ -489,6 +586,14 @@ export const Itinerary: React.FC = () => {
         onClose={() => setIsAddActivityOpen(false)}
         dayLabel={dayLabel}
         citySlug={activeCity}
+      />
+
+      {/* Global Activity Search (Cmd+K) */}
+      <ActivitySearch
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        allDays={allDays}
+        onNavigate={handleSearchNavigate}
       />
     </motion.div>
   );

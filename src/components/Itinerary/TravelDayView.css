@@ -1,0 +1,774 @@
+/* ==========================================================================
+   TravelDayView — Specialized view for travel/transit days
+   Prefix: .tdv-
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   Container
+   --------------------------------------------------------------------------- */
+
+.tdv-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 0 40px;
+}
+
+/* ---------------------------------------------------------------------------
+   Contextual Tips
+   --------------------------------------------------------------------------- */
+
+.tdv-tips {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tdv-tip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.tdv-tip svg {
+  flex-shrink: 0;
+  color: var(--city-color, var(--accent-primary));
+  opacity: 0.8;
+}
+
+/* ---------------------------------------------------------------------------
+   Large Transport Card
+   --------------------------------------------------------------------------- */
+
+.tdv-transport-card {
+  position: relative;
+  min-height: 200px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  gap: 24px;
+  border: 1px solid var(--border-subtle);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: box-shadow var(--transition-fast);
+}
+
+.tdv-transport-card:hover {
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* Gradient background layer */
+.tdv-transport-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--tdv-departing-color, var(--accent-primary)) 0%,
+    var(--tdv-arriving-color, var(--accent-secondary)) 100%
+  );
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Status badge in transport card */
+.tdv-transport-status {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 5;
+}
+
+/* Transport icon wrapper */
+.tdv-transport-icon-wrap {
+  position: relative;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--tdv-departing-color, var(--accent-primary)),
+    var(--tdv-arriving-color, var(--accent-secondary))
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.tdv-transport-icon {
+  color: #ffffff;
+  transform: rotate(45deg);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* For trains, no rotation */
+.tdv-transport-icon-wrap:has(.lucide-train-front) .tdv-transport-icon {
+  transform: rotate(0deg);
+}
+
+/* ---------------------------------------------------------------------------
+   City Transition Visual
+   --------------------------------------------------------------------------- */
+
+.tdv-city-transition {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 8px;
+}
+
+.tdv-city-endpoint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+}
+
+.tdv-city-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.tdv-departing-circle {
+  background: var(--bg-surface);
+  border-color: var(--tdv-departing-color, var(--accent-primary));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--tdv-departing-color, var(--accent-primary)) 25%, transparent);
+}
+
+.tdv-departing-circle svg {
+  color: var(--tdv-departing-color, var(--accent-primary));
+}
+
+.tdv-arriving-circle {
+  background: var(--bg-surface);
+  border-color: var(--tdv-arriving-color, var(--accent-secondary));
+  box-shadow: 0 0 12px color-mix(in srgb, var(--tdv-arriving-color, var(--accent-secondary)) 25%, transparent);
+}
+
+.tdv-arriving-circle svg {
+  color: var(--tdv-arriving-color, var(--accent-secondary));
+}
+
+.tdv-transport-card:hover .tdv-city-icon-circle {
+  transform: scale(1.08);
+}
+
+.tdv-city-name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Route path between cities */
+.tdv-route-path {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 24px;
+}
+
+.tdv-route-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--tdv-departing-color, var(--accent-primary)),
+    var(--tdv-arriving-color, var(--accent-secondary))
+  );
+  opacity: 0.3;
+  transform: translateY(-50%);
+}
+
+.tdv-route-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  pointer-events: none;
+}
+
+.tdv-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--tdv-departing-color, var(--accent-primary)),
+    var(--tdv-arriving-color, var(--accent-secondary))
+  );
+  opacity: 0.5;
+  animation: tdv-dot-pulse 2s ease-in-out infinite;
+}
+
+.tdv-dot-1 { animation-delay: 0s; }
+.tdv-dot-2 { animation-delay: 0.3s; }
+.tdv-dot-3 { animation-delay: 0.6s; }
+
+@keyframes tdv-dot-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+.tdv-route-arrow {
+  position: absolute;
+  right: -4px;
+  color: var(--tdv-arriving-color, var(--accent-secondary));
+  opacity: 0.6;
+}
+
+/* ---------------------------------------------------------------------------
+   Time Details
+   --------------------------------------------------------------------------- */
+
+.tdv-time-details {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 12px 24px;
+  background: var(--bg-surface);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  min-width: 280px;
+}
+
+.tdv-time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.tdv-time-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.tdv-time-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.tdv-duration-block {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.tdv-duration-block svg {
+  opacity: 0.6;
+}
+
+.tdv-duration-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Transport type label */
+.tdv-transport-label {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 5;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  opacity: 0.7;
+}
+
+/* ---------------------------------------------------------------------------
+   Status Badges (shared between transport card and mini cards)
+   --------------------------------------------------------------------------- */
+
+.tdv-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.tdv-badge-booked {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.25);
+}
+
+.tdv-badge-must-do {
+  background: rgba(168, 85, 247, 0.12);
+  color: #9333ea;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.tdv-badge-optional {
+  background: rgba(100, 116, 139, 0.1);
+  color: var(--text-secondary);
+  border: 1px solid rgba(100, 116, 139, 0.15);
+}
+
+/* ---------------------------------------------------------------------------
+   After Arrival Section
+   --------------------------------------------------------------------------- */
+
+.tdv-after-arrival {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tdv-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tdv-section-title svg {
+  color: var(--city-color, var(--accent-primary));
+  opacity: 0.7;
+}
+
+/* Activity list */
+.tdv-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Mini activity cards */
+.tdv-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+  cursor: default;
+}
+
+.tdv-mini-card:hover {
+  border-color: var(--border-focus);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+}
+
+.tdv-mini-card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface-hover);
+  color: var(--city-color, var(--accent-primary));
+  flex-shrink: 0;
+}
+
+.tdv-mini-card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tdv-mini-card-time {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.tdv-mini-card-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tdv-mini-card-status {
+  flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Arrival Note (transport-only day)
+   --------------------------------------------------------------------------- */
+
+.tdv-arrival-note {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-subtle);
+  border-radius: 12px;
+}
+
+.tdv-arrival-note p {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Dark Mode
+   --------------------------------------------------------------------------- */
+
+:root[data-theme="dark"] .tdv-transport-gradient {
+  opacity: 0.12;
+}
+
+:root[data-theme="dark"] .tdv-transport-card {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .tdv-transport-card:hover {
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="dark"] .tdv-transport-icon-wrap {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .tdv-time-details {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-subtle);
+}
+
+:root[data-theme="dark"] .tdv-badge-booked {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+:root[data-theme="dark"] .tdv-badge-must-do {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+  border-color: rgba(168, 85, 247, 0.3);
+}
+
+:root[data-theme="dark"] .tdv-badge-optional {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-secondary);
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+:root[data-theme="dark"] .tdv-mini-card {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+
+:root[data-theme="dark"] .tdv-mini-card:hover {
+  border-color: var(--border-focus);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .tdv-mini-card-icon {
+  background: var(--bg-surface-hover);
+}
+
+:root[data-theme="dark"] .tdv-tip {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+
+:root[data-theme="dark"] .tdv-arrival-note {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+
+:root[data-theme="dark"] .tdv-transport-label {
+  background: var(--bg-surface-hover);
+  border-color: var(--border-subtle);
+}
+
+/* Also support prefers-color-scheme for users without data-theme attribute */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .tdv-transport-gradient {
+    opacity: 0.12;
+  }
+
+  :root:not([data-theme="light"]) .tdv-transport-card {
+    background: var(--bg-surface);
+    border-color: var(--border-subtle);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  :root:not([data-theme="light"]) .tdv-transport-card:hover {
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.4),
+      0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  :root:not([data-theme="light"]) .tdv-transport-icon-wrap {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  :root:not([data-theme="light"]) .tdv-time-details {
+    background: var(--bg-surface-hover);
+    border-color: var(--border-subtle);
+  }
+
+  :root:not([data-theme="light"]) .tdv-badge-booked {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+
+  :root:not([data-theme="light"]) .tdv-badge-must-do {
+    background: rgba(168, 85, 247, 0.2);
+    color: #c084fc;
+    border-color: rgba(168, 85, 247, 0.3);
+  }
+
+  :root:not([data-theme="light"]) .tdv-badge-optional {
+    background: rgba(148, 163, 184, 0.15);
+    color: var(--text-secondary);
+    border-color: rgba(148, 163, 184, 0.2);
+  }
+
+  :root:not([data-theme="light"]) .tdv-mini-card {
+    background: var(--bg-surface);
+    border-color: var(--border-subtle);
+  }
+
+  :root:not([data-theme="light"]) .tdv-mini-card:hover {
+    border-color: var(--border-focus);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  :root:not([data-theme="light"]) .tdv-mini-card-icon {
+    background: var(--bg-surface-hover);
+  }
+
+  :root:not([data-theme="light"]) .tdv-tip {
+    background: var(--bg-surface);
+    border-color: var(--border-subtle);
+  }
+
+  :root:not([data-theme="light"]) .tdv-arrival-note {
+    background: var(--bg-surface);
+    border-color: var(--border-subtle);
+  }
+
+  :root:not([data-theme="light"]) .tdv-transport-label {
+    background: var(--bg-surface-hover);
+    border-color: var(--border-subtle);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile Responsive
+   --------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .tdv-container {
+    gap: 20px;
+    padding: 16px 0 32px;
+  }
+
+  .tdv-transport-card {
+    min-height: 180px;
+    padding: 24px 16px;
+    border-radius: 16px;
+    gap: 20px;
+  }
+
+  .tdv-transport-icon-wrap {
+    width: 64px;
+    height: 64px;
+  }
+
+  .tdv-transport-icon-wrap svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .tdv-city-transition {
+    gap: 10px;
+  }
+
+  .tdv-city-icon-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .tdv-city-icon-circle svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tdv-city-name {
+    font-size: 0.95rem;
+  }
+
+  .tdv-city-endpoint {
+    min-width: 64px;
+  }
+
+  .tdv-time-details {
+    gap: 16px;
+    padding: 10px 16px;
+    min-width: unset;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .tdv-time-value {
+    font-size: 0.95rem;
+  }
+
+  .tdv-mini-card {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .tdv-mini-card-title {
+    font-size: 0.88rem;
+  }
+
+  .tdv-tip {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .tdv-transport-label {
+    font-size: 0.65rem;
+  }
+
+  .tdv-transport-status {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tdv-city-transition {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .tdv-route-path {
+    min-width: 40px;
+  }
+
+  .tdv-time-details {
+    flex-direction: row;
+    gap: 12px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced Motion
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .tdv-dot {
+    animation: none;
+    opacity: 0.5;
+    transform: none;
+  }
+
+  .tdv-transport-card:hover .tdv-city-icon-circle {
+    transform: none;
+  }
+
+  .tdv-mini-card,
+  .tdv-mini-card:hover {
+    transition: none;
+    transform: none !important;
+  }
+
+  .tdv-transport-card,
+  .tdv-transport-card:hover {
+    transition: none;
+  }
+}
