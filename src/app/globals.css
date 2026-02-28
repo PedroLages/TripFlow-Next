@@ -144,6 +144,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Map city colors to shadcn chart tokens */
+  --chart-shanghai: 342 79% 44%;  /* #C2185B converted to HSL */
+  --chart-hongkong: 23 100% 45%;  /* #E65100 */
+  --chart-osaka: 186 100% 28%;    /* #00838F */
+  --chart-kyoto: 96 49% 36%;      /* #558B2F */
+  --chart-tokyo: 233 57% 36%;     /* #283593 */
+  --chart-beijing: 17 87% 40%;    /* #BF360C */
+
+  /* Semantic mappings for better DX */
+  --color-success: var(--color-green);
+  --color-warning: var(--color-amber);
+  --color-error: var(--destructive);
 }
 
 :root[data-theme="dark"] {
@@ -178,6 +191,14 @@
   --city-tokyo-glow: rgba(63, 81, 181, 0.20);
   --city-beijing: #E64A19;
   --city-beijing-glow: rgba(230, 74, 25, 0.20);
+
+  /* Brighter city colors for dark mode (shadcn chart tokens) */
+  --chart-shanghai: 350 79% 54%;  /* #E91E63 */
+  --chart-hongkong: 30 100% 50%;  /* #FF6D00 */
+  --chart-osaka: 186 100% 38%;    /* #00ACC1 */
+  --chart-kyoto: 96 49% 50%;      /* #7CB342 */
+  --chart-tokyo: 233 57% 48%;     /* #3F51B5 */
+  --chart-beijing: 17 87% 50%;    /* #E64A19 */
 
   --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   --glass-inner-shadow: none;

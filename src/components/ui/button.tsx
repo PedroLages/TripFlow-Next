@@ -19,6 +19,14 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+
+        // City-themed variants using shadcn chart tokens
+        shanghai: "bg-[hsl(var(--chart-shanghai))] text-white hover:bg-[hsl(var(--chart-shanghai))]/90 shadow-sm",
+        hongkong: "bg-[hsl(var(--chart-hongkong))] text-white hover:bg-[hsl(var(--chart-hongkong))]/90 shadow-sm",
+        osaka: "bg-[hsl(var(--chart-osaka))] text-white hover:bg-[hsl(var(--chart-osaka))]/90 shadow-sm",
+        kyoto: "bg-[hsl(var(--chart-kyoto))] text-white hover:bg-[hsl(var(--chart-kyoto))]/90 shadow-sm",
+        tokyo: "bg-[hsl(var(--chart-tokyo))] text-white hover:bg-[hsl(var(--chart-tokyo))]/90 shadow-sm",
+        beijing: "bg-[hsl(var(--chart-beijing))] text-white hover:bg-[hsl(var(--chart-beijing))]/90 shadow-sm",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
