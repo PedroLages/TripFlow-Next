@@ -114,7 +114,8 @@ export const AISuggestionsPanel: React.FC<AISuggestionsPanelProps> = ({ isOpen, 
                         <span><MapPin size={14} /> 15m from current</span>
                       </div>
 
-                      <Button fullWidth size="sm" icon={<Plus size={16} />} className="mt-3">
+                      <Button fullWidth size="sm" className="mt-3">
+                        <Plus size={16} />
                         Add to Itinerary
                       </Button>
                     </div>

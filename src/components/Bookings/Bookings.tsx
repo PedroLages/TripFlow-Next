@@ -104,8 +104,14 @@ export const Bookings: React.FC = () => {
           <p className="text-secondary">Keep track of flights, hotels, and activities in one place.</p>
         </div>
         <div style={{ display: 'flex', gap: '12px' }}>
-          <Button variant="secondary" icon={<Filter size={16} />}>Filter</Button>
-          <Button icon={<Search size={16} />}>Sync from Email</Button>
+          <Button variant="secondary">
+            <Filter size={16} />
+            Filter
+          </Button>
+          <Button>
+            <Search size={16} />
+            Sync from Email
+          </Button>
         </div>
       </div>
 
@@ -184,7 +190,10 @@ export const Bookings: React.FC = () => {
                 </div>
 
                 <div className="booking-actions">
-                  <Button variant="ghost" size="sm" icon={<ExternalLink size={14} />}>Manage</Button>
+                  <Button variant="ghost" size="sm">
+                    <ExternalLink size={14} />
+                    Manage
+                  </Button>
                 </div>
               </CardContent>
             </Card>
