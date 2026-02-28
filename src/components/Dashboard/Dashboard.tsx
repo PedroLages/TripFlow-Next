@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, type Variants } from 'framer-motion';
 import './Dashboard.css';
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Globe } from '../ui/Globe';
 import { Map, Wallet, Sparkles, Train, MapPin, AlertCircle, Clock, ChevronRight, Plane, Cloud, ReceiptText, ArrowRight } from 'lucide-react';
@@ -208,7 +208,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips }) => {
               <p className="briefing-text">
                 Your Japan trip is exactly 14 days away! The weather in Tokyo is currently a pleasant 22°C. I noticed you haven't booked your JR Pass yet — should I build a transit route for you?
               </p>
-              <Button size="sm" variant="secondary" className="mt-4" fullWidth>Review Transit Options</Button>
+              <Button size="sm" variant="secondary" className="mt-4 w-full">Review Transit Options</Button>
             </CardContent>
           </Card>
         </motion.div>

@@ -114,7 +114,7 @@ export const AISuggestionsPanel: React.FC<AISuggestionsPanelProps> = ({ isOpen, 
                         <span><MapPin size={14} /> 15m from current</span>
                       </div>
 
-                      <Button fullWidth size="sm" className="mt-3">
+                      <Button size="sm" className="mt-3">
                         <Plus size={16} />
                         Add to Itinerary
                       </Button>
@@ -133,7 +133,7 @@ export const AISuggestionsPanel: React.FC<AISuggestionsPanelProps> = ({ isOpen, 
             </div>
 
             <div className="panel-footer">
-              <Button variant="ghost" fullWidth>Gimme More Options</Button>
+              <Button variant="ghost" className="w-full">Gimme More Options</Button>
             </div>
           </motion.div>
         </motion.div>

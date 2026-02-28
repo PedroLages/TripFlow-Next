@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Bookings.css';
-import { Card, CardContent } from '../ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plane, Hotel, Ticket, Calendar, Search, Filter, ExternalLink, CheckCircle2, Clock } from 'lucide-react';
 

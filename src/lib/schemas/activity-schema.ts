@@ -7,7 +7,7 @@ export const activitySchema = z.object({
     .max(100, "Activity name is too long"),
 
   category: z.enum(["sightseeing", "dining", "transport", "accommodation", "other"], {
-    required_error: "Please select a category",
+    message: "Please select a category",
   }),
 
   startTime: z.string().optional(),
