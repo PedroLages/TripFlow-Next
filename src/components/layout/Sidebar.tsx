@@ -41,16 +41,17 @@ export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolea
             <LayoutDashboard size={18} /> <span>Dashboard</span>
           </Link>
 
-          <div
+          <button
+            type="button"
             className={`nav-item ${isNotificationsOpen ? 'active' : ''}`}
             onClick={() => setIsNotificationsOpen(true)}
             title="Notifications"
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', background: 'none', border: 'none', color: 'inherit', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }}
           >
             <Bell size={18} /> <span>Notifications</span>
             <span className="nav-badge">{unreadCount > 0 ? unreadCount : null}</span>
             <NotificationsPanel isOpen={isNotificationsOpen} onClose={() => setIsNotificationsOpen(false)} onUnreadCountChange={setUnreadCount} />
-          </div>
+          </button>
 
           <div className="sidebar-section-title">
             Your Trips
@@ -63,14 +64,14 @@ export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolea
             </Link>
           ))}
 
-          <div className="nav-item" style={{ color: 'var(--text-secondary)' }}>
+          <button type="button" className="nav-item" style={{ color: 'var(--text-secondary)', background: 'none', border: 'none', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }}>
             <span style={{ marginLeft: '26px' }}>+ New Trip</span>
-          </div>
+          </button>
 
-          <div className="nav-item" style={{ marginTop: 'auto' }} title="Settings" onClick={() => setIsSettingsOpen(true)}>
+          <button type="button" className="nav-item" style={{ marginTop: 'auto', background: 'none', border: 'none', color: 'inherit', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }} title="Settings" onClick={() => setIsSettingsOpen(true)}>
             <Settings size={18} /> <span>Settings</span>
             <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
-          </div>
+          </button>
         </nav>
 
         <button className="sidebar-collapse-btn" onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}>
@@ -96,17 +97,18 @@ export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolea
                 <LayoutDashboard size={18} /> <span>Dashboard</span>
               </Link>
 
-              <div
+              <button
+                type="button"
                 className={`nav-item ${isNotificationsOpen ? 'active' : ''}`}
                 onClick={() => setIsNotificationsOpen(true)}
-                style={{ position: 'relative' }}
+                style={{ position: 'relative', background: 'none', border: 'none', color: 'inherit', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }}
               >
                 <Bell size={18} /> <span>Notifications</span>
                 {unreadCount > 0 && (
                   <span style={{ marginLeft: 'auto', background: 'var(--color-red)', color: 'white', padding: '2px 8px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 600 }}>{unreadCount}</span>
                 )}
                 <NotificationsPanel isOpen={isNotificationsOpen} onClose={() => setIsNotificationsOpen(false)} onUnreadCountChange={setUnreadCount} />
-              </div>
+              </button>
 
               <div className="sidebar-section-title" style={{ marginTop: '24px', marginBottom: '8px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', padding: '0 16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Your Trips
@@ -119,14 +121,14 @@ export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolea
                 </Link>
               ))}
 
-              <div className="nav-item" style={{ color: 'var(--text-secondary)' }} onClick={onDrawerClose}>
+              <button type="button" className="nav-item" style={{ color: 'var(--text-secondary)', background: 'none', border: 'none', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }} onClick={onDrawerClose}>
                 <span style={{ marginLeft: '26px' }}>+ New Trip</span>
-              </div>
+              </button>
 
-              <div className="nav-item" style={{ marginTop: 'auto' }} onClick={() => setIsSettingsOpen(true)}>
+              <button type="button" className="nav-item" style={{ marginTop: 'auto', background: 'none', border: 'none', color: 'inherit', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }} onClick={() => setIsSettingsOpen(true)}>
                 <Settings size={18} /> <span>Settings</span>
                 <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
-              </div>
+              </button>
             </nav>
           </aside>
         </>

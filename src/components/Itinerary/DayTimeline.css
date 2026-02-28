@@ -13,8 +13,8 @@
   bottom: 0;
   left: 100px;
   width: 2px;
-  /* Task 14: Neutral timeline line — city colors restricted to accents only */
-  background: linear-gradient(180deg, var(--border-subtle) 0%, transparent 100%);
+  /* City-colored timeline line — fades in/out at edges */
+  background: linear-gradient(180deg, transparent 0%, var(--city-color, var(--border-subtle)) 10%, var(--city-color, var(--border-subtle)) 90%, transparent 100%);
   z-index: 1;
 }
 

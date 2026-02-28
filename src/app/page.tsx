@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Sparkles } from 'lucide-react'
 import { Dashboard } from '@/components/Dashboard/Dashboard'
 import { AIGeneratorWizard } from '@/components/AIGenerator/AIGeneratorWizard'
@@ -31,7 +30,6 @@ const MOCK_TRIPS = [
 ]
 
 export default function HomePage() {
-  const router = useRouter()
   const [isWizardOpen, setIsWizardOpen] = useState(false)
 
   return (
@@ -55,12 +53,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <Dashboard
-        trips={MOCK_TRIPS}
-        onTripClick={(tripData) => {
-          router.push(`/trips/${tripData.id}`)
-        }}
-      />
+      <Dashboard trips={MOCK_TRIPS} />
 
       {isWizardOpen && (
         <AIGeneratorWizard

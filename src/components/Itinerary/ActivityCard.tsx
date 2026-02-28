@@ -1,6 +1,7 @@
 "use client"
 
 import React from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Plane, Hotel, Utensils, Camera, MapPin, Sparkles,
@@ -157,10 +158,12 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
                       onOpenLightbox?.(slides, 0);
                     }}
                   >
-                    <img
+                    <Image
                       src={firstPhoto}
                       alt={activity.title}
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      fill
+                      sizes="200px"
+                      style={{ objectFit: 'cover' }}
                     />
                   </div>
                 )}

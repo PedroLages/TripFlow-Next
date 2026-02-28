@@ -56,11 +56,10 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(4px)' },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] },
   },
 };
@@ -88,21 +87,46 @@ function MapIntegrationBridge({
   const {
     setSelectedActivityId,
     setHoveredActivityId,
-    selectedActivityId,
+    selectedActivityId: mapSelectedId,
     hoveredActivityId: mapHoveredId,
   } = useMapContext();
 
-  // Sync from Itinerary → Map
-  useEffect(() => { setHoveredActivityId(hoveredActivityId); }, [hoveredActivityId, setHoveredActivityId]);
-  useEffect(() => { setSelectedActivityId(selectedPinId); }, [selectedPinId, setSelectedActivityId]);
+  // Shared refs prevent bidirectional sync ping-pong: whichever direction
+  // writes first records the value, so the reverse effect bails out.
+  const lastHoverRef = useRef<string | null>(null);
+  const lastSelectRef = useRef<string | null>(null);
 
-  // Sync from Map → Itinerary
+  // Sync hover: Itinerary → Map
   useEffect(() => {
-    if (mapHoveredId !== hoveredActivityId) onHover(mapHoveredId);
-  }, [mapHoveredId]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (hoveredActivityId !== lastHoverRef.current) {
+      lastHoverRef.current = hoveredActivityId;
+      setHoveredActivityId(hoveredActivityId);
+    }
+  }, [hoveredActivityId, setHoveredActivityId]);
+
+  // Sync hover: Map → Itinerary
   useEffect(() => {
-    if (selectedActivityId && selectedActivityId !== selectedPinId) onSelect(selectedActivityId);
-  }, [selectedActivityId]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (mapHoveredId !== lastHoverRef.current) {
+      lastHoverRef.current = mapHoveredId;
+      onHover(mapHoveredId);
+    }
+  }, [mapHoveredId, onHover]);
+
+  // Sync select: Itinerary → Map
+  useEffect(() => {
+    if (selectedPinId !== lastSelectRef.current) {
+      lastSelectRef.current = selectedPinId;
+      setSelectedActivityId(selectedPinId);
+    }
+  }, [selectedPinId, setSelectedActivityId]);
+
+  // Sync select: Map → Itinerary
+  useEffect(() => {
+    if (mapSelectedId !== lastSelectRef.current) {
+      lastSelectRef.current = mapSelectedId;
+      if (mapSelectedId) onSelect(mapSelectedId);
+    }
+  }, [mapSelectedId, onSelect]);
 
   return null;
 }
@@ -128,9 +152,9 @@ export const Itinerary: React.FC = () => {
   const contentTransition = prefersReducedMotion
     ? { initial: { opacity: 0 }, animate: { opacity: 1 }, exit: { opacity: 0 }, transition: { duration: 0.1 } }
     : {
-        initial: { opacity: 0, y: 20, scale: 0.98, filter: 'blur(4px)' },
-        animate: { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' },
-        exit: { opacity: 0, y: -16, scale: 0.98, filter: 'blur(4px)' },
+        initial: { opacity: 0, y: 20, scale: 0.98 },
+        animate: { opacity: 1, y: 0, scale: 1 },
+        exit: { opacity: 0, y: -16, scale: 0.98 },
         transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const },
       };
 
@@ -196,6 +220,10 @@ export const Itinerary: React.FC = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
+    const urlView = params.get('view');
+    if (urlView === 'trip') {
+      setViewMode('trip');
+    }
     const urlCity = params.get('city');
     if (urlCity && urlCity in CITY_CONFIGS) {
       setActiveCity(urlCity as CitySlug);
@@ -216,6 +244,9 @@ export const Itinerary: React.FC = () => {
       return;
     }
     const params = new URLSearchParams();
+    if (viewMode === 'trip') {
+      params.set('view', 'trip');
+    }
     params.set('city', activeCity);
     if (activeDay >= 0) {
       const days = getDaysForCity(activeCity);
@@ -223,7 +254,7 @@ export const Itinerary: React.FC = () => {
       if (localDay > 0) params.set('day', String(localDay));
     }
     window.history.replaceState(null, '', `?${params.toString()}`);
-  }, [activeCity, activeDay]);
+  }, [activeCity, activeDay, viewMode]);
 
   // Derived state
   const cityDayIndices = useMemo(() => getDaysForCity(activeCity), [activeCity]);
@@ -412,7 +443,10 @@ export const Itinerary: React.FC = () => {
           </button>
           <button
             className={cn('view-mode-btn', viewMode === 'city' && 'view-mode-active')}
-            onClick={() => setViewMode('city')}
+            onClick={() => {
+              setViewMode('city');
+              setActiveDay(-1);
+            }}
           >
             By City
           </button>
@@ -427,7 +461,11 @@ export const Itinerary: React.FC = () => {
 
       {/* Trip Overview (Full Trip mode) */}
       {viewMode === 'trip' && (
-        <motion.div variants={motionVariants}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
           <TripOverview
             allDays={allDays}
             onNavigateToDay={handleTripOverviewNavigate}
@@ -467,7 +505,7 @@ export const Itinerary: React.FC = () => {
               />
             </div>
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" key={`ap-${viewMode}-${activeCity}`}>
               {activeDay === -1 ? (
                 <motion.div
                   key={`overview-${activeCity}`}
