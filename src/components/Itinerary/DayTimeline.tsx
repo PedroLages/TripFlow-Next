@@ -214,9 +214,9 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
               className="timeline-item"
               layout
               initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{
-                delay: index * 0.1,
                 duration: 0.4,
                 ease: "easeOut",
                 layout: { type: 'spring', stiffness: 300, damping: 25 },
