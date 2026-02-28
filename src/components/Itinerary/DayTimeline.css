@@ -13,7 +13,8 @@
   bottom: 0;
   left: 100px;
   width: 2px;
-  background: linear-gradient(180deg, var(--accent-glow) 0%, rgba(99, 102, 241, 0.1) 100%);
+  /* City-colored timeline line — fades in/out at edges */
+  background: linear-gradient(180deg, transparent 0%, var(--city-color, var(--border-subtle)) 10%, var(--city-color, var(--border-subtle)) 90%, transparent 100%);
   z-index: 1;
 }
 
@@ -23,7 +24,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Reduced gap to accommodate transit connectors tightly */
+  gap: 16px; /* Task 16: Airbnb-style generous spacing between cards */
   position: relative;
   z-index: 2;
   width: 100%;
@@ -178,6 +179,141 @@
   100% { opacity: 0.4; transform: scale(0.98); }
 }
 
+/* ------------------------------------------------------------------ */
+/* Task 5: City Transition Banners                                    */
+/* ------------------------------------------------------------------ */
+
+.city-transition-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin: 8px 0 4px 0;
+  border-radius: var(--radius-md, 10px);
+  background: linear-gradient(135deg, var(--depart-color, #6366f1) 0%, var(--arrive-color, #22c55e) 100%);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.city-transition-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.city-transition-cities {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.city-transition-arrow {
+  opacity: 0.8;
+}
+
+.city-transition-duration {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Task 6: Day Density Warnings                                       */
+/* ------------------------------------------------------------------ */
+
+.density-warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md, 10px);
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+
+.density-warning-amber {
+  background: color-mix(in srgb, #f59e0b 12%, transparent);
+  border: 1px solid color-mix(in srgb, #f59e0b 25%, transparent);
+  color: #92400e;
+}
+
+.density-warning-red {
+  background: color-mix(in srgb, #ef4444 12%, transparent);
+  border: 1px solid color-mix(in srgb, #ef4444 25%, transparent);
+  color: #991b1b;
+}
+
+.density-warning-icon {
+  flex-shrink: 0;
+}
+
+.density-warning-text {
+  flex: 1;
+}
+
+.density-warning-dismiss {
+  margin-left: auto;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-sm, 6px);
+  color: inherit;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.density-warning-dismiss:hover {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Task 7: Day Intention States                                       */
+/* ------------------------------------------------------------------ */
+
+.free-day-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-secondary);
+}
+
+.free-day-state h3 {
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.free-day-icon {
+  color: #22c55e;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.travel-day-fallback {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-secondary);
+}
+
+.travel-day-fallback h3 {
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.travel-day-icon {
+  color: #6366f1;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
 /* Mobile responsive */
 @media (max-width: 768px) {
   .timeline-line {
@@ -195,6 +331,16 @@
   .empty-day-state,
   .generating-day-state {
     padding: 40px 16px;
+  }
+
+  .free-day-state,
+  .travel-day-fallback {
+    padding: 32px 16px;
+  }
+
+  .city-transition-banner {
+    padding: 10px 12px;
+    font-size: 0.8rem;
   }
 }
 

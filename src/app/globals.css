@@ -28,11 +28,11 @@
   --radius-xl: 16px;
 }
 
-@import '@fontsource/inter/300.css';
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
+@import '@fontsource/dm-sans/300.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/600.css';
+@import '@fontsource/dm-sans/700.css';
 @import '@fontsource/playfair-display/400.css';
 @import '@fontsource/playfair-display/500.css';
 @import '@fontsource/playfair-display/600.css';
@@ -105,7 +105,7 @@
   --sidebar-width: 280px;
 
   /* Typography */
-  --font-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-base: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-heading: "Playfair Display", Georgia, serif;
 
   /* Transitions */
@@ -264,6 +264,11 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 /* Animations */

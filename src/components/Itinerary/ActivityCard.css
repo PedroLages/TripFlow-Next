@@ -3,19 +3,24 @@
   display: contents;
 }
 
-/* Duration Bar - Visualization of Event Duration */
+/* Compact Tier 1 */
+.activity-card-compact .timeline-content-card {
+  padding: 8px 12px;
+}
+
+/* Duration Bar — Task 15: Fixed compact indicator (no variable height) */
 .duration-bar {
   position: absolute;
   top: 14px;
   left: 111px;
-  width: 6px;
-  border-radius: 4px;
+  width: 4px;
+  height: 32px;
+  border-radius: 2px;
   background: var(--accent-primary);
-  opacity: 0.2;
+  opacity: 0.15;
   z-index: 1;
   transform: translateX(-50%);
   pointer-events: none;
-  transition: height 0.3s ease, opacity 0.3s ease;
 }
 
 .duration-bar.type-flight { background: var(--color-blue); }
@@ -82,13 +87,15 @@
   border-left: 3px solid transparent;
 }
 
+/* City color accent on hover — left border + subtle glow */
 .timeline-content-card:hover {
   border-color: var(--border-focus);
-  border-left-color: var(--city-color, var(--accent-primary));
+  border-left-color: var(--city-color, var(--border-focus));
   box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.1),
+    -4px 0 12px var(--city-glow, transparent),
+    0 8px 24px rgba(0, 0, 0, 0.08),
     0 0 0 1px var(--border-focus);
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .timeline-content-card:active {
@@ -97,8 +104,8 @@
 }
 
 .timeline-content-card.expanded {
-  border-color: var(--city-color, var(--accent-primary));
-  border-left-color: var(--city-color, var(--accent-primary));
+  border-color: var(--border-focus);
+  border-left-color: var(--border-focus);
   background: var(--bg-surface-hover);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
@@ -144,25 +151,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Shimmer on booked badge */
-.badge-booked::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 100px;
-  background: linear-gradient(
-    110deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.2) 50%,
-    transparent 70%
-  );
-  animation: badge-shimmer 3s infinite ease-in-out;
-}
-
-@keyframes badge-shimmer {
-  0% { transform: translateX(-100%); }
-  50%, 100% { transform: translateX(100%); }
-}
+/* Task 15: Removed shimmer animation — motion budget cut to 3 signature effects */
 
 .badge-must-do {
   background: rgba(168, 85, 247, 0.9);
@@ -174,6 +163,33 @@
   background: rgba(100, 116, 139, 0.9);
   color: white;
   border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* New badge variants */
+.badge-paid {
+  background: color-mix(in srgb, #059669 12%, transparent);
+  color: #059669;
+}
+
+.badge-pending {
+  background: color-mix(in srgb, #d97706 12%, transparent);
+  color: #d97706;
+}
+
+.badge-considering {
+  background: color-mix(in srgb, #2563eb 12%, transparent);
+  color: #2563eb;
+}
+
+.badge-cancelled {
+  background: color-mix(in srgb, #dc2626 12%, transparent);
+  color: #dc2626;
+}
+
+/* Cancelled title strikethrough */
+.activity-title-cancelled {
+  text-decoration: line-through;
+  opacity: 0.6;
 }
 
 /* Card Inner Layout */
@@ -204,6 +220,9 @@
   font-size: 0.8rem;
   color: var(--text-secondary);
   font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .activity-actions {
@@ -227,7 +246,7 @@
   cursor: default;
 }
 
-/* Vote Buttons */
+/* Vote Buttons (kept for AI Insight button styling) */
 .vote-btn {
   display: flex;
   align-items: center;
@@ -246,12 +265,7 @@
   background: var(--accent-glow) !important;
 }
 
-.voting-section {
-  display: flex;
-  gap: 12px;
-}
-
-/* Discussion Panel */
+/* Discussion Panel (reused for Tier 2 expanded content) */
 .activity-discussion-panel {
   border-top: 1px solid var(--border-subtle);
   padding: 16px 20px 20px;
@@ -262,127 +276,102 @@
   cursor: default;
 }
 
-/* Comments */
-.comments-list {
+/* Expanded content layout: thumbnail + details side by side */
+.activity-expanded-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.activity-expanded-details {
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 8px;
 }
 
-.comment-item {
-  display: flex;
-  gap: 12px;
-}
-
-.comment-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid var(--border-subtle);
-  object-fit: cover;
-}
-
-.comment-body {
-  flex: 1;
-  min-width: 0;
-  background: var(--bg-surface);
-  padding: 10px 14px;
-  border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
-  font-size: 0.9rem;
-}
-
-.comment-body strong {
-  margin-right: 8px;
-  color: var(--text-primary);
-}
-
-.comment-time {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.comment-body p {
-  margin: 4px 0 0 0;
-  color: var(--text-secondary);
-  line-height: 1.5;
-}
-
-.no-comments {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-  font-style: italic;
-}
-
-/* Comment Input */
-.comment-input-area {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-}
-
-.full-width-input {
-  flex: 1;
-  padding: 10px 14px;
-  font-size: 0.85rem;
-  min-width: 0;
-}
-
-.send-btn {
-  background: var(--accent-primary);
-  color: white;
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  border: none;
+/* Expanded thumbnail */
+.activity-expanded-thumb {
+  width: 200px;
+  aspect-ratio: 3/2;
+  border-radius: var(--radius-sm, 6px);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
   cursor: pointer;
 }
 
-.send-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 12px var(--accent-glow);
+.activity-expanded-thumb:hover {
+  opacity: 0.9;
 }
 
-.send-btn:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
+/* Notes section (replaces discussion) */
+.activity-notes-section {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-/* Live Time Indicator */
-.live-time-indicator {
-  position: absolute;
-  top: 35%;
-  left: 104px;
-  right: 0;
-  height: 2px;
-  background: #ef4444;
-  z-index: 10;
-  pointer-events: none;
+.activity-notes-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
 }
 
-.live-time-indicator::before {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: -4px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
-  animation: pulse-red 2s infinite;
+.activity-notes-textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--bg-surface);
+  font-size: 0.8rem;
+  resize: vertical;
+  font-family: inherit;
+  color: var(--text-primary);
+  line-height: 1.5;
 }
 
-@keyframes pulse-red {
-  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+.activity-notes-textarea:focus {
+  outline: 2px solid var(--city-color, var(--accent-primary));
+  outline-offset: -1px;
+  border-color: transparent;
+}
+
+.activity-notes-textarea[readonly] {
+  cursor: default;
+  opacity: 0.85;
+}
+
+.activity-notes-preview {
+  /* Small indicator on collapsed card */
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+}
+
+/* Tags */
+.activity-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  padding: 0 16px;
+}
+
+.activity-tag {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 /* Place Metadata */
@@ -426,6 +415,37 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* Live Time Indicator */
+.live-time-indicator {
+  position: absolute;
+  top: 35%;
+  left: 104px;
+  right: 0;
+  height: 2px;
+  background: #ef4444;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.live-time-indicator::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
 }
 
 /* Highlighted card (from map pin interaction) */
@@ -472,6 +492,39 @@
 
   .timeline-content-card {
     border-left: 2px solid transparent;
+  }
+
+  .activity-expanded-content {
+    flex-direction: column;
+  }
+
+  .activity-expanded-thumb {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Task 12: Mobile drag handle — hidden on desktop, visible on mobile */
+.mobile-drag-handle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 4px 0 0;
+    color: var(--text-secondary);
+    opacity: 0.35;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .mobile-drag-handle:active {
+    opacity: 0.7;
+    cursor: grabbing;
   }
 }
 

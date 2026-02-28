@@ -21,11 +21,14 @@ export interface Activity {
   votes: { up: number; down: number };
   comments: ActivityComment[];
   imageUrl?: string;
-  status?: 'Booked' | 'Must Do' | 'Optional';
+  status?: 'Booked' | 'Paid' | 'Pending' | 'Must Do' | 'Considering' | 'Optional' | 'Cancelled';
   transitToNext?: { method: 'walk' | 'train' | 'car' | 'metro' | 'ferry'; duration: number };
   photos?: string[];          // multiple image URLs for carousel
   coordinates?: Coordinates;  // GPS for map pins
   place?: PlaceMetadata;      // enrichment data
+  notes?: string;             // Personal notes (replaces comments for solo trips)
+  tags?: string[];            // User-defined tags like "food", "culture", "romantic"
+  timezone?: string;          // IANA timezone e.g. 'Asia/Tokyo'
 }
 
 export interface PlaceMetadata {
@@ -48,6 +51,7 @@ export interface ItineraryDay {
   fullDate: string;       // "Wed, Aug 27"
   city: CitySlug;
   activities: Activity[];
+  intention?: 'planned' | 'free' | 'travel' | 'unplanned';
 }
 
 export interface LightboxSlide {
@@ -145,6 +149,19 @@ const ALEX = { user: 'Alex M.', avatar: '/avatars/alex.jpg' };
 const GUIDE = { user: 'Local Guide AI', avatar: '/avatars/ai-guide.png' };
 
 // ---------------------------------------------------------------------------
+// Timezone mapping by city
+// ---------------------------------------------------------------------------
+
+const CITY_TIMEZONE: Record<CitySlug, string> = {
+  shanghai: 'Asia/Shanghai',
+  hongkong: 'Asia/Hong_Kong',
+  osaka: 'Asia/Tokyo',
+  kyoto: 'Asia/Tokyo',
+  tokyo: 'Asia/Tokyo',
+  beijing: 'Asia/Shanghai',
+};
+
+// ---------------------------------------------------------------------------
 // Per-day activity data
 // ---------------------------------------------------------------------------
 
@@ -194,6 +211,8 @@ function shanghaiDay0(): Activity[] {
         address: 'Zhongshan East 1st Rd, Huangpu',
         placeCategory: 'Waterfront Promenade',
       },
+      notes: 'Best at sunset — arrive by 5pm for golden hour photos',
+      tags: ['photography', 'must-see'],
     },
     {
       id: 'sh-d0-4',
@@ -453,6 +472,7 @@ function hongKongDay3(): Activity[] {
         priceLevel: 2,
         placeCategory: 'Scenic Viewpoint',
       },
+      notes: 'Buy combo ticket for tram + Sky Terrace',
     },
   ];
 }
@@ -480,6 +500,7 @@ function hongKongDay4(): Activity[] {
         priceLevel: 1,
         placeCategory: 'Dim Sum Restaurant',
       },
+      tags: ['food', 'local-favorite'],
     },
     {
       id: 'hk-d4-2',
@@ -753,6 +774,7 @@ function kyotoDay9(): Activity[] {
         address: '68 Fukakusa Yabunouchicho, Fushimi',
         placeCategory: 'Shinto Shrine',
       },
+      notes: 'Start before 8am for empty torii gate photos',
     },
   ];
 }
@@ -915,6 +937,8 @@ function tokyoDay14(): Activity[] {
         priceLevel: 3,
         placeCategory: 'Digital Art Museum',
       },
+      notes: 'Wear white for best experience. Tickets pre-booked.',
+      tags: ['art', 'pre-booked'],
     },
   ];
 }
@@ -1071,13 +1095,39 @@ export function generateItineraryDays(): ItineraryDay[] {
   for (let i = 0; i <= 22; i++) {
     const { date, fullDate } = tripDate(i);
     const activityFn = DAY_ACTIVITIES[i];
+    const activities = activityFn ? activityFn() : [];
+    const city = getCityForDay(i);
+
+    // Auto-assign timezone to all activities based on city
+    const tz = CITY_TIMEZONE[city];
+    for (const activity of activities) {
+      if (!activity.timezone) {
+        activity.timezone = tz;
+      }
+    }
+
+    // Auto-detect day intention based on activity patterns
+    let intention: ItineraryDay['intention'];
+    if (activities.length === 0) {
+      intention = 'unplanned';
+    } else {
+      const hasFlightOrTransport = activities.some(
+        (a) => a.type === 'flight' || a.type === 'transport'
+      );
+      if (hasFlightOrTransport && activities.length <= 2) {
+        intention = 'travel';
+      } else {
+        intention = 'planned';
+      }
+    }
 
     days.push({
       dayIndex: i,
       date,
       fullDate,
-      city: getCityForDay(i),
-      activities: activityFn ? activityFn() : [],
+      city,
+      activities,
+      intention,
     });
   }
 

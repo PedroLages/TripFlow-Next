@@ -85,7 +85,7 @@
   right: 25%;
   height: 3px;
   border-radius: 3px 3px 0 0;
-  background: var(--tab-color);
+  background: var(--city-color, var(--tab-color));
 }
 
 /* Mobile: full-width scroll */

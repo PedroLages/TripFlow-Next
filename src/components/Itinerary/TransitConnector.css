@@ -15,19 +15,35 @@
   left: 109px; /* Align with timeline node */
   bottom: -4px;
   width: 2px;
-  border-left: 2px dashed var(--border-focus);
   z-index: 1;
+}
+
+/* Walking: dotted line */
+.transit-method-walk::before {
+  border-left: 2px dotted var(--border-focus);
+}
+
+/* Metro/Train/Ferry: dashed line */
+.transit-method-metro::before,
+.transit-method-train::before,
+.transit-method-ferry::before {
+  border-left: 2px dashed var(--border-focus);
+}
+
+/* Car/Taxi: solid line */
+.transit-method-car::before {
+  border-left: 2px solid var(--border-focus);
 }
 
 .transit-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
+  gap: 6px;
+  padding: 4px 10px;
   border-radius: 100px;
-  background: var(--bg-surface-hover);
-  border: 1px dashed var(--border-focus);
-  font-size: 0.8rem;
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.72rem;
   color: var(--text-secondary);
   font-weight: 500;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -37,14 +53,14 @@
 
 .transit-connector:hover .transit-pill {
   background: var(--bg-surface);
-  border-style: solid;
+  border: 1px solid var(--border-focus);
   transform: scale(1.05);
   cursor: pointer;
   color: var(--text-primary);
 }
 
 .transit-pill svg {
-  color: var(--accent-primary);
+  color: var(--text-secondary);
 }
 
 .transit-line {
@@ -95,14 +111,25 @@
 @media (max-width: 768px) {
   .transit-connector {
     padding-left: 90px;
+    margin: 6px 0 14px 0;
   }
 
   .transit-connector::before {
     left: 79px;
   }
 
+  /* Task 13: Touch target enforcement — 44px minimum */
+  .transit-pill {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+  }
+
   .inline-add-btn {
     left: 72px;
+    width: 36px;
+    height: 36px;
   }
 }
 

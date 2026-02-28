@@ -13,7 +13,7 @@
     "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.2.8",
+    "@fontsource/dm-sans": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.97.0",
