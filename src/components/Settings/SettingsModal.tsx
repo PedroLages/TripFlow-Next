@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Globe, Bell, Shield } from 'lucide-react';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import './SettingsModal.css';
 
 interface SettingsModalProps {
@@ -34,9 +34,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose })
           >
             <div className="settings-header" style={{ padding: '24px 32px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 style={{ margin: 0, fontSize: '1.25rem' }}>Global Settings</h2>
-              <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', padding: '4px' }}>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                onClick={onClose}
+                aria-label="Close settings"
+              >
                 <X size={20} />
-              </button>
+              </Button>
             </div>
 
             <div className="settings-content" style={{ padding: '0', overflowY: 'auto' }}>
