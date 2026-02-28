@@ -130,7 +130,7 @@ export async function markAsReadAction(
   notificationIds: string[]
 ): Promise<NotificationResult<void>> {
   if (notificationIds.length === 0) {
-    return { ok: true }
+    return { ok: true, data: undefined }
   }
 
   const supabase = createAdminClient()
@@ -147,7 +147,7 @@ export async function markAsReadAction(
     }
   }
 
-  return { ok: true }
+  return { ok: true, data: undefined }
 }
 
 /**
@@ -178,7 +178,7 @@ export async function markAllAsReadAction(
     }
   }
 
-  return { ok: true }
+  return { ok: true, data: undefined }
 }
 
 /**
@@ -189,7 +189,7 @@ export async function archiveNotificationAction(
   notificationIds: string[]
 ): Promise<NotificationResult<void>> {
   if (notificationIds.length === 0) {
-    return { ok: true }
+    return { ok: true, data: undefined }
   }
 
   const supabase = createAdminClient()
@@ -206,7 +206,7 @@ export async function archiveNotificationAction(
     }
   }
 
-  return { ok: true }
+  return { ok: true, data: undefined }
 }
 
 /**

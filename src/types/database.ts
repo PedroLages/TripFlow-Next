@@ -116,6 +116,113 @@ export interface Database {
           },
         ]
       }
+      notifications: {
+        Row: {
+          id: string
+          recipient_id: string
+          actor_id: string | null
+          trip_id: string | null
+          type: 'comment' | 'task' | 'upload' | 'invite' | 'mention' | 'default'
+          title: string
+          message: string | null
+          action_url: string | null
+          is_read: boolean
+          is_archived: boolean
+          read_at: string | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          recipient_id: string
+          actor_id?: string | null
+          trip_id?: string | null
+          type: 'comment' | 'task' | 'upload' | 'invite' | 'mention' | 'default'
+          title: string
+          message?: string | null
+          action_url?: string | null
+          is_read?: boolean
+          is_archived?: boolean
+          read_at?: string | null
+        }
+        Update: {
+          is_read?: boolean
+          is_archived?: boolean
+          read_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'notifications_recipient_id_fkey'
+            columns: ['recipient_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'notifications_actor_id_fkey'
+            columns: ['actor_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'notifications_trip_id_fkey'
+            columns: ['trip_id']
+            isOneToOne: false
+            referencedRelation: 'trips'
+            referencedColumns: ['id']
+          },
+        ]
+      }
+      notification_preferences: {
+        Row: {
+          id: string
+          user_id: string
+          trip_id: string | null
+          email_enabled: boolean
+          push_enabled: boolean
+          comment_notifications: boolean
+          task_notifications: boolean
+          invite_notifications: boolean
+          mention_notifications: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          trip_id?: string | null
+          email_enabled?: boolean
+          push_enabled?: boolean
+          comment_notifications?: boolean
+          task_notifications?: boolean
+          invite_notifications?: boolean
+          mention_notifications?: boolean
+        }
+        Update: {
+          email_enabled?: boolean
+          push_enabled?: boolean
+          comment_notifications?: boolean
+          task_notifications?: boolean
+          invite_notifications?: boolean
+          mention_notifications?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'notification_preferences_user_id_fkey'
+            columns: ['user_id']
+            isOneToOne: false
+            referencedRelation: 'profiles'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'notification_preferences_trip_id_fkey'
+            columns: ['trip_id']
+            isOneToOne: false
+            referencedRelation: 'trips'
+            referencedColumns: ['id']
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -137,3 +244,5 @@ export type Profile = Database['public']['Tables']['profiles']['Row']
 export type Trip = Database['public']['Tables']['trips']['Row']
 export type TripMember = Database['public']['Tables']['trip_members']['Row']
 export type BlindBudget = Database['public']['Tables']['blind_budgets']['Row']
+export type Notification = Database['public']['Tables']['notifications']['Row']
+export type NotificationPreference = Database['public']['Tables']['notification_preferences']['Row']

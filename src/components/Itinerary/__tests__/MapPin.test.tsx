@@ -35,7 +35,7 @@ describe('MapPin', () => {
   it('scales up when selected', () => {
     const { container } = render(<MapPin {...defaultProps} isSelected />);
     const pin = container.firstElementChild as HTMLElement;
-    expect(pin.style.transform).toContain('1.3');
+    expect(pin.className).toContain('selected');
   });
 
   it('calls onClick handler', () => {
