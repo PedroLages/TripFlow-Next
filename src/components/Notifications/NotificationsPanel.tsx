@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, X, Clock, MessageSquare, ListTodo, UploadCloud } from 'lucide-react'
-import { Button } from '../ui/ButtonLegacy'
+import { Button } from '@/components/ui/button'
 import { mockNotifications } from '@/lib/mock-notifications'
 import type { Notification } from '@/types/notification'
 import './NotificationsPanel.css'

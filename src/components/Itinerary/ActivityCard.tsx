@@ -10,7 +10,7 @@ import {
   CreditCard, HelpCircle, XCircle, StickyNote, GripVertical,
 } from 'lucide-react';
 import { Card, CardContent } from '../ui/Card';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getCityStyle } from '@/lib/city-colors';
 import type { CitySlug } from '@/lib/city-colors';

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react'
 import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Sparkles, Plus, Map as MapIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { AISuggestionsPanel } from '../AIGenerator/AISuggestionsPanel';
 import CityNavigator from './CityNavigator';
 import DayNavigator from './DayNavigator';

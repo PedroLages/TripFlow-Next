@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './AIGeneratorWizard.css';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { MapPin, Calendar, Users, DollarSign, Sparkles, X, ChevronRight, ChevronLeft, Check, Coffee, Mountain, Music, Tent } from 'lucide-react';
 
 interface AIGeneratorWizardProps {

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { motion, type Variants } from 'framer-motion';
 import './Dashboard.css';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { Globe } from '../ui/Globe';
 import { Map, Wallet, Sparkles, Train, MapPin, AlertCircle, Clock, ChevronRight, Plane, Cloud, ReceiptText, ArrowRight } from 'lucide-react';
 

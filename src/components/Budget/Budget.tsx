@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Budget.css';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
-import { Button } from '../ui/ButtonLegacy';
+import { Button } from '@/components/ui/button';
 import { PieChart, DollarSign, TrendingUp, Plus, Plane, Hotel, Utensils, ShoppingBag, ArrowUpRight, CreditCard, HelpCircle } from 'lucide-react';
 import { useBlindBudget } from '@/hooks/use-blind-budget';
 import { BlindBudgetForm } from '../BlindBudget/BlindBudgetForm';
