@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Providers } from '@/components/layout/Providers'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import { AppShell } from '@/components/layout/AppShell'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 import './app.css'
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             <AppShell>{children}</AppShell>
           </Providers>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )
