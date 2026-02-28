@@ -212,9 +212,15 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
               key={activity.id}
               value={activity}
               className="timeline-item"
+              layout
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.4, ease: "easeOut" }}
+              transition={{
+                delay: index * 0.1,
+                duration: 0.4,
+                ease: "easeOut",
+                layout: { type: 'spring', stiffness: 300, damping: 25 },
+              }}
             >
               {/* Task 5: City Transition Banner (rendered before the ActivityCard) */}
               {transition && (

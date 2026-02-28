@@ -87,11 +87,12 @@
   border-left: 3px solid transparent;
 }
 
-/* Task 14: City color restricted to node icon only, not card borders */
+/* City color accent on hover — left border + subtle glow */
 .timeline-content-card:hover {
   border-color: var(--border-focus);
-  border-left-color: var(--border-focus);
+  border-left-color: var(--city-color, var(--border-focus));
   box-shadow:
+    -4px 0 12px var(--city-glow, transparent),
     0 8px 24px rgba(0, 0, 0, 0.08),
     0 0 0 1px var(--border-focus);
   transform: translateY(-2px);

@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, MapPin, Navigation, Clock, ThumbsUp, Plus } from 'lucide-react';
 import { Button } from '../ui/ButtonLegacy';
@@ -43,6 +43,15 @@ const mockSuggestions = [
 ];
 
 export const AISuggestionsPanel: React.FC<AISuggestionsPanelProps> = ({ isOpen, onClose, day }) => {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handler);
+    return () => window.removeEventListener('keydown', handler);
+  }, [isOpen, onClose]);
+
   const containerVariants = {
     hidden: { x: '100%', opacity: 0 },
     visible: {
@@ -53,24 +62,17 @@ export const AISuggestionsPanel: React.FC<AISuggestionsPanelProps> = ({ isOpen, 
     exit: { x: '100%', opacity: 0, transition: { duration: 0.3 } }
   };
 
-  const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0 }
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          <motion.div
-            className="panel-backdrop"
-            variants={backdropVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            onClick={onClose}
-          />
+        <motion.div
+          key="ai-panel-root"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="panel-backdrop" onClick={onClose} />
           <motion.div
             className="ai-suggestions-panel glass-panel"
             variants={containerVariants}
@@ -133,7 +135,7 @@ export const AISuggestionsPanel: React.FC<AISuggestionsPanelProps> = ({ isOpen, 
               <Button variant="ghost" fullWidth>Gimme More Options</Button>
             </div>
           </motion.div>
-        </>
+        </motion.div>
       )}
     </AnimatePresence>
   );

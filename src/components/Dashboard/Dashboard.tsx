@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { motion, type Variants } from 'framer-motion';
 import './Dashboard.css';
 import { Card, CardHeader, CardTitle, CardContent } from '../ui/Card';
@@ -36,11 +37,10 @@ const containerVariants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24, filter: 'blur(4px)' },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] }
   }
 };
@@ -63,10 +63,9 @@ export interface TripData {
 
 interface DashboardProps {
   trips: TripData[];
-  onTripClick?: (trip: TripData) => void;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ trips, onTripClick }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ trips }) => {
   const imminentTrip = trips.length > 0 && trips[0].destination === 'Japan Circuit' ? trips[0] : null;
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -96,19 +95,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onTripClick }) => {
 
       {/* Hero Banner */}
       {imminentTrip ? (
-        <motion.div variants={resolvedItemVariants} className="active-trip-hero" style={{ backgroundImage: `url(${imminentTrip.imageUrl})` }}>
-          <div className="active-trip-hero-overlay"></div>
-          <div className="active-trip-hero-content">
-            <div className="hero-status-badge">Upcoming in 14 Days</div>
-            <h2 className="hero-destination">{imminentTrip.destination}</h2>
-            <p className="hero-dates">{imminentTrip.dates}</p>
-            <div className="hero-quick-actions">
-              <Button variant="secondary" className="glass-btn"><Plane size={16} /> Boarding Passes</Button>
-              <Button variant="secondary" className="glass-btn"><Cloud size={16} /> 22°C Tokyo</Button>
-              <Button variant="secondary" className="glass-btn"><ReceiptText size={16} /> Quick Expense</Button>
+        <Link href={`/trips/${imminentTrip.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+          <motion.div variants={resolvedItemVariants} className="active-trip-hero" style={{ backgroundImage: `url(${imminentTrip.imageUrl})`, cursor: 'pointer' }}>
+            <div className="active-trip-hero-overlay"></div>
+            <div className="active-trip-hero-content">
+              <div className="hero-status-badge">Upcoming in 14 Days</div>
+              <h2 className="hero-destination">{imminentTrip.destination}</h2>
+              <p className="hero-dates">{imminentTrip.dates}</p>
+              <div className="hero-quick-actions" onClick={(e) => e.preventDefault()}>
+                <Button variant="secondary" className="glass-btn"><Plane size={16} /> Boarding Passes</Button>
+                <Button variant="secondary" className="glass-btn"><Cloud size={16} /> 22°C Tokyo</Button>
+                <Button variant="secondary" className="glass-btn"><ReceiptText size={16} /> Quick Expense</Button>
+              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </Link>
       ) : (
         <div className="stats-grid">
           <motion.div variants={resolvedItemVariants}>
@@ -157,40 +158,42 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onTripClick }) => {
       <div className="dashboard-bento-grid">
         {trips.map(trip => (
           <motion.div key={trip.id} variants={resolvedItemVariants} className="bento-trip-card">
-            <Card className="interactive-trip-card" onClick={() => onTripClick && onTripClick(trip)}>
-              <div className="trip-card-image-wrapper">
-                <div className="trip-card-image" style={{ backgroundImage: `url(${trip.imageUrl})` }}>
-                  <div className="trip-card-image-overlay">
-                    <span className="status-badge" style={{ backgroundColor: 'var(--bg-surface)', color: trip.accentColor, border: `1px solid ${trip.accentColor}` }}>
-                      {trip.status}
-                    </span>
+            <Link href={`/trips/${trip.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Card className="interactive-trip-card">
+                <div className="trip-card-image-wrapper">
+                  <div className="trip-card-image" style={{ backgroundImage: `url(${trip.imageUrl})` }}>
+                    <div className="trip-card-image-overlay">
+                      <span className="status-badge" style={{ backgroundColor: 'var(--bg-surface)', color: trip.accentColor, border: `1px solid ${trip.accentColor}` }}>
+                        {trip.status}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <CardContent className="trip-card-details">
-                <div className="trip-card-top-info">
-                  <h3 className="trip-destination-title">{trip.destination}</h3>
-                  <div className="trip-dates-text">{trip.dates}</div>
-                </div>
-                <div className="trip-progress-section">
-                  <div className="progress-header">
-                    <span>Completion</span>
-                    <span style={{ fontVariantNumeric: 'tabular-nums' }}>{trip.progress}%</span>
+                <CardContent className="trip-card-details">
+                  <div className="trip-card-top-info">
+                    <h3 className="trip-destination-title">{trip.destination}</h3>
+                    <div className="trip-dates-text">{trip.dates}</div>
                   </div>
-                  <div className="progress-track">
-                    <div className="progress-fill" style={{ width: `${trip.progress}%`, background: trip.accentColor }}></div>
+                  <div className="trip-progress-section">
+                    <div className="progress-header">
+                      <span>Completion</span>
+                      <span style={{ fontVariantNumeric: 'tabular-nums' }}>{trip.progress}%</span>
+                    </div>
+                    <div className="progress-track">
+                      <div className="progress-fill" style={{ width: `${trip.progress}%`, background: trip.accentColor }}></div>
+                    </div>
                   </div>
-                </div>
-                <div className="trip-card-footer-actions">
-                  <div className="collaborator-avatars">
-                    {[...Array(trip.collaborators)].map((_, i) => (
-                      <div key={i} className="avatar-circle" style={{ zIndex: 10 - i }}></div>
-                    ))}
+                  <div className="trip-card-footer-actions">
+                    <div className="collaborator-avatars">
+                      {[...Array(trip.collaborators)].map((_, i) => (
+                        <div key={i} className="avatar-circle" style={{ zIndex: 10 - i }}></div>
+                      ))}
+                    </div>
+                    <Button size="sm">Open</Button>
                   </div>
-                  <Button size="sm" onClick={(e) => { e.stopPropagation(); if (onTripClick) onTripClick(trip); }}>Open</Button>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Link>
           </motion.div>
         ))}
 
@@ -227,9 +230,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onTripClick }) => {
         {/* Merged Activity + Actions — 8 cols */}
         <motion.div variants={resolvedItemVariants} className="bento-activity-actions">
           <Card className="activity-actions-card">
-            <div className="activity-actions-tabs">
-              <button className={`tab-btn ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')}>Activity</button>
-              <button className={`tab-btn ${activeTab === 'actions' ? 'active' : ''}`} onClick={() => setActiveTab('actions')}>
+            <div className="activity-actions-tabs" role="tablist">
+              <button className={`tab-btn ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')} role="tab" aria-selected={activeTab === 'activity'}>Activity</button>
+              <button className={`tab-btn ${activeTab === 'actions' ? 'active' : ''}`} onClick={() => setActiveTab('actions')} role="tab" aria-selected={activeTab === 'actions'}>
                 Actions <span className="tab-badge">{pendingActions.length}</span>
               </button>
             </div>
@@ -238,7 +241,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onTripClick }) => {
                 <>
                   <div className="live-presence-indicator" style={{ marginBottom: '16px' }}>
                     <div className="presence-avatar">
-                      <img src="https://i.pravatar.cc/150?u=2" alt="Sarah" />
+                      <img src="https://i.pravatar.cc/150?u=2" alt="Sarah" width={32} height={32} />
                       <div className="online-dot"></div>
                     </div>
                     <span className="presence-text">Sarah is viewing Kyoto Hotels</span>
