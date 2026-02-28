@@ -1,5 +1,11 @@
 "use client"
 
+/**
+ * @deprecated Use @/components/ui/button instead
+ * This component will be removed in the next major version.
+ * Migration guide: /docs/migrations/button-migration.md
+ */
+
 import React from 'react';
 import './Button.css';
 
@@ -10,6 +16,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
+/**
+ * @deprecated Use @/components/ui/button instead
+ */
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
@@ -19,6 +28,9 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props
 }) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.warn('ButtonLegacy is deprecated. Use @/components/ui/button instead.');
+  }
   const baseClasses = `btn btn-${variant} btn-${size} ${fullWidth ? 'w-full' : ''} ${className}`;
 
   return (
