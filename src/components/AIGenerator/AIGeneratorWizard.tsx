@@ -231,13 +231,17 @@ export const AIGeneratorWizard: React.FC<AIGeneratorWizardProps> = ({ onClose, o
 
               <div className="wizard-footer">
                 {step > 1 ? (
-                  <Button variant="ghost" onClick={handleBack} icon={<ChevronLeft size={16}/>}>Back</Button>
+                  <Button variant="ghost" onClick={handleBack}>
+                    <ChevronLeft size={16}/>
+                    Back
+                  </Button>
                 ) : <div></div>}
 
                 {step < WIZARD_STEPS ? (
                   <Button onClick={handleNext}>Next <ChevronRight size={16} style={{ marginLeft: 8 }}/></Button>
                 ) : (
-                  <Button variant="primary" className="magic-generate-btn" onClick={handleGenerate} icon={<Sparkles size={16}/>}>
+                  <Button variant="default" className="magic-generate-btn" onClick={handleGenerate}>
+                    <Sparkles size={16}/>
                     Generate Trip
                   </Button>
                 )}

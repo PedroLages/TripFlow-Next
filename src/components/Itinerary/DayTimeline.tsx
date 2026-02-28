@@ -317,10 +317,10 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
             <p>Use AI to quickly build a smart itinerary for this day, or add locations manually.</p>
             <Button
               className="mt-4 magic-wand-btn"
-              size="md"
-              icon={<Sparkles size={16} />}
+              size="default"
               onClick={onAutoFill}
             >
+              <Sparkles size={16} />
               Auto-fill {dayLabel}
             </Button>
           </div>

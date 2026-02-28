@@ -10,7 +10,8 @@ export const ExportMenu: React.FC = () => {
 
   return (
     <div style={{ position: 'relative' }}>
-      <Button variant="secondary" icon={<Share2 size={16} />} onClick={() => setIsOpen(!isOpen)}>
+      <Button variant="secondary" onClick={() => setIsOpen(!isOpen)}>
+        <Share2 size={16} />
         Share & Export
       </Button>
 

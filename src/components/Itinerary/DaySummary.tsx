@@ -134,17 +134,17 @@ export default function DaySummary({
           <Button
             fullWidth
             variant="secondary"
-            icon={<Sparkles size={16} />}
             onClick={onAutoFill}
             disabled={isGenerating}
           >
+            <Sparkles size={16} />
             {isGenerating ? 'Generating...' : 'AI Auto-fill Day'}
           </Button>
           <Button
             fullWidth
-            icon={<Plus size={16} />}
             onClick={onAddActivity}
           >
+            <Plus size={16} />
             Add Activity
           </Button>
         </div>

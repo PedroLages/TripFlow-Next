@@ -418,15 +418,15 @@ export const Itinerary: React.FC = () => {
         <div className="itinerary-header-actions">
           <Button
             variant="secondary"
-            icon={<Sparkles size={16} />}
             onClick={() => setIsSuggestionsOpen(true)}
           >
+            <Sparkles size={16} />
             AI Suggestions
           </Button>
           <Button
-            icon={<Plus size={16} />}
             onClick={() => setIsAddActivityOpen(true)}
           >
+            <Plus size={16} />
             Add Activity
           </Button>
         </div>

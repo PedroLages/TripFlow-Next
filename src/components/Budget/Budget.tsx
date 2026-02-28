@@ -87,7 +87,10 @@ export const Budget: React.FC = () => {
             <HelpCircle size={16} />
             How it works
           </Button>
-          <Button icon={<Plus size={16} />} onClick={() => setIsAddExpenseOpen(true)}>Add Expense</Button>
+          <Button onClick={() => setIsAddExpenseOpen(true)}>
+            <Plus size={16} />
+            Add Expense
+          </Button>
         </div>
       </div>
 
