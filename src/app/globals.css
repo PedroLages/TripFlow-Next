@@ -1,21 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* Map existing CSS variables to Tailwind tokens */
-  --color-teal: #0D9488;
-  --color-teal-light: #14B8A6;
-  --color-coral: #FF5A5F;
-  --color-coral-light: #FF767A;
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-danger: #EF4444;
-  --color-info: #3B82F6;
-  --color-purple: #8b5cf6;
+  /* ========================================
+     LAYER 3: TAILWIND MAPPINGS
+     Maps semantic tokens to Tailwind utilities
+     ======================================== */
 
-  /* Semantic tokens for blind budgeting */
-  --color-privacy: #0D9488;
-  --color-privacy-light: rgba(13, 148, 136, 0.15);
+  /* Base Colors (backward compatibility) */
+  --color-teal: var(--accent-primary);
+  --color-teal-light: var(--accent-primary);
+  --color-coral: var(--accent-secondary);
+  --color-coral-light: var(--accent-secondary);
+  --color-purple: var(--color-vote);
 
+  /* Surfaces */
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-surface-hover: var(--bg-surface-hover);
+  --color-bg-surface-subtle: var(--bg-surface-subtle);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  /* Borders */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-focus: var(--border-focus);
+
+  /* Accents */
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+
+  /* Feature Colors */
+  --color-privacy: var(--color-privacy);
+  --color-privacy-light: var(--color-privacy-subtle);
+  --color-vote: var(--color-vote);
+  --color-vote-subtle: var(--color-vote-subtle);
+
+  /* Semantic States */
+  --color-success: var(--color-success);
+  --color-warning: var(--color-warning);
+  --color-danger: var(--color-danger);
+  --color-info: var(--color-info);
+
+  /* City Colors */
   --color-city-shanghai: var(--city-shanghai);
   --color-city-hongkong: var(--city-hongkong);
   --color-city-osaka: var(--city-osaka);
@@ -23,6 +51,16 @@
   --color-city-tokyo: var(--city-tokyo);
   --color-city-beijing: var(--city-beijing);
 
+  /* Transport Modes */
+  --color-transport-flight: var(--transport-flight);
+  --color-transport-train: var(--transport-train);
+  --color-transport-bus: var(--transport-bus);
+  --color-transport-car: var(--transport-car);
+  --color-transport-metro: var(--transport-metro);
+  --color-transport-ferry: var(--transport-ferry);
+  --color-transport-walk: var(--transport-walk);
+
+  /* Radius */
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
@@ -43,62 +81,176 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* 2026 Cinematic Travel System - Light Mode First */
-  --bg-base: #fcfcfc;
-  --bg-surface: #ffffff;
-  --bg-surface-hover: #f5f5f5;
-  --bg-surface-subtle: rgba(0, 0, 0, 0.02);
+  /**
+   * TripFlow Color System v2.0 - OKLCH 3-Layer Architecture
+   * Merges TripOS semantic discipline + TripFlow visual richness
+   *
+   * Layer 1: Reference Tokens (Raw palette - never use directly)
+   * Layer 2: Semantic Tokens (Role-based - what components use)
+   * Layer 3: Tailwind Mappings (Utility classes - defined in @theme)
+   */
 
-  --text-primary: #1a1a1a;
-  --text-secondary: #5e5e5e;
+  /* ========================================
+     LAYER 1: REFERENCE COLORS (Palette)
+     ======================================== */
 
-  /* Semantic Colors */
-  --color-green: #10B981;
-  --color-amber: #F59E0B;
-  --color-red: #EF4444;
-  --color-blue: #3B82F6;
+  /* Primary Brand (Teal) */
+  --ref-teal-40: oklch(0.56 0.14 185);   /* Light mode primary */
+  --ref-teal-60: oklch(0.68 0.16 185);   /* Dark mode primary */
+  --ref-teal-95: oklch(0.98 0.02 185);   /* Subtle bg */
+
+  /* Secondary Brand (Coral) */
+  --ref-coral-50: oklch(0.65 0.22 15);
+  --ref-coral-70: oklch(0.70 0.20 15);
+
+  /* Feature: Privacy (Cyan-Teal, 185°) */
+  --ref-privacy-40: oklch(0.56 0.14 185);
+  --ref-privacy-60: oklch(0.68 0.16 185);
+  --ref-privacy-95: oklch(0.98 0.02 185);
+
+  /* Feature: Voting (Purple, 295°) */
+  --ref-vote-50: oklch(0.60 0.24 295);
+  --ref-vote-70: oklch(0.75 0.22 295);
+  --ref-vote-95: oklch(0.98 0.04 295);
+
+  /* City: Shanghai (Pink, 350°) */
+  --ref-shanghai-50: oklch(0.55 0.20 350);
+  --ref-shanghai-65: oklch(0.64 0.22 350);
+
+  /* City: Hong Kong (Orange, 30°) */
+  --ref-hongkong-50: oklch(0.62 0.22 30);
+  --ref-hongkong-68: oklch(0.68 0.24 30);
+
+  /* City: Osaka (Blue-Teal, 200° - Differentiated from Privacy at 185°) */
+  --ref-osaka-50: oklch(0.56 0.14 200);
+  --ref-osaka-64: oklch(0.64 0.16 200);
+
+  /* City: Kyoto (Green, 140°) */
+  --ref-kyoto-50: oklch(0.58 0.16 140);
+  --ref-kyoto-66: oklch(0.66 0.18 140);
+
+  /* City: Tokyo (Indigo, 264°) */
+  --ref-tokyo-50: oklch(0.48 0.18 264);
+  --ref-tokyo-58: oklch(0.58 0.20 264);
+
+  /* City: Beijing (Deep Orange, 25°) */
+  --ref-beijing-50: oklch(0.52 0.24 25);
+  --ref-beijing-60: oklch(0.60 0.26 25);
+
+  /* Semantic States */
+  --ref-success-50: oklch(0.60 0.18 145);
+  --ref-success-68: oklch(0.68 0.18 145);
+  --ref-warning-50: oklch(0.72 0.18 85);
+  --ref-danger-50: oklch(0.64 0.22 25);
+  --ref-info-50: oklch(0.62 0.20 240);
+  --ref-info-68: oklch(0.68 0.20 240);
+
+  /* Neutrals */
+  --ref-slate-07: oklch(0.12 0.01 264);
+  --ref-slate-10: oklch(0.12 0.01 264);
+  --ref-slate-20: oklch(0.20 0.01 264);
+  --ref-slate-30: oklch(0.30 0.01 264);
+  --ref-slate-50: oklch(0.50 0.01 264);
+  --ref-slate-68: oklch(0.68 0.01 264);
+  --ref-slate-90: oklch(0.96 0.00 264);
+  --ref-slate-96: oklch(0.98 0.00 264);
+  --ref-slate-98: oklch(0.99 0.00 0);
+  --ref-slate-100: oklch(1 0 0);
+
+  /* Transport Modes */
+  --ref-transport-flight: oklch(0.62 0.20 240);
+  --ref-transport-train: oklch(0.60 0.24 295);
+  --ref-transport-bus: oklch(0.60 0.24 295);
+  --ref-transport-car: oklch(0.72 0.18 85);
+  --ref-transport-metro: oklch(0.62 0.20 200);
+  --ref-transport-ferry: oklch(0.65 0.20 230);
+  --ref-transport-walk: oklch(0.64 0.22 25);
+
+  /* ========================================
+     LAYER 2: SEMANTIC TOKENS (Role-Based)
+     ======================================== */
+
+  /* Surfaces */
+  --bg-base: var(--ref-slate-98);
+  --bg-surface: var(--ref-slate-100);
+  --bg-surface-hover: var(--ref-slate-90);
+  --bg-surface-subtle: oklch(0.98 0 0 / 0.5);
+
+  /* Text */
+  --text-primary: var(--ref-slate-10);
+  --text-secondary: var(--ref-slate-50);
+
+  /* Borders */
+  --border-subtle: oklch(0.90 0 0);
+  --border-focus: var(--accent-primary);
 
   /* Accents */
-  --accent-primary: #0D9488;
-  --accent-glow: rgba(13, 148, 136, 0.15);
-  --accent-secondary: #FF5A5F;
+  --accent-primary: var(--ref-teal-40);
+  --accent-glow: oklch(0.56 0.14 185 / 0.15);
+  --accent-secondary: var(--ref-coral-50);
 
-  --bg-glass: rgba(255, 255, 255, 0.85);
-  --shimmer-bg: rgba(0, 0, 0, 0.04);
-  --overlay-bg: rgba(0, 0, 0, 0.1);
+  /* Feature: Privacy */
+  --color-privacy: var(--ref-privacy-40);
+  --color-privacy-subtle: var(--ref-privacy-95);
+  --color-privacy-foreground: var(--ref-slate-100);
 
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-focus: rgba(13, 148, 136, 0.3);
-  --border-gradient: transparent;
+  /* Feature: Voting */
+  --color-vote: var(--ref-vote-50);
+  --color-vote-subtle: var(--ref-vote-95);
+  --color-vote-foreground: var(--ref-slate-100);
 
-  /* City Color System */
-  --city-shanghai: #C2185B;
-  --city-shanghai-glow: rgba(194, 24, 91, 0.15);
-  --city-shanghai-muted: rgba(194, 24, 91, 0.08);
+  /* States */
+  --color-success: var(--ref-success-50);
+  --color-warning: var(--ref-warning-50);
+  --color-danger: var(--ref-danger-50);
+  --color-info: var(--ref-info-50);
 
-  --city-hongkong: #E65100;
-  --city-hongkong-glow: rgba(230, 81, 0, 0.15);
-  --city-hongkong-muted: rgba(230, 81, 0, 0.08);
+  /* Legacy semantic aliases (for compatibility) */
+  --color-green: var(--color-success);
+  --color-amber: var(--color-warning);
+  --color-red: var(--color-danger);
+  --color-blue: var(--color-info);
 
-  --city-osaka: #00838F;
-  --city-osaka-glow: rgba(0, 131, 143, 0.15);
-  --city-osaka-muted: rgba(0, 131, 143, 0.08);
+  /* City Colors */
+  --city-shanghai: var(--ref-shanghai-50);
+  --city-shanghai-glow: oklch(0.55 0.20 350 / 0.15);
+  --city-shanghai-muted: oklch(0.55 0.20 350 / 0.08);
 
-  --city-kyoto: #558B2F;
-  --city-kyoto-glow: rgba(85, 139, 47, 0.15);
-  --city-kyoto-muted: rgba(85, 139, 47, 0.08);
+  --city-hongkong: var(--ref-hongkong-50);
+  --city-hongkong-glow: oklch(0.62 0.22 30 / 0.15);
+  --city-hongkong-muted: oklch(0.62 0.22 30 / 0.08);
 
-  --city-tokyo: #283593;
-  --city-tokyo-glow: rgba(40, 53, 147, 0.15);
-  --city-tokyo-muted: rgba(40, 53, 147, 0.08);
+  --city-osaka: var(--ref-osaka-50);
+  --city-osaka-glow: oklch(0.56 0.14 200 / 0.15);
+  --city-osaka-muted: oklch(0.56 0.14 200 / 0.08);
 
-  --city-beijing: #BF360C;
-  --city-beijing-glow: rgba(191, 54, 12, 0.15);
-  --city-beijing-muted: rgba(191, 54, 12, 0.08);
+  --city-kyoto: var(--ref-kyoto-50);
+  --city-kyoto-glow: oklch(0.58 0.16 140 / 0.15);
+  --city-kyoto-muted: oklch(0.58 0.16 140 / 0.08);
 
-  /* Depth */
-  --glass-blur: blur(0px);
-  --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.05);
+  --city-tokyo: var(--ref-tokyo-50);
+  --city-tokyo-glow: oklch(0.48 0.18 264 / 0.15);
+  --city-tokyo-muted: oklch(0.48 0.18 264 / 0.08);
+
+  --city-beijing: var(--ref-beijing-50);
+  --city-beijing-glow: oklch(0.52 0.24 25 / 0.15);
+  --city-beijing-muted: oklch(0.52 0.24 25 / 0.08);
+
+  /* Transport Modes */
+  --transport-flight: var(--ref-transport-flight);
+  --transport-train: var(--ref-transport-train);
+  --transport-bus: var(--ref-transport-bus);
+  --transport-car: var(--ref-transport-car);
+  --transport-metro: var(--ref-transport-metro);
+  --transport-ferry: var(--ref-transport-ferry);
+  --transport-walk: var(--ref-transport-walk);
+
+  /* Glassmorphic */
+  --bg-glass: oklch(1 0 0 / 0.85);
+  --shimmer-bg: oklch(0 0 0 / 0.04);
+  --overlay-bg: oklch(0 0 0 / 0.1);
+  --glass-blur: 8px;
+  --glass-shadow: 0 4px 12px oklch(0 0 0 / 0.03), 0 1px 3px oklch(0 0 0 / 0.05);
   --glass-inner-shadow: none;
 
   /* Layout */
@@ -160,48 +312,95 @@
 }
 
 :root[data-theme="dark"] {
-  --bg-base: #121212;
-  --bg-surface: #1E1E1E;
-  --bg-surface-hover: #2A2A2A;
+  /* ========================================
+     DARK MODE (Explicit Palettes)
+     Transformation: +8-12% lightness boost for visibility
+     ======================================== */
 
-  --text-primary: #F5F5F5;
-  --text-secondary: #A3A3A3;
+  /* Surfaces (Full inversion) */
+  --bg-base: var(--ref-slate-07);
+  --bg-surface: var(--ref-slate-20);
+  --bg-surface-hover: oklch(0.24 0.01 264);
+  --bg-surface-subtle: oklch(0.15 0.01 264 / 0.5);
 
-  --accent-primary: #14B8A6;
-  --accent-glow: rgba(20, 184, 166, 0.3);
-  --accent-secondary: #FF767A;
+  /* Text (Full inversion) */
+  --text-primary: oklch(0.98 0 0);
+  --text-secondary: var(--ref-slate-68);
 
-  --bg-glass: rgba(18, 18, 18, 0.85);
-  --shimmer-bg: rgba(255, 255, 255, 0.04);
-  --overlay-bg: rgba(0, 0, 0, 0.6);
+  /* Borders */
+  --border-subtle: var(--ref-slate-30);
+  --border-focus: var(--accent-primary);
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(20, 184, 166, 0.4);
-  --border-gradient: transparent;
+  /* Accents (Brightened +8%) */
+  --accent-primary: var(--ref-teal-60);
+  --accent-glow: oklch(0.68 0.16 185 / 0.25);
+  --accent-secondary: var(--ref-coral-70);
 
-  --city-shanghai: #E91E63;
-  --city-shanghai-glow: rgba(233, 30, 99, 0.20);
-  --city-hongkong: #FF6D00;
-  --city-hongkong-glow: rgba(255, 109, 0, 0.20);
-  --city-osaka: #00ACC1;
-  --city-osaka-glow: rgba(0, 172, 193, 0.20);
-  --city-kyoto: #7CB342;
-  --city-kyoto-glow: rgba(124, 179, 66, 0.20);
-  --city-tokyo: #3F51B5;
-  --city-tokyo-glow: rgba(63, 81, 181, 0.20);
-  --city-beijing: #E64A19;
-  --city-beijing-glow: rgba(230, 74, 25, 0.20);
+  /* Feature: Privacy (Brightened +12%) */
+  --color-privacy: var(--ref-privacy-60);
+  --color-privacy-subtle: oklch(0.18 0.04 185);
+  --color-privacy-foreground: oklch(0.10 0 0);
 
-  /* Brighter city colors for dark mode (shadcn chart tokens) */
-  --chart-shanghai: 350 79% 54%;  /* #E91E63 */
-  --chart-hongkong: 30 100% 50%;  /* #FF6D00 */
-  --chart-osaka: 186 100% 38%;    /* #00ACC1 */
-  --chart-kyoto: 96 49% 50%;      /* #7CB342 */
-  --chart-tokyo: 233 57% 48%;     /* #3F51B5 */
-  --chart-beijing: 17 87% 50%;    /* #E64A19 */
+  /* Feature: Voting (Brightened +10%) */
+  --color-vote: var(--ref-vote-70);
+  --color-vote-subtle: oklch(0.20 0.06 295);
+  --color-vote-foreground: oklch(0.10 0 0);
 
-  --glass-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  /* States (Brightened +8%) */
+  --color-success: var(--ref-success-68);
+  --color-warning: var(--ref-warning-50);
+  --color-danger: var(--ref-danger-50);
+  --color-info: var(--ref-info-68);
+
+  /* City Colors (Brightened +8-14%) */
+  --city-shanghai: var(--ref-shanghai-65);
+  --city-shanghai-glow: oklch(0.64 0.22 350 / 0.25);
+  --city-shanghai-muted: oklch(0.64 0.22 350 / 0.08);
+
+  --city-hongkong: var(--ref-hongkong-68);
+  --city-hongkong-glow: oklch(0.68 0.24 30 / 0.25);
+  --city-hongkong-muted: oklch(0.68 0.24 30 / 0.08);
+
+  --city-osaka: var(--ref-osaka-64);
+  --city-osaka-glow: oklch(0.64 0.16 200 / 0.25);
+  --city-osaka-muted: oklch(0.64 0.16 200 / 0.08);
+
+  --city-kyoto: var(--ref-kyoto-66);
+  --city-kyoto-glow: oklch(0.66 0.18 140 / 0.25);
+  --city-kyoto-muted: oklch(0.66 0.18 140 / 0.08);
+
+  --city-tokyo: var(--ref-tokyo-58);
+  --city-tokyo-glow: oklch(0.58 0.20 264 / 0.25);
+  --city-tokyo-muted: oklch(0.58 0.20 264 / 0.08);
+
+  --city-beijing: var(--ref-beijing-60);
+  --city-beijing-glow: oklch(0.60 0.26 25 / 0.25);
+  --city-beijing-muted: oklch(0.60 0.26 25 / 0.08);
+
+  /* Transport Modes (Brightened +8%) */
+  --transport-flight: oklch(0.68 0.20 240);
+  --transport-train: oklch(0.75 0.22 295);
+  --transport-bus: oklch(0.75 0.22 295);
+  --transport-car: var(--ref-transport-car);
+  --transport-metro: oklch(0.68 0.20 200);
+  --transport-ferry: oklch(0.70 0.20 230);
+  --transport-walk: var(--ref-transport-walk);
+
+  /* Glassmorphic (Dark) */
+  --bg-glass: oklch(0.12 0.01 264 / 0.85);
+  --shimmer-bg: oklch(1 0 0 / 0.04);
+  --overlay-bg: oklch(0 0 0 / 0.6);
+  --glass-blur: 12px;
+  --glass-shadow: 0 4px 12px oklch(0 0 0 / 0.4);
   --glass-inner-shadow: none;
+
+  /* City Colors (shadcn chart tokens - converted from OKLCH to HSL for compatibility) */
+  --chart-shanghai: 350 79% 64%;  /* Brightened Shanghai */
+  --chart-hongkong: 30 100% 68%;  /* Brightened Hong Kong */
+  --chart-osaka: 200 100% 64%;    /* Brightened Osaka */
+  --chart-kyoto: 140 49% 66%;     /* Brightened Kyoto */
+  --chart-tokyo: 264 57% 58%;     /* Brightened Tokyo */
+  --chart-beijing: 25 87% 60%;    /* Brightened Beijing */
 }
 
 /* Sync color-scheme for native dark mode elements */
