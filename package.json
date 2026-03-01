@@ -14,7 +14,9 @@
     "test:e2e:headed": "playwright test --headed",
     "percy": "percy exec -- playwright test e2e/visual-regression.spec.ts",
     "percy:local": "percy exec --allow-noop -- playwright test e2e/visual-regression.spec.ts",
-    "percy:update": "percy exec -- playwright test e2e/visual-regression.spec.ts --update-snapshots"
+    "percy:update": "percy exec -- playwright test e2e/visual-regression.spec.ts --update-snapshots",
+    "percy:debug": "LOG_LEVEL=debug percy exec -- playwright test e2e/visual-regression.spec.ts",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.8",
