@@ -7,10 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "type-check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "percy": "percy exec -- playwright test e2e/visual-regression.spec.ts",
+    "percy:local": "percy exec --allow-noop -- playwright test e2e/visual-regression.spec.ts",
+    "percy:update": "percy exec -- playwright test e2e/visual-regression.spec.ts --update-snapshots"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.2.8",
@@ -43,6 +47,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@percy/cli": "^1.31.8",
+    "@percy/playwright": "^1.0.10",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@testing-library/dom": "^10.4.1",

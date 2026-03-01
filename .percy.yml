@@ -1,0 +1,36 @@
+# Percy Visual Testing Configuration
+# https://docs.percy.io/docs/configuration
+
+version: 2
+
+snapshot:
+  # Viewport widths for responsive testing
+  widths: [375, 768, 1280, 1920]
+
+  # Wait for animations to settle before snapshotting
+  # Prevents false positives from mid-animation captures
+  percy-css: |
+    * {
+      animation-duration: 0s !important;
+      animation-delay: 0s !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+
+  # Enable accessibility testing
+  enable-javascript: true
+
+  # Wait for network to be idle (prevents race conditions)
+  # Percy waits for 100ms of network idle before capturing
+  # Adjust if you have long-running requests
+  # network-idle-timeout: 750
+
+# Discovery patterns (optional - Percy auto-detects Playwright tests)
+# discovery:
+#   allowed-hostnames:
+#     - localhost
+#     - 127.0.0.1
+
+# Debugging
+# https://docs.percy.io/docs/debugging-sdks
+# PERCY_DEBUG=*   (set as env var to see verbose logs)
