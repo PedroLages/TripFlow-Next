@@ -1003,11 +1003,27 @@ Copy and customize these shadcn/ui components for blind budgeting:
 **Design Tokens (globals.css):**
 
 ```css
-/* Privacy Color Palette */
---color-private-bg: hsl(210 40% 96%);        /* Badge background */
---color-private-text: hsl(210 10% 40%);      /* Badge text */
---color-private-border: hsl(210 40% 85%);    /* Badge border */
---color-lock-icon: hsl(210 10% 40%);         /* Lock icon color */
+/* Privacy Color Palette (Teal - FR17) */
+--color-private-bg: hsl(180 55% 95%);        /* Badge background (light teal) */
+--color-private-text: hsl(180 50% 30%);      /* Badge text (dark teal) */
+--color-private-border: hsl(180 45% 75%);    /* Badge border (medium teal) */
+--color-lock-icon: hsl(180 50% 30%);         /* Lock icon color (dark teal) */
+
+/* Privacy Dark Mode Variants */
+--color-private-bg-dark: hsl(180 40% 15%);   /* Dark mode badge background */
+--color-private-text-dark: hsl(180 55% 85%); /* Dark mode badge text */
+--color-private-border-dark: hsl(180 45% 25%); /* Dark mode badge border */
+
+/* Voting Color Palette (Purple - FR36) */
+--color-voting-bg: hsl(270 60% 95%);         /* Voting badge background (light purple) */
+--color-voting-text: hsl(270 55% 35%);       /* Voting badge text (dark purple) */
+--color-voting-border: hsl(270 50% 70%);     /* Voting badge border (medium purple) */
+--color-voting-icon: hsl(270 55% 35%);       /* Voting icon color (dark purple) */
+
+/* Voting Dark Mode Variants */
+--color-voting-bg-dark: hsl(270 45% 15%);    /* Dark mode voting background */
+--color-voting-text-dark: hsl(270 60% 85%);  /* Dark mode voting text */
+--color-voting-border-dark: hsl(270 50% 25%); /* Dark mode voting border */
 
 /* Trust Color Palette */
 --color-trust-success: hsl(142 76% 36%);     /* Checkmark, budget saved */
@@ -1017,7 +1033,7 @@ Copy and customize these shadcn/ui components for blind budgeting:
 /* Emotional State Colors (from Step 4) */
 --color-relief: hsl(142 76% 36%);            /* Green - budget saved */
 --color-inclusion: hsl(210 100% 50%);        /* Blue - group max revealed */
---color-empowerment: hsl(271 76% 53%);       /* Purple - user in control */
+--color-empowerment: hsl(271 76% 53%);       /* Purple - user in control, voting features */
 ```
 
 **Component Customization Rules:**
@@ -1045,8 +1061,10 @@ Copy and customize these shadcn/ui components for blind budgeting:
 
 5. **Dark Mode Support** (Future):
    - All components use CSS variables (easy theme switching)
-   - Privacy indicators remain visible: `dark:bg-blue-900 dark:text-blue-100`
-   - Lock icon: `dark:text-blue-200` (sufficient contrast)
+   - Privacy indicators remain visible: `--color-private-bg-dark` + `--color-private-text-dark` (teal dark mode variants - FR17)
+   - Voting indicators remain visible: `--color-voting-bg-dark` + `--color-voting-text-dark` (purple dark mode variants - FR36)
+   - Lock icon: `--color-lock-icon` adapts to theme (sufficient contrast maintained)
+   - All semantic colors meet WCAG 2.1 AA contrast ratios in dark mode
 
 **Brand Differentiation Strategy:**
 
@@ -1334,15 +1352,27 @@ This defining experience creates the **vulnerability → relief → inclusion** 
 
 ### Color System
 
-**Semantic Color Mapping for Blind Budgeting:**
+**Semantic Color Mapping for Privacy & Collaborative Features:**
 
-TripFlow uses Tailwind CSS design tokens with custom semantic mappings for privacy-sensitive interactions. The blind budgeting feature extends the base color system with privacy-specific semantic colors:
+TripFlow uses Tailwind CSS design tokens with custom semantic mappings for privacy-sensitive interactions and collaborative features. The color system includes distinct semantic colors for different feature types:
 
-**Privacy State Colors:**
-- **Private/Protected** → `text-muted-foreground` + `bg-muted` (soft gray, non-threatening)
+**Privacy Features (Teal - FR17):**
+- **Private/Protected** → Custom teal palette: `--color-private-text` + `--color-private-bg` (calming teal, trust-building)
   - Lock icons, "Private" badges, encrypted state indicators
   - Purpose: Communicate privacy without alarm (not red, not yellow)
+  - Colors: Teal conveys security, trust, and calmness—associated with privacy-focused brands like Signal and ProtonMail
+  - Light mode: `hsl(180 55% 95%)` background, `hsl(180 50% 30%)` text
+  - Dark mode: `hsl(180 40% 15%)` background, `hsl(180 55% 85%)` text
 
+**Voting Features (Purple - FR36):**
+- **Voting/Democratic** → Custom purple palette: `--color-voting-text` + `--color-voting-bg` (empowering purple, collaborative)
+  - Voting badges, poll indicators, democratic decision markers
+  - Purpose: Signal collaborative decision-making distinct from privacy features
+  - Colors: Purple conveys choice, empowerment, and collective action
+  - Light mode: `hsl(270 60% 95%)` background, `hsl(270 55% 35%)` text
+  - Dark mode: `hsl(270 45% 15%)` background, `hsl(270 60% 85%)` text
+
+**Interaction State Colors:**
 - **Active Input** → `border-primary` + `ring-primary` (brand color, trustworthy)
   - Budget input fields when focused
   - Purpose: Encourage honest entry with positive reinforcement
@@ -1357,11 +1387,12 @@ TripFlow uses Tailwind CSS design tokens with custom semantic mappings for priva
 
 **Accessibility Compliance:**
 - All text meets **WCAG 2.1 AA** contrast ratios (4.5:1 minimum for body text, 3:1 for UI components)
-- Privacy indicators use **color + icon** (not color alone) for colorblind users
-- Dark mode support with equivalent contrast ratios
+- Privacy and voting indicators use **color + icon** (not color alone) for colorblind users
+- Dark mode support with equivalent contrast ratios for all semantic colors
+- Teal and purple palettes tested for deuteranopia and protanopia color blindness
 
 **Rationale:**
-From UX Pattern Analysis (Step 5), users need **visible privacy** without paranoia. Muted colors (gray, soft green) communicate "protected" more effectively than loud colors (red, yellow) which trigger alarm responses.
+From UX Pattern Analysis (Step 5), users need **visible privacy** without paranoia and **clear differentiation** between feature types. Teal communicates "protected" more effectively than gray (which lacks personality) or loud colors (red, yellow) which trigger alarm responses. Purple distinctly signals voting/collaborative features separate from privacy features, preventing visual confusion between different interaction patterns.
 
 ---
 
@@ -1482,7 +1513,7 @@ grid-cols-1
 **Visual Foundation Summary:**
 
 This foundation supports blind budgeting's emotional goals:
-- **Trust**: Visible privacy through muted colors, lock icons, and persistent badges
+- **Trust**: Visible privacy through teal color indicators (FR17), lock icons, and persistent badges
 - **Relief**: Generous spacing, calm palette, clear hierarchy reduces stress
 - **Inclusion**: WCAG 2.1 AA compliance ensures all users can participate
 
@@ -1567,10 +1598,10 @@ After evaluating all 6 directions against our emotional goals (Vulnerability →
 - **Rationale:** From Step 7 (Defining Experience), mental model shift from "social risk" to "privacy-protected calculation" requires showing the outcome (group max) without revealing individual budgets.
 
 **Privacy Indicators: Minimal Trust (#1)** → Subtle reassurance
-- Small lock icon (14px, muted gray) + "Private" badge
+- Small lock icon (14px, teal color per FR17) + "Private" badge
 - Persistent but not alarming
 - Avoids bold/dark security aesthetics
-- **Rationale:** From Step 4, "visible privacy without paranoia." Muted colors (Direction 1) communicate "protected" more effectively than loud colors (Direction 4) which trigger alarm responses.
+- **Rationale:** From Step 4, "visible privacy without paranoia." Teal color (Direction 1) communicates "protected" more effectively than loud colors (Direction 4) which trigger alarm responses. Teal builds trust through association with privacy-focused brands.
 
 **Rejected Elements:**
 - **Social Proof Heavy (#3):** Too much gamification creates social pressure, conflicts with "safe zone" psychological goal
@@ -1731,8 +1762,8 @@ All phases adapted for mobile (70% of usage from Step 3):
   <label className="text-base font-semibold text-foreground flex items-center gap-2">
     💰 What's your maximum budget per night?
   </label>
-  <div className="text-sm text-muted-foreground flex items-center gap-2">
-    <LockIcon className="w-3.5 h-3.5" />
+  <div className="text-sm flex items-center gap-2" style={{ color: 'var(--color-private-text)' }}>
+    <LockIcon className="w-3.5 h-3.5" style={{ color: 'var(--color-lock-icon)' }} />
     <span>Just between you and us</span>
   </div>
   <Input
@@ -2275,7 +2306,7 @@ TripFlow's blind budgeting feature leverages shadcn/ui's composable component li
 ```
 ┌──────────────────────────────────────┐
 │ 💰 What's your maximum budget?      │ ← Label (friendly tone)
-│ 🔒 Just between you and us           │ ← Privacy sublabel (muted)
+│ 🔒 Just between you and us           │ ← Privacy sublabel (teal - FR17)
 │                                      │
 │ ┌────────────────────────────────┐  │
 │ │         $____________          │  │ ← Large input (text-3xl)
@@ -2306,8 +2337,8 @@ TripFlow's blind budgeting feature leverages shadcn/ui's composable component li
   <label id="budget-label" className="text-base font-semibold">
     💰 What's your maximum budget per night?
   </label>
-  <div id="budget-privacy" className="text-sm text-muted-foreground">
-    <LockIcon aria-hidden="true" className="w-3.5 h-3.5" />
+  <div id="budget-privacy" className="text-sm" style={{ color: 'var(--color-private-text)' }}>
+    <LockIcon aria-hidden="true" className="w-3.5 h-3.5" style={{ color: 'var(--color-lock-icon)' }} />
     <span>Just between you and us</span>
   </div>
   <Input
@@ -2440,6 +2471,68 @@ TripFlow's blind budgeting feature leverages shadcn/ui's composable component li
 
 ---
 
+#### 7. VotingIndicator
+
+**Purpose:** Signal voting/democratic decision features using purple color (FR36)
+
+**Visual Anatomy:**
+```
+┌─────────────────────────────────────────┐
+│ 🗳️ Vote on Activities                   │ ← Label (democratic tone)
+│ 🟣 All votes stay hidden until complete │ ← Voting sublabel (purple - FR36)
+│                                         │
+│ ┌──────────────────────────────────┐   │
+│ │ [ ] Option A                     │   │ ← Voting options
+│ │ [ ] Option B                     │   │
+│ │ [ ] Option C                     │   │
+│ └──────────────────────────────────┘   │
+│                                         │
+│ [Submit Vote 🗳️]                        │ ← Primary button
+└─────────────────────────────────────────┘
+```
+
+**Component Specification:**
+
+```tsx
+<div className="space-y-3">
+  <label className="text-base font-semibold text-foreground flex items-center gap-2">
+    🗳️ Vote on Activities
+  </label>
+  <div className="text-sm flex items-center gap-2" style={{ color: 'var(--color-voting-text)' }}>
+    <CheckCircleIcon className="w-3.5 h-3.5" style={{ color: 'var(--color-voting-icon)' }} />
+    <span>All votes stay hidden until complete</span>
+  </div>
+  <div className="space-y-2">
+    {/* Voting options */}
+  </div>
+  <Button className="w-full">Submit Vote 🗳️</Button>
+</div>
+```
+
+**States:**
+- **Default**: Options visible, no votes submitted yet, voting indicator purple
+- **Voting Open**: Purple badge "Voting in progress" visible
+- **User Voted**: Badge changes to "Your vote recorded" (purple checkmark)
+- **Waiting**: Show "X of Y voted" without revealing choices (purple indicator)
+- **Complete**: All votes in, results revealed with purple accent
+
+**Variants:**
+- **Activity Vote**: Checkbox selection, multiple allowed
+- **Accommodation Vote**: Radio selection, single choice only
+- **Quick Poll**: Simple yes/no with purple toggle
+
+**Accessibility:**
+- Purple color + icon (never color alone per FR36)
+- Screen reader announces "Voting feature - your vote will remain private until all members vote"
+- Keyboard navigation for all voting options
+
+**Content Guidelines:**
+- **Label**: Include 🗳️ emoji for democratic visual cue
+- **Privacy sublabel**: Use "All votes stay hidden until complete" (collaborative), NOT "Secret ballot" (formal)
+- **Status**: Show participation count, not individual votes
+
+---
+
 ### Component Implementation Strategy
 
 **Foundation Principle: Compose, Don't Reinvent**
@@ -2461,7 +2554,7 @@ shadcn/ui Base Components
 **Implementation Guidelines:**
 
 1. **Use Design Tokens Exclusively**
-   - Colors: `bg-muted`, `text-muted-foreground`, `border-primary` (never hex codes)
+   - Colors: `var(--color-private-*)` for privacy features (teal - FR17), `var(--color-voting-*)` for voting features (purple - FR36), `border-primary` for active states (never hex codes)
    - Spacing: `p-4`, `space-y-8`, `gap-2` (always 4px multiples)
    - Typography: `text-3xl font-semibold`, `text-sm` (system font stack)
 

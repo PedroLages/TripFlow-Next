@@ -1,0 +1,237 @@
+# generated: 2026-03-01
+# project: Asia Trip
+# project_key: asia-trip
+# tracking_system: file-system
+# story_location: docs/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-03-01
+project: Asia Trip
+project_key: asia-trip
+tracking_system: file-system
+story_location: docs/implementation-artifacts
+
+development_status:
+  epic-0: backlog
+  0-project-foundation-and-setup-one-time-prerequisite: backlog
+  epic-0-retrospective: optional
+
+  epic-1: backlog
+  1-1-user-registration-with-email-and-password: backlog
+  1-2-user-login-with-session-management: backlog
+  1-3-oauth-login-google-github-apple: backlog
+  1-4-password-reset-via-email: backlog
+  1-5-user-profile-editing: backlog
+  1-6-account-deletion-and-data-export: backlog
+  1-7-notification-preferences-management: backlog
+  1-8-row-level-security-rls-policies-for-trip-access: backlog
+  1-9-unauthorized-access-prevention: backlog
+  epic-1-retrospective: optional
+
+  epic-2: backlog
+  2-1-create-new-trip-with-basic-details: backlog
+  2-2-upload-trip-cover-photo: backlog
+  2-3-view-all-trips-dashboard: backlog
+  2-4-invite-travelers-via-email: backlog
+  2-5-accept-or-decline-trip-invitation: backlog
+  2-6-view-trip-roster-and-member-roles: backlog
+  2-7-remove-members-from-trip-owner-only: backlog
+  2-8-leave-trip-voluntarily: backlog
+  2-9-transfer-trip-ownership: backlog
+  2-10-archive-completed-trips: backlog
+  epic-2-retrospective: optional
+
+  epic-3: backlog
+  3-1-set-private-budget-in-preferred-currency: backlog
+  3-2-update-private-budget-at-any-time: backlog
+  3-3-view-my-own-budget-encrypted-retrieval: backlog
+  3-4-set-category-specific-budget-limits: backlog
+  3-5-server-side-budget-encryption-with-pgcrypto: backlog
+  3-6-edge-function-for-collective-possibilities-calculation: backlog
+  3-7-display-collective-possibilities-with-teal-privacy-indicators: backlog
+  3-8-real-time-collective-possibilities-updates: backlog
+  3-9-budget-setup-status-indicator: backlog
+  3-10-minimum-group-size-enforcement-3-plus-travelers: backlog
+  3-11-privacy-warning-for-small-groups-less-than-4-travelers: backlog
+  3-12-interactive-blind-budgeting-tutorial-for-new-users: backlog
+  3-13-live-demo-with-fake-users-in-tutorial: backlog
+  3-14-privacy-dashboard-showing-what-each-member-sees: backlog
+  3-15-audit-log-for-budget-related-queries: backlog
+  3-16-teal-lock-icons-on-all-sensitive-budget-fields: backlog
+  epic-3-retrospective: optional
+
+  epic-4: backlog
+  4-1-add-activities-with-basic-details: backlog
+  4-2-edit-and-update-activities: backlog
+  4-3-delete-activities: backlog
+  4-4-reorder-activities-via-drag-and-drop: backlog
+  4-5-move-activities-between-days: backlog
+  4-6-real-time-activity-sync-500ms: backlog
+  4-7-presence-indicators-for-concurrent-editing: backlog
+  4-8-activity-change-history-and-audit-trail: backlog
+  4-9-undo-recent-changes: backlog
+  4-10-threaded-comments-on-activities: backlog
+  4-11-mention-collaborators-in-comments: backlog
+  4-12-conflict-detection-and-resolution: backlog
+  4-13-bulk-operations-on-activities: backlog
+  4-14-activity-templates-for-quick-creation: backlog
+  4-15-activity-status-tracking: backlog
+  4-16-activity-dependencies-and-sequencing: backlog
+  4-17-activity-milestones-and-progress: backlog
+  epic-4-retrospective: optional
+
+  epic-5: backlog
+  5-1-create-yes-no-votes: backlog
+  5-2-create-rating-votes-1-5-stars: backlog
+  5-3-create-ranking-votes-order-preferences: backlog
+  5-4-create-time-selection-votes: backlog
+  5-5-create-budget-allocation-votes: backlog
+  5-6-cast-vote-anonymously: backlog
+  5-7-view-vote-status-how-many-voted: backlog
+  5-8-anonymous-voting-until-all-vote-or-deadline: backlog
+  5-9-set-vote-deadlines: backlog
+  5-10-vote-reminder-notifications: backlog
+  5-11-view-vote-results-after-completion: backlog
+  5-12-tie-breaking-rules-for-results: backlog
+  5-13-vote-on-multiple-activities-simultaneously: backlog
+  5-14-revote-change-vote-before-deadline: backlog
+  5-15-vote-history-and-audit-trail: backlog
+  5-16-vote-templates-for-common-decisions: backlog
+  5-17-weighted-voting-optional-priority: backlog
+  epic-5-retrospective: optional
+
+  epic-6: backlog
+  6-1-add-activity-location-via-pin-drop: backlog
+  6-2-add-activity-location-via-google-places-search: backlog
+  6-3-display-all-activities-on-interactive-map: backlog
+  6-4-route-planning-between-activities: backlog
+  6-5-marker-clustering-for-dense-activity-groups: backlog
+  6-6-timezone-intelligence-and-dst-warnings: backlog
+  6-7-local-time-conversions-for-activities: backlog
+  6-8-map-view-customization-satellite-terrain-etc: backlog
+  epic-6-retrospective: optional
+
+  epic-7: backlog
+  7-1-upload-photos-to-activities: backlog
+  7-2-automatic-photo-compression-and-optimization: backlog
+  7-3-photo-cdn-delivery: backlog
+  7-4-scan-receipt-photos-with-device-camera: backlog
+  7-5-ocr-for-receipt-data-extraction: backlog
+  7-6-auto-populate-expense-forms-from-receipt-data: backlog
+  7-7-manage-and-delete-photos: backlog
+  epic-7-retrospective: optional
+
+  epic-8: backlog
+  8-1-log-expense-with-basic-details: backlog
+  8-2-split-expense-equally-among-members: backlog
+  8-3-split-expense-with-custom-amounts: backlog
+  8-4-split-expense-by-percentage: backlog
+  8-5-multi-currency-expense-logging: backlog
+  8-6-automatic-currency-conversion: backlog
+  8-7-calculate-who-owes-whom-settlement-optimization: backlog
+  8-8-view-expense-analytics-and-reports: backlog
+  8-9-filter-and-search-expenses: backlog
+  8-10-attach-receipt-photos-to-expenses: backlog
+  8-11-edit-and-delete-expenses: backlog
+  8-12-expense-categories-and-tagging: backlog
+  8-13-mark-expenses-as-paid-settled: backlog
+  8-14-expense-approval-workflow-optional: backlog
+  8-15-recurring-expenses-optional: backlog
+  8-16-export-expenses-to-csv-pdf: backlog
+  8-17-expense-notifications: backlog
+  8-18-per-person-expense-summary: backlog
+  8-19-expense-history-and-audit-trail: backlog
+  epic-8-retrospective: optional
+
+  epic-9: backlog
+  9-1-generate-payment-links-for-settlements: backlog
+  9-2-settle-expenses-via-integrated-payment-providers: backlog
+  9-3-automatic-settlement-status-tracking: backlog
+  epic-9-retrospective: optional
+
+  epic-10: backlog
+  10-1-search-trips-by-destination-or-date: backlog
+  10-2-search-activities-by-name-location-or-type: backlog
+  10-3-filter-itinerary-by-day-cost-or-category: backlog
+  10-4-filter-expenses-by-category-or-traveler: backlog
+  epic-10-retrospective: optional
+
+  epic-11: backlog
+  11-1-view-cached-itinerary-offline: backlog
+  11-2-add-and-edit-activities-offline: backlog
+  11-3-offline-sync-status-and-queue: backlog
+  11-4-conflict-resolution-for-concurrent-offline-edits: backlog
+  11-5-install-app-to-home-screen-pwa: backlog
+  11-6-receive-push-notifications-web-push: backlog
+  11-7-service-worker-caching-strategy: backlog
+  11-8-background-sync-for-failed-requests: backlog
+  11-9-offline-budget-viewing-privacy-preserved: backlog
+  11-10-offline-expense-logging: backlog
+  11-11-offline-photo-viewing: backlog
+  11-12-offline-indicator-and-connectivity-status: backlog
+  epic-11-retrospective: optional
+
+  epic-12: backlog
+  12-1-assign-roles-to-trip-members-owner-editor-viewer: backlog
+  12-2-viewer-role-permissions-view-only: backlog
+  12-3-editor-role-permissions-edit-but-not-admin: backlog
+  12-4-generate-public-share-link-with-privacy-controls: backlog
+  12-5-access-public-share-link-with-optional-password: backlog
+  12-6-revoke-or-extend-public-share-links: backlog
+  epic-12-retrospective: optional
+
+  epic-13: backlog
+  13-1-import-trip-from-csv-or-google-sheets: backlog
+  13-2-export-itinerary-to-ical-format: backlog
+  13-3-export-itinerary-to-pdf: backlog
+  13-4-sync-trip-activities-to-google-calendar-bidirectional: backlog
+  13-5-sync-trip-activities-to-apple-calendar-icloud: backlog
+  13-6-handle-calendar-sync-conflicts: backlog
+  13-7-manage-calendar-sync-preferences: backlog
+  epic-13-retrospective: optional
+
+  epic-14: backlog
+  14-1-email-notifications-for-trip-invitations: backlog
+  14-2-in-app-notifications-for-votes-and-results: backlog
+  14-3-vote-deadline-reminders: backlog
+  14-4-view-notification-history: backlog
+  14-5-mark-notifications-as-read-unread: backlog
+  14-6-configure-notification-batching-real-time-vs-daily-digest: backlog
+  epic-14-retrospective: optional
+
+  epic-15: backlog
+  15-1-mark-trip-as-complete: backlog
+  15-2-generate-post-trip-summary: backlog
+  15-3-clone-past-trip-for-reuse: backlog
+  15-4-save-trip-as-reusable-template: backlog
+  15-5-share-trip-templates-with-community: backlog
+  15-6-post-trip-photo-album-and-sharing: backlog
+  epic-15-retrospective: optional
