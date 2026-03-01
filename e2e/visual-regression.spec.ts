@@ -38,8 +38,8 @@ test.describe('Visual Regression Tests', () => {
     });
 
     test('Itinerary Page - Light', async ({ page }) => {
-      await page.goto('/itinerary');
-      await page.waitForSelector('.day-timeline, h1', { timeout: 5000 });
+      await page.goto('/trips/1/itinerary');
+      await page.waitForSelector('.timeline-container, h1', { timeout: 5000 });
       // Wait for city colors to load
       await page.waitForTimeout(500);
       await percySnapshot(page, 'Itinerary - Light Mode', {
@@ -47,19 +47,11 @@ test.describe('Visual Regression Tests', () => {
       });
     });
 
-    test('Map Page - Light', async ({ page }) => {
-      await page.goto('/map');
-      await page.waitForSelector('canvas, [role="region"]', { timeout: 10000 });
-      // Wait for map to render
-      await page.waitForTimeout(1500);
-      await percySnapshot(page, 'Map - Light Mode', {
-        widths: [768, 1280],
-        // Only desktop widths - mobile map has different layout
-      });
-    });
+    // Map page doesn't exist in current app structure - removed test
+    // TODO: Re-add when /map route is implemented
 
     test('Budget Page - Light', async ({ page }) => {
-      await page.goto('/budget');
+      await page.goto('/trips/1/budget');
       await page.waitForSelector('.budget-container, h2', { timeout: 5000 });
       await percySnapshot(page, 'Budget - Light Mode', {
         widths: [375, 768, 1280],
@@ -67,7 +59,7 @@ test.describe('Visual Regression Tests', () => {
     });
 
     test('Voting Page - Light', async ({ page }) => {
-      await page.goto('/voting');
+      await page.goto('/trips/1/voting');
       await page.waitForSelector('.voting-container, h1', { timeout: 5000 });
       await percySnapshot(page, 'Voting - Light Mode', {
         widths: [375, 768, 1280],
@@ -93,25 +85,19 @@ test.describe('Visual Regression Tests', () => {
     });
 
     test('Itinerary Page - Dark', async ({ page }) => {
-      await page.goto('/itinerary');
-      await page.waitForSelector('.day-timeline, h1', { timeout: 5000 });
+      await page.goto('/trips/1/itinerary');
+      await page.waitForSelector('.timeline-container, h1', { timeout: 5000 });
       await page.waitForTimeout(500);
       await percySnapshot(page, 'Itinerary - Dark Mode', {
         widths: [375, 768, 1280],
       });
     });
 
-    test('Map Page - Dark', async ({ page }) => {
-      await page.goto('/map');
-      await page.waitForSelector('canvas, [role="region"]', { timeout: 10000 });
-      await page.waitForTimeout(1500);
-      await percySnapshot(page, 'Map - Dark Mode', {
-        widths: [768, 1280],
-      });
-    });
+    // Map page doesn't exist in current app structure - removed test
+    // TODO: Re-add when /map route is implemented
 
     test('Budget Page - Dark', async ({ page }) => {
-      await page.goto('/budget');
+      await page.goto('/trips/1/budget');
       await page.waitForSelector('.budget-container, h2', { timeout: 5000 });
       await percySnapshot(page, 'Budget - Dark Mode', {
         widths: [375, 768, 1280],
@@ -119,7 +105,7 @@ test.describe('Visual Regression Tests', () => {
     });
 
     test('Voting Page - Dark', async ({ page }) => {
-      await page.goto('/voting');
+      await page.goto('/trips/1/voting');
       await page.waitForSelector('.voting-container, h1', { timeout: 5000 });
       await percySnapshot(page, 'Voting - Dark Mode', {
         widths: [375, 768, 1280],
@@ -129,7 +115,7 @@ test.describe('Visual Regression Tests', () => {
 
   test.describe('Component States', () => {
     test('Activity Card - All States', async ({ page }) => {
-      await page.goto('/itinerary');
+      await page.goto('/trips/1/itinerary');
       await page.waitForSelector('.activity-card', { timeout: 5000 });
 
       // Capture default state
@@ -149,7 +135,7 @@ test.describe('Visual Regression Tests', () => {
     });
 
     test('City Color Accents', async ({ page }) => {
-      await page.goto('/itinerary');
+      await page.goto('/trips/1/itinerary');
       await page.waitForSelector('[data-city="shanghai"], .activity-card', { timeout: 5000 });
       await page.waitForTimeout(500);
 
@@ -161,7 +147,7 @@ test.describe('Visual Regression Tests', () => {
     });
 
     test('Blind Budget Form', async ({ page }) => {
-      await page.goto('/budget');
+      await page.goto('/trips/1/budget');
       await page.waitForSelector('.blind-budget-form, form', { timeout: 5000 });
 
       await percySnapshot(page, 'Blind Budget - Empty State', {
@@ -203,8 +189,8 @@ test.describe('Visual Regression Tests', () => {
 
     test('Tablet Layout', async ({ page }) => {
       await page.setViewportSize({ width: 768, height: 1024 });
-      await page.goto('/itinerary');
-      await page.waitForSelector('.day-timeline, main', { timeout: 5000 });
+      await page.goto('/trips/1/itinerary');
+      await page.waitForSelector('.timeline-container, main', { timeout: 5000 });
 
       await percySnapshot(page, 'Tablet Layout - Itinerary', {
         widths: [768],
