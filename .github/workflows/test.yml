@@ -28,9 +28,6 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    defaults:
-      run:
-        working-directory: tripflow-next
 
     steps:
       - uses: actions/checkout@v4
@@ -43,12 +40,15 @@ jobs:
           cache-dependency-path: tripflow-next/package-lock.json
 
       - name: Install dependencies
+        working-directory: tripflow-next
         run: npm ci
 
       - name: Run linter
+        working-directory: tripflow-next
         run: npm run lint
 
       - name: Type check
+        working-directory: tripflow-next
         run: npm run type-check
 
   # Unit test stage - Fast feedback with Vitest
@@ -57,9 +57,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: lint
-    defaults:
-      run:
-        working-directory: tripflow-next
 
     steps:
       - uses: actions/checkout@v4
@@ -72,9 +69,11 @@ jobs:
           cache-dependency-path: tripflow-next/package-lock.json
 
       - name: Install dependencies
+        working-directory: tripflow-next
         run: npm ci
 
       - name: Run unit tests
+        working-directory: tripflow-next
         run: npm run test
 
       - name: Upload test results
@@ -91,9 +90,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     needs: [lint, unit-test]
-    defaults:
-      run:
-        working-directory: tripflow-next
 
     strategy:
       fail-fast: false
@@ -119,12 +115,15 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - name: Install dependencies
+        working-directory: tripflow-next
         run: npm ci
 
       - name: Install Playwright browsers
+        working-directory: tripflow-next
         run: npx playwright install --with-deps chromium
 
       - name: Run E2E tests (shard ${{ matrix.shard }}/4)
+        working-directory: tripflow-next
         run: npm run test:e2e -- --shard=${{ matrix.shard }}/4
 
       - name: Upload test results
@@ -145,9 +144,6 @@ jobs:
     needs: e2e-test
     # Only run burn-in on PRs to main branches or on schedule
     if: github.event_name == 'pull_request' || github.event_name == 'schedule'
-    defaults:
-      run:
-        working-directory: tripflow-next
 
     steps:
       - uses: actions/checkout@v4
@@ -168,12 +164,15 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - name: Install dependencies
+        working-directory: tripflow-next
         run: npm ci
 
       - name: Install Playwright browsers
+        working-directory: tripflow-next
         run: npx playwright install --with-deps chromium
 
       - name: Run burn-in loop (10 iterations)
+        working-directory: tripflow-next
         run: |
           echo "🔥 Starting burn-in loop - detecting flaky tests"
           for i in {1..10}; do
