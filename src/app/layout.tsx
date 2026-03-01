@@ -11,12 +11,14 @@ export const metadata: Metadata = {
   description: 'AI-powered collaborative trip planning',
 }
 
+/* eslint-disable tripflow/no-hardcoded-colors -- Browser theme-color meta tags require literal values */
 export const viewport: Viewport = {
   themeColor: [
     { media: '(prefers-color-scheme: dark)', color: '#121212' },
     { media: '(prefers-color-scheme: light)', color: '#fcfcfc' },
   ],
 }
+/* eslint-enable tripflow/no-hardcoded-colors */
 
 export default function RootLayout({
   children,

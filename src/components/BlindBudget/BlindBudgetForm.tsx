@@ -67,7 +67,7 @@ export function BlindBudgetForm({
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm"
-            style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#D97706' }}
+            style={{ background: 'oklch(from var(--color-warning) l c h / 0.1)', color: 'var(--color-warning)' }}
           >
             Your budget is currently setting the group limit
           </motion.div>

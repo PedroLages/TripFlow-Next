@@ -10,15 +10,29 @@ export const CITY_CENTERS: Record<CitySlug, { lat: number; lng: number; zoom: nu
   beijing:  { lat: 39.9042, lng: 116.4074, zoom: 11 },
 };
 
-/** City color hex values (CSS vars can't be used in Mapbox paint properties) */
+/**
+ * City color hex values (Mapbox GL JS requires literal colors, not CSS vars)
+ *
+ * **⚠️ These are hex approximations of OKLCH tokens from globals.css:**
+ * - Shanghai: oklch(0.55 0.20 350) → #D63384 (pink)
+ * - Hong Kong: oklch(0.62 0.22 30) → #E07B39 (orange)
+ * - Osaka: oklch(0.56 0.14 200) → #52A3A8 (blue-teal)
+ * - Kyoto: oklch(0.58 0.16 140) → #62A855 (green)
+ * - Tokyo: oklch(0.48 0.18 264) → #5651A6 (indigo)
+ * - Beijing: oklch(0.52 0.24 25) → #C65628 (burnt orange)
+ *
+ * Note: Hex conversions are approximate. For CSS use city color tokens instead.
+ */
+/* eslint-disable tripflow/no-hardcoded-colors -- Mapbox GL JS requires literal hex values */
 export const CITY_COLOR_HEX: Record<CitySlug, string> = {
-  shanghai: '#C2185B',
-  hongkong: '#E65100',
-  osaka:    '#00838F',
-  kyoto:    '#558B2F',
-  tokyo:    '#283593',
-  beijing:  '#BF360C',
+  shanghai: '#D63384',
+  hongkong: '#E07B39',
+  osaka:    '#52A3A8',
+  kyoto:    '#62A855',
+  tokyo:    '#5651A6',
+  beijing:  '#C65628',
 };
+/* eslint-enable tripflow/no-hardcoded-colors */
 
 /** Filter activities that have coordinates */
 export function activitiesWithCoords(activities: Activity[]): Activity[] {

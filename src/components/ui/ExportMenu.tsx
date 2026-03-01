@@ -30,7 +30,7 @@ export const ExportMenu: React.FC = () => {
               background: 'var(--bg-surface)',
               border: '1px solid var(--border-subtle)',
               borderRadius: '12px',
-              boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+              boxShadow: '0 12px 40px oklch(0 0 0 / 0.15)',
               zIndex: 100,
               overflow: 'hidden'
             }}

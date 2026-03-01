@@ -73,7 +73,8 @@ export function TripOverviewLayer({ activeCity }: TripOverviewLayerProps) {
           id="trip-flight-arcs"
           type="line"
           paint={{
-            'line-color': '#3B82F6',
+            // eslint-disable-next-line tripflow/no-hardcoded-colors -- Mapbox paint properties require literal values
+            'line-color': '#5B87E8', // Approx. oklch(0.62 0.20 240) = var(--transport-flight)
             'line-width': 2,
             'line-dasharray': [8, 6],
             'line-opacity': 0.5,
@@ -101,7 +102,7 @@ export function TripOverviewLayer({ activeCity }: TripOverviewLayerProps) {
                 height: isActive ? 48 : 40,
                 borderRadius: '50%',
                 background: CITY_COLOR_HEX[slug],
-                border: `3px solid ${isActive ? 'white' : 'rgba(255,255,255,0.7)'}`,
+                border: `3px solid ${isActive ? 'oklch(1 0 0)' : 'oklch(1 0 0 / 0.7)'}`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -109,8 +110,8 @@ export function TripOverviewLayer({ activeCity }: TripOverviewLayerProps) {
                 fontSize: isActive ? 12 : 10,
                 fontWeight: 600,
                 boxShadow: isActive
-                  ? `0 0 0 3px ${CITY_COLOR_HEX[slug]}44, 0 4px 12px rgba(0,0,0,0.3)`
-                  : '0 2px 8px rgba(0,0,0,0.2)',
+                  ? `0 0 0 3px ${CITY_COLOR_HEX[slug]}44, 0 4px 12px oklch(0 0 0 / 0.3)`
+                  : '0 2px 8px oklch(0 0 0 / 0.2)',
                 transition: 'all 0.3s ease',
                 cursor: 'pointer',
               }}

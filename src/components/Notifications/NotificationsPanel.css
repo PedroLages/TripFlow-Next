@@ -6,8 +6,8 @@
 
 .notifications-panel {
   position: absolute;
-  top: 40px; /* Below the bell icon */
-  left: 30px; /* Offset from sidebar */
+  top: 48px; /* Below the bell icon */
+  right: 0; /* Align right to the bell */
   width: 380px;
   max-height: 500px;
   background: var(--bg-surface);

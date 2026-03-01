@@ -47,10 +47,10 @@ export const MapPin: React.FC<MapPinProps> = ({
   ].filter(Boolean).join(' ');
 
   const shadow = isSelected
-    ? `0 0 0 3px white, 0 4px 16px ${color}88, 0 8px 24px rgba(0,0,0,0.25)`
+    ? `0 0 0 3px white, 0 4px 16px ${color}88, 0 8px 24px oklch(0 0 0 / 0.25)`
     : isHovered
       ? `0 0 0 3px white, 0 0 12px ${color}66`
-      : '0 2px 6px rgba(0,0,0,0.3)';
+      : '0 2px 6px oklch(0 0 0 / 0.3)';
 
   return (
     <div
@@ -93,7 +93,7 @@ export const MapPin: React.FC<MapPinProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+            boxShadow: '0 1px 3px oklch(0 0 0 / 0.2)',
           }}
         >
           {orderIndex}

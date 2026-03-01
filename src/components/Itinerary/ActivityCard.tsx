@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 import { getCityStyle } from '@/lib/city-colors';
 import type { CitySlug } from '@/lib/city-colors';
 import type { Activity, LightboxSlide } from '@/lib/itinerary-data';
-import { PhotoCarousel } from './PhotoCarousel';
+
 import './ActivityCard.css';
 
 interface ActivityCardProps {
@@ -28,7 +28,7 @@ interface ActivityCardProps {
   onOpenSuggestions: () => void;
   onOpenLightbox?: (slides: LightboxSlide[], startIndex: number) => void;
   onHover?: (activityId: string | null) => void;
-  index: number;
+
 }
 
 function getIconForType(type: Activity['type']) {
@@ -66,7 +66,6 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
   onOpenSuggestions,
   onOpenLightbox,
   onHover,
-  index,
 }, ref) => {
   const cityStyle = getCityStyle(citySlug);
   const isCancelled = activity.status === 'Cancelled';
@@ -128,24 +127,26 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
         </div>
 
         {/* Tier 1 -- Collapsed: compact single-line with status badge inline */}
-        {activity.status && (
-          <div className={cn('status-badge', `badge-${activity.status.replace(/\s+/g, '-').toLowerCase()}`)}>
-            {getStatusBadgeIcon(activity.status)} {activity.status}
-          </div>
-        )}
         <CardContent className="timeline-card-inner">
-          <div className="activity-info">
-            <h4 className={cn('activity-title', isCancelled && 'activity-title-cancelled')}>
-              {activity.title}
-            </h4>
-            <div className="activity-duration">
-              {activity.duration} min
-              {hasNotes && (
-                <span className="activity-notes-preview">
-                  <StickyNote size={10} /> Note
-                </span>
-              )}
+          <div className="flex w-full justify-between items-start gap-4">
+            <div className="activity-info flex-1">
+              <h4 className={cn('activity-title', isCancelled && 'activity-title-cancelled')}>
+                {activity.title}
+              </h4>
+              <div className="activity-duration">
+                {activity.duration} min
+                {hasNotes && (
+                  <span className="activity-notes-preview">
+                    <StickyNote size={10} /> Note
+                  </span>
+                )}
+              </div>
             </div>
+            {activity.status && (
+              <div className={cn('status-badge shrink-0', `badge-${activity.status.replace(/\s+/g, '-').toLowerCase()}`)}>
+                {getStatusBadgeIcon(activity.status)} {activity.status}
+              </div>
+            )}
           </div>
         </CardContent>
 

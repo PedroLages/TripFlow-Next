@@ -27,10 +27,10 @@ function getDensityLevel(totalMinutes: number): 'light' | 'moderate' | 'heavy' |
 
 function getDensityColor(level: ReturnType<typeof getDensityLevel>): string {
   switch (level) {
-    case 'light': return 'var(--density-light, #22c55e)';
-    case 'moderate': return 'var(--density-moderate, #22c55e)';
-    case 'heavy': return 'var(--density-heavy, #f59e0b)';
-    case 'over': return 'var(--density-over, #ef4444)';
+    case 'light': return 'var(--color-success)';
+    case 'moderate': return 'var(--color-success)';
+    case 'heavy': return 'var(--color-warning)';
+    case 'over': return 'var(--color-danger)';
   }
 }
 
