@@ -14,8 +14,23 @@
  *   https://percy.io/your-org/tripflow-next
  */
 
-import { test } from '@playwright/test';
+import { test, Page } from '@playwright/test';
 import percySnapshot from '@percy/playwright';
+
+/**
+ * Helper function to load all lazy-loaded images before capturing Percy snapshots.
+ * Percy doesn't automatically scroll pages, so we need to trigger lazy loading manually.
+ * @see https://docs.percy.io/docs/capturing-lazy-loading-images
+ */
+async function loadAllImages(page: Page) {
+  // Scroll to bottom to trigger lazy loading
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(500); // Allow images to start loading
+
+  // Scroll back to top for consistent snapshot starting point
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(200); // Allow layout to settle
+}
 
 test.describe('Visual Regression Tests', () => {
   test.describe.configure({ mode: 'serial' }); // Run sequentially for consistent snapshots
@@ -42,6 +57,8 @@ test.describe('Visual Regression Tests', () => {
       await page.waitForSelector('.timeline-container, h1', { timeout: 5000 });
       // Wait for city colors to load
       await page.waitForTimeout(500);
+      // Load lazy-loaded images (activity card images)
+      await loadAllImages(page);
       await percySnapshot(page, 'Itinerary - Light Mode', {
         widths: [375, 768, 1280],
       });
@@ -88,6 +105,8 @@ test.describe('Visual Regression Tests', () => {
       await page.goto('/trips/1/itinerary');
       await page.waitForSelector('.timeline-container, h1', { timeout: 5000 });
       await page.waitForTimeout(500);
+      // Load lazy-loaded images (activity card images)
+      await loadAllImages(page);
       await percySnapshot(page, 'Itinerary - Dark Mode', {
         widths: [375, 768, 1280],
       });
@@ -117,6 +136,8 @@ test.describe('Visual Regression Tests', () => {
     test('Activity Card - All States', async ({ page }) => {
       await page.goto('/trips/1/itinerary');
       await page.waitForSelector('.activity-card', { timeout: 5000 });
+      // Load lazy-loaded images before capturing
+      await loadAllImages(page);
 
       // Capture default state
       await percySnapshot(page, 'Activity Card - Default State', {
@@ -138,6 +159,8 @@ test.describe('Visual Regression Tests', () => {
       await page.goto('/trips/1/itinerary');
       await page.waitForSelector('[data-city="shanghai"], .activity-card', { timeout: 5000 });
       await page.waitForTimeout(500);
+      // Load lazy-loaded images
+      await loadAllImages(page);
 
       // Capture cards with different city colors to verify color system
       await percySnapshot(page, 'City Colors - Shanghai', {

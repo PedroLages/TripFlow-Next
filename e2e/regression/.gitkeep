@@ -1,0 +1,10 @@
+# E2E Regression Tests
+
+This directory contains story-specific E2E tests that have been archived after story completion.
+
+When `/finish-story` runs, story-specific tests (e.g., `e2e/story-e01-s03.spec.ts`) are moved here to:
+1. Prevent them from running in every test suite (they're already validated)
+2. Keep them as regression tests for future reference
+3. Maintain a history of story-specific test coverage
+
+Tests in this directory are not run by default but can be executed manually or as part of extended regression suites.

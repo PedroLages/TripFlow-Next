@@ -64,7 +64,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run dev',
+    // Use production build in CI for stable asset paths
+    command: process.env.CI ? 'npm run start' : 'npm run dev',
     url: 'http://localhost:3100',
     reuseExistingServer: !process.env.CI,  // Reuse locally, fresh in CI
     timeout: 120_000,

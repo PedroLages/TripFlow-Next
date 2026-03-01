@@ -21,15 +21,18 @@ snapshot:
   enable-javascript: true
 
   # Wait for network to be idle (prevents race conditions)
-  # Percy waits for 100ms of network idle before capturing
-  # Adjust if you have long-running requests
-  # network-idle-timeout: 750
+  # Percy waits for 750ms of network idle before capturing
+  # This allows time for Next.js to serve all CSS/font files
+  network-idle-timeout: 750
 
-# Discovery patterns (optional - Percy auto-detects Playwright tests)
-# discovery:
-#   allowed-hostnames:
-#     - localhost
-#     - 127.0.0.1
+# Asset discovery - allows Percy to capture resources from localhost
+# Required for Next.js dev server assets (CSS, fonts, images)
+discovery:
+  allowed-hostnames:
+    - localhost
+    - 127.0.0.1
+  network-idle-timeout: 750
+  disable-cache: false
 
 # Debugging
 # https://docs.percy.io/docs/debugging-sdks
