@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MockAuthProvider } from '@/lib/mock-auth'
+import { NotificationProvider } from '@/components/Notifications/NotificationProvider'
 import { useState, type ReactNode } from 'react'
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -20,7 +21,9 @@ export function Providers({ children }: { children: ReactNode }) {
   return (
     <MockAuthProvider>
       <QueryClientProvider client={queryClient}>
-        {children}
+        <NotificationProvider>
+          {children}
+        </NotificationProvider>
       </QueryClientProvider>
     </MockAuthProvider>
   )

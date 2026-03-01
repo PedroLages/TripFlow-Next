@@ -38,23 +38,31 @@ function applyTheme(theme: string) {
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState('light')
+  // Initialize to undefined to prevent hydration mismatch
+  const [theme, setTheme] = useState<string | undefined>(undefined)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
     const initial = getInitialTheme()
     setTheme(initial)
     applyTheme(initial)
   }, [])
 
   useEffect(() => {
-    applyTheme(theme)
-    localStorage.setItem('tripflow-theme', theme)
-  }, [theme])
+    if (theme && isMounted) {
+      applyTheme(theme)
+      localStorage.setItem('tripflow-theme', theme)
+    }
+  }, [theme, isMounted])
 
   const toggle = useCallback(() => setTheme(t => (t === 'dark' ? 'light' : 'dark')), [])
 
+  // Use 'light' as fallback during SSR to prevent hydration mismatch
+  const effectiveTheme = theme ?? 'light'
+
   return (
-    <ThemeContext.Provider value={{ theme, toggle }}>
+    <ThemeContext.Provider value={{ theme: effectiveTheme, toggle }}>
       {children}
     </ThemeContext.Provider>
   )

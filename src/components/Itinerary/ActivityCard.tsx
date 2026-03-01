@@ -75,6 +75,18 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
   const tags = (activity as Activity & { tags?: string[] }).tags;
   const firstPhoto = activity.photos?.[0] ?? activity.imageUrl;
 
+  const [isExpenseLogged, setIsExpenseLogged] = React.useState(false);
+  const [isLoggingExpense, setIsLoggingExpense] = React.useState(false);
+  const [expenseAmount, setExpenseAmount] = React.useState('');
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  // Focus input when it appears
+  React.useEffect(() => {
+    if (isLoggingExpense && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isLoggingExpense]);
+
   return (
     <div
       ref={ref}
@@ -229,6 +241,56 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
                   ))}
                 </div>
               )}
+
+              {/* Inline Expense Logger */}
+              <div className="activity-expense-section" onClick={(e) => e.stopPropagation()}>
+                {isExpenseLogged ? (
+                  <div className="expense-logged-badge">
+                    <CheckCircle2 size={14} className="text-green-500" />
+                    <span>Expense Logged (${expenseAmount})</span>
+                  </div>
+                ) : isLoggingExpense ? (
+                  <div className="expense-input-wrapper">
+                    <span className="currency-symbol">$</span>
+                    <input
+                      ref={inputRef}
+                      type="number"
+                      className="inline-expense-input"
+                      value={expenseAmount}
+                      onChange={(e) => setExpenseAmount(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && expenseAmount) {
+                          setIsExpenseLogged(true);
+                          setIsLoggingExpense(false);
+                        }
+                        if (e.key === 'Escape') {
+                          setIsLoggingExpense(false);
+                        }
+                      }}
+                      placeholder="0.00"
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        if (expenseAmount) setIsExpenseLogged(true);
+                        setIsLoggingExpense(false);
+                      }}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="log-expense-btn"
+                    onClick={() => setIsLoggingExpense(true)}
+                  >
+                    <CreditCard size={14} style={{ marginRight: '6px' }} />
+                    Log Expense
+                  </Button>
+                )}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

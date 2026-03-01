@@ -101,6 +101,26 @@ export function MapContainer({
     executeCameraMove();
   }, [executeCameraMove]);
 
+  // Suppress "styleimagemissing" warnings from map style
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const handleImageMissing = (e: { id: string }) => {
+      // Suppress empty/whitespace image warnings from map style
+      if (!e.id || e.id.trim() === '') {
+        return; // Silently ignore
+      }
+    };
+
+    const mapInstance = map.getMap();
+    mapInstance.on('styleimagemissing', handleImageMissing);
+
+    return () => {
+      mapInstance.off('styleimagemissing', handleImageMissing);
+    };
+  }, []);
+
   // Fly to selected activity
   useEffect(() => {
     const map = mapRef.current;
