@@ -125,10 +125,6 @@ export default function DayNavigator({
           >
             <span className="day-tab-number">Day {localIndex + 1}</span>
             <span className="day-tab-date">{day.date}</span>
-            {activityCount > 0 && (
-              <span className="day-tab-count">{activityCount}</span>
-            )}
-
             {/* Weather Tooltip */}
             <div className="day-weather-badge">
               {getMockWeather(day.dayIndex).icon}

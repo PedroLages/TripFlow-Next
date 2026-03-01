@@ -34,7 +34,7 @@
 }
 
 .day-tab:hover {
-  background: var(--bg-surface-hover);
+  background: color-mix(in srgb, var(--tab-color) 8%, transparent);
   color: var(--text-primary);
 }
 
@@ -47,6 +47,7 @@
 .day-tab-active {
   color: var(--tab-color);
   font-weight: 600;
+  background: color-mix(in srgb, var(--tab-color) 4%, transparent);
 }
 
 .day-tab-number {
@@ -91,8 +92,8 @@
 .day-tab-bar {
   position: absolute;
   bottom: 0;
-  left: 25%;
-  right: 25%;
+  left: 0;
+  right: 0;
   height: 3px;
   border-radius: 3px 3px 0 0;
   background: var(--city-color, var(--tab-color));
