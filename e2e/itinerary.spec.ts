@@ -209,7 +209,7 @@ test.describe('Day Timeline & Activity Cards', () => {
     await goToDay(page);
     const card = page.locator('.timeline-content-card').first();
     // Native click bypasses Framer Motion Reorder drag interception
-    await card.evaluate(el => el.click());
+    await card.evaluate(el => (el as HTMLElement).click());
     await page.waitForTimeout(500);
     await expect(card).toHaveClass(/expanded/);
     await expect(page.locator('.activity-discussion-panel').first()).toBeAttached();
@@ -217,7 +217,7 @@ test.describe('Day Timeline & Activity Cards', () => {
 
   test('expanded card shows vote buttons and comment input', async ({ page }) => {
     await goToDay(page);
-    await page.locator('.timeline-content-card').first().evaluate(el => el.click());
+    await page.locator('.timeline-content-card').first().evaluate(el => (el as HTMLElement).click());
     await page.waitForTimeout(500);
     const panel = page.locator('.activity-discussion-panel').first();
     await expect(panel).toBeAttached();
@@ -228,10 +228,10 @@ test.describe('Day Timeline & Activity Cards', () => {
   test('clicking expanded card again collapses it', async ({ page }) => {
     await goToDay(page);
     const card = page.locator('.timeline-content-card').first();
-    await card.evaluate(el => el.click());
+    await card.evaluate(el => (el as HTMLElement).click());
     await page.waitForTimeout(500);
     await expect(card).toHaveClass(/expanded/);
-    await card.evaluate(el => el.click());
+    await card.evaluate(el => (el as HTMLElement).click());
     await page.waitForTimeout(500);
     await expect(card).not.toHaveClass(/expanded/);
   });
@@ -550,10 +550,10 @@ test.describe('Cross-City Navigation Flow', () => {
     // 4. Expand first activity card (native click bypasses Reorder drag)
     const cards = page.locator('.timeline-content-card');
     if (await cards.count() > 0) {
-      await cards.first().evaluate(el => el.click());
+      await cards.first().evaluate(el => (el as HTMLElement).click());
       await page.waitForTimeout(500);
       await expect(cards.first()).toHaveClass(/expanded/);
-      await cards.first().evaluate(el => el.click());
+      await cards.first().evaluate(el => (el as HTMLElement).click());
       await page.waitForTimeout(500);
       await expect(cards.first()).not.toHaveClass(/expanded/);
     }

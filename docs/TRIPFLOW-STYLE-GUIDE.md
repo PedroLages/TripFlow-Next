@@ -271,6 +271,101 @@ All color combinations meet **WCAG 2.1 AA** standards minimum.
 - ❌ **DON'T**: Rely on color alone to convey information
 - ❌ **DON'T**: Use low-contrast color combinations for text
 
+#### **5.5 Color Coexistence Rules**
+
+TripFlow uses multiple color systems that must coexist harmoniously. This section defines **color hierarchy**, **usage constraints**, and **conflict resolution** strategies.
+
+**Color Hierarchy (Precedence Order):**
+
+```
+Tier 1: Semantic UI (success, danger, warning, info)     ← Always wins
+Tier 2: Feature Colors (privacy teal, voting purple)     ← Wins in feature contexts
+Tier 3: Brand Accent (primary teal, coral)               ← Wins in neutral UI
+Tier 4: City Colors (Shanghai pink, Osaka teal, etc.)    ← Context-specific only
+```
+
+**Usage Matrix:**
+
+| Color Type | Allowed Usage | Forbidden Usage |
+|------------|---------------|-----------------|
+| **Semantic UI** | Buttons, alerts, status badges, form validation | Decorative borders, backgrounds |
+| **Feature Colors** | Privacy badges, voting indicators, feature-specific icons | Primary actions, city theming |
+| **Brand Accent** | Primary buttons, links, focus rings, global UI | Status indicators, feature badges |
+| **City Colors** | Left/right borders, map pins, city chips, timeline nodes | Primary buttons, status badges, form inputs |
+
+**⚠️ Critical Conflict: Osaka City Teal vs Privacy Feature Teal**
+
+TripFlow uses **15° hue separation** in OKLCH color space to resolve the Osaka/Privacy teal conflict:
+
+| Color | Hue | OKLCH Value | Usage Context |
+|-------|-----|-------------|---------------|
+| **Privacy Feature** | 185° | `oklch(0.56 0.14 185)` | Icons, badges, privacy indicators |
+| **Osaka City** | 200° | `oklch(0.56 0.14 200)` | Borders, map pins, city theming |
+
+**Spatial Separation Strategy:**
+
+When both colors appear in the same component:
+- **City color** → Border (left/right edge)
+- **Privacy color** → Icon or badge (interior content)
+- **Example**: Osaka activity card with city border + privacy badge coexist without confusion
+
+**Correct Implementation Examples:**
+
+```tsx
+// ✅ CORRECT: City border + privacy badge
+<div style={{
+  ...getCityStyle('osaka'),
+  borderLeft: '3px solid var(--city-color)'
+}}>
+  <h3>Private Dinner Reservation</h3>
+  <PrivacyIndicator /> {/* Uses --color-privacy (185° hue) */}
+</div>
+
+// ✅ CORRECT: Feature color in feature context
+<button className="privacy-toggle">
+  <Lock color="var(--color-privacy)" />
+  Make Private
+</button>
+
+// ✅ CORRECT: Semantic color for status
+<Badge variant="success">Booked</Badge>
+```
+
+**Incorrect Implementations (Anti-Patterns):**
+
+```tsx
+// ❌ WRONG: City color on primary button
+<button style={{ background: 'var(--city-osaka)' }}>
+  Book Now
+</button>
+
+// ❌ WRONG: Feature color for decorative border
+<div style={{ borderLeft: '4px solid var(--color-privacy)' }}>
+  Generic Content
+</div>
+
+// ❌ WRONG: City color for status badge
+<Badge style={{ background: 'var(--city-tokyo)' }}>
+  Booked
+</Badge>
+```
+
+**Testing Checklist:**
+
+- [ ] No city colors used on buttons (use `--accent-primary` instead)
+- [ ] No feature colors used decoratively (reserved for privacy/voting)
+- [ ] No semantic colors used for city theming (use city colors instead)
+- [ ] Osaka city + privacy teal can coexist via spatial separation
+- [ ] All color combinations pass WCAG AA (4.5:1 text, 3:1 UI)
+
+**Developer Guidelines:**
+
+1. **Read JSDoc first**: Check `getCityStyle()` documentation before using city colors
+2. **Check the hierarchy**: Semantic > Feature > Brand > City
+3. **Verify hue separation**: Privacy (185°) ≠ Osaka (200°)
+4. **Test dark mode**: All colors must adapt correctly
+5. **Use design tokens**: Never hardcode hex values
+
 ---
 
 ### 6. Typography
