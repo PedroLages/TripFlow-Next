@@ -54,10 +54,10 @@ export const Budget: React.FC = () => {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'transport': return 'var(--accent-glow)';
-      case 'lodging': return '#10b981'; // green
-      case 'food': return '#f59e0b'; // orange
-      case 'activities': return '#8b5cf6'; // purple
+      case 'transport': return 'var(--accent-primary)';
+      case 'lodging': return 'var(--color-success)';
+      case 'food': return 'var(--color-warning)';
+      case 'activities': return 'var(--color-vote)';
       default: return 'var(--text-secondary)';
     }
   };
@@ -188,7 +188,7 @@ export const Budget: React.FC = () => {
               <div className="cat-bar">
                 <div className="cat-bar-header">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div className="color-dot" style={{ background: '#10b981' }}></div>
+                    <div className="color-dot" style={{ background: 'var(--color-success)' }}></div>
                     <span>Lodging</span>
                   </div>
                   <div className="cat-bar-values">
@@ -197,14 +197,14 @@ export const Budget: React.FC = () => {
                   </div>
                 </div>
                 <div className="progress-bar-container small">
-                  <div className="progress-bar-fill" style={{ width: '32%', backgroundColor: '#10b981' }}></div>
+                  <div className="progress-bar-fill" style={{ width: '32%', backgroundColor: 'var(--color-success)' }}></div>
                 </div>
               </div>
 
               <div className="cat-bar">
                 <div className="cat-bar-header">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div className="color-dot" style={{ background: '#f59e0b' }}></div>
+                    <div className="color-dot" style={{ background: 'var(--color-warning)' }}></div>
                     <span>Food & Dining</span>
                   </div>
                   <div className="cat-bar-values">
@@ -213,14 +213,14 @@ export const Budget: React.FC = () => {
                   </div>
                 </div>
                 <div className="progress-bar-container small">
-                  <div className="progress-bar-fill" style={{ width: '2%', backgroundColor: '#f59e0b' }}></div>
+                  <div className="progress-bar-fill" style={{ width: '2%', backgroundColor: 'var(--color-warning)' }}></div>
                 </div>
               </div>
 
               <div className="cat-bar">
                 <div className="cat-bar-header">
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <div className="color-dot" style={{ background: '#8b5cf6' }}></div>
+                    <div className="color-dot" style={{ background: 'var(--color-vote)' }}></div>
                     <span>Activities</span>
                   </div>
                   <div className="cat-bar-values">
@@ -229,7 +229,7 @@ export const Budget: React.FC = () => {
                   </div>
                 </div>
                 <div className="progress-bar-container small">
-                  <div className="progress-bar-fill" style={{ width: '2%', backgroundColor: '#8b5cf6' }}></div>
+                  <div className="progress-bar-fill" style={{ width: '2%', backgroundColor: 'var(--color-vote)' }}></div>
                 </div>
               </div>
             </div>
@@ -295,7 +295,7 @@ export const Budget: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'oklch(0 0 0 / 0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             onClick={() => setIsAddExpenseOpen(false)}
           >
             <motion.div
@@ -304,7 +304,7 @@ export const Budget: React.FC = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
               onClick={e => e.stopPropagation()}
-              style={{ background: 'var(--bg-base)', padding: '32px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 24px 60px rgba(0,0,0,0.2)' }}
+              style={{ background: 'var(--bg-base)', padding: '32px', borderRadius: '16px', width: '100%', maxWidth: '500px', boxShadow: '0 24px 60px oklch(0 0 0 / 0.2)' }}
             >
               <h2 style={{marginTop: 0, marginBottom: '24px'}}>Add Expense</h2>
               <div style={{display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '32px'}}>

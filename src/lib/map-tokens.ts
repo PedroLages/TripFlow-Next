@@ -6,13 +6,13 @@ import type { TransportMode, TransportStyle } from '@/types/map';
 // ---------------------------------------------------------------------------
 
 export const TRANSPORT_STYLES: Record<TransportMode, TransportStyle> = {
-  flight:  { color: '#3B82F6', dashArray: [8, 6],  width: 3, curved: true },
-  train:   { color: '#8B5CF6', dashArray: [6, 4],  width: 3 },
-  bus:     { color: '#8B5CF6', dashArray: [4, 4],  width: 2.5 },
-  car:     { color: '#F59E0B', dashArray: [],       width: 3 },
-  metro:   { color: '#06B6D4', dashArray: [4, 3],  width: 2.5 },
-  ferry:   { color: '#0EA5E9', dashArray: [8, 4],  width: 3 },
-  walk:    { color: '#EF4444', dashArray: [2, 3],  width: 2 },
+  flight:  { color: 'var(--transport-flight)', dashArray: [8, 6],  width: 3, curved: true },
+  train:   { color: 'var(--transport-train)', dashArray: [6, 4],  width: 3 },
+  bus:     { color: 'var(--transport-bus)', dashArray: [4, 4],  width: 2.5 },
+  car:     { color: 'var(--transport-car)', dashArray: [],       width: 3 },
+  metro:   { color: 'var(--transport-metro)', dashArray: [4, 3],  width: 2.5 },
+  ferry:   { color: 'var(--transport-ferry)', dashArray: [8, 4],  width: 3 },
+  walk:    { color: 'var(--transport-walk)', dashArray: [2, 3],  width: 2 },
 };
 
 export function getTransportStyle(mode: TransportMode): TransportStyle {
@@ -25,13 +25,13 @@ export function getTransportStyle(mode: TransportMode): TransportStyle {
 // ---------------------------------------------------------------------------
 
 export const DAY_COLORS = [
-  '#3B82F6', // blue
-  '#10B981', // emerald
-  '#F59E0B', // amber
-  '#EF4444', // red
-  '#8B5CF6', // violet
-  '#EC4899', // pink
-  '#14B8A6', // teal
+  'var(--color-info)',     // blue
+  'var(--color-success)',  // emerald
+  'var(--color-warning)',  // amber
+  'var(--color-danger)',   // red
+  'var(--color-vote)',     // violet
+  'var(--city-shanghai)',  // pink
+  'var(--accent-primary)', // teal
 ];
 
 export function getDayColor(dayIndex: number): string {

@@ -30,12 +30,12 @@ const CITY_NAMES = ['Hong Kong', 'Shanghai', 'Beijing', 'Osaka', 'Kyoto', 'Tokyo
 
 /** Color palette for each city (used in transition gradients). */
 const CITY_GRADIENT_COLORS: Record<CitySlug, string> = {
-  shanghai: '#6366f1',
-  hongkong: '#f43f5e',
-  osaka: '#f97316',
-  kyoto: '#22c55e',
-  tokyo: '#8b5cf6',
-  beijing: '#ef4444',
+  shanghai: 'var(--city-shanghai)',
+  hongkong: 'var(--city-hongkong)',
+  osaka: 'var(--city-osaka)',
+  kyoto: 'var(--city-kyoto)',
+  tokyo: 'var(--city-tokyo)',
+  beijing: 'var(--city-beijing)',
 };
 
 interface TransitionInfo {
@@ -215,7 +215,7 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
               layout
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              whileDrag={{ scale: 1.02, rotate: -1.5, zIndex: 50, boxShadow: "0 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--border-focus)" }}
+              whileDrag={{ scale: 1.02, rotate: -1.5, zIndex: 50, boxShadow: "0 24px 48px oklch(0 0 0 / 0.15), 0 0 0 1px var(--border-focus)" }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{
                 duration: 0.4,
@@ -259,7 +259,6 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
                 ref={(el) => {
                   if (el && activityRefs?.current) activityRefs.current.set(activity.id, el);
                 }}
-                index={index}
               />
 
               {activity.transitToNext && (

@@ -28,12 +28,12 @@
   pointer-events: none;
 }
 
-.duration-bar.type-flight { background: var(--color-blue); }
-.duration-bar.type-hotel { background: var(--color-purple); }
-.duration-bar.type-food { background: var(--color-amber, var(--color-orange, #F59E0B)); }
-.duration-bar.type-activity { background: var(--color-green); }
+.duration-bar.type-flight { background: var(--color-info); }
+.duration-bar.type-hotel { background: var(--color-vote); }
+.duration-bar.type-food { background: var(--color-warning); }
+.duration-bar.type-activity { background: var(--color-success); }
 .duration-bar.type-shopping { background: var(--accent-secondary); }
-.duration-bar.type-transport { background: var(--color-blue); }
+.duration-bar.type-transport { background: var(--color-info); }
 
 /* Timeline Time */
 .timeline-time {
@@ -132,63 +132,56 @@
 
 /* Status Badges */
 .status-badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
+  padding: 4px 10px;
   border-radius: 100px;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 .badge-booked {
-  background: rgba(34, 197, 94, 0.9);
+  background: oklch(from var(--color-success) l c h / 0.9);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid oklch(1 0 0 / 0.2);
 }
 
 /* Task 15: Removed shimmer animation — motion budget cut to 3 signature effects */
 
 .badge-must-do {
-  background: rgba(168, 85, 247, 0.9);
+  background: oklch(from var(--color-vote) l c h / 0.9);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid oklch(1 0 0 / 0.2);
 }
 
 .badge-optional {
-  background: rgba(100, 116, 139, 0.9);
+  background: oklch(from var(--text-secondary) l c h / 0.9);
   color: white;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid oklch(1 0 0 / 0.2);
 }
 
 /* New badge variants */
 .badge-paid {
-  background: color-mix(in srgb, #059669 12%, transparent);
-  color: #059669;
+  background: oklch(from var(--color-success) l c h / 0.12);
+  color: var(--color-success);
 }
 
 .badge-pending {
-  background: color-mix(in srgb, #d97706 12%, transparent);
-  color: #d97706;
+  background: oklch(from var(--color-warning) l c h / 0.12);
+  color: var(--color-warning);
 }
 
 .badge-considering {
-  background: color-mix(in srgb, #2563eb 12%, transparent);
-  color: #2563eb;
+  background: oklch(from var(--color-info) l c h / 0.12);
+  color: var(--color-info);
 }
 
 .badge-cancelled {
-  background: color-mix(in srgb, #dc2626 12%, transparent);
-  color: #dc2626;
+  background: oklch(from var(--color-danger) l c h / 0.12);
+  color: var(--color-danger);
 }
 
 /* Cancelled title strikethrough */
@@ -397,7 +390,7 @@
 }
 
 .meta-rating {
-  color: #f59e0b;
+  color: var(--color-warning);
   font-weight: 600;
 }
 
@@ -430,7 +423,7 @@
   left: 111px; /* Align with timeline node */
   right: 0;
   height: 2px;
-  background: #ef4444;
+  background: var(--color-danger);
   z-index: -1; /* Place behind the card */
   pointer-events: none;
 }
@@ -443,15 +436,15 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ef4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
+  background: var(--color-danger);
+  box-shadow: 0 0 0 4px oklch(from var(--color-danger) l c h / 0.2);
   animation: pulse-red 2s infinite;
 }
 
 @keyframes pulse-red {
-  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  0% { box-shadow: 0 0 0 0 oklch(from var(--color-danger) l c h / 0.4); }
+  70% { box-shadow: 0 0 0 10px oklch(from var(--color-danger) l c h / 0); }
+  100% { box-shadow: 0 0 0 0 oklch(from var(--color-danger) l c h / 0); }
 }
 
 /* Highlighted card (from map pin interaction) */
@@ -555,4 +548,72 @@
   .badge-booked::after {
     animation: none;
   }
+}
+
+/* Inline Expense Logger */
+.activity-expense-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+}
+
+.expense-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 12px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.inline-expense-input {
+  width: 120px;
+  height: 36px;
+  padding: 0 12px 0 28px;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface, #ffffff);
+  color: var(--text-primary, #000000);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.inline-expense-input:focus {
+  outline: none;
+  border-color: var(--city-color, var(--accent-primary, #3b82f6));
+  box-shadow: 0 0 0 3px var(--city-glow, rgba(59, 130, 246, 0.1));
+}
+
+.expense-logged-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: oklch(from var(--color-success) l c h / 0.1);
+  color: var(--color-success);
+  border-radius: var(--radius-md, 8px);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.log-expense-btn {
+  color: var(--text-secondary);
+  border-color: var(--border-subtle);
+  background: transparent;
+  transition: all var(--transition-fast);
+}
+
+.log-expense-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-focus);
 }

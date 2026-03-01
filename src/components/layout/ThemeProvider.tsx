@@ -34,6 +34,7 @@ function applyTheme(theme: string) {
     meta.name = 'theme-color'
     document.head.appendChild(meta)
   }
+  // eslint-disable-next-line tripflow/no-hardcoded-colors -- Browser theme-color meta tag requires literal values
   meta.content = theme === 'dark' ? '#121212' : '#fcfcfc'
 }
 
