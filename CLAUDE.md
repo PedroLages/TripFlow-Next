@@ -149,3 +149,122 @@ tripflow-next/docs/
 - Markdown = permanent documentation & planning
 - CSV = active tracking during trip (Google Sheets)
 - PDFs = proof of purchase
+
+---
+
+## TripFlow Development Standards
+
+**⚠️ CRITICAL: All TripFlow code MUST follow the comprehensive style guide.**
+
+### Style Guide Location
+
+**Primary Reference:** `tripflow-next/docs/TRIPFLOW-STYLE-GUIDE.md`
+
+This 38-section guide covers:
+- Design system (colors, typography, spacing, components)
+- Code standards (TypeScript, React, testing, performance)
+- Accessibility (WCAG 2.1 AA compliance)
+- Cross-functional collaboration
+
+### Mandatory Requirements
+
+**Before Writing ANY Code:**
+
+1. **Read the relevant style guide sections** for your task:
+   - New component? → Read [Component Library](#iii-component-library) sections
+   - Styling changes? → Read [Styling Conventions](#23-styling-conventions)
+   - New feature? → Read [Component API Patterns](#12-component-api-patterns)
+
+2. **Use the Component Checklist** (Section 37):
+   - [ ] TypeScript with strict types
+   - [ ] Follows shadcn/ui composable pattern
+   - [ ] Uses design tokens (no hardcoded colors)
+   - [ ] Responsive (mobile-first)
+   - [ ] Dark mode support
+   - [ ] Accessible (keyboard, ARIA, screen reader)
+   - [ ] Tested (unit + E2E if critical)
+   - [ ] Documented with usage examples
+
+3. **Reference Quick Reference** (Section 36) while coding:
+   - Design tokens (colors, spacing, typography)
+   - Common patterns
+   - Component API conventions
+
+### Code Review Standards
+
+**Every PR MUST meet these criteria** (Section 32.2):
+
+✅ **Functionality:**
+- All tests pass (`npm run test`)
+- TypeScript compiles without errors (`npm run build`)
+- ESLint passes (`npm run lint`)
+
+✅ **Accessibility:**
+- Keyboard navigation works (tab through all interactive elements)
+- Screen reader tested (VoiceOver on macOS or NVDA on Windows)
+- Color contrast meets WCAG 2.1 AA (4.5:1 for text, 3:1 for UI)
+- Focus indicators visible on all interactive elements
+
+✅ **Quality:**
+- Follows TypeScript conventions (Section 19)
+- Follows React patterns (Section 20)
+- Uses design tokens from `globals.css`
+- Responsive (test mobile, tablet, desktop)
+- Dark mode works
+
+✅ **Testing:**
+- Unit tests for component logic
+- E2E tests for critical user flows
+- Edge cases covered (empty, error, loading states)
+
+### Common Patterns (Reference Section 38)
+
+**Conditional Rendering:**
+```tsx
+{isLoading ? <Spinner /> : <Content />}
+{items.length === 0 && <EmptyState />}
+```
+
+**Component Structure:**
+```tsx
+interface Props {
+  // Props with clear types
+}
+
+export const Component = ({ ...props }: Props) => {
+  // 1. Hooks
+  // 2. Effects
+  // 3. Event handlers
+  // 4. Render
+}
+```
+
+**Styling:**
+```tsx
+// ✅ Use design tokens
+<div className="bg-bg-surface text-text-primary p-lg rounded-lg">
+
+// ❌ Don't hardcode colors
+<div className="bg-white text-black p-6 rounded-lg">
+```
+
+### When Uncertain
+
+1. Check the style guide section relevant to your task
+2. Look at existing components for patterns (e.g., `Button.tsx`, `Card.tsx`)
+3. Ask for clarification if trade-offs exist
+4. Default to shadcn/ui patterns and Tailwind utilities
+
+### Enforcement
+
+**AI Assistants (Claude Code, Gemini, etc.):**
+- MUST read relevant style guide sections before writing code
+- MUST use the Component Checklist for new components
+- MUST reference design tokens (Section 36) while coding
+- MUST follow code review standards (Section 32.2) before completing work
+
+**Human Developers:**
+- Review style guide quarterly
+- Update guide when establishing new patterns
+- Reference guide during code reviews
+- Maintain guide as living document

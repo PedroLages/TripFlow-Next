@@ -1,0 +1,902 @@
+.city-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+
+.co-hero {
+  position: relative;
+  height: 200px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* Task 15: Static hero — no parallax offset needed */
+.co-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.co-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    var(--city-color) 0%,
+    color-mix(in srgb, var(--city-color) 40%, rgba(0, 0, 0, 0.5)) 40%,
+    rgba(0, 0, 0, 0.15) 70%,
+    transparent 100%
+  );
+}
+
+.co-hero-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 24px;
+  color: white;
+  z-index: 2;
+}
+
+.co-hero-icon {
+  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.co-hero-title {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  margin: 0 0 4px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.co-hero-tagline {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin: 0 0 16px;
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.co-hero-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.co-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(0, 0, 0, 0.25); /* Darkened for better contrast on bright images */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   Progress Bar
+   ============================================================ */
+
+.co-progress-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--glass-shadow);
+}
+
+.co-progress-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.co-progress-ring-wrap {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.co-progress-ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.co-progress-ring-bg {
+  fill: none;
+  stroke: var(--border-subtle);
+  stroke-width: 3;
+}
+
+.co-progress-ring-fill {
+  fill: none;
+  stroke: var(--city-color);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.6s ease;
+}
+
+.co-progress-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: var(--city-color);
+  font-variant-numeric: tabular-nums;
+}
+
+.co-progress-counts {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.co-progress-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.co-progress-count strong {
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.co-progress-count svg {
+  color: var(--city-color);
+  flex-shrink: 0;
+}
+
+.co-progress-alert svg {
+  color: var(--color-warning, #d97706);
+}
+
+.co-progress-hours {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.co-progress-hours svg {
+  color: var(--city-color);
+}
+
+.co-progress-segments {
+  display: flex;
+  gap: 3px;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.co-progress-segment {
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+/* ============================================================
+   Section Titles
+   ============================================================ */
+
+.co-section-title {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+/* ============================================================
+   Photo Strip — horizontal scroll row
+   ============================================================ */
+
+.co-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.co-section-header .co-section-title {
+  margin: 0;
+}
+
+.co-photo-view-all {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+  transition: color 0.2s ease;
+}
+
+.co-photo-view-all:hover {
+  color: var(--city-color);
+}
+
+.co-photo-strip {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+
+.co-photo-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.co-photo-strip-item {
+  position: relative;
+  flex: 0 0 280px;
+  height: 140px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.co-photo-strip-img {
+  transition: transform 0.6s ease;
+  object-fit: cover;
+}
+
+.co-photo-strip-item:hover .co-photo-strip-img {
+  transform: scale(1.06);
+}
+
+.co-photo-strip-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.co-photo-strip-item:hover .co-photo-strip-overlay,
+.co-photo-strip-item:focus-visible .co-photo-strip-overlay {
+  opacity: 1;
+}
+
+.co-photo-strip-item:focus-visible {
+  outline: 2px solid var(--city-color);
+  outline-offset: 2px;
+}
+
+.co-photo-title {
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.co-photo-day-btn {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+.co-photo-day-btn:hover {
+  color: white;
+}
+
+/* ============================================================
+   Day Preview Cards — enhanced
+   ============================================================ */
+
+.co-day-cards-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 0;
+}
+
+.co-day-cards-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.co-day-card {
+  flex: 0 0 auto;
+  width: 220px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--city-color);
+  box-shadow: var(--glass-shadow);
+  cursor: pointer;
+  scroll-snap-align: start;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.co-day-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.co-day-card:focus-visible {
+  outline: 2px solid var(--city-color);
+  outline-offset: 2px;
+}
+
+.co-day-card-thumb {
+  position: relative;
+  height: 90px;
+  overflow: hidden;
+}
+
+.co-day-card-info {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.co-day-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.co-day-card-number {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.co-day-card-date {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.co-day-card-preview {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.co-day-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+.co-day-card-dots {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+
+.co-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.co-status-dot.booked {
+  background-color: #16a34a;
+}
+
+.co-status-dot.must-do {
+  background-color: #7c3aed;
+}
+
+.co-status-dot.optional {
+  background-color: var(--border-subtle);
+}
+
+.co-day-card-count {
+  font-size: 0.7rem;
+  color: var(--city-color);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   Quick Info Bar
+   ============================================================ */
+
+.co-quick-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.co-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+}
+
+.co-info-item svg {
+  color: var(--city-color);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.co-info-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.co-info-value {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* ============================================================
+   Highlight Pills
+   ============================================================ */
+
+.co-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.co-highlight-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 100px;
+  background: var(--city-muted, var(--bg-surface-hover));
+  color: var(--city-color);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* ============================================================
+   Glance Row (Route + Budget side-by-side)
+   ============================================================ */
+
+.co-glance-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ============================================================
+   Mini Route Summary
+   ============================================================ */
+
+.co-route-summary {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--glass-shadow);
+}
+
+.co-route-summary .co-section-title {
+  margin-bottom: 10px;
+}
+
+.co-route-flow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px; /* Space for hidden scrollbar */
+}
+
+.co-route-flow::-webkit-scrollbar {
+  display: none;
+}
+
+.co-route-arrow {
+  color: var(--text-secondary);
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+
+.co-route-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: none;
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  min-width: 42px;
+}
+
+.co-route-day:hover {
+  border-color: var(--city-color);
+  background: color-mix(in srgb, var(--city-color) 6%, transparent);
+}
+
+.co-route-day:focus-visible {
+  outline: 2px solid var(--city-color);
+  outline-offset: 2px;
+}
+
+.co-route-day-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.co-route-density {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.co-route-day-count {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+/* ============================================================
+   Budget Summary
+   ============================================================ */
+
+.co-budget-summary {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.co-budget-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.co-budget-icon {
+  color: var(--city-color);
+  flex-shrink: 0;
+}
+
+.co-budget-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.co-budget-total {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+}
+
+.co-budget-sub {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.co-budget-per-day {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--city-color);
+  white-space: nowrap;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: color-mix(in srgb, var(--city-color) 10%, transparent);
+}
+
+.co-budget-categories {
+  display: flex;
+  gap: 12px;
+}
+
+.co-budget-cat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.co-budget-cat svg {
+  color: var(--city-color);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.co-budget-cat-label {
+  font-weight: 500;
+}
+
+.co-budget-cat-value {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.co-budget-bar {
+  display: flex;
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.co-budget-bar-seg {
+  border-radius: 2px;
+  background: var(--city-color);
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.co-budget-bar-seg:first-child {
+  opacity: 0.7;
+}
+
+.co-budget-bar-seg:nth-child(2) {
+  opacity: 0.5;
+}
+
+.co-budget-summary:hover .co-budget-bar-seg {
+  opacity: 0.55;
+}
+
+.co-budget-summary:hover .co-budget-bar-seg:first-child {
+  opacity: 0.9;
+}
+
+.co-budget-summary:hover .co-budget-bar-seg:nth-child(2) {
+  opacity: 0.7;
+}
+
+/* ============================================================
+   Weather Strip
+   ============================================================ */
+
+.co-weather-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--city-color) 5%, var(--bg-surface));
+  border: 1px solid var(--border-subtle);
+}
+
+.co-weather-icon {
+  color: var(--city-color);
+  flex-shrink: 0;
+}
+
+.co-weather-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
+}
+
+.co-weather-condition {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.co-weather-detail {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.co-weather-detail svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+.co-weather-sep {
+  display: inline-block;
+  width: 1px;
+  height: 10px;
+  background: var(--border-subtle);
+  margin: 0 4px;
+}
+
+.co-weather-bar {
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-subtle);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.co-weather-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--city-color), color-mix(in srgb, var(--city-color) 60%, #f59e0b));
+  transition: width 0.4s ease;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+/* Tablet */
+@media (max-width: 1023px) {
+  .co-hero {
+    height: 180px;
+  }
+
+  .co-hero-content {
+    padding: 16px 20px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .city-overview {
+    gap: 24px;
+  }
+
+  .co-hero {
+    height: 160px;
+  }
+
+  .co-hero-content {
+    padding: 14px 16px;
+  }
+
+  .co-hero-tagline {
+    font-size: 0.9rem;
+  }
+
+  .co-progress-stats {
+    gap: 12px;
+  }
+
+  .co-progress-hours {
+    display: none;
+  }
+
+  .co-photo-strip-item {
+    flex: 0 0 220px;
+    height: 120px;
+  }
+
+  .co-hero-image {
+    top: 0;
+    height: 100%;
+  }
+
+  .co-day-card {
+    width: 180px;
+  }
+
+  .co-day-card-thumb {
+    height: 70px;
+  }
+
+  .co-quick-info {
+    grid-template-columns: 1fr;
+  }
+
+  .co-glance-row {
+    grid-template-columns: 1fr;
+  }
+
+  .co-budget-categories {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .co-weather-bar {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .co-hero-image {
+    transform: none !important;
+  }
+
+  .co-photo-strip-img {
+    transition: none !important;
+  }
+
+  .co-progress-ring-fill {
+    transition: none !important;
+  }
+
+  .co-day-card {
+    transition: none;
+  }
+}

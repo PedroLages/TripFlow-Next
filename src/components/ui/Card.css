@@ -1,0 +1,50 @@
+.card-root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle inner glow for premium feel */
+.card-root::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-gradient);
+}
+
+.card-header {
+  padding: 24px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-content {
+  padding: 0 24px 24px;
+  flex-grow: 1;
+}
+
+/* If CardContent is the first child (no header), give it top padding */
+.card-root > .card-content:first-child {
+  padding-top: 24px;
+}
+
+.card-footer {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(0, 0, 0, 0.2);
+}

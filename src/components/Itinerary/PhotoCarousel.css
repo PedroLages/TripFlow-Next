@@ -1,0 +1,118 @@
+/* PhotoCarousel – Embla-powered image carousel for ActivityCard */
+
+.photo-carousel {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.photo-carousel-single {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.photo-carousel-single img {
+  transition: transform 0.3s ease;
+}
+
+.photo-carousel-single:hover img {
+  transform: scale(1.03);
+}
+
+/* Embla container structure */
+.photo-carousel-viewport {
+  overflow: hidden;
+  height: 100%;
+}
+
+.photo-carousel-container {
+  display: flex;
+  height: 100%;
+}
+
+.photo-carousel-slide {
+  position: relative;
+  flex: 0 0 100%;
+  min-width: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.photo-carousel-slide img {
+  transition: transform 0.3s ease;
+}
+
+.photo-carousel-slide:hover img {
+  transform: scale(1.03);
+}
+
+/* Chevron buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 2;
+}
+
+.photo-carousel:hover .carousel-btn {
+  opacity: 1;
+}
+
+.carousel-btn-prev { left: 8px; }
+.carousel-btn-next { right: 8px; }
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Dot indicators */
+.carousel-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.carousel-dot.active {
+  background: white;
+  transform: scale(1.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-carousel-single img,
+  .photo-carousel-slide img {
+    transition: none;
+  }
+}

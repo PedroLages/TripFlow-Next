@@ -1,0 +1,142 @@
+/* Transit Connector between activities */
+.transit-connector {
+  width: 100%;
+  padding-left: 120px; /* Offset to sit nicely under the card, avoiding the timeline line */
+  margin: 4px 0 12px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.transit-connector::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 109px; /* Align with timeline node */
+  bottom: -4px;
+  width: 2px;
+  z-index: 1;
+}
+
+/* Walking: dotted line */
+.transit-method-walk::before {
+  border-left: 2px dotted var(--border-focus);
+}
+
+/* Metro/Train/Ferry: dashed line */
+.transit-method-metro::before,
+.transit-method-train::before,
+.transit-method-ferry::before {
+  border-left: 2px dashed var(--border-focus);
+}
+
+/* Car/Taxi: solid line */
+.transit-method-car::before {
+  border-left: 2px solid var(--border-focus);
+}
+
+.transit-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--bg-surface-subtle);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.transit-connector:hover .transit-pill {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-focus);
+  transform: scale(1.05);
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.transit-pill svg {
+  color: var(--text-secondary);
+}
+
+.transit-line {
+  /* Placeholder for potential line styling between pill elements */
+}
+
+/* Inline Add Button appearing on hover */
+.inline-add-btn {
+  position: absolute;
+  left: 102px; /* Centered precisely on the timeline line */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.4);
+  cursor: pointer;
+}
+
+.inline-add-btn:focus-visible {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.transit-connector:hover .inline-add-btn {
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+.inline-add-btn:hover {
+  background: var(--accent-primary-hover);
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .transit-connector {
+    padding-left: 90px;
+    margin: 6px 0 14px 0;
+  }
+
+  .transit-connector::before {
+    left: 79px;
+  }
+
+  /* Task 13: Touch target enforcement — 44px minimum */
+  .transit-pill {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+  }
+
+  .inline-add-btn {
+    left: 72px;
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .transit-pill,
+  .inline-add-btn {
+    transition: none;
+  }
+}

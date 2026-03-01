@@ -1,0 +1,140 @@
+.day-navigator {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 8px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border-subtle);
+  touch-action: pan-x manipulation;
+}
+
+.day-navigator::-webkit-scrollbar {
+  display: none;
+}
+
+.day-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  height: 60px; /* fixed height for better vertical alignment */
+  padding: 8px 16px;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--text-secondary);
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.day-tab:hover {
+  background: color-mix(in srgb, var(--tab-color) 8%, transparent);
+  color: var(--text-primary);
+}
+
+.day-tab:focus-visible {
+  outline: 2px solid var(--tab-color);
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+
+.day-tab-active {
+  color: var(--tab-color);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--tab-color) 4%, transparent);
+}
+
+.day-tab-number {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.day-tab-date {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.day-tab-count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  border-radius: 100px;
+  background: var(--tab-color);
+  color: white;
+  padding: 0 4px;
+}
+
+.day-tab-bg-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.day-tab-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--city-color, var(--tab-color));
+}
+
+/* Mobile: full-width scroll */
+@media (max-width: 768px) {
+  .day-navigator {
+    gap: 2px;
+  }
+
+  .day-tab {
+    padding: 6px 12px 10px;
+    min-width: 64px;
+  }
+
+  .day-tab-date {
+    font-size: 0.65rem;
+  }
+}
+
+/* Overview Tab */
+.overview-tab {
+  gap: 4px;
+  flex-direction: row;
+  font-weight: 600;
+  padding: 8px 20px 12px;
+}
+
+.overview-tab svg {
+  opacity: 0.7;
+}
+
+.overview-tab.day-tab-active svg {
+  opacity: 1;
+  color: var(--tab-color);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .day-tab {
+    transition: none;
+  }
+}
