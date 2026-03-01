@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Settings, ChevronLeft, ChevronRight, Bell, MapPin, X } from 'lucide-react'
-import { NotificationsPanel } from '@/components/Notifications/NotificationsPanel'
+import { LayoutDashboard, Settings, ChevronLeft, ChevronRight, MapPin, X } from 'lucide-react'
 import { SettingsModal } from '@/components/Settings/SettingsModal'
 
 interface TripData {
@@ -21,9 +20,7 @@ const MOCK_TRIPS: TripData[] = [
 export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolean; onDrawerClose?: () => void }) {
   const pathname = usePathname()
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
-  const [unreadCount, setUnreadCount] = useState(2)
 
   const isActive = (path: string) => pathname === path
 
@@ -41,17 +38,7 @@ export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolea
             <LayoutDashboard size={18} /> <span>Dashboard</span>
           </Link>
 
-          <button
-            type="button"
-            className={`nav-item ${isNotificationsOpen ? 'active' : ''}`}
-            onClick={() => setIsNotificationsOpen(true)}
-            title="Notifications"
-            style={{ position: 'relative', background: 'none', border: 'none', color: 'inherit', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }}
-          >
-            <Bell size={18} /> <span>Notifications</span>
-            <span className="nav-badge">{unreadCount > 0 ? unreadCount : null}</span>
-            <NotificationsPanel isOpen={isNotificationsOpen} onClose={() => setIsNotificationsOpen(false)} onUnreadCountChange={setUnreadCount} />
-          </button>
+
 
           <div className="sidebar-section-title">
             Your Trips
@@ -97,18 +84,7 @@ export function Sidebar({ isDrawerOpen, onDrawerClose }: { isDrawerOpen?: boolea
                 <LayoutDashboard size={18} /> <span>Dashboard</span>
               </Link>
 
-              <button
-                type="button"
-                className={`nav-item ${isNotificationsOpen ? 'active' : ''}`}
-                onClick={() => setIsNotificationsOpen(true)}
-                style={{ position: 'relative', background: 'none', border: 'none', color: 'inherit', font: 'inherit', cursor: 'pointer', width: '100%', textAlign: 'left' }}
-              >
-                <Bell size={18} /> <span>Notifications</span>
-                {unreadCount > 0 && (
-                  <span style={{ marginLeft: 'auto', background: 'var(--color-red)', color: 'white', padding: '2px 8px', borderRadius: '100px', fontSize: '0.7rem', fontWeight: 600 }}>{unreadCount}</span>
-                )}
-                <NotificationsPanel isOpen={isNotificationsOpen} onClose={() => setIsNotificationsOpen(false)} onUnreadCountChange={setUnreadCount} />
-              </button>
+
 
               <div className="sidebar-section-title" style={{ marginTop: '24px', marginBottom: '8px', fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary)', padding: '0 16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Your Trips

@@ -3,7 +3,33 @@ import React, { useRef, useEffect } from 'react';
 import { getDaysForCity, CITY_CONFIGS, type CitySlug } from '@/lib/city-colors';
 import type { ItineraryDay } from '@/lib/itinerary-data';
 import { cn } from '@/lib/utils';
+import { CloudSun, Sun, CloudRain, Thermometer, Droplets } from 'lucide-react';
 import './DayNavigator.css';
+
+// Mock Weather Data Generator for luxury polish
+function getMockWeather(dayIndex: number) {
+  const conditions = [
+    { icon: <Sun size={14} />, text: 'Sunny', temp: 31, hourly: [
+      { time: '9 AM', temp: 28, icon: <Sun size={12}/> },
+      { time: '12 PM', temp: 31, icon: <Sun size={12}/> },
+      { time: '3 PM', temp: 32, icon: <Sun size={12}/> },
+      { time: '6 PM', temp: 29, icon: <Sun size={12}/> },
+    ]},
+    { icon: <CloudSun size={14} />, text: 'Partly Cloudy', temp: 28, hourly: [
+      { time: '9 AM', temp: 24, icon: <CloudSun size={12}/> },
+      { time: '12 PM', temp: 28, icon: <CloudSun size={12}/> },
+      { time: '3 PM', temp: 27, icon: <CloudSun size={12}/> },
+      { time: '6 PM', temp: 25, icon: <CloudSun size={12}/> },
+    ]},
+    { icon: <CloudRain size={14} />, text: 'Light Rain', temp: 24, hourly: [
+      { time: '9 AM', temp: 22, icon: <CloudRain size={12}/> },
+      { time: '12 PM', temp: 24, icon: <CloudRain size={12}/> },
+      { time: '3 PM', temp: 23, icon: <CloudRain size={12}/> },
+      { time: '6 PM', temp: 22, icon: <CloudSun size={12}/> },
+    ]}
+  ];
+  return conditions[dayIndex % conditions.length];
+}
 
 interface DayNavigatorProps {
   days: ItineraryDay[];
@@ -102,6 +128,29 @@ export default function DayNavigator({
             {activityCount > 0 && (
               <span className="day-tab-count">{activityCount}</span>
             )}
+
+            {/* Weather Tooltip */}
+            <div className="day-weather-badge">
+              {getMockWeather(day.dayIndex).icon}
+              <span>{getMockWeather(day.dayIndex).temp}°C</span>
+
+              <div className="weather-tooltip">
+                <div className="weather-tooltip-header">
+                  {getMockWeather(day.dayIndex).icon}
+                  <span>{getMockWeather(day.dayIndex).text}</span>
+                </div>
+                <div className="weather-hourly">
+                  {getMockWeather(day.dayIndex).hourly.map((h, i) => (
+                    <div key={i} className="hourly-slot">
+                      <span className="hourly-time">{h.time}</span>
+                      {h.icon}
+                      <span className="hourly-temp">{h.temp}°</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {isActive && <span className="day-tab-bar" />}
           </button>
         );

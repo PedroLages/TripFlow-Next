@@ -11,10 +11,9 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 100px;
-  width: 2px;
-  /* City-colored timeline line — fades in/out at edges */
-  background: linear-gradient(180deg, transparent 0%, var(--city-color, var(--border-subtle)) 10%, var(--city-color, var(--border-subtle)) 90%, transparent 100%);
+  left: 114px; /* Aligns with the center of the timeline nodes */
+  width: 0px;
+  border-left: 2px dashed var(--border-subtle);
   z-index: 1;
 }
 

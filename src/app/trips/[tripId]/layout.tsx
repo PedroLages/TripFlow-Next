@@ -7,6 +7,7 @@ import { Users } from 'lucide-react'
 import { CollaborationPanel } from '@/components/Collaboration/CollaborationPanel'
 import { ExportMenu } from '@/components/ui/ExportMenu'
 import { ThemeToggle } from '@/components/layout/ThemeProvider'
+import { NotificationBell } from '@/components/Notifications/NotificationBell'
 
 const MOCK_TRIPS: Record<string, { destination: string; dates: string; collaborators: number }> = {
   '1': { destination: 'Japan Circuit', dates: 'Oct 12 - Oct 26, 2026', collaborators: 2 },
@@ -43,6 +44,7 @@ export default function TripLayout({ children }: { children: React.ReactNode }) 
             <p>{trip.dates} &bull; {trip.collaborators} members</p>
           </div>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+            <NotificationBell tripId={tripId} />
             <ThemeToggle />
             <button
               className="glass-panel"

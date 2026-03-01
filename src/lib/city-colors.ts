@@ -32,7 +32,7 @@ export const CITY_CONFIGS: Record<CitySlug, CityConfig> = {
     glowVar: '--city-shanghai-glow',
     mutedVar: '--city-shanghai-muted',
     tagline: 'Where futurism meets French Concession charm',
-    heroImage: 'https://images.unsplash.com/photo-1537531383496-47a782e39c1e?w=1600&auto=format&fit=crop',
+    heroImage: 'https://images.unsplash.com/photo-1548919973-5cef591cdbc9?w=1600&auto=format&fit=crop',
     climate: 'Hot & humid, 28-33°C',
     transitTip: 'Metro + walking',
     budgetRange: '~$80/day',

@@ -215,6 +215,7 @@ export const DayTimeline: React.FC<DayTimelineProps> = ({
               layout
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
+              whileDrag={{ scale: 1.02, rotate: -1.5, zIndex: 50, boxShadow: "0 24px 48px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--border-focus)" }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{
                 duration: 0.4,

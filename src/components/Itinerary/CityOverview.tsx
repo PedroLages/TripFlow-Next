@@ -242,7 +242,7 @@ export const CityOverview: React.FC<CityOverviewProps> = ({
             src={config.heroImage}
             alt={`${config.name} hero`}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 60vw"
             priority
             style={{ objectFit: 'cover' }}
           />

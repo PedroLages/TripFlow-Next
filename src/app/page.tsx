@@ -5,6 +5,7 @@ import { Sparkles } from 'lucide-react'
 import { Dashboard } from '@/components/Dashboard/Dashboard'
 import { AIGeneratorWizard } from '@/components/AIGenerator/AIGeneratorWizard'
 import { ThemeToggle } from '@/components/layout/ThemeProvider'
+import { NotificationBell } from '@/components/Notifications/NotificationBell'
 
 const MOCK_TRIPS = [
   {
@@ -41,6 +42,7 @@ export default function HomePage() {
             <p>Ready for your next adventure?</p>
           </div>
           <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <NotificationBell />
             <ThemeToggle />
             <div className="search-container" style={{ position: 'relative', cursor: 'text' }} onClick={() => setIsWizardOpen(true)}>
               <Sparkles size={16} className="search-icon" style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: 'var(--accent-primary)', zIndex: 1 }} />

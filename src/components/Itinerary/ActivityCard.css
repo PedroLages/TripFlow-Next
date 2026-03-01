@@ -1,6 +1,11 @@
 /* ActivityCard wrapper - used for positioning context */
 .activity-card-wrapper {
-  display: contents;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  position: relative;
 }
 
 /* Compact Tier 1 */
