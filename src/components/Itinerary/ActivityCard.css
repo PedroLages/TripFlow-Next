@@ -212,6 +212,7 @@
 }
 
 .activity-title {
+  font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 1.1rem;
   margin-bottom: 4px;
   display: -webkit-box;
@@ -426,11 +427,11 @@
 .live-time-indicator {
   position: absolute;
   top: 35%;
-  left: 104px;
+  left: 111px; /* Align with timeline node */
   right: 0;
   height: 2px;
   background: #ef4444;
-  z-index: 10;
+  z-index: -1; /* Place behind the card */
   pointer-events: none;
 }
 
