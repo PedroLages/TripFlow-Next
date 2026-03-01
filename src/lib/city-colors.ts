@@ -156,6 +156,60 @@ export function getFirstDayOfCity(city: CitySlug): number {
   return getDaysForCity(city)[0];
 }
 
+/**
+ * Get city color CSS variables for inline styles.
+ *
+ * **⚠️ USAGE RULES - Color Hierarchy:**
+ * ```
+ * Tier 1: Semantic UI (success, danger, warning, info)     ← Always wins
+ * Tier 2: Feature Colors (privacy teal, voting purple)     ← Wins in feature contexts
+ * Tier 3: Brand Accent (primary teal, coral)               ← Wins in neutral UI
+ * Tier 4: City Colors (Shanghai pink, Osaka teal, etc.)    ← Context-specific only
+ * ```
+ *
+ * **✅ ALLOWED USAGE:**
+ * - Left/Right borders on cards and panels (decorative accent)
+ * - Map pins and route lines (geographic theming)
+ * - City navigation chips and badges (location context)
+ * - Timeline nodes and connectors (itinerary theming)
+ *
+ * **❌ FORBIDDEN USAGE:**
+ * - Primary buttons (use `--accent-primary` instead)
+ * - Status badges (use `--color-success/warning/danger` instead)
+ * - Form inputs and focus states (use `--border-focus` instead)
+ * - Feature indicators (use `--color-privacy/vote` instead)
+ *
+ * **⚠️ CONFLICT RESOLUTION:**
+ * - **Osaka city color** (200° hue) ≠ **Privacy feature color** (185° hue)
+ * - **15° hue separation** ensures visual distinction
+ * - **Spatial separation**: Borders ≠ Icons ≠ Badges
+ * - If both appear in same component, city = border, privacy = icon/badge
+ *
+ * @param city - City slug (shanghai, hongkong, osaka, kyoto, tokyo, beijing)
+ * @returns CSS custom properties object for inline styles
+ *
+ * @example
+ * // ✅ CORRECT: Border accent on activity card
+ * <div style={{
+ *   ...getCityStyle('osaka'),
+ *   borderLeft: '4px solid var(--city-color)'
+ * }}>
+ *
+ * @example
+ * // ❌ WRONG: City color on primary button
+ * <button style={{ background: getCityStyle('osaka')['--city-color'] }}>
+ *   Book Now
+ * </button>
+ *
+ * @example
+ * // ✅ CORRECT: City border + privacy badge coexist
+ * <div style={{
+ *   ...getCityStyle('osaka'),
+ *   borderLeft: '3px solid var(--city-color)'
+ * }}>
+ *   <PrivacyIndicator /> // Uses --color-privacy (different hue)
+ * </div>
+ */
 export function getCityStyle(city: CitySlug): React.CSSProperties {
   const config = CITY_CONFIGS[city];
   return {
