@@ -118,7 +118,7 @@ export const AIGeneratorWizard: React.FC<AIGeneratorWizardProps> = ({ onClose, o
                       initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }}
                     >
                       <h3>Where and when?</h3>
-                      <p className="text-secondary mb-4">Let's start with the basics. Where is the AI taking you?</p>
+                      <p className="text-secondary mb-4">Let&apos;s start with the basics. Where is the AI taking you?</p>
 
                       <div className="input-group">
                         <label>Destination</label>
@@ -158,7 +158,7 @@ export const AIGeneratorWizard: React.FC<AIGeneratorWizardProps> = ({ onClose, o
                       initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }}
                     >
                       <h3>Who is traveling?</h3>
-                      <p className="text-secondary mb-4">We'll optimize the itinerary for your group size.</p>
+                      <p className="text-secondary mb-4">We&apos;ll optimize the itinerary for your group size.</p>
 
                       <div className="counter-group">
                         <Users size={24} className="text-secondary" />
@@ -177,7 +177,7 @@ export const AIGeneratorWizard: React.FC<AIGeneratorWizardProps> = ({ onClose, o
                       className="wizard-step"
                       initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: -20, opacity: 0 }}
                     >
-                      <h3>What's your budget style?</h3>
+                      <h3>What&apos;s your budget style?</h3>
                       <p className="text-secondary mb-4">This helps us recommend the right hotels and dining.</p>
 
                       <div className="selection-grid">

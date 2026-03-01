@@ -65,7 +65,7 @@ export async function getNotificationsAction(
     .filter(notif => notif.actor && typeof notif.actor === 'object' && 'id' in notif.actor)
     .map(notif => ({
       ...notif,
-      actor: notif.actor as any // Type assertion needed due to Supabase inference limitations
+      actor: notif.actor as EnrichedNotification['actor'] // Type assertion needed due to Supabase inference limitations
     })) as EnrichedNotification[]
 
   return { ok: true, data: enrichedData }

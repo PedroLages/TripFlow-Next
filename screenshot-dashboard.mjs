@@ -61,7 +61,7 @@ async function run() {
     } else {
       console.log('Page already in dark mode via prefers-color-scheme');
     }
-  } catch (e) {
+  } catch {
     console.log('Could not find theme toggle, using OS dark mode preference');
   }
 

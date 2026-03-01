@@ -73,7 +73,6 @@ test.describe('Keyboard Navigation', () => {
     }
 
     // Focus should still be within the dialog
-    const activeElement = page.locator(':focus')
     const isWithinDialog = await dialog.locator(':focus').count() > 0
     expect(isWithinDialog).toBeTruthy()
   })

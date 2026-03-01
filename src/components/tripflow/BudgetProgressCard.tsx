@@ -104,7 +104,7 @@ export function BudgetProgressCard({
           <Alert variant="destructive">
             <AlertTriangle size={16} />
             <AlertDescription>
-              You've exceeded your budget by {formatCurrency(Math.abs(remaining))}.
+              You&apos;ve exceeded your budget by {formatCurrency(Math.abs(remaining))}.
               Consider adjusting activities or increasing your budget.
             </AlertDescription>
           </Alert>
@@ -114,7 +114,7 @@ export function BudgetProgressCard({
           <Alert>
             <AlertTriangle size={16} />
             <AlertDescription>
-              You've used {percentage.toFixed(0)}% of your budget. Plan
+              You&apos;ve used {percentage.toFixed(0)}% of your budget. Plan
               remaining expenses carefully.
             </AlertDescription>
           </Alert>
