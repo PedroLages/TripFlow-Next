@@ -20,7 +20,6 @@ fi
 # Configuration
 PROJECT_ROOT="/Volumes/SSD/Dev/Asia Trip"
 WORKTREE_BASE="/Volumes/SSD/Dev/Asia Trip-worktrees"
-SUBMODULE_DIR="tripflow-next"
 
 # Normalize story key
 STORY_KEY_LOWER=$(echo "$STORY_KEY" | tr '[:upper:]' '[:lower:]')
@@ -46,20 +45,7 @@ BRANCH_NAME=$(git branch --show-current)
 echo "🌿 Branch: $BRANCH_NAME"
 echo ""
 
-# Remove submodule worktree first
-if [[ -d "$WORKTREE_PATH/$SUBMODULE_DIR/.git" ]]; then
-  echo "🔗 Removing $SUBMODULE_DIR worktree..."
-  cd "$PROJECT_ROOT/$SUBMODULE_DIR"
-  git worktree remove "$WORKTREE_PATH/$SUBMODULE_DIR" --force 2>/dev/null || true
-
-  # Ask about deleting submodule branch
-  read -p "🗑️  Delete branch '$BRANCH_NAME' from $SUBMODULE_DIR? (y/n) " -n 1 -r
-  echo
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    git branch -D "$BRANCH_NAME" 2>/dev/null || echo "⚠️  Branch not found or already deleted"
-    echo "✅ Branch deleted from $SUBMODULE_DIR"
-  fi
-fi
+# Monorepo: No nested repo to clean up
 
 # Remove main worktree
 echo ""

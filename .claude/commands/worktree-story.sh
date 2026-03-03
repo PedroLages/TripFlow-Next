@@ -21,7 +21,6 @@ fi
 # Configuration
 PROJECT_ROOT="/Volumes/SSD/Dev/Asia Trip"
 WORKTREE_BASE="/Volumes/SSD/Dev/Asia Trip-worktrees"
-SUBMODULE_DIR="tripflow-next"
 
 # Normalize story key to branch name
 STORY_KEY_LOWER=$(echo "$STORY_KEY" | tr '[:upper:]' '[:lower:]')
@@ -67,28 +66,8 @@ else
   git worktree add "$WORKTREE_PATH" -b "$BRANCH_NAME"
 fi
 
-# Handle tripflow-next directory
-if [[ -d "$PROJECT_ROOT/$SUBMODULE_DIR/.git" ]]; then
-  echo ""
-  echo "🔗 Setting up $SUBMODULE_DIR worktree..."
-
-  cd "$PROJECT_ROOT/$SUBMODULE_DIR"
-
-  # Get current branch or default
-  CURRENT_BRANCH=$(git branch --show-current)
-  BASE_BRANCH="${CURRENT_BRANCH:-feat/itinerary-redesign}"
-
-  # Check if branch exists in submodule
-  if git show-ref --verify --quiet "refs/heads/$BRANCH_NAME"; then
-    echo "⚠️  Branch '$BRANCH_NAME' already exists in $SUBMODULE_DIR"
-    git worktree add "$WORKTREE_PATH/$SUBMODULE_DIR" "$BRANCH_NAME"
-  else
-    echo "Creating new branch in $SUBMODULE_DIR from: $BASE_BRANCH"
-    git worktree add "$WORKTREE_PATH/$SUBMODULE_DIR" -b "$BRANCH_NAME" "$BASE_BRANCH"
-  fi
-
-  echo "✅ $SUBMODULE_DIR worktree created"
-fi
+# Monorepo: tripflow-next is now part of the main repo
+# No separate worktree needed for nested repo
 
 echo ""
 echo "✨ Worktree setup complete!"
@@ -97,7 +76,7 @@ echo "📋 Next steps:"
 echo "   cd $WORKTREE_PATH"
 echo ""
 echo "🧪 Test your setup:"
-echo "   cd $WORKTREE_PATH/$SUBMODULE_DIR && npm run dev"
+echo "   cd $WORKTREE_PATH/tripflow-next && npm run dev"
 echo ""
 echo "🧹 When done, clean up with:"
 echo "   worktree-cleanup $STORY_KEY_LOWER"
