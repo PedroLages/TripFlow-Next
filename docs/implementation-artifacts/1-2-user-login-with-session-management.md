@@ -61,4 +61,4 @@ So that **I can access my trips and data securely**.
 
 ## Implementation Plan
 
-See [plan](../../.claude/plans/e01-s02-user-login-implementation-plan.md) for implementation approach.
+See [plan](plans/e01-s02-user-login-implementation-plan.md) for implementation approach.
