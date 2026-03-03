@@ -1,0 +1,55 @@
+/* ---------------------------------------------------------------
+   MapPin.module.css — hover pulse ring + selection animations
+   --------------------------------------------------------------- */
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* Base pin -------------------------------------------------------- */
+.pin {
+  position: relative;
+  border-radius: 50%;
+  border: 2.5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  opacity: 0.85;
+  transition:
+    transform 200ms ease-out,
+    box-shadow 200ms ease-out,
+    opacity 200ms ease-out,
+    filter 200ms ease-out;
+}
+
+/* Hovered state -------------------------------------------------- */
+.pin.hovered {
+  transform: scale(1.15);
+  opacity: 1;
+}
+
+/* Selected state ------------------------------------------------- */
+.pin.selected {
+  transform: scale(1.3) translateY(-4px);
+  opacity: 1;
+  filter: brightness(1.15);
+}
+
+/* Pulsing ring (rendered as a child span when hovered) ----------- */
+.pulseRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--ring-color);
+  animation: pulse-ring 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  pointer-events: none;
+}

@@ -1,0 +1,60 @@
+/* YARL lightbox theme overrides — dark glass morphism */
+
+@import "yet-another-react-lightbox/styles.css";
+@import "yet-another-react-lightbox/plugins/thumbnails.css";
+@import "yet-another-react-lightbox/plugins/captions.css";
+
+/* Backdrop */
+.yarl__root {
+  --yarl__color_backdrop: rgba(0, 0, 0, 0.92);
+}
+
+.yarl__portal {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Navigation buttons — glass morphism */
+.yarl__button {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-radius: 50% !important;
+  backdrop-filter: blur(8px);
+  transition: background 0.2s ease !important;
+}
+
+.yarl__button:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Thumbnails strip */
+.yarl__thumbnails_container {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+}
+
+.yarl__thumbnails_thumbnail {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.yarl__thumbnails_thumbnail_active {
+  border-color: white;
+}
+
+/* Captions */
+.yarl__slide_title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Counter */
+.yarl__toolbar {
+  background: transparent !important;
+}
+
+/* Image styling */
+.yarl__slide_image {
+  border-radius: 8px;
+}

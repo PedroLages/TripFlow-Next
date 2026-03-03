@@ -1,0 +1,150 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ============================================
+# DEPENDENCIES
+# ============================================
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ============================================
+# TESTING
+# ============================================
+/coverage
+/test-results
+/playwright-report
+# Playwright artifacts
+playwright/.cache/
+test-results/
+playwright-report/
+blob-report/
+playwright/.auth/
+# Trace files
+trace.zip
+*.trace
+# Video recordings
+videos/
+screenshots/
+
+# ============================================
+# NEXT.JS
+# ============================================
+/.next/
+/out/
+# Turbopack cache
+.turbo/
+# Static exports
+out/
+
+# ============================================
+# PRODUCTION
+# ============================================
+/build
+/dist
+
+# ============================================
+# SUPABASE LOCAL FILES
+# ============================================
+# Keep migrations/ and config.toml tracked
+supabase/.branches/
+supabase/.temp/
+supabase/.temp*
+**/supabase/.branches/
+**/supabase/.temp/
+
+# ============================================
+# ENVIRONMENT VARIABLES
+# ============================================
+.env*
+!.env.example
+!.env.local.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ============================================
+# VERCEL
+# ============================================
+.vercel
+.vercel.json
+
+# ============================================
+# TYPESCRIPT
+# ============================================
+*.tsbuildinfo
+next-env.d.ts
+
+# ============================================
+# OS FILES
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+desktop.ini
+
+# ============================================
+# IDE / EDITOR
+# ============================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.swp
+*.swo
+*.swn
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+.history/
+
+# ============================================
+# LOGS
+# ============================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# ============================================
+# CERTIFICATES
+# ============================================
+*.pem
+*.key
+*.cert
+
+# ============================================
+# CACHE & TEMP
+# ============================================
+.cache/
+.parcel-cache/
+*.tmp
+*.temp
+
+# ============================================
+# BUNDLE ANALYSIS
+# ============================================
+.next/analyze/
+stats.html
+bundle-analyzer-report.html
+
+# ============================================
+# STORYBOOK (if used)
+# ============================================
+storybook-static/

@@ -1,0 +1,105 @@
+/* =========================================================================
+   TripContextBar — persistent trip orientation indicator
+   Prefix: .tcb-
+   ========================================================================= */
+
+.tcb-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface, hsl(0 0% 98%));
+  border: 1px solid var(--border-subtle, hsl(0 0% 90%));
+  border-radius: var(--radius-md, 10px);
+  overflow: hidden;
+}
+
+.tcb-content {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  min-height: 36px;
+}
+
+.tcb-text {
+  display: flex;
+  align-items: center;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tcb-segment-primary {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.tcb-segment {
+  color: var(--text-secondary);
+}
+
+.tcb-sep {
+  margin: 0 8px;
+  color: var(--text-secondary);
+  opacity: 0.4;
+  font-size: 0.7rem;
+}
+
+.tcb-num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.tcb-of-total {
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.tcb-remaining {
+  opacity: 0.7;
+}
+
+/* Progress bar */
+.tcb-progress-track {
+  height: 3px;
+  width: 100%;
+  background: var(--bg-surface-hover, hsl(0 0% 94%));
+}
+
+.tcb-progress-fill {
+  height: 100%;
+  width: var(--tcb-progress, 0%);
+  background: var(--city-color);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tcb-trip-mode .tcb-progress-fill {
+  border-radius: 0;
+  opacity: 0.5;
+}
+
+.tcb-overview-mode .tcb-progress-fill {
+  opacity: 0.4;
+}
+
+/* Mobile toggle */
+.tcb-show-mobile { display: none; }
+
+@media (max-width: 768px) {
+  .tcb-content { padding: 6px 12px; min-height: 32px; }
+  .tcb-text { font-size: 0.75rem; }
+  .tcb-hide-mobile { display: none; }
+  .tcb-show-mobile { display: inline; }
+  .tcb-progress-track { height: 2px; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .tcb-bar { background: var(--bg-surface); border-color: var(--border-subtle); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tcb-progress-fill { transition: none; }
+}
