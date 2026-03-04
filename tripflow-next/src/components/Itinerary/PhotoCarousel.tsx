@@ -28,7 +28,7 @@ export const PhotoCarousel: React.FC<PhotoCarouselProps> = ({ photos, alt, onPho
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
+    queueMicrotask(() => onSelect());
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
     return () => {

@@ -45,7 +45,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
   useEffect(() => {
     // Only setup realtime if user is authenticated
     if (!user?.id) {
-      setIsRealtimeConnected(false)
+      queueMicrotask(() => setIsRealtimeConnected(false))
       return
     }
 
@@ -83,7 +83,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
         setIsRealtimeConnected(status === 'SUBSCRIBED')
       })
 
-    setChannel(notificationChannel)
+    queueMicrotask(() => setChannel(notificationChannel))
 
     return () => {
       notificationChannel.unsubscribe()

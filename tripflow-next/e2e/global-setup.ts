@@ -4,9 +4,9 @@
  */
 
 const ROUTES_TO_WARM = [
-  'http://localhost:3100/',
-  'http://localhost:3100/trips/1',
-  'http://localhost:3100/trips/1/itinerary',
+  'http://localhost:3001/',
+  'http://localhost:3001/trips/1',
+  'http://localhost:3001/trips/1/itinerary',
 ];
 
 async function globalSetup() {

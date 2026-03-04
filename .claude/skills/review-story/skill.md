@@ -1,6 +1,6 @@
 ---
 name: review-story
-description: Use when running quality gates on a LevelUp story before shipping. Runs build/lint/tests, dispatches design review (Playwright MCP) and adversarial code review agents, generates consolidated report. Use after implementing a story to catch issues before /finish-story.
+description: Use when running quality gates on a TripFlow story before shipping. Runs build/lint/tests, dispatches design review (Playwright MCP) and adversarial code review agents, generates consolidated report. Use after implementing a story to catch issues before /finish-story.
 argument-hint: "[E##-S##]"
 disable-model-invocation: true
 ---
@@ -148,7 +148,7 @@ The `-skipped` suffix indicates the gate was intentionally skipped (no lint scri
 
    **UI changes detected**: Run the design review:
 
-   a. Check dev server: `curl -s -o /dev/null -w "%{http_code}" http://localhost:5173`.
+   a. Check dev server: `curl -s -o /dev/null -w "%{http_code}" http://localhost:3001`.
       - Not reachable → start `npm run dev` in background via Bash (`npm run dev &`), wait up to 30s.
       - Still unreachable → **do NOT skip silently**. Warn the user: "Dev server unreachable. Design review cannot run." Do NOT add `design-review` to gates. The review stays incomplete — this blocks `reviewed: true`.
    b. Dispatch to `design-review` agent via Task tool:
@@ -180,7 +180,7 @@ The `-skipped` suffix indicates the gate was intentionally skipped (no lint scri
    ```
    Task({
      subagent_type: "code-review",
-     prompt: "Review story E##-S## at docs/implementation-artifacts/{key}.md. Run git diff main...HEAD for changes. Focus on architecture, security, correctness, silent failures, and LevelUp stack patterns. Score each finding with confidence (0-100).",
+     prompt: "Review story E##-S## at docs/implementation-artifacts/{key}.md. Run git diff main...HEAD for changes. Focus on architecture, security, correctness, silent failures, and TripFlow stack patterns. Score each finding with confidence (0-100).",
      description: "Code review E##-S##"
    })
 

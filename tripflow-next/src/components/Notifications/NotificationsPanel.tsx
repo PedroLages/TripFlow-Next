@@ -100,7 +100,7 @@ export const NotificationsPanel: React.FC<NotificationsPanelProps> = ({ isOpen, 
               {notifications.length === 0 ? (
                 <div className="empty-notifications">
                   <Check size={24} color="var(--color-green)" />
-                  <p>You're all caught up!</p>
+                  <p>You&apos;re all caught up!</p>
                 </div>
               ) : (
                 notifications.map((notif) => (

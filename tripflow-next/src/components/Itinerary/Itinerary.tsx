@@ -137,10 +137,12 @@ function MapIntegrationBridge({
 
 export const Itinerary: React.FC = () => {
   // Reduced motion preference
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
@@ -219,23 +221,25 @@ export const Itinerary: React.FC = () => {
   const didMountRef = useRef(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const urlView = params.get('view');
-    if (urlView === 'trip') {
-      setViewMode('trip');
-    }
-    const urlCity = params.get('city');
-    if (urlCity && urlCity in CITY_CONFIGS) {
-      setActiveCity(urlCity as CitySlug);
-      const urlDay = params.get('day');
-      if (urlDay) {
-        const dayNum = parseInt(urlDay, 10);
-        const days = getDaysForCity(urlCity as CitySlug);
-        if (!isNaN(dayNum) && dayNum >= 1 && dayNum <= days.length) {
-          setActiveDay(days[dayNum - 1]);
+    queueMicrotask(() => {
+      const params = new URLSearchParams(window.location.search);
+      const urlView = params.get('view');
+      if (urlView === 'trip') {
+        setViewMode('trip');
+      }
+      const urlCity = params.get('city');
+      if (urlCity && urlCity in CITY_CONFIGS) {
+        setActiveCity(urlCity as CitySlug);
+        const urlDay = params.get('day');
+        if (urlDay) {
+          const dayNum = parseInt(urlDay, 10);
+          const days = getDaysForCity(urlCity as CitySlug);
+          if (!isNaN(dayNum) && dayNum >= 1 && dayNum <= days.length) {
+            setActiveDay(days[dayNum - 1]);
+          }
         }
       }
-    }
+    });
   }, []);
 
   useEffect(() => {

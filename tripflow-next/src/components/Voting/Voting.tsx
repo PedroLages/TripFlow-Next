@@ -193,7 +193,7 @@ export const Voting: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
           >
-            <div className="create-poll-content glass-panel" style={{ padding: '24px', borderRadius: '16px', marginBottom: '24px', border: '1px solid var(--border-subtle)' }}>
+            <div className="create-poll-content glass-panel" style={{ padding: '24px', marginBottom: '24px' }}>
               <h3 style={{ marginTop: 0, marginBottom: '20px' }}>Create New Poll</h3>
 
               <div className="form-group" style={{ marginBottom: '16px' }}>

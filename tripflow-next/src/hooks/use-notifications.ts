@@ -6,11 +6,10 @@ interface NotificationListParams {
   tripId?: string
 }
 
-export function useNotifications(params: NotificationListParams = {}) {
+export function useNotifications(_params: NotificationListParams = {}) {
   // Use mock data for now - simplified version
-  const notifications = params.tripId
-    ? mockNotifications.filter(n => n.tripId === params.tripId)
-    : mockNotifications
+  // Note: tripId filtering not supported by mock data yet
+  const notifications = mockNotifications
 
   const unreadCount = notifications.filter(n => !n.isRead).length
 

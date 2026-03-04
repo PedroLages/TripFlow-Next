@@ -27,7 +27,7 @@ export function useCountUp(target: number, duration: number = 1200): [React.RefO
 
     // Check prefers-reduced-motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setValue(target);
+      queueMicrotask(() => setValue(target));
       return;
     }
 

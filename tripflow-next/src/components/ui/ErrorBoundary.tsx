@@ -41,7 +41,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <AlertCircle size={16} className="error-badge" />
           </div>
           <h3>Map Temporarily Unavailable</h3>
-          <p>We're having trouble loading the map view. The rest of your itinerary is fully functional.</p>
+          <p>We&apos;re having trouble loading the map view. The rest of your itinerary is fully functional.</p>
           <button
             className="error-retry-btn"
             onClick={() => this.setState({ hasError: false, error: null })}

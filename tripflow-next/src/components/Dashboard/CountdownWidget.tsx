@@ -33,10 +33,9 @@ function calculateTimeRemaining(targetDate: string): TimeRemaining {
 }
 
 export function CountdownWidget({ departureDate, className = '' }: CountdownWidgetProps) {
-  const [timeRemaining, setTimeRemaining] = useState<TimeRemaining | null>(null)
+  const [timeRemaining, setTimeRemaining] = useState<TimeRemaining | null>(() => calculateTimeRemaining(departureDate))
 
   useEffect(() => {
-    setTimeRemaining(calculateTimeRemaining(departureDate))
     const timer = setInterval(() => {
       setTimeRemaining(calculateTimeRemaining(departureDate))
     }, 1000)
@@ -45,7 +44,7 @@ export function CountdownWidget({ departureDate, className = '' }: CountdownWidg
   }, [departureDate])
 
   if (!timeRemaining) {
-    return <div className={`countdown-widget ${className}`} style={{ opacity: 0 }}>...</div>
+    return <div className={`countdown-widget opacity-0 ${className}`}>...</div>
   }
 
   return (

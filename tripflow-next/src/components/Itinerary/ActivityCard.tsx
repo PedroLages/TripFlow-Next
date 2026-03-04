@@ -91,7 +91,7 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
 
       <div className={cn('duration-bar', `type-${activity.type}`)} />
 
-      <div className="timeline-time" style={{ fontVariantNumeric: 'tabular-nums' }}>{activity.time}</div>
+      <div className="timeline-time tabular-nums">{activity.time}</div>
 
       <div className="timeline-node">
         <div className="node-icon">{getIconForType(activity.type)}</div>
@@ -163,7 +163,7 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
                       alt={activity.title}
                       fill
                       sizes="200px"
-                      style={{ objectFit: 'cover' }}
+                      className="object-cover"
                     />
                   </div>
                 )}
@@ -204,7 +204,7 @@ export const ActivityCard = React.forwardRef<HTMLDivElement, ActivityCardProps>(
                     onClick={(e) => { e.stopPropagation(); onOpenSuggestions(); }}
                     aria-label="AI Insights"
                   >
-                    <Sparkles size={14} className="text-accent" style={{ marginRight: '4px' }} /> Insight
+                    <Sparkles size={14} className="text-accent mr-1" /> Insight
                   </Button>
                 </div>
               </div>

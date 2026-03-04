@@ -14,6 +14,7 @@ import { test, expect } from '@playwright/test';
  *  - AC6: Invalid credentials show error message
  *  - AC7: Keyboard and screen reader accessibility
  *  - AC8: "Remember me" extends session to 30 days
+ *  - AC9: Protected routes redirect unauthenticated users to login
  */
 test.describe('E01-S02: User Login with Session Management', () => {
   test.beforeEach(async ({ page }) => {
@@ -26,23 +27,23 @@ test.describe('E01-S02: User Login with Session Management', () => {
     await expect(page).toHaveURL(/\/login/);
 
     // WHEN I enter valid credentials
-    await page.fill('input[type="email"], input[name="email"]', 'test@example.com');
-    await page.fill('input[type="password"], input[name="password"]', 'validpassword123');
-    await page.click('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
+    await page.getByRole('textbox', { name: /email/i }).fill('test@example.com');
+    await page.getByRole('textbox', { name: /password/i }).fill('validpassword123');
+    await page.getByRole('button', { name: /log in|sign in/i }).click();
 
     // THEN I am redirected to the dashboard
-    await expect(page).toHaveURL(/\/dashboard|^\/$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/\/dashboard$/, { timeout: 10_000 });
 
-    // AND I see dashboard content
-    await expect(page.locator('text=/dashboard|good|welcome/i')).toBeVisible({ timeout: 10_000 });
+    // AND I see dashboard content (use .first() to handle multiple matches)
+    await expect(page.locator('text=/dashboard|good|welcome/i').first()).toBeVisible({ timeout: 10_000 });
   });
 
   test('AC2: Session tokens are stored in HTTP-only cookies', async ({ page, context }) => {
     // GIVEN I am logged in
-    await page.fill('input[type="email"], input[name="email"]', 'test@example.com');
-    await page.fill('input[type="password"], input[name="password"]', 'validpassword123');
-    await page.click('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
-    await page.waitForURL(/\/dashboard|^\/$/, { timeout: 10_000 });
+    await page.getByRole('textbox', { name: /email/i }).fill('test@example.com');
+    await page.getByRole('textbox', { name: /password/i }).fill('validpassword123');
+    await page.getByRole('button', { name: /log in|sign in/i }).click();
+    await page.waitForURL(/\/dashboard$/, { timeout: 10_000 });
 
     // WHEN I check the cookies
     const cookies = await context.cookies();
@@ -69,9 +70,9 @@ test.describe('E01-S02: User Login with Session Management', () => {
     await expect(page).toHaveURL(/\/login/);
 
     // WHEN I enter incorrect credentials
-    await page.fill('input[type="email"], input[name="email"]', 'wrong@example.com');
-    await page.fill('input[type="password"], input[name="password"]', 'wrongpassword');
-    await page.click('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
+    await page.getByRole('textbox', { name: /email/i }).fill('wrong@example.com');
+    await page.getByRole('textbox', { name: /password/i }).fill('wrongpassword');
+    await page.getByRole('button', { name: /log in|sign in/i }).click();
 
     // THEN I see an error message
     await expect(page.locator('text=/invalid.*email.*password|incorrect.*credentials|login.*failed/i')).toBeVisible({
@@ -84,17 +85,17 @@ test.describe('E01-S02: User Login with Session Management', () => {
 
   test('AC4: Session persists across page refreshes', async ({ page }) => {
     // GIVEN I am logged in
-    await page.fill('input[type="email"], input[name="email"]', 'test@example.com');
-    await page.fill('input[type="password"], input[name="password"]', 'validpassword123');
-    await page.click('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
-    await page.waitForURL(/\/dashboard|^\/$/, { timeout: 10_000 });
+    await page.getByRole('textbox', { name: /email/i }).fill('test@example.com');
+    await page.getByRole('textbox', { name: /password/i }).fill('validpassword123');
+    await page.getByRole('button', { name: /log in|sign in/i }).click();
+    await page.waitForURL(/\/dashboard$/, { timeout: 10_000 });
 
     // WHEN I refresh the page
     await page.reload({ waitUntil: 'domcontentloaded' });
 
     // THEN I remain logged in (still on dashboard, not redirected to login)
-    await expect(page).toHaveURL(/\/dashboard|^\/$/, { timeout: 10_000 });
-    await expect(page.locator('text=/dashboard|good|welcome/i')).toBeVisible({ timeout: 10_000 });
+    await expect(page).toHaveURL(/\/dashboard$/, { timeout: 10_000 });
+    await expect(page.locator('text=/dashboard|good|welcome/i').first()).toBeVisible({ timeout: 10_000 });
   });
 
   test('AC5: Login form is keyboard accessible', async ({ page }) => {
@@ -104,26 +105,28 @@ test.describe('E01-S02: User Login with Session Management', () => {
     // WHEN I navigate using keyboard only
     // Tab to email field
     await page.keyboard.press('Tab');
-    const emailField = page.locator('input[type="email"], input[name="email"]');
+    const emailField = page.getByRole('textbox', { name: /email/i });
     await expect(emailField).toBeFocused();
 
     // Fill email and tab to password
     await emailField.fill('test@example.com');
     await page.keyboard.press('Tab');
-    const passwordField = page.locator('input[type="password"], input[name="password"]');
+    const passwordField = page.getByRole('textbox', { name: /password/i });
     await expect(passwordField).toBeFocused();
 
-    // Fill password and tab to submit button
+    // Fill password and tab through Remember Me and Forgot Password to submit button
     await passwordField.fill('validpassword123');
-    await page.keyboard.press('Tab');
-    const submitButton = page.locator('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
+    await page.keyboard.press('Tab'); // Tab to Remember Me checkbox
+    await page.keyboard.press('Tab'); // Tab to Forgot Password link
+    await page.keyboard.press('Tab'); // Tab to Submit button
+    const submitButton = page.getByRole('button', { name: /log in|sign in/i });
     await expect(submitButton).toBeFocused();
 
     // Submit with Enter key
     await page.keyboard.press('Enter');
 
     // THEN login succeeds
-    await expect(page).toHaveURL(/\/dashboard|^\/$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/\/dashboard$/, { timeout: 10_000 });
   });
 
   test('AC6: Login form has proper ARIA labels for screen readers', async ({ page }) => {
@@ -131,9 +134,9 @@ test.describe('E01-S02: User Login with Session Management', () => {
     await expect(page).toHaveURL(/\/login/);
 
     // WHEN I inspect form accessibility
-    const emailField = page.locator('input[type="email"], input[name="email"]');
-    const passwordField = page.locator('input[type="password"], input[name="password"]');
-    const submitButton = page.locator('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
+    const emailField = page.getByRole('textbox', { name: /email/i });
+    const passwordField = page.getByRole('textbox', { name: /password/i });
+    const submitButton = page.getByRole('button', { name: /log in|sign in/i });
 
     // THEN email field has label or aria-label
     const emailHasLabel =
@@ -165,9 +168,7 @@ test.describe('E01-S02: User Login with Session Management', () => {
     await expect(page).toHaveURL(/\/login/);
 
     // THEN I see a "Remember me" checkbox
-    const rememberMeCheckbox = page.locator('input[type="checkbox"]').filter({
-      has: page.locator('text=/remember/i'),
-    });
+    const rememberMeCheckbox = page.getByRole('checkbox', { name: /remember/i });
     const rememberMeLabel = page.locator('label').filter({ hasText: /remember/i });
 
     const hasRememberMe = (await rememberMeCheckbox.count()) > 0 || (await rememberMeLabel.count()) > 0;
@@ -178,14 +179,23 @@ test.describe('E01-S02: User Login with Session Management', () => {
       await rememberMeCheckbox.check();
     }
 
-    await page.fill('input[type="email"], input[name="email"]', 'test@example.com');
-    await page.fill('input[type="password"], input[name="password"]', 'validpassword123');
-    await page.click('button[type="submit"], button:has-text("Log in"), button:has-text("Sign in")');
+    await page.getByRole('textbox', { name: /email/i }).fill('test@example.com');
+    await page.getByRole('textbox', { name: /password/i }).fill('validpassword123');
+    await page.getByRole('button', { name: /log in|sign in/i }).click();
 
     // THEN login succeeds
-    await expect(page).toHaveURL(/\/dashboard|^\/$/, { timeout: 10_000 });
+    await expect(page).toHaveURL(/\/dashboard$/, { timeout: 10_000 });
 
     // Note: Testing actual 30-day expiry requires time manipulation, which is outside scope of E2E
     // The presence of the checkbox and successful login with it checked is sufficient for this AC
+  });
+
+  test('AC9: Protected routes redirect unauthenticated users to login', async ({ page }) => {
+    // GIVEN I am not logged in
+    // WHEN I try to access a trip directly
+    await page.goto('/trips/1/itinerary');
+
+    // THEN I am redirected to the login page
+    await expect(page).toHaveURL(/\/login/);
   });
 });

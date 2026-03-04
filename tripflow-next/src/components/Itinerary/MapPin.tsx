@@ -4,7 +4,7 @@ import React from 'react';
 import { Plane, Hotel, Utensils, Camera, ShoppingBag, Train, Bus } from 'lucide-react';
 import type { Activity } from '@/lib/itinerary-data';
 import { PIN_SIZES } from '@/lib/map-tokens';
-import styles from './MapPin.module.css';
+import { cn } from '@/lib/utils';
 
 interface MapPinProps {
   activity: Activity;
@@ -40,12 +40,6 @@ export const MapPin: React.FC<MapPinProps> = ({
   onMouseEnter,
   onMouseLeave,
 }) => {
-  const className = [
-    styles.pin,
-    isHovered && styles.hovered,
-    isSelected && styles.selected,
-  ].filter(Boolean).join(' ');
-
   const shadow = isSelected
     ? `0 0 0 3px white, 0 4px 16px ${color}88, 0 8px 24px rgba(0,0,0,0.25)`
     : isHovered
@@ -54,7 +48,16 @@ export const MapPin: React.FC<MapPinProps> = ({
 
   return (
     <div
-      className={className}
+      className={cn(
+        // Base styles
+        "relative rounded-full border-[2.5px] border-white",
+        "flex items-center justify-center text-white cursor-pointer",
+        "opacity-85 transition-all duration-200 ease-out",
+        // Hover state
+        isHovered && "scale-115 opacity-100",
+        // Selected state
+        isSelected && "scale-130 -translate-y-1 opacity-100 brightness-115"
+      )}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -70,8 +73,8 @@ export const MapPin: React.FC<MapPinProps> = ({
       {/* Pulsing ring on hover */}
       {isHovered && (
         <span
-          className={styles.pulseRing}
-          style={{ '--ring-color': color } as React.CSSProperties}
+          className="absolute -inset-[2px] rounded-full border-2 pulse-ring pointer-events-none"
+          style={{ borderColor: color }}
         />
       )}
 
@@ -79,22 +82,8 @@ export const MapPin: React.FC<MapPinProps> = ({
 
       {orderIndex != null && (
         <span
-          style={{
-            position: 'absolute',
-            top: -6,
-            right: -6,
-            width: 18,
-            height: 18,
-            borderRadius: '50%',
-            background: 'white',
-            color: color,
-            fontSize: 10,
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
-          }}
+          className="absolute -top-1.5 -right-1.5 w-[18px] h-[18px] rounded-full bg-white text-[10px] font-bold flex items-center justify-center shadow-sm"
+          style={{ color }}
         >
           {orderIndex}
         </span>

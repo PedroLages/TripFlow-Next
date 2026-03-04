@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Providers } from '@/components/layout/Providers'
 import { ThemeProvider } from '@/components/layout/ThemeProvider'
-import { AppShell } from '@/components/layout/AppShell'
 import './globals.css'
 import './app.css'
 
@@ -27,7 +26,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <Providers>
-            <AppShell>{children}</AppShell>
+            {children}
           </Providers>
         </ThemeProvider>
       </body>

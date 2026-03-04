@@ -31,7 +31,7 @@ export default defineConfig({
   expect: { timeout: 10_000 },
 
   use: {
-    baseURL: 'http://localhost:3100',
+    baseURL: 'http://localhost:3001',
 
     /* Headless mode – browser runs without visible window */
     headless: true,
@@ -59,15 +59,18 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: devices['Desktop Chrome'],
     },
   ],
 
   webServer: {
     // Use production build in CI for stable asset paths
-    command: process.env.CI ? 'npm run start' : 'npm run dev',
-    url: 'http://localhost:3100',
+    command: process.env.CI ? 'pnpm start' : 'pnpm dev',
+    url: 'http://localhost:3001',
     reuseExistingServer: true,  // Always reuse existing server
     timeout: 120_000,
+    env: {
+      PORT: '3001',
+    },
   },
 });

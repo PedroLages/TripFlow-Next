@@ -74,11 +74,13 @@ interface DashboardProps {
 export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQuickExpense }) => {
   const imminentTrip = trips.length > 0 && trips[0].destination === 'Japan Circuit' ? trips[0] : null;
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mq.matches);
     const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
@@ -102,8 +104,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
 
       {/* Hero Banner */}
       {imminentTrip && (
-        <Link href={`/trips/${imminentTrip.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-          <motion.div variants={resolvedItemVariants} className="active-trip-hero" style={{ backgroundImage: `url(${imminentTrip.imageUrl})`, cursor: 'pointer' }}>
+        <Link href={`/trips/${imminentTrip.id}`} className="no-underline text-inherit">
+          <motion.div variants={resolvedItemVariants} className="active-trip-hero cursor-pointer" style={{ backgroundImage: `url(${imminentTrip.imageUrl})` }}>
             <div className="active-trip-hero-overlay"></div>
             <div className="active-trip-hero-content">
               {imminentTrip.departureDate && (
@@ -203,8 +205,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
             <CardContent className="create-new-content">
               <div className="create-icon"><Sparkles size={32} /></div>
               <div className="create-new-text">
-                <h3 style={{ margin: '0 0 4px 0' }}>Where to next?</h3>
-                <p style={{ margin: 0, color: 'var(--text-secondary)' }}>Let AI draft your perfect itinerary.</p>
+                <h3 className="m-0 mb-1">Where to next?</h3>
+                <p className="m-0 text-[var(--text-secondary)]">Let AI draft your perfect itinerary.</p>
               </div>
               <Button onClick={() => onGenerateTrip?.()} className="w-full">Generate Trip</Button>
             </CardContent>
@@ -213,7 +215,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
 
         {trips.slice(0, 2).map(trip => (
           <motion.div key={trip.id} variants={resolvedItemVariants} className="bento-trip-card">
-            <Link href={`/trips/${trip.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link href={`/trips/${trip.id}`} className="no-underline text-inherit">
               <Card className="interactive-trip-card">
                 <div className="trip-card-image-wrapper">
                   <div className="trip-card-image" style={{ backgroundImage: `url(${trip.imageUrl})` }}>
@@ -232,7 +234,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
                   <div className="trip-progress-section">
                     <div className="progress-header">
                       <span>Completion</span>
-                      <span style={{ fontVariantNumeric: 'tabular-nums' }}>{trip.progress}%</span>
+                      <span className="tabular-nums">{trip.progress}%</span>
                     </div>
                     <div className="progress-track">
                       <div className="progress-fill" style={{ width: `${trip.progress}%`, background: trip.accentColor }}></div>
@@ -242,7 +244,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
                     <div className="collaborator-avatars">
                       {trip.collaboratorAvatars?.slice(0, 3).map((avatar, i) => (
                         <div key={i} className="avatar-circle" style={{ zIndex: 10 - i }}>
-                          <img src={avatar} alt={`Collaborator ${i + 1}`} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />
+                          <img src={avatar} alt={`Collaborator ${i + 1}`} className="w-full h-full rounded-full object-cover" />
                         </div>
                       )) || [...Array(trip.collaborators)].map((_, i) => (
                         <div key={i} className="avatar-circle" style={{ zIndex: 10 - i }}></div>
@@ -269,7 +271,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
                 <h4>Daily Travel Intel</h4>
               </div>
               <p className="briefing-text">
-                Your Japan trip is exactly 14 days away! The weather in Tokyo is currently a pleasant 22°C. I noticed you haven't booked your JR Pass yet — should I build a transit route for you?
+                Your Japan trip is exactly 14 days away! The weather in Tokyo is currently a pleasant 22°C. I noticed you haven&apos;t booked your JR Pass yet — should I build a transit route for you?
               </p>
               <Button size="sm" variant="secondary" className="mt-4" fullWidth>Review Transit Options</Button>
             </CardContent>
@@ -290,7 +292,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ trips, onGenerateTrip, onQ
             <CardContent>
               {activeTab === 'activity' ? (
                 <>
-                  <div className="live-presence-indicator" style={{ marginBottom: '16px' }}>
+                  <div className="live-presence-indicator mb-4">
                     <div className="presence-avatar">
                       <img src="https://i.pravatar.cc/150?u=2" alt="Sarah" width={32} height={32} />
                       <div className="online-dot"></div>

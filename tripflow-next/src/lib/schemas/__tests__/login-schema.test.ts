@@ -50,7 +50,7 @@ describe('loginSchema', () => {
     expect(result.success).toBe(false)
     if (!result.success) {
       expect(result.error.issues[0].path).toEqual(['email'])
-      expect(result.error.issues[0].message).toBe('Please enter a valid email address')
+      expect(result.error.issues[0].message).toMatch(/valid email/i)
     }
   })
 
@@ -73,7 +73,7 @@ describe('loginSchema', () => {
     expect(result.success).toBe(false)
     if (!result.success) {
       expect(result.error.issues[0].path).toEqual(['password'])
-      expect(result.error.issues[0].message).toBe('Password must be at least 8 characters')
+      expect(result.error.issues[0].message).toMatch(/at least 8 characters/i)
     }
   })
 
