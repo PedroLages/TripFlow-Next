@@ -62,3 +62,20 @@ So that **I can access my trips and data securely**.
 ## Implementation Plan
 
 See [plan](plans/e01-s02-user-login-implementation-plan.md) for implementation approach.
+
+## Testing Setup
+
+**⚠️ Local Supabase Required:**
+TripFlow uses local Supabase running in Docker. Ensure it's running before tests:
+```bash
+supabase status  # Check if running
+supabase start   # Start if stopped
+```
+
+**Test User Required for E2E Tests:**
+- Email: `test@example.com`
+- Password: `validpassword123`
+- Location: Local Supabase Studio (http://127.0.0.1:54423)
+- Documentation: [`tripflow-next/docs/testing/test-users.md`](../../tripflow-next/docs/testing/test-users.md)
+
+To run E2E tests, ensure this test user exists in local Supabase Auth (see test-users.md for setup instructions).
