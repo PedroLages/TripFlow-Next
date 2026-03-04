@@ -34,6 +34,33 @@ The `-skipped` suffix indicates the gate was intentionally skipped (no lint scri
 
 ## Steps
 
+0. **Worktree detection and navigation**:
+
+   Extract story key from `$ARGUMENTS` (e.g., `E04-S04` → `e04-s04`) or derive from current branch.
+
+   **Detection logic**:
+   1. List all worktrees: `git worktree list`
+   2. Search for a worktree with branch matching `feature/{story-key-lower}-*`
+   3. If found:
+      - Extract worktree path from output (first column)
+      - Check if already in that worktree: `pwd` matches worktree path
+      - **If NOT in worktree**: Navigate to it:
+        ```bash
+        cd {worktree-path}
+        ```
+      - Inform user: "📂 Found worktree for {story-id} at {path}"
+   4. If NOT found:
+      - Check current branch: `git branch --show-current`
+      - If current branch matches `feature/{story-key-lower}-*`:
+        - Continue in current location (main workspace)
+        - Inform user: "Working in main workspace"
+      - If current branch does NOT match:
+        - Check if branch exists: `git branch --list feature/{story-key-lower}-*`
+        - If exists: `git checkout feature/{story-key-lower}-{slug}`
+        - If not: STOP with error: "Branch for {story-id} not found. Run /start-story first."
+
+   **Result**: By the end of Step 0, you're in the correct directory (worktree or main) with the correct branch checked out.
+
 1. **Identify story**: Parse ID from `$ARGUMENTS` or from branch name (`git branch --show-current` → `feature/e01-s03-...` → `E01-S03`).
 
 2. **Read story file** from `docs/implementation-artifacts/`. Extract acceptance criteria, tasks, current status, and **review tracking fields** (`reviewed`, `review_started`, `review_gates_passed`).

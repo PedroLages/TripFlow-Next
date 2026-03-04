@@ -48,6 +48,7 @@ When invoked with a story ID (e.g., `E01-S03`):
        - Worktree at: `${WORKTREE_BASE}/${STORY_KEY_LOWER}/`
        - Branch: `feature/${STORY_KEY_LOWER}-${STORY_SLUG}`
    - Change working directory: `cd "${WORKTREE_BASE}/${STORY_KEY_LOWER}"`
+   - **Store worktree state**: Remember that we're in a worktree for steps 10-11 (plan file location)
    - Inform user:
      ```
      ✨ Worktree created successfully!
@@ -57,10 +58,11 @@ When invoked with a story ID (e.g., `E01-S03`):
 
      📝 All story files will be created here.
      🧑‍💻 You can develop in isolation without affecting your main workspace.
+     📄 Plans will be saved to: tripflow-next/docs/plans/ (in worktree)
 
      🧹 When done: worktree-cleanup ${STORY_KEY_LOWER}
      ```
-   - **Important**: All subsequent steps (1-14) will execute in the worktree directory
+   - **Important**: All subsequent steps (1-14) will execute in the worktree directory. Plans must be saved to `tripflow-next/docs/plans/` in the worktree.
 
    **If user selects NO**:
    - Continue in main workspace (current directory)
@@ -117,16 +119,44 @@ When invoked with a story ID (e.g., `E01-S03`):
     - UX design references (if applicable)
     - Note: during implementation, make granular commits after each small task as save points
 
-11. **Link plan to story file**: After `ExitPlanMode` returns (plan approved), save the plan to `docs/implementation-artifacts/plans/{plan-filename}.md`, then append an `## Implementation Plan` section to the story file so the developer can find the plan in a later session. If the section already exists, skip.
+    **Plan file location** (important for worktree compatibility):
+    - **If in a worktree** (working on TripFlow): Plan should be saved to `tripflow-next/docs/plans/{plan-filename}.md` in the worktree directory
+    - **If in main workspace**: Plan should be saved to `docs/implementation-artifacts/plans/{plan-filename}.md`
+    - To detect worktree: Check if current path contains `-worktrees/` or run `git rev-parse --show-toplevel` and compare to known project root (`/Volumes/SSD/Dev/Asia Trip`)
+    - If path contains `-worktrees/`, you're in a worktree; otherwise, you're in main workspace
 
-    Format:
+11. **Link plan to story file**: After `ExitPlanMode` returns (plan approved), verify the plan file location and link it to the story file so the developer can find the plan in a later session. If the section already exists, skip.
+
+    **Determine correct paths**:
+    - **If in worktree** (path contains `-worktrees/`):
+      - Target plan location: `tripflow-next/docs/plans/{plan-filename}.md`
+      - Story file: `docs/implementation-artifacts/{key}.md` (still in main repo via git)
+      - Link format: Absolute path to worktree plan
+    - **If in main workspace**:
+      - Target plan location: `docs/implementation-artifacts/plans/{plan-filename}.md`
+      - Story file: `docs/implementation-artifacts/{key}.md`
+      - Link format: `[plan](plans/{plan-filename}.md)` (relative)
+
+    **Implementation steps**:
+    1. Detect workspace type: Run `pwd` and check if output contains `-worktrees/`
+    2. Determine target directory based on workspace type
+    3. Ensure target directory exists: `mkdir -p {target-dir}`
+    4. If plan file exists in a different location (from EnterPlanMode), move it:
+       ```bash
+       mv {source-plan-path} {target-plan-path}
+       ```
+    5. Verify the plan file exists at target location
+    6. Append link to story file (if not already present)
+
+    Format for story file:
     ```markdown
     ## Implementation Plan
 
-    See [plan](plans/{plan-filename}.md) for implementation approach.
+    [If worktree:] See [plan]({absolute-path-to-worktree}/tripflow-next/docs/plans/{plan-filename}.md)
+    [If main:] See [plan](plans/{plan-filename}.md) for implementation approach.
     ```
 
-    Use the actual plan filename (relative to `docs/implementation-artifacts/`) from the current session.
+    **Important**: The plan MUST be in the worktree directory when working in a worktree, otherwise Claude cannot access it during implementation.
 
 12. **Assess workflow recommendation**: Based on research from Steps 9-10, determine which shipping workflow to recommend:
 
@@ -160,6 +190,7 @@ When invoked with a story ID (e.g., `E01-S03`):
     | Worktree         | [Path to worktree / "Main workspace"]    |
     | Branch           | `feature/e##-s##-slug`                    |
     | Story file       | `docs/implementation-artifacts/{key}.md`  |
+    | Plan location    | [tripflow-next/docs/plans/{plan}.md if worktree, else docs/implementation-artifacts/plans/{plan}.md] |
     | Sprint status    | Updated to `in-progress`                  |
     | ATDD tests       | [Created N tests / Skipped]               |
     | Initial commit   | `chore: start story E##-S##`              |
@@ -168,7 +199,8 @@ When invoked with a story ID (e.g., `E01-S03`):
 
     1. **Implement the story** (new session recommended):
        ```
-       Implement E##-S## following the plan at docs/implementation-artifacts/plans/{plan-filename}.md
+       [If worktree:] Implement E##-S## following the plan at tripflow-next/docs/plans/{plan-filename}.md
+       [If main:] Implement E##-S## following the plan at docs/implementation-artifacts/plans/{plan-filename}.md
        ```
     2. Make **granular commits** after each task as save points
     3. When done, ship it:
