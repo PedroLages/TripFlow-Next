@@ -1,0 +1,128 @@
+# ============================================
+# DEPENDENCIES
+# ============================================
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ============================================
+# NEXT.JS (artifacts at root level)
+# ============================================
+/.next/
+/out/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# ============================================
+# TESTING
+# ============================================
+/playwright-report/
+/test-results/
+/coverage/
+*.lcov
+.playwright-mcp/
+
+# Playwright screenshots (but keep visual regression baselines)
+!tests/e2e/**/*-snapshots/*.png
+*.png
+
+# Lighthouse CI reports
+.lighthouseci/
+
+# ============================================
+# SUPABASE LOCAL FILES
+# ============================================
+supabase/.temp/
+supabase/.branches/
+supabase/.temp*
+
+# ============================================
+# ENVIRONMENT VARIABLES
+# ============================================
+.env
+.env*.local
+!.env.example
+
+# ============================================
+# BUILD OUTPUTS
+# ============================================
+/build/
+/dist/
+*.tsbuildinfo
+
+# ============================================
+# LOGS
+# ============================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# ============================================
+# OS FILES
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+
+# ============================================
+# IDE / EDITOR
+# ============================================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*.swn
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+
+# ============================================
+# TEMPORARY FILES
+# ============================================
+*.tmp
+*.temp
+.cache/
+.parcel-cache/
+
+# ============================================
+# VERCEL
+# ============================================
+.vercel
+
+# ============================================
+# MISC
+# ============================================
+*.pem
+.eslintcache
+
+# ============================================
+# GIT WORKTREES
+# ============================================
+.worktrees/
+
+# ============================================
+# PROJECT SPECIFIC - KEEP THESE
+# ============================================
+# .claude/       - Claude Code configuration (tracked)
+# _bmad/         - BMAD workflows (tracked)
+# docs/          - Trip planning docs (tracked)
+# tripflow-next/ - Next.js app (tracked)

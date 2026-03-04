@@ -1,0 +1,224 @@
+/* =========================================================================
+   Itinerary Page – Layout & Container Styles
+   Sub-component styles live in their respective CSS files:
+   - CityNavigator.css     — city pill navigation + progress bar
+   - DayNavigator.css      — day tab strip
+   - DayTimeline.css       — timeline container, empty/generating states
+   - ActivityCard.css       — activity cards, status badges, discussion
+   - TransitConnector.css   — transit pills between activities
+   - DaySummary.css         — right sidebar panel
+   ========================================================================= */
+
+.itinerary-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Header */
+.itinerary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.itinerary-header h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.itinerary-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.itinerary-dates {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 3px 12px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.itinerary-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* View Mode Toggle */
+.view-mode-toggle {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: var(--radius-md, 10px);
+  background: var(--bg-surface, hsl(0 0% 98%));
+  border: 1px solid var(--border-subtle, hsl(0 0% 90%));
+  width: fit-content;
+  margin-bottom: 12px;
+}
+
+.view-mode-btn {
+  padding: 6px 16px;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.view-mode-btn:hover {
+  color: var(--text-primary);
+}
+
+.view-mode-active {
+  background: var(--bg-base, white);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Content Split – 50/50 grid on desktop */
+.itinerary-content-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Left Panel */
+.itinerary-left-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: linear-gradient(135deg, var(--city-muted, transparent) 0%, transparent 60%);
+}
+
+.sticky-nav-area {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg-base) 92%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding-bottom: 8px;
+}
+
+/* Right Panel */
+.itinerary-right-panel {
+  position: sticky;
+  top: 80px;
+  height: calc(100vh - 120px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--city-glow, transparent), inset 0 0 20px var(--city-glow, transparent);
+  border: 1px solid var(--city-glow, transparent);
+}
+
+/* Shared utility – used across sub-components */
+.text-secondary {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+
+/* Tablet — Task 11: Show compact inline map instead of hiding */
+@media (max-width: 1024px) {
+  .itinerary-content-split {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .itinerary-right-panel {
+    position: relative;
+    top: auto;
+    height: 280px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    order: -1; /* Map above timeline */
+  }
+}
+
+/* Mobile — Task 11: Map-first with compact inline map */
+@media (max-width: 768px) {
+  .itinerary-container {
+    gap: 16px;
+  }
+
+  .itinerary-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .itinerary-header h2 {
+    font-size: 1.4rem;
+  }
+
+  .itinerary-header-actions {
+    width: 100%;
+  }
+
+  .itinerary-header-actions .btn {
+    flex: 1;
+  }
+
+  .itinerary-content-split {
+    gap: 12px;
+  }
+
+  .itinerary-right-panel {
+    height: 220px;
+  }
+
+  /* Hide FAB since map is now inline */
+  .map-fab {
+    display: none !important;
+  }
+}
+
+/* Map FAB — only visible below 1024px */
+.map-fab {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--city-color, var(--accent-primary));
+  color: white;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.map-fab:hover {
+  transform: scale(1.08);
+}
+
+@media (max-width: 1024px) {
+  .map-fab {
+    display: flex;
+  }
+}

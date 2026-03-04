@@ -1,0 +1,268 @@
+/* =========================================================================
+   ActivitySearch — Cmd+K search dialog
+   Prefix: .as-
+   ========================================================================= */
+
+/* Override Radix Dialog defaults for search-specific sizing */
+.as-dialog {
+  max-width: 560px;
+  padding: 0;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.18),
+    0 0 0 1px var(--border-subtle, hsl(0 0% 90%));
+}
+
+/* Search header with input */
+.as-search-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-subtle, hsl(0 0% 90%));
+}
+
+.as-search-icon {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.as-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  font-family: inherit;
+}
+
+.as-search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.as-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-surface-hover, hsl(0 0% 94%));
+  border: 1px solid var(--border-subtle, hsl(0 0% 88%));
+  font-size: 0.65rem;
+  font-family: inherit;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+/* Results list */
+.as-results {
+  max-height: 380px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px 0;
+}
+
+/* Scrollbar styling */
+.as-results::-webkit-scrollbar {
+  width: 6px;
+}
+
+.as-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.as-results::-webkit-scrollbar-thumb {
+  background: var(--border-subtle, hsl(0 0% 85%));
+  border-radius: 3px;
+}
+
+/* Empty / no-results state */
+.as-empty {
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* City group header */
+.as-city-group {
+  padding: 4px 0;
+}
+
+.as-city-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.as-city-header svg {
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* Individual result item */
+.as-result-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-primary);
+  border-radius: 0;
+  transition: background 0.1s ease;
+}
+
+.as-result-item:hover,
+.as-result-selected {
+  background: var(--bg-surface-hover, hsl(0 0% 95%));
+}
+
+.as-result-selected {
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 8%, transparent);
+}
+
+/* Result icon */
+.as-result-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--bg-surface-hover, hsl(0 0% 94%));
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.as-result-selected .as-result-icon {
+  background: color-mix(in srgb, var(--accent-primary, #6366f1) 15%, transparent);
+  color: var(--accent-primary, #6366f1);
+}
+
+/* Result info (title + meta stacked) */
+.as-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.as-result-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.as-result-meta {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status badge in results */
+.as-result-status {
+  flex-shrink: 0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover);
+  color: var(--text-secondary);
+}
+
+.as-status-booked {
+  background: color-mix(in srgb, #22c55e 12%, transparent);
+  color: #16a34a;
+}
+
+.as-status-paid {
+  background: color-mix(in srgb, #059669 12%, transparent);
+  color: #059669;
+}
+
+.as-status-pending {
+  background: color-mix(in srgb, #d97706 12%, transparent);
+  color: #d97706;
+}
+
+.as-status-must-do {
+  background: color-mix(in srgb, #a855f7 12%, transparent);
+  color: #9333ea;
+}
+
+.as-status-considering {
+  background: color-mix(in srgb, #2563eb 12%, transparent);
+  color: #2563eb;
+}
+
+.as-status-optional {
+  background: color-mix(in srgb, #64748b 12%, transparent);
+  color: #64748b;
+}
+
+.as-status-cancelled {
+  background: color-mix(in srgb, #dc2626 12%, transparent);
+  color: #dc2626;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .as-dialog {
+    max-width: calc(100vw - 32px);
+    margin: 16px;
+  }
+
+  .as-results {
+    max-height: 320px;
+  }
+
+  .as-search-header {
+    padding: 12px 14px;
+  }
+
+  .as-search-input {
+    font-size: 1rem; /* Prevent iOS zoom on focus */
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .as-dialog {
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.5),
+      0 0 0 1px var(--border-subtle);
+  }
+
+  .as-result-selected {
+    background: color-mix(in srgb, var(--accent-primary, #6366f1) 12%, transparent);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .as-result-item {
+    transition: none;
+  }
+}

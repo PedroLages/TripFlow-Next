@@ -1,0 +1,317 @@
+/* =========================================================================
+   TripOverview — Full Trip View (all 23 days, grouped by city)
+   Compact Gantt-style rows for quick scanning of entire trip.
+   ========================================================================= */
+
+.trip-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Summary bar */
+.to-summary {
+  display: flex;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md, 10px);
+  background: var(--bg-surface, hsl(0 0% 98%));
+  border: 1px solid var(--border-subtle, hsl(0 0% 90%));
+}
+
+.to-summary-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.to-summary-stat svg {
+  opacity: 0.6;
+}
+
+/* Filter tabs */
+.to-filters {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-md, 10px);
+  background: var(--bg-surface, hsl(0 0% 98%));
+  border: 1px solid var(--border-subtle, hsl(0 0% 90%));
+}
+
+.to-filter-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  background: transparent;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.to-filter-tab:hover {
+  background: var(--bg-surface-hover, hsl(0 0% 94%));
+}
+
+.to-filter-active {
+  background: var(--bg-base, white);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.to-filter-count {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 100px;
+  background: var(--bg-surface-hover, hsl(0 0% 92%));
+}
+
+.to-filter-active .to-filter-count {
+  background: var(--accent-primary, hsl(220, 70%, 55%));
+  color: white;
+}
+
+/* City sections */
+.to-city-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.to-city-section {
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid var(--border-subtle, hsl(0 0% 90%));
+  overflow: hidden;
+}
+
+/* City header */
+.to-city-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-surface, hsl(0 0% 98%));
+  border-bottom: 1px solid var(--border-subtle, hsl(0 0% 92%));
+}
+
+.to-city-hero-thumb {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm, 6px);
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid color-mix(in srgb, var(--city-color, #666) 30%, transparent);
+}
+
+.to-city-info {
+  min-width: 0;
+}
+
+.to-city-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.to-city-name svg {
+  color: var(--city-color, var(--text-secondary));
+}
+
+.to-city-dates {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Day rows */
+.to-day-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.to-day-row {
+  display: grid;
+  grid-template-columns: 28px 52px 8px 24px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle, hsl(0 0% 94%));
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.1s ease;
+  min-height: 44px;
+}
+
+.to-day-row:last-child {
+  border-bottom: none;
+}
+
+.to-day-row:hover {
+  background: var(--bg-surface-hover, hsl(0 0% 96%));
+}
+
+.to-day-dimmed {
+  opacity: 0.35;
+}
+
+.to-day-travel {
+  background: color-mix(in srgb, var(--city-color, #666) 4%, transparent);
+}
+
+/* Day number */
+.to-day-number {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Date */
+.to-day-date {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Density dot */
+.to-day-density {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Activity count */
+.to-day-count {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Key titles */
+.to-day-titles {
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.to-travel-label {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.to-empty-label {
+  color: var(--text-muted, hsl(0 0% 72%));
+  font-style: italic;
+}
+
+/* Status badges */
+.to-day-badges {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.to-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+}
+
+.to-badge-booked {
+  color: var(--status-booked, #16a34a);
+  background: color-mix(in srgb, var(--status-booked, #16a34a) 12%, transparent);
+}
+
+.to-badge-mustdo {
+  color: var(--status-mustdo, #9333ea);
+  background: color-mix(in srgb, var(--status-mustdo, #9333ea) 12%, transparent);
+}
+
+.to-badge-optional {
+  color: var(--status-optional, #6b7280);
+  background: color-mix(in srgb, var(--status-optional, #6b7280) 12%, transparent);
+}
+
+/* =========================================================================
+   Responsive
+   ========================================================================= */
+
+@media (max-width: 768px) {
+  .to-summary {
+    gap: 12px;
+    padding: 10px 12px;
+    flex-wrap: wrap;
+  }
+
+  .to-day-row {
+    grid-template-columns: 24px 44px 8px 20px 1fr auto;
+    gap: 6px;
+    padding: 6px 10px;
+  }
+
+  .to-day-titles {
+    font-size: 0.72rem;
+  }
+
+  .to-filters {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .to-filters::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   Dark Mode
+   ========================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  .to-summary,
+  .to-filters {
+    background: var(--bg-surface);
+    border-color: var(--border-subtle);
+  }
+
+  .to-city-section {
+    border-color: var(--border-subtle);
+  }
+
+  .to-city-header {
+    background: var(--bg-surface);
+    border-color: var(--border-subtle);
+  }
+
+  .to-day-row {
+    border-color: var(--border-subtle);
+  }
+}
