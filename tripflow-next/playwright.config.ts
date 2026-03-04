@@ -8,7 +8,7 @@ import { defineConfig, devices } from '@playwright/test';
  *   playwright-report/   – HTML report
  *
  * Key settings:
- *   headless: false      – browser window is visible during local runs
+ *   headless: true       – browser runs without visible window
  *   video: 'on'          – every test records a .webm video
  *   trace: 'on-first-retry' – full trace collected on first retry (for LLM analysis)
  *   screenshot: 'only-on-failure' – PNG captured only when a test fails
@@ -33,8 +33,8 @@ export default defineConfig({
   use: {
     baseURL: 'http://localhost:3100',
 
-    /* Visible browser – set to true in CI via env override */
-    headless: !!process.env.CI,
+    /* Headless mode – browser runs without visible window */
+    headless: true,
 
     /* Video recording for every test */
     video: 'on',
