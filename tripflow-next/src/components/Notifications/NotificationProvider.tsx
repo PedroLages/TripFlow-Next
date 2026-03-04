@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useMockAuth } from '@/lib/mock-auth'
+import { useAuth } from '@/lib/auth-context'
 import type { RealtimeChannel } from '@supabase/supabase-js'
 
 interface NotificationContextValue {
@@ -35,7 +35,7 @@ interface NotificationProviderProps {
 }
 
 export function NotificationProvider({ children }: NotificationProviderProps) {
-  const { user } = useMockAuth()
+  const { user } = useAuth()
   const [isRealtimeConnected, setIsRealtimeConnected] = useState(false)
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const [channel, setChannel] = useState<RealtimeChannel | null>(null)
@@ -43,6 +43,12 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
 
   // Setup Supabase realtime subscription
   useEffect(() => {
+    // Only setup realtime if user is authenticated
+    if (!user?.id) {
+      setIsRealtimeConnected(false)
+      return
+    }
+
     const supabase = createClient()
 
     // Subscribe to notifications for current user
@@ -82,7 +88,7 @@ export function NotificationProvider({ children }: NotificationProviderProps) {
     return () => {
       notificationChannel.unsubscribe()
     }
-  }, [user.id])
+  }, [user?.id])
 
   const openPanel = () => setIsPanelOpen(true)
   const closePanel = () => setIsPanelOpen(false)
