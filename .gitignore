@@ -27,6 +27,14 @@ next-env.d.ts
 /test-results/
 /coverage/
 *.lcov
+.playwright-mcp/
+
+# Playwright screenshots (but keep visual regression baselines)
+!tests/e2e/**/*-snapshots/*.png
+*.png
+
+# Lighthouse CI reports
+.lighthouseci/
 
 # ============================================
 # SUPABASE LOCAL FILES
@@ -105,6 +113,11 @@ Thumbs.db
 # ============================================
 *.pem
 .eslintcache
+
+# ============================================
+# GIT WORKTREES
+# ============================================
+.worktrees/
 
 # ============================================
 # PROJECT SPECIFIC - KEEP THESE

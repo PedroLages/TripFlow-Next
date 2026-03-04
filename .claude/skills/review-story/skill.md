@@ -23,9 +23,12 @@ All gates must use these exact names in `review_gates_passed`. No variants (e.g.
 | Gate | When added | Required for `reviewed: true` |
 |------|-----------|-------------------------------|
 | `build` | Pre-checks pass | Yes |
+| `bundle-size` | Pre-checks pass | Yes |
 | `lint` | Pre-checks pass (or skipped if no script) | Yes (or `lint-skipped`) |
 | `unit-tests` | Pre-checks pass (or skipped if no tests) | Yes (or `unit-tests-skipped`) |
 | `e2e-tests` | Pre-checks pass (or skipped if no tests) | Yes (or `e2e-tests-skipped`) |
+| `visual-regression` | Pre-checks pass (or skipped if no baselines) | Yes (or `visual-regression-skipped`) |
+| `performance` | Performance validation completes | Yes (or `performance-skipped` if Lighthouse not configured) |
 | `design-review` | Design review agent completes | Yes (or `design-review-skipped` if no UI changes) |
 | `code-review` | Code review agent completes | Yes |
 | `code-review-testing` | Test coverage agent completes | Yes |
@@ -36,30 +39,25 @@ The `-skipped` suffix indicates the gate was intentionally skipped (no lint scri
 
 0. **Worktree detection and navigation**:
 
-   Extract story key from `$ARGUMENTS` (e.g., `E04-S04` → `e04-s04`) or derive from current branch.
+   a. **Extract story key**:
+      - If `$ARGUMENTS` provided: Parse story key (e.g., `E04-S04` → `e04-s04`)
+      - If no arguments: Will derive from branch name in step 1, so skip to step 1 first, then return here
 
-   **Detection logic**:
-   1. List all worktrees: `git worktree list`
-   2. Search for a worktree with branch matching `feature/{story-key-lower}-*`
-   3. If found:
-      - Extract worktree path from output (first column)
-      - Check if already in that worktree: `pwd` matches worktree path
-      - **If NOT in worktree**: Navigate to it:
-        ```bash
-        cd {worktree-path}
-        ```
-      - Inform user: "📂 Found worktree for {story-id} at {path}"
-   4. If NOT found:
-      - Check current branch: `git branch --show-current`
-      - If current branch matches `feature/{story-key-lower}-*`:
-        - Continue in current location (main workspace)
-        - Inform user: "Working in main workspace"
-      - If current branch does NOT match:
-        - Check if branch exists: `git branch --list feature/{story-key-lower}-*`
-        - If exists: `git checkout feature/{story-key-lower}-{slug}`
-        - If not: STOP with error: "Branch for {story-id} not found. Run /start-story first."
+   b. **Check for worktree**:
+      - Run: `git worktree list`
+      - Search output for a worktree matching the story's branch pattern `feature/e##-s##-*` (lowercase)
+      - Example match: `feature/e04-s04-view-study-session-history`
 
-   **Result**: By the end of Step 0, you're in the correct directory (worktree or main) with the correct branch checked out.
+   c. **Navigate if found**:
+      - **Worktree exists**:
+        - Extract worktree path from `git worktree list` output (first column)
+        - Navigate: `cd <worktree-path>`
+        - Inform user: "📂 Navigating to worktree at `<worktree-path>`"
+      - **Worktree not found**:
+        - Check current branch: `git branch --show-current`
+        - If current branch matches story (`feature/e##-s##-*`): Continue in current location
+        - If on different branch: Switch to story branch: `git checkout feature/e##-s##-slug`
+        - Inform user: "Working in main workspace (no worktree detected)"
 
 1. **Identify story**: Parse ID from `$ARGUMENTS` or from branch name (`git branch --show-current` → `feature/e01-s03-...` → `E01-S03`).
 
@@ -80,24 +78,67 @@ The `-skipped` suffix indicates the gate was intentionally skipped (no lint scri
 
    Run these sequentially — stop on first failure:
 
-   a. `npm run build` — STOP on failure with build errors.
-   b. `npm run lint` — STOP on failure with lint errors (if lint script exists, otherwise skip).
-   c. `npm run test:unit -- --run` — STOP on failure. If no unit test script or no test files, note and continue.
-   d. E2E tests — run smoke specs + current story's spec on Chromium only:
+   a. `npm run build` — STOP on failure with build errors. On success: add `build` to `review_gates_passed`.
+
+   b. **Bundle size check** — `bash scripts/check-bundle-size.sh 5`
+      - Verify dist/ size < 5MB (prevents bloat)
+      - If size exceeds threshold, STOP with recommendation to run `npm run build:analyze` to investigate
+      - On success: add `bundle-size` to `review_gates_passed`
+
+   c. `npm run lint` — STOP on failure with lint errors (if lint script exists, otherwise skip).
+   d. `npm run test:unit -- --run` — STOP on failure. If no unit test script or no test files, note and continue.
+   e. E2E tests — run smoke specs + current story's spec on Chromium only:
       ```
       npx playwright test tests/e2e/navigation.spec.ts tests/e2e/overview.spec.ts tests/e2e/courses.spec.ts tests/e2e/story-{id}.spec.ts --project=chromium
       ```
       If the current story has no spec file in `tests/e2e/`, run smoke specs only. STOP on failure. Do NOT run `tests/design-review.spec.ts` or `tests/e2e/regression/` specs here — those are separate.
 
+   f. **Visual regression** — `npm run test:visual` (Chromium only)
+      - Compare screenshots against baselines in `tests/e2e/visual-regression.spec.ts-snapshots/`
+      - If diffs found: STOP with recommendation to review changes. Provide instructions to run `npm run test:visual:update` to update baselines if changes are intentional.
+      - If no baselines exist (first run): Skip with note: "No visual baselines found. Run `npm run test:visual:update` to create initial baselines."
+      - If test file doesn't exist: Skip silently (visual regression not configured).
+      - On success: add `visual-regression` to `review_gates_passed`
+
    If any pre-check fails: show the error output, suggest fixes, and STOP. Do not proceed to reviews. Keep `reviewed: in-progress` so next run resumes.
 
    On success: update `review_gates_passed` using canonical gate names:
-   - Always add: `build`
+   - Always add: `build`, `bundle-size`
    - Add `lint` if lint ran and passed, or `lint-skipped` if no lint script exists
    - Add `unit-tests` if tests ran and passed, or `unit-tests-skipped` if no test files
    - Add `e2e-tests` if tests ran and passed, or `e2e-tests-skipped` if no test files
+   - Add `visual-regression` if tests ran and passed, or `visual-regression-skipped` if no baselines exist or test file doesn't exist
 
-5. **Design review** (conditional, skippable on resume):
+5. **Performance Budget Validation** (conditional, skippable on resume):
+
+   **Skip condition**: If resuming AND `performance` is already in `review_gates_passed` — skip with message: "Performance validation already completed."
+
+   **Skip if no Lighthouse**: If `npm run lighthouse` script doesn't exist or `lighthouserc.cjs` not found:
+   - Add `performance-skipped` to `review_gates_passed`.
+   - Note in consolidated report: "Skipped — Lighthouse not configured."
+
+   **Run Lighthouse CI**:
+
+   Run: `npm run lighthouse` (configured to test against Vite preview on localhost:4173)
+
+   **Validates:**
+   - Performance score ≥ 90%
+   - Accessibility score ≥ 90%
+   - Core Web Vitals: FCP < 2s, LCP < 2.5s, CLS < 0.1
+   - Total Blocking Time < 300ms
+   - Speed Index < 3s
+
+   **Behavior:**
+   - If performance score < 90%: STOP with specific failing metrics. Show which pages failed and scores.
+   - If accessibility score < 90%: STOP (design review will also catch accessibility issues).
+   - If Core Web Vitals fail: WARN (don't block, but include in report).
+   - If Lighthouse run fails (e.g., preview server unreachable): STOP and suggest manual check.
+
+   On success: add `performance` to `review_gates_passed`.
+
+   **Report location:** Lighthouse HTML reports saved to `.lighthouseci/` directory.
+
+6. **Design review** (conditional, skippable on resume):
 
    **Skip condition**: If resuming AND `design-review` is already in `review_gates_passed` AND the report file `docs/reviews/design/design-review-*-{story-id}.md` exists — skip with message: "Design review already completed. Report: [path]".
 
@@ -212,7 +253,7 @@ The `-skipped` suffix indicates the gate was intentionally skipped (no lint scri
 
 9. **Mark reviewed** (with gate validation):
 
-   **Validate all required gates** before marking `reviewed: true`. Check that `review_gates_passed` contains one entry (base or `-skipped` variant) for each of the 7 canonical gates: `build`, `lint`, `unit-tests`, `e2e-tests`, `design-review`, `code-review`, `code-review-testing`.
+   **Validate all required gates** before marking `reviewed: true`. Check that `review_gates_passed` contains one entry (base or `-skipped` variant) for each of the 10 canonical gates: `build`, `bundle-size`, `lint`, `unit-tests`, `e2e-tests`, `visual-regression`, `performance`, `design-review`, `code-review`, `code-review-testing`.
 
    - **All gates present**: Set `reviewed: true`. Set `review_gates_passed` to the full list. Append review summary to `## Design Review Feedback` and `## Code Review Feedback` sections.
    - **Missing gates**: Do NOT set `reviewed: true`. Keep `reviewed: in-progress`. Warn the user:

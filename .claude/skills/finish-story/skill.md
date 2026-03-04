@@ -32,30 +32,25 @@ Adaptive shipping skill. Detects whether `/review-story` was already run and adj
 
 0. **Worktree detection and navigation**:
 
-   Extract story key from `$ARGUMENTS` (e.g., `E04-S04` → `e04-s04`) or derive from current branch.
+   a. **Extract story key**:
+      - If `$ARGUMENTS` provided: Parse story key (e.g., `E04-S04` → `e04-s04`)
+      - If no arguments: Will derive from branch name in step 1, so skip to step 1 first, then return here
 
-   **Detection logic**:
-   1. List all worktrees: `git worktree list`
-   2. Search for a worktree with branch matching `feature/{story-key-lower}-*`
-   3. If found:
-      - Extract worktree path from output (first column)
-      - Check if already in that worktree: `pwd` matches worktree path
-      - **If NOT in worktree**: Navigate to it:
-        ```bash
-        cd {worktree-path}
-        ```
-      - Inform user: "📂 Found worktree for {story-id} at {path}"
-   4. If NOT found:
-      - Check current branch: `git branch --show-current`
-      - If current branch matches `feature/{story-key-lower}-*`:
-        - Continue in current location (main workspace)
-        - Inform user: "Working in main workspace"
-      - If current branch does NOT match:
-        - Check if branch exists: `git branch --list feature/{story-key-lower}-*`
-        - If exists: `git checkout feature/{story-key-lower}-{slug}`
-        - If not: STOP with error: "Branch for {story-id} not found. Run /start-story first."
+   b. **Check for worktree**:
+      - Run: `git worktree list`
+      - Search output for a worktree matching the story's branch pattern `feature/e##-s##-*` (lowercase)
+      - Example match: `feature/e04-s04-view-study-session-history`
 
-   **Result**: By the end of Step 0, you're in the correct directory (worktree or main) with the correct branch checked out.
+   c. **Navigate if found**:
+      - **Worktree exists**:
+        - Extract worktree path from `git worktree list` output (first column)
+        - Navigate: `cd <worktree-path>`
+        - Inform user: "📂 Navigating to worktree at `<worktree-path>`"
+      - **Worktree not found**:
+        - Check current branch: `git branch --show-current`
+        - If current branch matches story (`feature/e##-s##-*`): Continue in current location
+        - If on different branch: Switch to story branch: `git checkout feature/e##-s##-slug`
+        - Inform user: "Working in main workspace (no worktree detected)"
 
 1. **Identify story**: Parse ID from `$ARGUMENTS` or from branch name (`git branch --show-current` → `feature/e01-s03-...` → `E01-S03`).
 
@@ -176,7 +171,7 @@ Adaptive shipping skill. Detects whether `/review-story` was already run and adj
       You can:
       • Make additional changes and commit them
       • Run /finish-story again after PR is merged
-      • Or manually cleanup: worktree-cleanup {story-key-lower}
+      • Or manually cleanup: bash scripts/worktree-cleanup.sh {story-key-lower}
 
       [If in worktree, show:]
       Worktree location: {worktree-path}
@@ -194,9 +189,14 @@ Adaptive shipping skill. Detects whether `/review-story` was already run and adj
         MAIN_WORKSPACE=$(dirname "$(git rev-parse --show-toplevel)" | sed 's/-worktrees$//')
         cd "$MAIN_WORKSPACE"
         ```
-      - Clean up worktree:
+      - Clean up worktree (check if script exists first):
         ```bash
-        worktree-cleanup "${STORY_KEY}"
+        if [ -f "scripts/worktree-cleanup.sh" ]; then
+          bash scripts/worktree-cleanup.sh "${STORY_KEY}"
+        else
+          echo "⚠️  Warning: scripts/worktree-cleanup.sh not found"
+          echo "Manual cleanup: git worktree remove {path} && git branch -D {branch}"
+        fi
         ```
       - Checkout main and pull:
         ```bash
@@ -303,7 +303,7 @@ Adaptive shipping skill. Detects whether `/review-story` was already run and adj
 - **Step 9 fail** (push): Check `git remote -v`, fix remote config, re-run.
 - **Step 10 fail** (PR): Check `gh auth status`, authenticate if needed, re-run.
 - **Step 12 (PR not merged yet)**: Re-run `/finish-story` after merge. Worktree stays active for additional changes.
-- **Step 13b fail** (worktree cleanup): If `worktree-cleanup` fails, manually remove: `git worktree remove {path} && git branch -D {branch}`.
+- **Step 13b fail** (worktree cleanup): If `bash scripts/worktree-cleanup.sh` fails, manually remove: `git worktree remove {path} && git branch -D {branch}`.
 
 ## Common Mistakes
 
