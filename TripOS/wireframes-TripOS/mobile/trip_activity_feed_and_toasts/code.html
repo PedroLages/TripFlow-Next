@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Activity Feed</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecc8",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#10221f",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased h-screen overflow-hidden flex justify-center">
+<!-- Mobile Container -->
+<div class="w-full max-w-md h-screen bg-white dark:bg-slate-950 shadow-2xl relative flex flex-col">
+<!-- Top Status Bar (iOS Style) -->
+<div class="px-6 pt-4 pb-2 flex justify-between items-center text-xs font-semibold">
+<span>9:41</span>
+<div class="flex items-center space-x-1.5">
+<span class="material-icons-round text-[14px]">signal_cellular_alt</span>
+<span class="material-icons-round text-[14px]">wifi</span>
+<span class="material-icons-round text-[14px]">battery_full</span>
+</div>
+</div>
+<!-- Header -->
+<header class="px-6 py-4 flex items-center justify-between border-b border-primary/10">
+<div>
+<h1 class="text-xl font-bold tracking-tight">Europe Summer '24</h1>
+<p class="text-xs text-slate-500 font-medium">8 members • 12 days to go</p>
+</div>
+<div class="relative">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-icons-round text-slate-600 dark:text-slate-300">notifications</span>
+</button>
+<div class="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 border-2 border-white dark:border-slate-950 rounded-full flex items-center justify-center">
+<span class="text-[10px] text-white font-bold leading-none">3</span>
+</div>
+</div>
+</header>
+<!-- Main Content (Activity Feed) -->
+<main class="flex-1 overflow-y-auto px-6 py-4 space-y-6 pb-40">
+<!-- Today Section -->
+<section>
+<h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Today</h2>
+<div class="space-y-4">
+<!-- Activity Item 1: Vote -->
+<div class="flex items-start gap-4">
+<div class="relative flex-shrink-0">
+<img alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" data-alt="Close up portrait of a young man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE12wiwZGvx9laahLOjvjecKhy69I9UVQ--9JR1eL08np1TEAc2bfi9bs82sRh9jjlWd1sWLIp2y6n1T0mH__QaOm-gk7-RCDKv068OybwvDbEAU1Y_ew7USRnlpDrdNdJTQF4hEz375lb96YCyJg7SC2dXatoXFqMIbzEcdbx2H90NEhpP_bIZjCcN5EeRXsMHjkEWtM5EVOYEqbvd5qaKtCtMas4AcOtMC-X0LYcga4z0fpfJ74DOfTFQSi9YwxJBuGKKE1yI0c"/>
+<div class="absolute -bottom-1 -right-1 bg-primary p-1 rounded-full shadow-sm">
+<span class="material-icons-round text-[12px] text-slate-900 leading-none">how_to_vote</span>
+</div>
+</div>
+<div class="flex-1 pt-1">
+<div class="flex justify-between items-start">
+<p class="text-sm">
+<span class="font-bold">Alex</span> voted on 
+                                    <span class="font-semibold text-primary/80 dark:text-primary underline decoration-primary/30">Dinner at Trattoria</span>
+</p>
+<span class="text-[10px] text-slate-400 font-medium whitespace-nowrap ml-2">2h ago</span>
+</div>
+<div class="mt-2 bg-slate-50 dark:bg-slate-900/50 p-3 rounded-lg border border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-icons-round text-primary text-sm">check_circle</span>
+<span class="text-xs text-slate-600 dark:text-slate-400 italic">"Looks great, they have amazing pasta!"</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Item 2: Comment -->
+<div class="flex items-start gap-4">
+<div class="relative flex-shrink-0">
+<img alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" data-alt="Smiling woman with long hair portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwHw8_OpbdZuiO6bB8_j5aDUdopA1vABLcUXVfKyVmP_43UCFZgJuLAPlgba2d3RANmKTZ-5kxEEI9z0w86RD2G4WFwVFqN6BrGU7RXRZqd007B1rVyYA6YBhZ4OLDculA6IuCE_x89Ns5qcUVt95KBWR-QldDoBNL4KzdAEwtwXKWlGVChTXciV82CoEUEUlyBj5Q66d4--pGBY-rmlobwoGuGaDs7moqdHKuTyUUgA0ZxlTYr1e4oGCTwh5Hxfznmi2Wl1zzf-E"/>
+<div class="absolute -bottom-1 -right-1 bg-slate-200 dark:bg-slate-700 p-1 rounded-full shadow-sm">
+<span class="material-icons-round text-[12px] text-slate-600 dark:text-slate-300 leading-none">chat_bubble</span>
+</div>
+</div>
+<div class="flex-1 pt-1">
+<div class="flex justify-between items-start">
+<p class="text-sm">
+<span class="font-bold">Sarah</span> commented on 
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">Hotel options</span>
+</p>
+<span class="text-[10px] text-slate-400 font-medium whitespace-nowrap ml-2">4h ago</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Yesterday Section -->
+<section>
+<h2 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Yesterday</h2>
+<div class="space-y-4">
+<!-- Activity Item 3: New Activity -->
+<div class="flex items-start gap-4">
+<div class="relative flex-shrink-0">
+<img alt="User Avatar" class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900 shadow-sm" data-alt="Middle aged man with glasses avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb_aeaDl8YhAveW9o0xz4yzaumAH__0_j575rVPUmhIK_bIAPusIWLGoEbAe1qPEqhx5sUsaheBwvmC1yYdF2MADFdEV1qzl97V6M_BAgaAQvwQzi4hWVmwdZ3f-kmi_otwc8YFowasSjapMDx5fDf1VCQA_zwbUcOmM2ajNiX6DbatwWRbKaITl1xm5lc_2ib5MWlHMsGgxgANuYXJz-uzt7ueyOt_nWQpBDoQifCetQg2fVHCf9t8f-D2wX7Gznb5LJmCjrdz9A"/>
+<div class="absolute -bottom-1 -right-1 bg-primary/20 dark:bg-primary/30 p-1 rounded-full shadow-sm">
+<span class="material-icons-round text-[12px] text-primary dark:text-primary leading-none">add_location_alt</span>
+</div>
+</div>
+<div class="flex-1 pt-1">
+<div class="flex justify-between items-start">
+<p class="text-sm">
+<span class="font-bold">Jamie</span> added 
+                                    <span class="font-semibold text-slate-700 dark:text-slate-300">Eiffel Tower Tour</span>
+</p>
+<span class="text-[10px] text-slate-400 font-medium whitespace-nowrap ml-2">22h ago</span>
+</div>
+<div class="mt-3 relative rounded-xl overflow-hidden h-32 w-full border border-slate-200 dark:border-slate-800">
+<img alt="Activity Preview" class="w-full h-full object-cover" data-alt="View of the Eiffel Tower at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7XH14geke_6-PvTcaXIctBwjrG4z4NkOZTR8SK_HWngGXH05cDhL2DQRiq6ugkWN1CDyy8thfvqr9ATh0_tz7dxcyw4uvLC-A36bHiPF7H0H5Z9qnhgYIN5A7RBWyma0rNQhE2x4G8nfBTQDrMBNNkIjPI_o1iifVwnd4V0OvBu4tFH4H28bTcN3hm9t9yPp7JRxHdN7IDB1EKnEotSvqFuVPbv-uQ56kUjtp1p2lCLg5YfoFxCRBlkEvAp8Rr_hCCCKb4RlXvxQ"/>
+<div class="absolute bottom-2 left-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1">
+<span class="material-icons-round text-[12px] text-primary">place</span>
+<span class="text-[10px] font-bold text-slate-800 dark:text-slate-100 uppercase">Paris, France</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Toast Notification (Success) -->
+<div class="absolute bottom-24 left-6 right-6 z-50">
+<div class="bg-slate-900/95 dark:bg-slate-100/95 text-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-xl flex items-center justify-between backdrop-blur-sm border border-white/10">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-1 rounded-full">
+<span class="material-icons-round text-primary text-sm font-bold">check_circle</span>
+</div>
+<span class="text-sm font-medium">Budget updated successfully</span>
+</div>
+<button class="opacity-50 hover:opacity-100">
+<span class="material-icons-round text-sm">close</span>
+</button>
+</div>
+</div>
+<!-- Bottom Navigation Bar -->
+<nav class="absolute bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 px-6 pb-8 pt-2">
+<div class="flex justify-between items-center max-w-sm mx-auto">
+<button class="flex flex-col items-center gap-1 group">
+<span class="material-icons-round text-slate-400 group-hover:text-primary transition-colors">home</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<span class="material-icons-round text-slate-400 group-hover:text-primary transition-colors">poll</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Polls</span>
+</button>
+<!-- Active Tab -->
+<button class="flex flex-col items-center gap-1 relative">
+<div class="absolute -top-1 w-1 h-1 bg-primary rounded-full"></div>
+<span class="material-icons-round text-primary">grid_view</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-tighter">Overview</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<span class="material-icons-round text-slate-400 group-hover:text-primary transition-colors">payments</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Budget</span>
+</button>
+<button class="flex flex-col items-center gap-1 group">
+<span class="material-icons-round text-slate-400 group-hover:text-primary transition-colors">settings</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-tighter">Settings</span>
+</button>
+</div>
+</nav>
+<!-- Home Indicator (iOS) -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
+</div>
+</body></html>

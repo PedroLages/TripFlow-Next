@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - My Trips</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "vote-subtle": "#e0e7ff",
+                        "vote-text": "#4338ca",
+                        "privacy-subtle": "#dcfce7",
+                        "privacy-text": "#15803d",
+                        "warning-subtle": "#fef3c7",
+                        "warning-text": "#b45309",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Status Bar Spacer (iOS Style) -->
+<div class="h-12 w-full bg-background-light dark:bg-background-dark sticky top-0 z-50"></div>
+<!-- Material 3 Top App Bar -->
+<header class="sticky top-12 z-40 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons-round text-white text-xl">explore</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">TripOS</h1>
+</div>
+<button class="relative p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons-round">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light dark:border-background-dark"></span>
+</button>
+</header>
+<!-- Filter Pills Row -->
+<div class="overflow-x-auto hide-scrollbar flex items-center gap-2 px-4 py-4">
+<button class="px-5 py-2 bg-primary text-white rounded-full text-sm font-semibold shadow-sm whitespace-nowrap">
+            All Trips
+        </button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium whitespace-nowrap">
+            Upcoming
+        </button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium whitespace-nowrap">
+            Voting
+        </button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-sm font-medium whitespace-nowrap">
+            Past
+        </button>
+</div>
+<!-- Content Area -->
+<main class="px-4 space-y-6">
+<!-- Section: Active/Upcoming -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-lg font-bold">Current &amp; Next</h2>
+<button class="text-primary text-sm font-semibold">View All</button>
+</div>
+<!-- Featured Trip Card -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 relative">
+<div class="h-40 w-full relative">
+<img alt="Paris Trip" class="w-full h-full object-cover" data-alt="Scenic view of the Eiffel Tower at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKs9KJuMmGdLbmDlYpPfrXLY5YjD_tvHZkSIPaBneCJdVG4SYykq0Qt1p1YfYu7nCASuHdVCOWHk6J__0oHbYXyiM4oAKLXnTeNT_kAIWSK6at_2qt9CDkVFtKMTyeZhXJKxWQ6DbCuPtfB2J4Ja84rsIYwvHxvuFhYqsNF3rUsRNYpYpLPXANZ8Ogp-UIhHd-aCOfAJGp9S7NY7Z7P0jznWbQqfhR2uasDmAL005gL7chbZqlUT1BINPDs-ucrr2JWx_xhGYrvCY"/>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-1">
+<span class="material-icons-round text-primary text-xs">group</span>
+<span class="text-[10px] font-bold">8 People</span>
+</div>
+</div>
+<div class="p-4 space-y-4">
+<div>
+<h3 class="text-xl font-bold">Spring Break in Paris</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Apr 12 - Apr 18, 2024</p>
+</div>
+<!-- Status Badges -->
+<div class="flex flex-wrap gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-vote-subtle text-vote-text rounded-lg">
+<span class="material-icons-round text-sm">how_to_vote</span>
+<span class="text-xs font-bold">3 Active Polls</span>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-privacy-subtle text-privacy-text rounded-lg">
+<span class="material-icons-round text-sm">account_balance_wallet</span>
+<span class="text-xs font-bold">On Budget</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="User avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB_i_jB5XKfaH2qUYhPabszfsi__6jIpwxTRLGijyrONESPnjVPyKNcPDO4XwMJU_7knx7NYAbrYnCkF5K-gW3WlnORJWya1Lb1IKPjyXY1PLgpQD4QT4gv2SaoWu2CVLXwgYDbJCWFNMQ8ZxUWx7rx80E_4zLoPXh7gxkDwqsoO3dnBQ7DB_hgbQqvBcS2kueXCJDuf9UK8WMYCjWig3ybbpx4LWI4EBPulguz7orq42k4ya_zkTiycXQ94dZllMEoiIF7WYgf1Q"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="User avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlDuYT9n4WNiwa_fFkO1Xldll4LKJBS36_H07nV7A_oQVlSk4QkdwvansU-7TZj-5Dacf6K7y8m70wG37srwcIz24lc4G4QP3fG-ukgwNUyddiL6cS1XxIR97k0TnZpA5sXEPEwv5_Im0M2DRxCw4WS2gi0DVu_5qhVQfUBcIl4k9M2L6Hce3ELvj32wCa4_vDKEbuJzZRnikLswCksRyLGBt3OvS5G1EjcEgKVBBHZcOEkPAEGtqKDQjX2Xu5Wfs7f4BnSepLrYQ"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800" data-alt="User avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-hl2hbb1TT5CasSwGcfOEWpa-4t0Pnm4SfKrlJQKJai1fPFD7GmNizBD6ogWm9Umni0sEdVoXv5np9dbw8pS5E3Rr0yzgT2m1NIn1C9I-5Q3P6fHuI6EpO3lm7j87vUGjC1ht8QmZDv_P_VJ9y3vlvtmecwxZlSJwcvbrvXmugWfqyPlgQqmpEnwY4jjH_7Yhbqu9VM6BcS6aWfHHpiQtqJTflcSev7GD9PJeoR4rq36g0R00CiVk5eQ_fcewvNOF8xERUinNLLg"/>
+<div class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center border-2 border-white dark:border-slate-800">
+<span class="text-[10px] font-bold">+5</span>
+</div>
+</div>
+<span class="text-xs text-slate-400 font-medium italic">Shared with "The Crew"</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: More Trips -->
+<section class="space-y-4">
+<h2 class="text-lg font-bold">Planned Trips</h2>
+<!-- Standard Trip Card 1 -->
+<div class="flex bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 h-32">
+<div class="w-28 h-full">
+<img alt="Beach Trip" class="w-full h-full object-cover" data-alt="Beautiful turquoise ocean waves on white sand" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBpiqFrdkFMV7_RgCwvBQkNunXUGN8R0g7rkA7SGwQM3CoDz1vqIVNEAjB2FYTZv4Gi7vEVR7mc_cczRqBhnlRutlJwk1caAZsrD6D00d8wAh66e2qAtecFhssgLZHenGyvq-0WoRE59aNJZSAIYfmAIQXory_2NhlMfFCELMDmHf71_S3L3dR9aMqKL8zI6ChH4Eenej5aTsWbHOmMVmg81-cD_2Z8Qz6V2IVAJXdHhwKUcYtom2a6bCUiHXZOT_WJ_b1gd3-_Mc"/>
+</div>
+<div class="flex-1 p-3 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-base leading-tight">Amalfi Coast Getaway</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">June 2024 • 4 People</p>
+</div>
+<div class="flex gap-2">
+<div class="px-2 py-1 bg-warning-subtle text-warning-text rounded-md text-[10px] font-bold flex items-center gap-1">
+<span class="material-icons-round text-xs">priority_high</span>
+                            Needs Voting
+                        </div>
+<div class="px-2 py-1 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-md text-[10px] font-bold">
+                            Draft
+                        </div>
+</div>
+</div>
+</div>
+<!-- Standard Trip Card 2 -->
+<div class="flex bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 h-32">
+<div class="w-28 h-full">
+<img alt="City Trip" class="w-full h-full object-cover" data-alt="Night skyline of Tokyo with neon lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNi2z-HtdJnGLH-pGXdMHii_FV7pyYfLlB_uB73j7RHj1VxaLgHJvj9WhDgUo_Pnf4632eps2JffLPX_cAAZy8DhtCELBo_W5MYsHNc3DyenTI5dj8FPhE7QmR3LeyrZqecNKhEbQriasKqaB-mFEIWNggKgUWXR13QUE6gofPTkGqu9woz1vlIpRV1Z7rEkBWhObb6PQ2QDelX5PXwLi4we8jTEZCH_J07JG7PQFgd9vcqKRI228memXNq5dnAyEivXHL94xqOUw"/>
+</div>
+<div class="flex-1 p-3 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-base leading-tight">Tokyo Adventure</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Oct 2024 • 2 People</p>
+</div>
+<div class="flex gap-2">
+<div class="px-2 py-1 bg-privacy-subtle text-privacy-text rounded-md text-[10px] font-bold flex items-center gap-1">
+<span class="material-icons-round text-xs">done_all</span>
+                            Confirmed
+                        </div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-50">
+<span class="material-icons-round text-3xl">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 px-6 py-3 pb-8 z-50">
+<div class="flex justify-around items-center max-w-sm mx-auto">
+<!-- Tab 1: My Trips (Active) -->
+<button class="relative flex flex-col items-center gap-1 group">
+<div class="absolute -top-1 px-8 py-4 bg-primary/10 rounded-full transition-all"></div>
+<span class="material-icons-round text-primary z-10">luggage</span>
+<span class="text-xs font-bold text-primary z-10">My Trips</span>
+</button>
+<!-- Tab 2: Profile -->
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons-round">person</span>
+<span class="text-xs font-medium">Profile</span>
+</button>
+</div>
+</nav>
+<!-- Map Context Hint (Invisible but required by task if map exists) -->
+<!-- (No map visible in this specific mobile dashboard view, focusing on list/card layout) -->
+</body></html>

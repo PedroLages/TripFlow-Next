@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>TripOS - Cast Vote</title>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "vote-purple": "#7c3aed",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Navigation Header -->
+<nav class="border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-icons text-white text-sm">flight_takeoff</span>
+</div>
+<span class="font-bold text-xl tracking-tight">TripOS</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="User profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDDMFjHqfInmTI0otSOQEwMEQKHSzC8TOv0V4AtQWhwoAcqTEW1IEEWVlUT7W_f5wn6Sfi5HDS_3j_bN-sudPv0LUjTiPxsHEwYke2U3NogTpEAD4oaBXi1bk2HuUc36sIU6Fyxa1hqf2qf1fMbjf4t5PvXRhtrjE1d85el6UxPyXPROdPiwWSrY8YP2uUo67rGrVlYmyG0TmzEi3-Y9eVmqDGvXEAVod7CXTkVXezqnCB1lRgNaqQhRtxRiunLQhAhY8l4m_Ic-E"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow flex items-center justify-center p-6">
+<div class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Poll Header Area -->
+<div class="p-8 pb-4">
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<span class="px-3 py-1 bg-vote-purple/10 text-vote-purple text-xs font-semibold rounded-full border border-vote-purple/20 tracking-wide uppercase">Yes/No Poll</span>
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-icons text-sm">lock</span>
+<span>Anonymous</span>
+</div>
+</div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white leading-tight mb-8">
+                    Confirm Catamaran Tour for Saturday?
+                </h1>
+<!-- Quorum Progress -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">Quorum Progress</span>
+<span class="text-sm font-bold text-vote-purple">40% <span class="text-xs font-normal text-slate-400 ml-1">(4/10 votes)</span></span>
+</div>
+<div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-vote-purple rounded-full w-[40%]"></div>
+</div>
+</div>
+</div>
+<!-- Context Info -->
+<div class="px-8 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-white dark:bg-slate-700 flex items-center justify-center shadow-sm">
+<span class="material-icons text-vote-purple">sailing</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Activity Details</p>
+<p class="text-sm text-slate-700 dark:text-slate-200">Santorini Coastline Cruise • 10:00 AM - 4:00 PM</p>
+</div>
+</div>
+<!-- Voting Area -->
+<div class="p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Yes Button -->
+<button class="group relative flex flex-col items-center justify-center p-8 rounded-xl border-2 border-vote-purple bg-vote-purple/[0.04] hover:bg-vote-purple/[0.08] transition-all duration-200">
+<div class="w-16 h-16 rounded-full bg-vote-purple text-white flex items-center justify-center mb-4 shadow-lg shadow-vote-purple/30 group-hover:scale-110 transition-transform">
+<span class="material-icons text-3xl">check</span>
+</div>
+<span class="text-xl font-bold text-vote-purple">Yes</span>
+<span class="text-sm text-vote-purple/60 mt-1 font-medium italic">I'm in!</span>
+</button>
+<!-- No Button -->
+<button class="group relative flex flex-col items-center justify-center p-8 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/30 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-200">
+<div class="w-16 h-16 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-icons text-3xl">close</span>
+</div>
+<span class="text-xl font-bold text-slate-600 dark:text-slate-300">No</span>
+<span class="text-sm text-slate-400 mt-1 font-medium italic">Not for me</span>
+</button>
+</div>
+<!-- Abstain Option -->
+<div class="mt-8 flex justify-center">
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-sm font-medium flex items-center gap-2 transition-colors">
+<span class="material-icons text-sm">remove_circle_outline</span>
+                        Abstain from this vote
+                    </button>
+</div>
+</div>
+<!-- Footer Meta -->
+<div class="px-8 py-4 border-t border-slate-100 dark:border-slate-800 text-center">
+<p class="text-xs text-slate-400">
+                    Poll created by <span class="font-semibold">Alex M.</span> • Ends in 24 hours
+                </p>
+</div>
+</div>
+</main>
+<!-- Map Preview Element (Hidden or Decorative) -->
+<div class="fixed bottom-8 right-8 w-48 h-48 rounded-xl overflow-hidden border-4 border-white dark:border-slate-700 shadow-2xl opacity-50 grayscale hover:grayscale-0 transition-all cursor-pointer hidden lg:block">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10"></div>
+<p class="absolute bottom-3 left-3 z-20 text-white text-[10px] font-bold uppercase tracking-widest">Meeting Point</p>
+<img class="w-full h-full object-cover" data-alt="Stylized map of Santorini coast" data-location="Santorini" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2EAMrpfRQDFRTi46Q9IrXDDlSxyXDc6HZAWq_n0QoGNwQvmO5Mqev3vR33r08bD9S35PPB9JkuFszl5MkMf6B-iWEOu0TPl6Vqv_S3oI2NR86je5CoeHjAE1w71qEzZEsjWuoQQ_J9B-pB9DmF4WyUhF5nxPMoMUilhiPl27FiC--Cqyp95Bk-FsFDRiMNXA7eOA-0douA8-MlJIyfIYTvaaN7958_3MkUHVNChfbLFu65hDbjx6iJ_Fc-Ldwpz9q95fU7s7R5Go"/>
+</div>
+</body></html>

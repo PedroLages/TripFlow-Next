@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>TripOS - Sign Up</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-safe-top {
+            padding-top: env(safe-area-inset-top, 44px);
+        }
+        .ios-safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 34px);
+        }
+        .material-ripple:active {
+            background-color: rgba(29, 79, 215, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Status Bar Spacer (iOS Style) -->
+<div class="ios-safe-top bg-transparent"></div>
+<main class="flex-1 flex flex-col items-center justify-center px-6 py-8 max-w-md mx-auto w-full">
+<!-- Brand Header -->
+<div class="text-center mb-10">
+<div class="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-xl mb-4 shadow-lg shadow-primary/20">
+<span class="material-icons text-white text-3xl">flight_takeoff</span>
+</div>
+<h1 class="text-3xl font-extrabold tracking-tight mb-2">TripOS</h1>
+<p class="text-slate-500 dark:text-slate-400 font-medium">Travel together, better.</p>
+</div>
+<!-- Social Buttons -->
+<div class="w-full space-y-3 mb-8">
+<button class="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 active:scale-[0.98] transition-all material-ripple">
+<img alt="Google Logo" class="w-5 h-5" data-alt="Google company logo multi-color icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQTfJ9Qp4Bt8z-p84RPwpJlRAgk7oz6SLmntTH0g1oTX8kfUh8CrDuTdC7UbXCrn8CJOIxxHrpEb8vr_HDksDOWR7Fl7vXyFjInaTJH4c6Qrgtjq37rQICQmTAu6YCYoDL39IfN0tfXc6j0zdc2xKvbp9aXtfQOgflkhO4rxUzVWFOojVhCtRPWlzR2o5vBistiqIx-SREGsgWr1uyl0I9saE1mO-zXrsQ7e_hcH-A4jbbZDL0J4yQrWiSU9NhrdY4KTik2zV9-EY"/>
+<span>Continue with Google</span>
+</button>
+<button class="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 active:scale-[0.98] transition-all material-ripple">
+<span class="material-icons text-xl">apple</span>
+<span>Continue with Apple</span>
+</button>
+</div>
+<!-- Divider -->
+<div class="w-full flex items-center gap-4 mb-8">
+<div class="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
+<span class="text-sm font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wider">or</span>
+<div class="flex-1 h-px bg-slate-200 dark:bg-slate-700"></div>
+</div>
+<!-- Email Sign Up Form -->
+<form class="w-full space-y-6" onsubmit="return false;">
+<div class="space-y-4">
+<!-- Outlined Email Field -->
+<div class="relative group">
+<input class="peer w-full px-4 pt-6 pb-2 bg-transparent border-2 border-slate-200 dark:border-slate-700 rounded-lg focus:border-primary dark:focus:border-primary focus:ring-0 outline-none transition-colors text-slate-900 dark:text-white" id="email" placeholder=" " required="" type="email"/>
+<label class="absolute left-4 top-4 text-slate-500 dark:text-slate-400 transition-all duration-200 pointer-events-none origin-left peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-primary peer-[:not(:placeholder-shown)]:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-3" for="email">
+                        Email Address
+                    </label>
+</div>
+<!-- Outlined Password Field -->
+<div class="relative group">
+<input class="peer w-full px-4 pt-6 pb-2 bg-transparent border-2 border-slate-200 dark:border-slate-700 rounded-lg focus:border-primary dark:focus:border-primary focus:ring-0 outline-none transition-colors text-slate-900 dark:text-white" id="password" placeholder=" " required="" type="password"/>
+<label class="absolute left-4 top-4 text-slate-500 dark:text-slate-400 transition-all duration-200 pointer-events-none origin-left peer-focus:scale-75 peer-focus:-translate-y-3 peer-focus:text-primary peer-[:not(:placeholder-shown)]:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-3" for="password">
+                        Password
+                    </label>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 mt-2" type="button">
+<span class="material-icons text-xl">visibility_off</span>
+</button>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-lg font-bold text-lg shadow-lg shadow-primary/30 active:scale-[0.98] active:shadow-sm transition-all material-ripple" type="submit">
+                Create Account
+            </button>
+</form>
+<!-- Terms -->
+<p class="mt-6 text-xs text-center text-slate-400 dark:text-slate-500 leading-relaxed px-4">
+            By signing up, you agree to our 
+            <a class="text-primary font-semibold" href="#">Terms of Service</a> and 
+            <a class="text-primary font-semibold" href="#">Privacy Policy</a>.
+        </p>
+<!-- Bottom Link -->
+<div class="mt-auto pt-8">
+<p class="text-slate-600 dark:text-slate-400 font-medium">
+                Already have an account? 
+                <a class="text-primary font-bold ml-1 active:opacity-60 transition-opacity" href="#">Sign in</a>
+</p>
+</div>
+</main>
+<!-- Map/Background Reference (Hidden/Decorative) -->
+<div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none opacity-5 dark:opacity-10">
+<div class="absolute -top-24 -right-24 w-96 h-96 bg-primary rounded-full blur-[100px]"></div>
+<div class="absolute -bottom-24 -left-24 w-96 h-96 bg-primary rounded-full blur-[100px]"></div>
+<!-- Decorative abstract image -->
+<img alt="World Map Background" class="w-full h-full object-cover grayscale" data-alt="Soft grayscale abstract world map outline pattern" data-location="Global" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC9ybSPFikwjYu7dYq1kvtxhvVBZqlO9CnzJFXNBUusYLAgDaRp-UPF64dkH5K4ltk9dt2x2G2MbvERMS5mq7ShnTszrzZMZEa5nNcQFVatWKgPnoEvCqGvXaHgKGpVKR2EdozrogvuNVfXx44kvZgZ-XmYH9qOJ_yjCXK9k_yq8WAiyAMjySneotGiK9MJ4ZdH4RgAqeRnXsIOIz1ReH2C2vYgnRouYU4CGF2vYAnTWQxzTQGjmNc2OvM6KHCCMqFKFmkjo22tZY"/>
+</div>
+<!-- Home Indicator Spacer (iOS Style) -->
+<div class="ios-safe-bottom"></div>
+</body></html>

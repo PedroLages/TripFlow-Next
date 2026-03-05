@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Forgot Password</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-input:focus-within label {
+            transform: translateY(-1.5rem) scale(0.85);
+            color: #1d4fd7;
+            background: white;
+            padding: 0 0.25rem;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col items-center font-display">
+<!-- Mobile Screen Wrapper (iPhone Pro Max simulation width) -->
+<main class="w-full max-w-[430px] min-h-screen bg-white dark:bg-slate-900 shadow-2xl relative flex flex-col">
+<!-- Status Bar (iOS Simulation) -->
+<div class="h-12 w-full flex justify-between items-center px-8 pt-4">
+<span class="text-sm font-semibold dark:text-white">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-icons text-sm dark:text-white">signal_cellular_alt</span>
+<span class="material-icons text-sm dark:text-white">wifi</span>
+<span class="material-icons text-sm dark:text-white text-lg">battery_full</span>
+</div>
+</div>
+<!-- Header / Back Navigation -->
+<header class="p-6">
+<a class="inline-flex items-center text-primary transition-opacity hover:opacity-70" href="#">
+<span class="material-icons">arrow_back_ios</span>
+<span class="sr-only">Back</span>
+</a>
+</header>
+<!-- Content Section -->
+<div class="flex-1 px-8 pt-4 flex flex-col">
+<!-- Logo Branding -->
+<div class="flex justify-center mb-10">
+<div class="w-20 h-20 bg-primary/10 rounded-xl flex items-center justify-center">
+<img alt="TripOS Logo" class="w-12 h-12 object-contain" data-alt="Abstract blue logo for travel app TripOS" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6yDSIuQb0SKHO-DHNzip2-ZCmcbgpYCn7qdE-6oVAyoDhF5zj3NdMQSJINLD0oT-bRwpApGjEpHklSm0gS1o7TzCEYsaWEcQ9F0HOj-XtzQqGFvJ53ZYxQJAyX-szUYdjit13YbNssIL-mjg7CQ9XMO56CmynCAdYbQQQJruHi-Qw9M5gZjz5rG9tB9lvAkyMs0v9wPQHdqXpLHo-O4U6RBIPHnmBqYM4j9m2WRF5Vkjlz_A1HGa6OS32HdLvTD9u3j9Yp3bUtkI"/>
+</div>
+</div>
+<!-- Title & Description -->
+<div class="mb-10 text-center">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">Reset your password</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed px-4">
+                    Enter the email associated with your account and we'll send a code to reset your password.
+                </p>
+</div>
+<!-- Form -->
+<form class="space-y-8">
+<div class="relative material-input">
+<input class="block w-full px-4 py-4 text-slate-900 dark:text-white bg-transparent border border-slate-300 dark:border-slate-700 rounded-lg focus:ring-0 focus:border-primary peer transition-colors" id="email" name="email" placeholder=" " type="email"/>
+<label class="absolute left-4 top-4 text-slate-500 transition-all duration-200 pointer-events-none origin-left peer-focus:transform peer-focus:-translate-y-[1.7rem] peer-focus:scale-[0.85] peer-focus:bg-white dark:peer-focus:bg-slate-900 peer-focus:px-1 peer-focus:text-primary peer-[:not(:placeholder-shown)]:transform peer-[:not(:placeholder-shown)]:-translate-y-[1.7rem] peer-[:not(:placeholder-shown)]:scale-[0.85] peer-[:not(:placeholder-shown)]:bg-white dark:peer-[:not(:placeholder-shown)]:bg-slate-900 peer-[:not(:placeholder-shown)]:px-1" for="email">
+                        Email Address
+                    </label>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98]" type="submit">
+                    Send Reset Link
+                </button>
+</form>
+<!-- Bottom Navigation -->
+<div class="mt-auto mb-12 text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm">
+                    Remember your password? 
+                    <a class="text-primary font-semibold ml-1 hover:underline underline-offset-4" href="#">
+                        Back to Sign In
+                    </a>
+</p>
+</div>
+</div>
+<!-- iOS Home Indicator -->
+<div class="h-8 flex justify-center items-center">
+<div class="w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</main>
+<!-- Visual Hint for User (Optional background elements) -->
+<div class="fixed -z-10 top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+<div class="absolute -top-20 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-20 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+</div>
+</body></html>

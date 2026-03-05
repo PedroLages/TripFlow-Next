@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Expense Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1d4fd7",
+                "background-light": "#f6f6f8",
+                "background-dark": "#111521",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<div class="max-w-6xl mx-auto px-4 py-8 md:px-8">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div class="space-y-1">
+<div class="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider">
+<span class="material-icons text-base">explore</span>
+                    TripOS Planning
+                </div>
+<h2 class="text-4xl font-bold tracking-tight">Expenses</h2>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 mt-1">
+<span class="material-icons text-sm">payments</span>
+<span class="text-lg font-medium text-slate-700 dark:text-slate-200">$2,450.00 total trip spend</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-95">
+<span class="material-icons">add_circle</span>
+                Add Expense
+            </button>
+</header>
+<!-- Settlement Summary Section -->
+<section class="mb-10">
+<div class="bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/50 rounded-xl p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold flex items-center gap-2">
+<span class="material-icons text-primary">account_balance_wallet</span>
+                        Settlement Summary
+                    </h3>
+<span class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Live Balances</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Debt List -->
+<div class="space-y-3">
+<p class="text-sm font-semibold text-slate-500 uppercase">Who Owes Whom</p>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 bg-background-light dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-700/30">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Portrait of a male traveler smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUzEzWnw-SLrIEy510X7IoxzjojktWNC2uouFim1MaJAHBw4q4Jn8SwAMDVeOto9b0Y80-eGAMGSoGS3s45vtJN8lUYraUtzTfVA65Qzd6ra7YjFluRBPUrXP-jfIF9pUQ2XT_X9tW1K2TyjmqC7nGCH07TO9XasZuDWJ_0z9cF0an-8PfTR1jZIvL-X_mcdVY3_D56bwcKzRs6yCrgCcR4MKrzCwgdEQH1z0UKjMdist4GjUHKRfrGTRNYxMfkj0ZPcRpCtoZz1U"/>
+<span class="font-medium">Alex</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="text-xs font-bold">$45.00</span>
+<span class="material-icons">arrow_forward</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-medium text-right">Jordan</span>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Portrait of a female traveler laughing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFciSGxKQK4W8QKqc2pVPxrtqRba4yGe7YQuwMwBNoqFATZWojjMGHb8Lbp23_fYWqo4UxY9sPAs90AXeMISBX8ccMIiClJ3XhbE_UGe-mVsrdfybDEAvKlGEdLVMbLu6wDy6t2S1vwWj5cGvbtvDnaACTeHAUQ59tfzA3ufq7IR-I9NSKCc4yJWDThTlTBldyUU_i4RjKkLRYrCnwqGAZr6L2MvTTbx2ukrHJ3iU2jLDBSaVfM587Mnb7TRI6QafOUladS12xYBE"/>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 bg-background-light dark:bg-slate-900/50 rounded-lg border border-slate-100 dark:border-slate-700/30">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Portrait of a traveler with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtUHdMbVX6-Vw5O_Z9h8PZ2UTsMdpE3Xw8xZRDhJpLpdvuyJXjq862e3nsp1mVLe70jyt8G4R8Cqs0byX6_CGq0u0aZc7E8aU3bLI9qkYmj6q-IRDdy35cQR-J34opberUMrw3mwizNWaIZ18I5RlbbMf8H3ni8ZWiufLcWX12eFOUiIdEnp2CAKykE3Vyo0u8uR8mSYPDy6HmR0LdkxRcXwZtG6G1zl-xLYj-dXU5imgkuLb0GzBl9iWi55EfjlnVpR-9WZVj2uk"/>
+<span class="font-medium">Jamie</span>
+</div>
+<div class="flex items-center gap-2 text-primary">
+<span class="text-xs font-bold">$112.50</span>
+<span class="material-icons">arrow_forward</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-medium text-right">Jordan</span>
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Portrait of a female traveler laughing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBsK4zUT-C93sMStS5jh2sDGwuasZ6ujgKcMX9jtvtPg2OGwuS-nWL726vYbKgtCpX5qQQwseg3hOGj9BQ74v5Ivmt-hOsbVetb4BmJzQTeULPuk08s32Yi3Z4BNUZRv0Js9_LdZKBlfEZMWvHKFmboXb8D17LO1FnkozVKOGLuXXSWcwuxj_1aRxnGwMJ6RuBvK3_5IWR728x20qJKq2oD_qFacCMn--wUklGf-lKM0eV9Avnfi23G-foGEe7SeVrtx2Vq45-NBk"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Net Balances -->
+<div class="space-y-3">
+<p class="text-sm font-semibold text-slate-500 uppercase">Your Net Balance</p>
+<div class="flex flex-wrap gap-3">
+<div class="flex-1 min-w-[140px] bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 p-4 rounded-xl">
+<p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold uppercase mb-1">Jordan (You)</p>
+<p class="text-2xl font-bold text-emerald-700 dark:text-emerald-400">+$157.50</p>
+</div>
+<div class="flex-1 min-w-[140px] bg-rose-50 dark:bg-rose-500/10 border border-rose-100 dark:border-rose-500/20 p-4 rounded-xl">
+<p class="text-xs text-rose-600 dark:text-rose-400 font-bold uppercase mb-1">Jamie</p>
+<p class="text-2xl font-bold text-rose-700 dark:text-rose-400">-$112.50</p>
+</div>
+<div class="flex-1 min-w-[140px] bg-slate-50 dark:bg-slate-700/30 border border-slate-100 dark:border-slate-700/30 p-4 rounded-xl">
+<p class="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase mb-1">Alex</p>
+<p class="text-2xl font-bold text-slate-700 dark:text-slate-200">-$45.00</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filters & Expense List -->
+<main class="space-y-6">
+<!-- Category Pills -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 hide-scrollbar">
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-primary text-white shrink-0 shadow-md shadow-primary/20">All</button>
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary shrink-0 transition-colors">Food &amp; Drink</button>
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary shrink-0 transition-colors">Activity</button>
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary shrink-0 transition-colors">Transport</button>
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary shrink-0 transition-colors">Accommodation</button>
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary shrink-0 transition-colors">Shopping</button>
+<button class="px-5 py-2 rounded-full text-sm font-semibold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary shrink-0 transition-colors">Other</button>
+</div>
+<!-- List Content -->
+<div class="space-y-4">
+<!-- Expense Item 1 -->
+<div class="group bg-white dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/50 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:shadow-md">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 dark:bg-primary/20 text-primary w-12 h-12 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons">restaurant</span>
+</div>
+<div>
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Dinner at La Pasta</h4>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+<span class="text-sm text-slate-500 font-medium italic">Oct 14, 2023</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<span class="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded uppercase font-bold tracking-tight">Food</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<div class="flex items-center gap-1 text-xs text-slate-500">
+<span class="material-icons text-xs">groups</span>
+                                    Split 4 ways
+                                </div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:text-right gap-6">
+<div class="hidden md:block">
+<p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Paid by</p>
+<p class="font-semibold text-slate-700 dark:text-slate-300">Alex</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-slate-900 dark:text-white tabular-nums">$185.00</p>
+<span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">Verified</span>
+</div>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Expense Item 2 -->
+<div class="group bg-white dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/50 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:shadow-md">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 dark:bg-primary/20 text-primary w-12 h-12 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons">confirmation_number</span>
+</div>
+<div>
+<div class="flex items-center gap-3">
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Louvre Museum Tickets</h4>
+<span class="flex items-center gap-1 text-[10px] bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full font-bold uppercase border border-amber-200 dark:border-amber-800/50">
+<span class="material-icons text-[10px]">event</span>
+                                    Linked Activity
+                                </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+<span class="text-sm text-slate-500 font-medium italic">Oct 15, 2023</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<span class="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded uppercase font-bold tracking-tight">Activity</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<div class="flex items-center gap-1 text-xs text-slate-500">
+<span class="material-icons text-xs">person</span>
+                                    Split 2 ways
+                                </div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:text-right gap-6">
+<div class="hidden md:block">
+<p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Paid by</p>
+<p class="font-semibold text-slate-700 dark:text-slate-300">Jordan (You)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-slate-900 dark:text-white tabular-nums">$120.00</p>
+<span class="text-xs text-slate-400 font-medium">Processing...</span>
+</div>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Expense Item 3 -->
+<div class="group bg-white dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/50 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:shadow-md">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 dark:bg-primary/20 text-primary w-12 h-12 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons">directions_bus</span>
+</div>
+<div>
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Airport Shuttle</h4>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+<span class="text-sm text-slate-500 font-medium italic">Oct 13, 2023</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<span class="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded uppercase font-bold tracking-tight">Transport</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<div class="flex items-center gap-1 text-xs text-slate-500">
+<span class="material-icons text-xs">groups</span>
+                                    Split equally
+                                </div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:text-right gap-6">
+<div class="hidden md:block">
+<p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Paid by</p>
+<p class="font-semibold text-slate-700 dark:text-slate-300">Jamie</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-slate-900 dark:text-white tabular-nums">$45.00</p>
+<span class="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold">Verified</span>
+</div>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Expense Item 4 (Minimal) -->
+<div class="group bg-white dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/50 rounded-xl p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all hover:shadow-md">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 dark:bg-primary/20 text-primary w-12 h-12 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons">apartment</span>
+</div>
+<div>
+<h4 class="font-bold text-lg group-hover:text-primary transition-colors">Airbnb (Full Trip)</h4>
+<div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+<span class="text-sm text-slate-500 font-medium italic">Oct 12, 2023</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<span class="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded uppercase font-bold tracking-tight">Accommodation</span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></span>
+<div class="flex items-center gap-1 text-xs text-slate-500">
+<span class="material-icons text-xs">groups</span>
+                                    Split 3 ways
+                                </div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between md:text-right gap-6">
+<div class="hidden md:block">
+<p class="text-xs text-slate-400 uppercase font-bold tracking-wider">Paid by</p>
+<p class="font-semibold text-slate-700 dark:text-slate-300">Jordan (You)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-slate-900 dark:text-white tabular-nums">$2,100.00</p>
+<span class="text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded-full font-bold">Settled</span>
+</div>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State / Footer Call to Action (Subtle) -->
+<div class="pt-8 text-center border-t border-slate-200 dark:border-slate-800">
+<p class="text-slate-400 text-sm">Showing 4 of 4 total expenses for Paris Adventure 2023</p>
+<button class="mt-4 text-primary font-bold text-sm hover:underline">Download Trip Summary (PDF)</button>
+</div>
+</main>
+</div>
+</body></html>

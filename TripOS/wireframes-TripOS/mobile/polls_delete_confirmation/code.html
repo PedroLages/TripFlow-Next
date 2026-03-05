@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .ios-shadow {
+            box-shadow: 0 -4px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+        .backdrop-dim {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+<title>TripOS - Delete Poll Confirmation</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display flex justify-center items-center min-h-screen">
+<!-- Mobile Device Frame Simulator -->
+<div class="relative w-full max-w-[390px] h-[844px] bg-white dark:bg-slate-900 overflow-hidden border-[8px] border-slate-800 rounded-[3rem] shadow-2xl">
+<!-- Status Bar -->
+<div class="flex justify-between items-center px-8 pt-4 pb-2 text-sm font-semibold">
+<span>9:41</span>
+<div class="flex gap-1 items-center">
+<span class="material-icons text-[14px]">signal_cellular_4_bar</span>
+<span class="material-icons text-[14px]">wifi</span>
+<span class="material-icons text-[14px]">battery_full</span>
+</div>
+</div>
+<!-- Background Content (The Polls Screen) -->
+<div class="px-6 pt-4 opacity-50 select-none">
+<div class="flex justify-between items-center mb-6">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Trip Polls</h1>
+<span class="material-icons text-primary">add_circle</span>
+</div>
+<!-- Placeholder Poll Card 1 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl mb-4 border border-slate-100 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between mb-2">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Active</span>
+<span class="material-icons text-slate-400 text-sm">more_horiz</span>
+</div>
+<h3 class="font-bold text-lg mb-3 dark:text-white">Best date for the Amalfi Coast?</h3>
+<div class="space-y-2">
+<div class="h-8 bg-primary/10 rounded w-full border border-primary/20"></div>
+<div class="h-8 bg-slate-100 dark:bg-slate-700 rounded w-full"></div>
+</div>
+</div>
+<!-- Placeholder Poll Card 2 (Target of deletion) -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border-2 border-primary/20 shadow-sm">
+<div class="flex justify-between mb-2">
+<span class="text-xs font-bold text-primary uppercase tracking-wider">Draft</span>
+<span class="material-icons text-slate-400 text-sm">delete</span>
+</div>
+<h3 class="font-bold text-lg mb-3 dark:text-white">Dinner choices in Rome</h3>
+<div class="space-y-2">
+<div class="h-8 bg-slate-100 dark:bg-slate-700 rounded w-full"></div>
+<div class="h-8 bg-slate-100 dark:bg-slate-700 rounded w-full"></div>
+</div>
+</div>
+</div>
+<!-- Backdrop Overlay -->
+<div class="absolute inset-0 backdrop-dim z-10"></div>
+<!-- iOS Bottom Sheet (Delete Confirmation) -->
+<div class="absolute bottom-0 left-0 right-0 z-20 bg-white dark:bg-slate-800 rounded-t-xl ios-shadow animate-in slide-in-from-bottom duration-300">
+<!-- Drag Handle -->
+<div class="flex justify-center py-3">
+<div class="w-10 h-1 bg-slate-300 dark:bg-slate-600 rounded-full"></div>
+</div>
+<!-- Content Container -->
+<div class="px-6 pb-12 pt-2 text-center">
+<div class="mb-4 inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 dark:bg-red-900/20">
+<span class="material-icons text-red-500 text-3xl">delete_forever</span>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Delete this poll?</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-8 px-4">
+                    This will permanently delete the poll. This action cannot be undone and all current votes will be lost.
+                </p>
+<!-- Action Stack (Variant 4: Cancel above Delete) -->
+<div class="flex flex-col gap-3">
+<button class="w-full py-4 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-900 dark:text-white font-semibold rounded-xl transition-colors">
+                        Cancel
+                    </button>
+<button class="w-full py-4 bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl transition-colors shadow-lg shadow-red-500/20">
+                        Delete
+                    </button>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="flex justify-center pb-2">
+<div class="w-32 h-1.5 bg-slate-900 dark:bg-white rounded-full"></div>
+</div>
+</div>
+<!-- Optional Decorative Map Detail Background to show "Travel" context -->
+<div class="absolute top-0 left-0 w-full h-1/2 -z-10 overflow-hidden opacity-10">
+<img alt="Travel Map Detail" class="w-full h-full object-cover grayscale" data-alt="Abstract colorful travel map background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYiLVcsiA7St7dLYcpxRYMyumVTzJNmQiDe1HBQpFG10QuTfddkxp2Xvrdr-LYQ95B691zm1DnviVaAx8IJ2BwZ9rP4JwOcUkTRK-FHcsPPDjXLAr6W5ulADr-seG_UgTMmsOBbgRHW7Ahf8dpUQLjzFwHyVWr1I7g8rIYC3sOMYKh6Byc2kTESJTFCbiJQbbw9Y8Zil6iyzuHhi3KckFUWCslJOW0CzYaQVa4sMW1_rqymdVTWplZJW5IcMdL60FgwQYpDIsM4V4"/>
+</div>
+</div>
+</body></html>

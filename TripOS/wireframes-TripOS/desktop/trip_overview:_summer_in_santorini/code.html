@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1d4fd7",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111521",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .sidebar-active { background-color: rgba(29, 79, 215, 0.1); color: #1d4fd7; font-weight: 600; }
+        .poll-card-accent { border-left: 4px solid #a855f7; }
+        .vote-subtle { background-color: #f5f3ff; }
+    </style>
+<title>TripOS - Summer in Santorini</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex">
+<!-- Sidebar -->
+<aside class="w-[280px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col fixed h-full overflow-y-auto">
+<div class="p-6">
+<div class="flex items-center gap-2 mb-10">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-icons text-xl">map</span>
+</div>
+<span class="font-bold text-xl tracking-tight">TripOS</span>
+</div>
+<nav class="space-y-1">
+<a class="sidebar-active flex items-center gap-3 px-4 py-3 rounded-lg" href="#">
+<span class="material-icons text-[20px]">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-icons text-[20px]">calendar_today</span>
+<span>Itinerary</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-icons text-[20px]">account_balance_wallet</span>
+<span>Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-icons text-[20px]">how_to_vote</span>
+<span>Polls</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors rounded-lg" href="#">
+<span class="material-icons text-[20px]">chat_bubble_outline</span>
+<span>Group Chat</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="User profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAZXjFOezaY-D0yajozKNlFD-kf0kuJf_JvLS9yFQfvX77jD4NGHzS_5Bv9FCVWjJWgSJh5bQyVLuxlWZ7f1-RBeG0TiBQy1OhAqFgPas9JYSvThOcaDXvgynFuKFHAScFxFUNMdG2mlxhmrIsI82JUgWnBtMuAS50IcwwndvwTEbRRUZhmTp39_P1kZ-1m9NdUS7nToA-HwiLdctqSp0kq0YAVu25LLlR9JcA5-8Iex5m_w3wBuwlC46YeetJL-HjDwPtMttH_A8"/>
+<div>
+<p class="text-sm font-semibold">Alex Rivera</p>
+<p class="text-xs text-slate-500">Trip Organizer</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-[280px] p-8 max-w-[1200px] mx-auto">
+<!-- Header -->
+<header class="flex justify-between items-start mb-10">
+<div>
+<h1 class="text-3xl font-bold mb-2">Summer in Santorini</h1>
+<div class="flex items-center gap-4 text-slate-500">
+<span class="flex items-center gap-1.5">
+<span class="material-icons text-sm">place</span>
+                        Santorini, Greece
+                    </span>
+<span class="flex items-center gap-1.5">
+<span class="material-icons text-sm">event</span>
+                        July 15 - July 22, 2024
+                    </span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex -space-x-3">
+<div class="relative">
+<img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx1SrGzK-kijwbPfu6pCLK4wwXFiij15H1gvlmi1PLsKsAs2puwy73oHtM6RV73_H_60fSVC5dITE_R-LLur6cGvx7D0tOLZ0e6tdMoeNa_3SfTkPktn9XinnrcqPlxyYiVBE5h1Ct9dnBLeBhwJJtqugfWKk2uQLrQKjDAWbwgSpYVq8AhmInY-Vuw6uIgyJTYQbRbaR5rljikF8Sipmap9ycMuRK-xIb-AaVI9tOKwfgdcm6rgeeOPOpEmQ0C8lCNtN-lPFvPNM"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+</div>
+<div class="relative">
+<img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcG7N4b0Vex2wi3zimZckl2O0yUG8RiN1txQCvu1-TT9Wwl9yawPI3c_EHmA7H0Iuvv6U4LU--niYVlo-Y769nZutnnqgHTNqD1J-KOVk8Yd9jtjZ-pnc-Vb6s5sdHL9HT68fgLKARJ-gH3j_neLcFXmw8aQf_j915uheCzcsGrRFAeCoDExsmKMhAnj4OLSjq-VcC9GzQzlLcX4ZVzOR_z0IWkxBfF9TlDVVs5etxhl0FKObZLrU7H0clHZz7G8YMMzGCvHgBItw"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+</div>
+<div class="relative">
+<img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF4Z7LJbDJtYB-N0ATxBYkMh_AnAb6xTBDggatE9FhYYDIKld-VIrijpcNZJ5HnWC9Ah9JGQvsNVEwDWczOCCzNEuNrRRFkvzl_1meE3wx6_1M9UN1vGKiqtZZHKcude-Egw-71cX-GsVNIc_U18HZ3B_6UwsKB5ltNgWIEIaYnecQcj8AcGfZJmoUmZGrY4o7SUxBd5k-aLjHKuvq8FybK8W9ATeKYcvKNLYfDhMyfmveaX90Cl05Sld0AwjMexIcEKqgJBbsFDA"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu-pZVHHU41flx4SNiQ2ueo4F9SVglKtAPaVY3LN_QOlFwh5MeQhS9w_0hnBsSt8TpujeCnCCaBDvUeLZnNDApP44gc9ELPV3cGjfyZYGNXHfZt6UHK0ElsrdeFqwjfGqQ11CF5AkezaRaN9lbk4uiQSxtxMJTWaOD_uTFCXOtoRgMV4zlWaFv_TJQ_eGnBbAfE7QX3E02dwVq1JEVdI9LcJI94xMjfYPFtLP41jIXXv2txYvv7Fmb7qsln9RmE-A0Mx8BHzyAB70"/>
+<img class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Team member profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAQRdlMl0xG1alvJyAzkZ8rVrumS55oAUOvNMqNjLfZV7r8Qznv7w4MfiBy233Rt6_kRKRpY5HDSelgSzDVgHaQ-GTdZpX9EdhHayyMV5BWx30mhgF0V5GYnpnwy1dla190SYa4kJy8xAJmJLGUK-jGAQTdBMKjeIzDsupgC8_0RtKKl90_KHmOHZ9Rz3Jk-f3o1kCkINVOqN4mm7J-ReKN6nZhlIle-4JvTKv55vkT_v7Qh9K1aU3UhbJMRDGpZ0JGjT7Ae_ucjY"/>
+<div class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs font-semibold text-slate-500">
+                        +3
+                    </div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 font-medium transition-colors">
+<span class="material-icons text-[20px]">share</span>
+                    Invite
+                </button>
+</div>
+</header>
+<!-- Quick Stats Row -->
+<div class="grid grid-cols-4 gap-6 mb-10">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-lg flex items-center justify-center mb-4">
+<span class="material-icons">group</span>
+</div>
+<h4 class="text-slate-500 text-sm font-medium mb-1">Members</h4>
+<p class="text-lg font-bold">8 members <span class="text-sm font-normal text-green-500">(3 online)</span></p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-lg flex items-center justify-center mb-4">
+<span class="material-icons">how_to_vote</span>
+</div>
+<h4 class="text-slate-500 text-sm font-medium mb-1">Active Polls</h4>
+<p class="text-lg font-bold">2 active polls</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 text-teal-600 rounded-lg flex items-center justify-center mb-4">
+<span class="material-icons">lock</span>
+</div>
+<h4 class="text-slate-500 text-sm font-medium mb-1">Budget Status</h4>
+<p class="text-lg font-bold">Budget set</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm">
+<div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-lg flex items-center justify-center mb-4">
+<span class="material-icons">calendar_month</span>
+</div>
+<h4 class="text-slate-500 text-sm font-medium mb-1">Activities</h4>
+<p class="text-lg font-bold">12 activities</p>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Activity Feed -->
+<div class="col-span-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-bold">Recent Activity</h3>
+<a class="text-primary font-medium hover:underline text-sm" href="#">View All</a>
+</div>
+<div class="space-y-8">
+<!-- Today Group -->
+<div>
+<div class="flex items-center gap-4 mb-4">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Today</span>
+<div class="h-px flex-1 bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div class="space-y-6">
+<!-- Item 1 -->
+<div class="flex gap-4">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Profile photo of Jordan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2pkxTzjos61tlQL-O-2VYDaPU1-zheZG4Yf98docf4Iq6GzO_s3rDoTneZZlVT2qgVNYTE_4PRt6mkiKbBWqDqCrlFwzSt1aa0_ZV8a6pFEbl2fLNy3j7-Tj1XxMhmXs9Rwy1jh4J_oSTaZGRsXMy4wO-KIrMDiZMTwkxLwKK5EoLSAEnxjDjpT-RAuZ6kY02EJE4G6KYa5wYjDgUBDsAE6RRfcRypzOiXOqWfdXzj6B2Cm_ACkw8y1aFBT35MAqmx7NKSsPMd0s"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-purple-500 rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-icons text-[10px] text-white">how_to_vote</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="text-sm leading-relaxed">
+<span class="font-bold">Jordan</span> created a poll: 
+                                        <span class="text-primary font-medium hover:underline cursor-pointer">"Which lodge?"</span>
+</p>
+<span class="text-xs text-slate-400">2h ago</span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Profile photo of Sam" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmGy6gidzJ2i8VtmurJ-GxwAlcMep7zOFcRLiTegx5df3zDdApUAfF0lCklPpGgOl9W3qngn76EcU5FjPcOp_gDW1Zr12EQgoohel_k5vvyV1ZX-0iYVjua6TBG6IuENgbHdgA_CX79fMEO06pUJUE2zs-QRg1prMHTxG3zkUv1Dfpso7oiGxr6cWdMXTM18xKIGpDga9LsPxoIvnt2jin6E95tr2gU6rxpLkaXrslA8Hda3Y6BY2xcKO64bEimehFPcU8nKs0zfQ"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-teal-500 rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-icons text-[10px] text-white">lock</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="text-sm leading-relaxed">
+<span class="font-bold">Sam</span> set their private budget and locked the allocation.
+                                    </p>
+<span class="text-xs text-slate-400">4h ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Yesterday Group -->
+<div>
+<div class="flex items-center gap-4 mb-4">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Yesterday</span>
+<div class="h-px flex-1 bg-slate-100 dark:bg-slate-800"></div>
+</div>
+<div class="space-y-6">
+<!-- Item 3 -->
+<div class="flex gap-4">
+<div class="relative shrink-0">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Profile photo of Maya" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRGhnPuIY2f1B4yoARIJKJRnw3DNYX2fNd_99DM2P0liKxP5nZmKxyTzOtNUv_SVJ0pVOdo5KCA_53StrUeQZMw4mT8C1FCRdcDUZ_g6UWb-EpFGrScp7D1McbjdlPBInMpwzeTg7ieweNt6axCFZfDcQGjNFAMG_fYXhRN6cJaWnTK1bNWc25JMHtBIuN7IqaR-SRCdkgKm5fdFVq1LfthDP2PwyPSIDfxgSIhSFBpCVc5sWMHZ4c2yFFYQ5zYIppIj84acDL4ys"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-orange-500 rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-icons text-[10px] text-white">calendar_month</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="text-sm leading-relaxed">
+<span class="font-bold">Maya</span> added <span class="font-semibold text-slate-900 dark:text-white">"Sunset Hike"</span> to Day 3 of the itinerary.
+                                    </p>
+<span class="text-xs text-slate-400">1d ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar Widgets -->
+<div class="col-span-4 space-y-6">
+<!-- Active Polls Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm poll-card-accent">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-icons text-purple-600">how_to_vote</span>
+                            Active Polls
+                        </h3>
+</div>
+<div class="space-y-4">
+<div class="vote-subtle dark:bg-purple-900/20 p-4 rounded-lg border border-purple-100 dark:border-purple-800">
+<h4 class="text-sm font-semibold mb-2">Restaurant choice</h4>
+<div class="flex justify-between items-center">
+<span class="text-xs px-2 py-1 bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-200 rounded font-medium">2 days left</span>
+<span class="text-xs text-slate-500">6 votes</span>
+</div>
+</div>
+<div class="p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+<h4 class="text-sm font-semibold mb-2">Which lodge?</h4>
+<div class="flex justify-between items-center">
+<span class="text-xs px-2 py-1 bg-red-50 dark:bg-red-900/20 text-red-600 rounded font-medium">Urgent</span>
+<span class="text-xs text-slate-500">2 votes</span>
+</div>
+</div>
+<button class="w-full py-2 text-primary font-medium text-sm hover:bg-primary/5 rounded-lg transition-colors border border-dashed border-primary/30">
+                            + Create New Poll
+                        </button>
+</div>
+</div>
+<!-- Destination Map Sneak Peak -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="h-40 bg-slate-200 relative">
+<img class="w-full h-full object-cover grayscale-[0.5] opacity-80" data-alt="Map view of Santorini caldera" data-location="Santorini" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiw_WbvBHe1gEV7OHI9ENBKbOOGmtYDNdhvgt8QKIDSOd3ReZ_jdph_SUt9e8kS0rlBpM2JGkh8EvUo2qnj9g9v8vhQZ4qHcpYtjgM9eRir3Ac2qdkDxGWypO3ME89waRQd6p8o1gMZ7CkUrv069fPS5jR04KEH6B05cXVrg1iRtFAlNNHEVUrHwJhQ57kd08TVxGuEpr7cB1ePXcEFbVqdjUKavk-hsCgo5FkKtGqj0mFWSsDLipg-Crtdfn2qqaGqbnpfXUbTEM"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+<div class="absolute bottom-3 left-3 text-white">
+<p class="text-xs uppercase font-bold tracking-widest">Map Preview</p>
+<p class="text-sm">Oia &amp; Fira area</p>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 py-2.5 rounded-lg text-sm font-medium">
+                            Open Interactive Map
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

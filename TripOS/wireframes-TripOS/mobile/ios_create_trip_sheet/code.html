@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Create Trip</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        /* Custom scrollbar for subtle feel */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(29, 79, 215, 0.1);
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display h-screen w-full overflow-hidden flex items-end">
+<!-- Dashboard Background (Simulated) -->
+<div class="fixed inset-0 z-0 p-6 flex flex-col gap-6">
+<header class="flex justify-between items-center">
+<div>
+<h1 class="text-2xl font-bold text-gray-900 dark:text-white">My Trips</h1>
+<p class="text-sm text-gray-500">Upcoming adventures</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons text-primary">person</span>
+</div>
+</header>
+<div class="grid grid-cols-1 gap-4">
+<div class="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-primary/5">
+<div class="h-32 w-full rounded-lg bg-gray-200 dark:bg-gray-700 mb-3 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="Golden gate bridge in the sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-CfsHafqF1V4BuREHLH8xNFOtizKCyVZ8lbSLNQfr-d_ZAWoHdzZRGalxYX7X5L_MlTkkHci5arfz9Fe9RGJJ7JlCaGFBJNEGJAqe1jwxnTMRlINL39kzhVdqQncynBt04Yh_AYd6fInD7Nl4dFLZvYE4blxLl4ND4QpzMiXQOVicrWjTlpc1tOj8ZABQJ-va7Py_DKoFIh6bFEtoBEl6xL7Xs6eQ1qERCWT0sKshXzECTxFvAjoSUlVYEA8c-4SuefPtI8VS2b8"/>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<h3 class="font-semibold text-gray-900 dark:text-white">San Francisco</h3>
+<p class="text-xs text-gray-500">June 12 - 18, 2024</p>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-blue-400"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-indigo-400"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Semi-transparent Backdrop -->
+<div class="fixed inset-0 bg-black/40 z-10"></div>
+<!-- Create Trip Sheet (iOS Bottom Sheet) -->
+<div class="relative z-20 w-full bg-white dark:bg-gray-900 rounded-t-xl shadow-2xl flex flex-col max-h-[92%] animate-slide-up">
+<!-- Drag Handle Indicator -->
+<div class="w-full flex justify-center py-2">
+<div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+</div>
+<!-- Sheet Header -->
+<header class="flex justify-between items-center px-5 py-3 border-b border-gray-100 dark:border-gray-800">
+<button class="text-primary font-medium hover:opacity-70 transition-opacity">Cancel</button>
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">New Trip</h2>
+<button class="text-primary font-bold hover:opacity-70 transition-opacity">Create</button>
+</header>
+<!-- Form Content -->
+<div class="p-6 overflow-y-auto space-y-6 pb-12">
+<!-- Trip Name Section -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Trip Name</label>
+<input class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder-gray-400 transition-all shadow-sm" placeholder="e.g. Summer in Tokyo" type="text"/>
+</div>
+<!-- Destination Section -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Destination</label>
+<div class="relative group">
+<span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors text-xl">place</span>
+<input class="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder-gray-400 transition-all shadow-sm" placeholder="Search for a city or place" type="text"/>
+</div>
+<!-- Map Preview (Simplified) -->
+<div class="mt-2 h-24 w-full rounded-xl bg-gray-100 dark:bg-gray-800 relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors"></div>
+<img class="w-full h-full object-cover opacity-40 grayscale" data-alt="Abstract map illustration with primary color accents" data-location="Tokyo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaezijNU_zKNH-aX4lVX9xRgjokp39r7QR9yi5DKLkjtutW8nA90PVgGdP4egPob83vr2QR9yyWblEVwsT6TwWIZusJdktqG866doJrfoykzUvh5JB85WrHvC3BJYImO5u8HNYZX92F8k_HW-zrsFSDSGiaZyFZ5eWXYIX8l9_JI830HJ8-AmscNa0oscdSBJNW1EfpLPeLojSOGCze1NPXOqo4UMMkPmoJ-W_0zAupPRRnNTXbttPa3tvSnxQv62jdwQJ-9v2s3w"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-white/90 dark:bg-gray-900/90 rounded-full shadow-lg">
+<span class="material-icons text-primary text-sm">map</span>
+<span class="text-xs font-semibold text-gray-700 dark:text-gray-200">View Map</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Dates Row -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Starts</label>
+<div class="relative">
+<span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">calendar_today</span>
+<input class="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-gray-900 dark:text-white text-sm shadow-sm cursor-pointer" placeholder="Select Date" readonly="" type="text" value="Oct 12, 2024"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Ends</label>
+<div class="relative">
+<span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">calendar_today</span>
+<input class="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-gray-900 dark:text-white text-sm shadow-sm cursor-pointer" placeholder="Select Date" readonly="" type="text" value="Oct 20, 2024"/>
+</div>
+</div>
+</div>
+<!-- Description Section -->
+<div class="space-y-2">
+<label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 ml-1">Description</label>
+<textarea class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-gray-900 dark:text-white placeholder-gray-400 transition-all shadow-sm resize-none" placeholder="What's the plan? Invite friends and start planning activities together..." rows="4"></textarea>
+</div>
+<!-- Collaboration Toggle (Bonus TripOS Feature) -->
+<div class="flex items-center justify-between p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+<span class="material-icons text-white text-sm">group_add</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-900 dark:text-white">Collaborative Trip</p>
+<p class="text-xs text-gray-500">Allow others to edit the itinerary</p>
+</div>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative p-1 flex justify-end">
+<div class="w-4 h-4 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Safe Area Spacer for iOS -->
+<div class="h-8 w-full bg-white dark:bg-gray-900"></div>
+</div>
+</body></html>

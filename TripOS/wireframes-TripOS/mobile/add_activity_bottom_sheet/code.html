@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Activity - TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "poll-color": "#0ea5e9",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #000; /* Backdrop color for the bottom sheet */
+            margin: 0;
+            overflow: hidden;
+        }
+        .bottom-sheet {
+            height: 92%;
+            background: white;
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<!-- Bottom Sheet Wrapper -->
+<div class="bottom-sheet bg-white dark:bg-background-dark overflow-hidden">
+<!-- Drag Handle Header -->
+<div class="flex flex-col items-center pt-3 pb-6 shrink-0">
+<div class="w-10 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+<h1 class="mt-4 text-xl font-bold text-gray-900 dark:text-white">Add New Activity</h1>
+</div>
+<!-- Scrollable Form Area -->
+<div class="flex-1 overflow-y-auto px-6 pb-32 no-scrollbar">
+<!-- Activity Name -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">ACTIVITY NAME</label>
+<input class="w-full px-4 py-4 bg-gray-100 dark:bg-gray-800 border-transparent focus:border-primary focus:ring-0 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400" placeholder="e.g. Dinner at Sketch London" type="text"/>
+</div>
+<!-- Category Selection -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">CATEGORY</label>
+<div class="flex overflow-x-auto gap-3 no-scrollbar pb-1">
+<button class="flex-shrink-0 flex items-center gap-2 px-5 py-3 bg-primary text-white rounded-full font-medium">
+<span class="material-icons text-lg">restaurant</span> Food
+                    </button>
+<button class="flex-shrink-0 flex items-center gap-2 px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full font-medium">
+<span class="material-icons text-lg">attractions</span> Activity
+                    </button>
+<button class="flex-shrink-0 flex items-center gap-2 px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full font-medium">
+<span class="material-icons text-lg">flight_takeoff</span> Transport
+                    </button>
+<button class="flex-shrink-0 flex items-center gap-2 px-5 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-full font-medium">
+<span class="material-icons text-lg">hotel</span> Stay
+                    </button>
+</div>
+</div>
+<!-- Day Selection -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">CHOOSE DAY</label>
+<div class="flex overflow-x-auto gap-3 no-scrollbar pb-1">
+<button class="flex-shrink-0 w-24 py-3 bg-primary/10 dark:bg-primary/20 text-primary border-2 border-primary rounded-xl font-bold">
+<div class="text-xs opacity-70 uppercase">Jul 12</div>
+                        Day 1
+                    </button>
+<button class="flex-shrink-0 w-24 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-2 border-transparent rounded-xl font-bold">
+<div class="text-xs opacity-70 uppercase">Jul 13</div>
+                        Day 2
+                    </button>
+<button class="flex-shrink-0 w-24 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-2 border-transparent rounded-xl font-bold">
+<div class="text-xs opacity-70 uppercase">Jul 14</div>
+                        Day 3
+                    </button>
+<button class="flex-shrink-0 w-24 py-3 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-2 border-transparent rounded-xl font-bold">
+<div class="text-xs opacity-70 uppercase">Jul 15</div>
+                        Day 4
+                    </button>
+</div>
+</div>
+<!-- Time and Cost Row -->
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">TIME</label>
+<div class="relative">
+<input class="w-full px-4 py-4 bg-gray-100 dark:bg-gray-800 border-transparent focus:border-primary focus:ring-0 rounded-xl text-gray-900 dark:text-white" type="time" value="19:00"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">EST. COST</label>
+<div class="relative flex items-center">
+<span class="absolute left-4 text-gray-500 font-semibold">$</span>
+<input class="w-full pl-8 pr-4 py-4 bg-gray-100 dark:bg-gray-800 border-transparent focus:border-primary focus:ring-0 rounded-xl text-gray-900 dark:text-white" placeholder="0.00" type="number"/>
+</div>
+</div>
+</div>
+<!-- Location -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">LOCATION</label>
+<div class="relative flex items-center">
+<span class="material-icons absolute left-4 text-gray-400">place</span>
+<input class="w-full pl-12 pr-4 py-4 bg-gray-100 dark:bg-gray-800 border-transparent focus:border-primary focus:ring-0 rounded-xl text-gray-900 dark:text-white" placeholder="Search for a place..." type="text"/>
+</div>
+<div class="mt-3 overflow-hidden rounded-xl border border-gray-100 dark:border-gray-800">
+<img class="w-full h-32 object-cover" data-alt="Map view showing a specific city location" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA43VaIQEN3Rk-drAFELq9oPo_lbOvAjTYnSJF-uMRsTk2Ntpolf_LUk6X8eh5T0C2tJTJ1W-sZ6qbWY-fKg8haDmbPe-GYKyzgDtonJ1GKixsMlD-xQ5moMTzBwmmibefIUqs79mVgMHapYnFQq0In-4Ek2dMCrNJsWY0boNq52C5KG057C6QqDgwWjAllAerOAobVOiaNn-o-DdCM6vjb5JgRk9u0HJw-SZURagC0Zw_koWDZLkkST0lgxe8RjkRJgrrL7WsL8kY"/>
+</div>
+</div>
+<!-- Notes -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2 ml-1">NOTES</label>
+<textarea class="w-full px-4 py-4 bg-gray-100 dark:bg-gray-800 border-transparent focus:border-primary focus:ring-0 rounded-xl text-gray-900 dark:text-white resize-none" placeholder="Add any specific details, reservation numbers, or dietary requirements..." rows="3"></textarea>
+</div>
+</div>
+<!-- Sticky Footer -->
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-white/80 dark:bg-background-dark/80 backdrop-blur-lg border-t border-gray-100 dark:border-gray-800">
+<button class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-colors shadow-lg shadow-primary/20">
+                Save Activity
+            </button>
+<div class="mt-4 text-center">
+<a class="text-poll-color font-semibold flex items-center justify-center gap-1 text-sm" href="#">
+<span class="material-icons text-lg">poll</span>
+                    Unsure? Create a Poll for this instead
+                </a>
+</div>
+</div>
+</div>
+<!-- Background Mockup UI (simulating the screen behind) -->
+<div class="p-6 opacity-20 pointer-events-none">
+<div class="flex justify-between items-center mb-8">
+<div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+<div class="w-24 h-6 bg-gray-300 rounded-full"></div>
+<div class="w-10 h-10 bg-gray-300 rounded-full"></div>
+</div>
+<div class="space-y-4">
+<div class="h-40 bg-gray-200 rounded-2xl w-full"></div>
+<div class="h-4 bg-gray-200 rounded-full w-3/4"></div>
+<div class="h-4 bg-gray-200 rounded-full w-1/2"></div>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-32 bg-gray-200 rounded-2xl"></div>
+<div class="h-32 bg-gray-200 rounded-2xl"></div>
+</div>
+</div>
+</div>
+</body></html>

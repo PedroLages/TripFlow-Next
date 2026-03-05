@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TripOS Approval Vote Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .ios-status-bar {
+            height: 47px;
+        }
+        .ios-safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex justify-center items-start">
+<!-- Mobile Device Mockup Container -->
+<div class="w-full max-w-md bg-white dark:bg-slate-900 min-h-screen shadow-2xl relative flex flex-col overflow-hidden">
+<!-- iOS Status Bar Simulation -->
+<div class="ios-status-bar flex justify-between items-center px-8 pt-4 w-full">
+<span class="text-sm font-bold">9:41</span>
+<div class="flex items-center space-x-1.5">
+<span class="material-icons text-[14px]">signal_cellular_alt</span>
+<span class="material-icons text-[14px]">wifi</span>
+<span class="material-icons text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Header / Navigation Bar -->
+<header class="px-4 py-2 flex items-center justify-between border-b border-slate-100 dark:border-slate-800">
+<button class="p-2 text-primary flex items-center">
+<span class="material-icons">arrow_back_ios</span>
+<span class="font-medium -ml-1">Trips</span>
+</button>
+<h1 class="text-lg font-bold">Vote</h1>
+<div class="w-12"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content (Scrollable) -->
+<main class="flex-1 overflow-y-auto px-6 pt-6 pb-40">
+<!-- Poll Metadata -->
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Approval</span>
+<span class="text-slate-400 dark:text-slate-500 text-xs flex items-center">
+<span class="material-icons text-[14px] mr-1">visibility_off</span>
+                        Your vote is anonymous
+                    </span>
+</div>
+<h2 class="text-2xl font-bold leading-tight mb-4 text-slate-900 dark:text-white">
+                    Which activities are you interested in?
+                </h2>
+<div class="space-y-2">
+<div class="flex justify-between items-end text-sm">
+<span class="text-slate-500 dark:text-slate-400 font-medium">Quorum Progress</span>
+<span class="text-primary font-bold">4 of 8 voted</span>
+</div>
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Selection Instruction -->
+<div class="mb-6">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Select all options you approve of</p>
+</div>
+<!-- Activity List -->
+<div class="space-y-4">
+<!-- Selected Card: Wine Tasting -->
+<div class="relative group bg-primary/5 border-2 border-primary rounded-xl p-4 flex items-center justify-between transition-all active:scale-[0.98]">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Close up of red wine being poured" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWSmo97DqESNhIoqK_eD18QOIjFklMizA4kyKqsLuyZgXBHRgy2no7jd8_OTLGgi_q8-KUuQDh08VgH67Lp-ZW_jzE8oqgFSlT0pRzG5GYLSwvwEtmof5aA__keZd5wNWs7QCDPIV3jzIfaulNlNalI_tZ0cFUTyncfvpcuSnYPbKS8yFGRL086Ko4hFcQ0_RLej5u5iMkpp9aO3ggGvr0sirVjkpY2TLeCMOc5uMzY2wpBIt8CBP4WJ887egfjqKFSCHB6aUneH8"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Wine Tasting</h3>
+<p class="text-xs text-slate-500">Valle de Guadalupe</p>
+</div>
+</div>
+<div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+<span class="material-icons text-white text-[16px]">check</span>
+</div>
+</div>
+<!-- Selected Card: Hiking -->
+<div class="relative group bg-primary/5 border-2 border-primary rounded-xl p-4 flex items-center justify-between transition-all active:scale-[0.98]">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Person hiking up a scenic mountain trail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6tzFFxiaWSvktF4wJjmSpQLf7dugBRTnteXsNAfx-ZCniE83Z5H-cIF7kRUBPgY2_suSxkXiCEgNhtfOGjS1Q6j4Rul_pztSS_GJtJXkWtR_6FAQOlXHmI5QZFgSnH0EmYdabe74uqN8TAmLr_-pegrcIywtZnHGyVlHlQ0AP0spvLZYlSmPu7W4RSlevaZbtX3-8gSKumaqZErvEEhDquUEKjufbRmUSJBT0fkTAaKrycvsznzLS_I5-6VMaUUdGZgOOud0M22M"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Hiking</h3>
+<p class="text-xs text-slate-500">San Jacinto Peaks</p>
+</div>
+</div>
+<div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+<span class="material-icons text-white text-[16px]">check</span>
+</div>
+</div>
+<!-- Unselected Card: Museum Tour -->
+<div class="relative group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center justify-between transition-all active:scale-[0.98]">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 grayscale">
+<img class="w-full h-full object-cover" data-alt="Modern art museum gallery interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4mLb2NOWq15pqockuuN4A41JSbD3Fxl6TVNDbrMLLX4rPiKw1fPn4Adjs2sJxDAr_3WMqhpKmLfq-VGNuz9gFPjm60G46Kvkcan9g4YLDCEl6FEvJyDpRutOkROXKFuVyqBubZmyCnhKrgsc1CP7UwyQpJK7Wlrzl1f_6MsmzSE7LIWD_DCfyzmoi5gw9Zl7RVI1WHKUTkkMLkq2MnwUbX1aBouviyAI53PeAYd2P3WvXc8QymKVUwqHmKqxuqlPjIlBHNnZqAU"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Museum Tour</h3>
+<p class="text-xs text-slate-500">Modern Art Collection</p>
+</div>
+</div>
+<div class="w-6 h-6 border-2 border-slate-300 dark:border-slate-600 rounded-full"></div>
+</div>
+<!-- Unselected Card: Spa Day -->
+<div class="relative group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-4 flex items-center justify-between transition-all active:scale-[0.98]">
+<div class="flex items-center space-x-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 grayscale">
+<img class="w-full h-full object-cover" data-alt="Luxury spa treatment room with towels" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC9zVuypxuXMo2JYuNicmyMtt8h2rWBLoLdhV9nWiVKpoUKjd7Nj9cse4ju5X96M6atWi0HjnFWUyCjDrNlBnhZVRc1u1TbC377lEjr6H-3dkgrriaO4eUtjb_1LHbx69J7pX5l86utK36ZllvWrrsylqxAWtuLNLCivSpg4a8nUituHXUjuXZFek_pMty-AqxoVRbqHarwyqM9VvjCX8AeIPlRpkr_LE0U8pAej81C6PRaX5RoaqHKZjpyBYoaeXBOYGv00khvB4"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Spa Day</h3>
+<p class="text-xs text-slate-500">The Ritz Wellness</p>
+</div>
+</div>
+<div class="w-6 h-6 border-2 border-slate-300 dark:border-slate-600 rounded-full"></div>
+</div>
+</div>
+</main>
+<!-- Sticky Footer Area -->
+<div class="absolute bottom-0 left-0 right-0 z-20">
+<!-- Glassmorphism Blur Container -->
+<div class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-100 dark:border-slate-800 px-6 pt-4 pb-0 ios-safe-bottom">
+<!-- Action Status -->
+<div class="flex justify-center mb-3">
+<span class="text-sm font-semibold text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">
+                        2 of 4 selected
+                    </span>
+</div>
+<!-- Primary CTA -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 transition-transform active:scale-[0.97] mb-6">
+                    Confirm Votes
+                </button>
+<!-- iOS Tab Bar -->
+<div class="flex justify-between items-center px-4 py-3 -mx-6 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col items-center flex-1 text-slate-400">
+<span class="material-icons text-[24px]">explore</span>
+<span class="text-[10px] mt-1 font-medium">Explore</span>
+</div>
+<div class="flex flex-col items-center flex-1 text-slate-400">
+<span class="material-icons text-[24px]">flight_takeoff</span>
+<span class="text-[10px] mt-1 font-medium">Trips</span>
+</div>
+<div class="flex flex-col items-center flex-1 text-primary">
+<span class="material-icons text-[24px]">how_to_vote</span>
+<span class="text-[10px] mt-1 font-medium">Votes</span>
+</div>
+<div class="flex flex-col items-center flex-1 text-slate-400 relative">
+<span class="material-icons text-[24px]">chat_bubble_outline</span>
+<span class="text-[10px] mt-1 font-medium">Chat</span>
+<div class="absolute top-0 right-1/4 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></div>
+</div>
+<div class="flex flex-col items-center flex-1 text-slate-400">
+<span class="material-icons text-[24px]">person_outline</span>
+<span class="text-[10px] mt-1 font-medium">Profile</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="flex justify-center pb-2 pt-1">
+<div class="w-32 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

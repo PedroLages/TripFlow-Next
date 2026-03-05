@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Collaborative Travel Planning</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-item-active {
+            background-color: rgba(29, 79, 215, 0.1);
+            color: #1d4fd7;
+            border-right: 3px solid #1d4fd7;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<!-- Top Navigation Bar (64px) -->
+<header class="h-16 fixed top-0 left-0 right-0 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 z-50 flex items-center justify-between px-6">
+<div class="flex items-center gap-8">
+<!-- Logo -->
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons-round text-white text-lg">flight_takeoff</span>
+</div>
+<span class="font-bold text-xl tracking-tight text-slate-800 dark:text-white">TripOS</span>
+</div>
+<!-- Trip Selector -->
+<div class="relative group">
+<button class="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-200">My Trips</span>
+<span class="material-icons-round text-slate-400 text-sm">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Notifications -->
+<button class="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-icons-round">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-primary text-[10px] text-white font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-slate-900">3</span>
+</button>
+<!-- User Avatar -->
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200 dark:border-slate-800">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-semibold text-slate-800 dark:text-white leading-none">Alex Johnson</p>
+<p class="text-[10px] text-slate-500 mt-1 uppercase font-bold tracking-wider">Pro Planner</p>
+</div>
+<img alt="User Profile" class="w-9 h-9 rounded-full object-cover border-2 border-slate-100 dark:border-slate-700" data-alt="Professional portrait of a male user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDj3T6FY6K48eFTgql_el5wmUn0AfrS2vS6yqnA1-WGCF09vZ7aTBJKwYHZsQUfQIRzCzHyYzvWeF5MgaOpb1H_S4zEbVmLqQfE7fmqbxBita26DvsnSHxmZFcHZSjUfyOSvG0JPF9lmeNMEIROmKOqwR2BY9p0VsiF4ewVLqg3h1pbYOuylAGyvUPoL3mEXm0LP-jeI9RtXwWyndHwMPRtoON7HnyjmyCNEmzLP8qYkc2ut-MLp0l8Chgd_XZlGalScO2V59em8o"/>
+</div>
+</div>
+</header>
+<!-- Sidebar (280px) -->
+<aside class="fixed top-16 left-0 w-[280px] h-[calc(100vh-64px)] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 z-40 flex flex-col">
+<!-- Trip Context Header -->
+<div class="p-6">
+<h2 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4">Active Trip</h2>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50">
+<img alt="Santorini" class="w-12 h-12 rounded-lg object-cover" data-alt="Stunning white buildings in Santorini Greece" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0OhmNhLXWS35HEflzHQX9zQJN2CsAQh7DKBHUPOmRqGsyhXez_yOo_yyiDOYW9tf3_nKFdSvqhKlY6vWAXvPq0CjFWG5aM2CDUem9hDUQj5ttQyEqmYFtP3Xs_FJTJqweArMkdd_dPNvoR0Cd7ep0SHnrDFcaex_YxckzAcNlkzz4HiZ1GCd4BE52aGtIzqEZyw_ouMV9yjMBQMAyDWjkbQB76Gc2cE1KZfhuenI8X-2uZZk3kuYFXSa6g3FZsy1oIxNI8Ealjpk"/>
+<div>
+<h3 class="font-bold text-slate-800 dark:text-white leading-tight">Summer in Santorini</h3>
+<p class="text-xs text-slate-500 flex items-center gap-1 mt-1">
+<span class="material-icons-round text-[12px]">calendar_today</span>
+                        June 12 - 20
+                    </p>
+</div>
+</div>
+</div>
+<!-- Navigation Menu -->
+<nav class="flex-1 px-4 py-2 space-y-1 overflow-y-auto hide-scrollbar">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-item-active group transition-all" href="#">
+<span class="material-icons-round text-primary">dashboard</span>
+<span class="font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round">calendar_month</span>
+<span class="font-medium">Itinerary</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round">how_to_vote</span>
+<span class="font-medium">Votes</span>
+<span class="ml-auto bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded text-[10px] font-bold">2</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round">payments</span>
+<span class="font-medium">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-icons-round">groups</span>
+<span class="font-medium">Members</span>
+</a>
+</nav>
+<!-- Sidebar Footer -->
+<div class="p-6 border-t border-slate-100 dark:border-slate-800 mt-auto">
+<button class="w-full bg-primary hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20 mb-4">
+<span class="material-icons-round text-sm">person_add</span>
+<span>Invite Members</span>
+</button>
+<a class="flex items-center gap-3 px-4 py-2 text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors" href="#">
+<span class="material-icons-round text-sm">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-[280px] mt-16 p-8 min-h-[calc(100vh-64px)]">
+<div class="max-w-6xl mx-auto">
+<!-- Header Section -->
+<div class="mb-8">
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white">Trip Dashboard</h1>
+<p class="text-slate-500 mt-1">Welcome back, Alex. Here's what's happening with your trip.</p>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column (Main Stats) -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Trip Summary Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-5">
+<span class="material-icons-round text-9xl">explore</span>
+</div>
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="material-icons-round text-primary">info</span>
+                            Trip Summary
+                        </h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
+<p class="text-xs text-slate-500 uppercase font-bold mb-1">Duration</p>
+<p class="text-lg font-bold text-slate-800 dark:text-white">8 Days</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
+<p class="text-xs text-slate-500 uppercase font-bold mb-1">Travelers</p>
+<p class="text-lg font-bold text-slate-800 dark:text-white">8 People</p>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl">
+<p class="text-xs text-slate-500 uppercase font-bold mb-1">Status</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<p class="text-sm font-bold text-emerald-500 uppercase">Confirmed</p>
+</div>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<div class="flex -space-x-2">
+<img alt="Traveler" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="Female traveler portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOGEjhqMLM8vO9umHezudvRLzTWZcCHtCEja7omIW3_CNOq0KXaEYyo9wPhYEJmlKSgcI5LQegCNDCQbft7Yt_0FWOJneisKDhc53UOiMaYLrga9zPejr81C190kb_Ydt85ILC-V7gq_0wKLyJsA1oQ-F31w4LzUb-PuoirpBTyqf9Ys_iNrSvl2MxhkefmbyHey4ZR0vHnbwuevj3WeqhGtjSEVcJD5uc6NRNjbjN-RBEpk_42xx1ihgFs69bjF5ixypbWrQPZYw"/>
+<img alt="Traveler" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="Male traveler portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlNIWuJy-HjUwHBf3485bws3r7gtZbwX5i5Q61CAZxF7Z6_nD8TfVybJ2WpTrQJXx6WQ2cmss0Loc1ZZgUYTjg28O3VCut7CbsATpa5VL7W8By6RS_yAHli5DfyJ3gZMnk4c4XAZowPFHnndC07EE-IK8FiRjllRcOoAmVR1614CL_N_EKhFu9UZDAudyB0EUUbTg_RELItRX3ZDR3qVjggXnO_Wm1y43ysIHiIH_N5yTEBqDz_Z42lcpV6aaGOD4qSKjCjU2XjUQ"/>
+<img alt="Traveler" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="Female profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQKtjR9gje8SyQn5GsEwPnFjO_3PQW-5WM7jG45vmlRZuMuiSG8k1BwnH1UfQOyg0IY8WUGRpyeW3NtUbZAlN6Bn6ksDvYDrYDtz1qcNxM7tEhPL-9bllFWisMOvpENmK2_rOLBgcRI6Ss6botSzdD70L_ReoHnGSfrUYSIlOW3jo0nb2Vis9M0yIAqKiYRJJMbWbpSswT-NOQ8g5HB4DkPoKWsf-s0D-Yy4OQrJY0WKLgeNRTjvt-myUPgdechJ2Gah2nIjAmg8Y"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold">+5</div>
+</div>
+<p class="text-xs text-slate-500 ml-2 italic">3 members still need to confirm flights</p>
+</div>
+</div>
+<!-- Next Activity Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold flex items-center gap-2">
+<span class="material-icons-round text-primary">event_available</span>
+                                Next Activity
+                            </h3>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">Full Itinerary</a>
+</div>
+<div class="flex flex-col md:flex-row gap-6 items-center">
+<div class="relative w-full md:w-48 h-32 rounded-lg overflow-hidden shrink-0">
+<img alt="Sunset Tavern" class="w-full h-full object-cover" data-alt="Beautiful dinner table with sunset view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6s1Ia04CTzHdjCyenPxpkpDVjC21Zm0BAYFLlROsV9vjpmDlrQIlQKPATpv1gx__4HMI6qgOZF7U0NamJ0JzS0vZEdiVE0C79qPQjGtm2_y3GsZygRLLGcjYgbkbaKN9r3hTm3uuSnfBRTfcKlLslwBma8ddpB0-oKT-0zc59QtJVJY3ivEqUF6zfAeXEOdrV3POvXKUe3YGoKXFUz7TT-g4d9-_y4DRaJk1_dAk4PVr4uk-_8vxbE7YO922mthf8pb3pcZR0oJ8"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<p class="text-[10px] font-bold uppercase tracking-wider">Tomorrow</p>
+<p class="text-sm font-bold">19:30 PM</p>
+</div>
+</div>
+<div class="flex-1">
+<h4 class="text-xl font-bold text-slate-800 dark:text-white">Dinner at Sunset Tavern</h4>
+<p class="text-slate-500 text-sm mt-1 mb-4 flex items-center gap-1">
+<span class="material-icons-round text-[16px]">location_on</span>
+                                    Oia Cliffs, North District
+                                </p>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">Reservation Made</span>
+<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-full">8 Going</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Recent Activity) -->
+<div class="lg:col-span-1">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex flex-col h-full max-h-[600px]">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-icons-round text-primary">history</span>
+                                Recent Activity
+                            </h3>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons-round text-sm">more_vert</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6 hide-scrollbar">
+<!-- Activity Item 1 -->
+<div class="flex gap-4 relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-px bg-slate-100 dark:bg-slate-800"></div>
+<img alt="Alex" class="w-8 h-8 rounded-full shrink-0" data-alt="Male user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmk0sMO2SLfwaYrmuEn8qXV4qzBRWZ78_h7P8A4MqDKdQojZaI1cLcdnEcSmjO95J_eJYa7tQXO5c1TvXsI3zS3HOLVHRJf4T-Ya4UqksVqibwTtSgvDOFnTQ9ZuoLzyyODxOC0FR-qQillwvEus_fqEAj0jYhSd13nZVBVZ94dFMoLOXiegH3Kftyvgd4F2Y2pEXwSCH5n33lb3Gmu-BGB0B69QEJ-NwJ-8EjiIVyA8HDSXozpWFp3BaBO5d8ldsXQCmWeqdG9_o"/>
+<div>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+<span class="font-bold text-slate-800 dark:text-white">Alex</span> added <span class="text-primary font-medium">'Oia Sunset Tour'</span> to Itinerary
+                                    </p>
+<p class="text-[11px] text-slate-400 mt-1 uppercase font-bold">2m ago</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex gap-4 relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-px bg-slate-100 dark:bg-slate-800"></div>
+<div class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center shrink-0">
+<span class="material-icons-round text-primary text-sm">attach_money</span>
+</div>
+<div>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+<span class="font-bold text-slate-800 dark:text-white">Sarah</span> updated the <span class="text-primary font-medium">Hotel Budget</span>
+</p>
+<p class="text-[11px] text-slate-400 mt-1 uppercase font-bold">45m ago</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex gap-4 relative">
+<div class="absolute left-4 top-10 bottom-[-24px] w-px bg-slate-100 dark:bg-slate-800"></div>
+<img alt="Jane" class="w-8 h-8 rounded-full shrink-0" data-alt="Female user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrgy68m1IYgLQavnKonTHyUm8Bn5i6v378uoDoGzvOCenG84VvaYmRQye2nEykmQJrpZcsIabva6q5gDNvBjIrMYL0UIKamTZQ6gUbiY6fUBWgNqxrohMdPHigN1NPEpPwD_NBGTn3du9ndrsXfKGMEr441Y1DCuDtTQfy23J3BX-fq0wONhLVCX4KueBvhGAAxzaYsfxmtm4c_MUnHha-IyEu-RF6nFVbTyqLVZc5BUA-F1ywFScKFszoQr-eT8k3XAWuw7brv8M"/>
+<div>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+<span class="font-bold text-slate-800 dark:text-white">Jane</span> started a new vote: <span class="italic text-slate-500">"Rent ATVs?"</span>
+</p>
+<p class="text-[11px] text-slate-400 mt-1 uppercase font-bold">3h ago</p>
+</div>
+</div>
+<!-- Activity Item 4 -->
+<div class="flex gap-4">
+<div class="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center shrink-0">
+<span class="material-icons-round text-emerald-500 text-sm">person_add</span>
+</div>
+<div>
+<p class="text-sm text-slate-600 dark:text-slate-400">
+<span class="font-bold text-slate-800 dark:text-white">Marcus</span> joined the group
+                                    </p>
+<p class="text-[11px] text-slate-400 mt-1 uppercase font-bold">Yesterday</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 text-center">
+<button class="text-xs font-bold text-slate-500 hover:text-primary uppercase tracking-widest transition-colors">View All Updates</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

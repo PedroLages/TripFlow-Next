@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Join the Trip</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1d4fd7",
+                "background-light": "#f6f6f8",
+                "background-dark": "#111521",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .ios-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        }
+        .avatar-ring {
+            box-shadow: 0 0 0 3px #ffffff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex items-center justify-center min-h-screen p-6">
+<!-- Phone Container Simulation (Max width for Phone layout) -->
+<div class="w-full max-w-[400px] flex flex-col items-center">
+<!-- Header / Logo Section -->
+<div class="flex flex-col items-center mb-12">
+<div class="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mb-4 ios-shadow">
+<span class="material-icons text-white text-4xl">flight_takeoff</span>
+</div>
+<h1 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">TripOS</h1>
+</div>
+<!-- Main Invite Card -->
+<div class="w-full bg-white dark:bg-slate-800 rounded-xl p-8 ios-shadow mb-8 border border-slate-100 dark:border-slate-700">
+<!-- Inviter info -->
+<div class="flex items-center space-x-3 mb-6">
+<div class="relative">
+<img alt="Sarah Jenkins" class="w-10 h-10 rounded-full object-cover" data-alt="Close up portrait of a smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPumiJWw8vEuv3w0HKPzaGgrvfzGwhJvIdCpFtvtTB0KOketJ2yz-exU8doNtXXihoPUg39341jyiuuk8ZgB5r5veKXD723Uz1SOuysqU-01rpY2PBCT0n2GWhrrqhdvqoLLejQRXy206QrE46A9aYn6KMDZszwa7F3-D8BpuAN9oiGdC5lDAFP4yHK3jz_UhbZWFkwhcgY9UU8gDoiLXrsgSt1mMKqA8eiZNkceB4ihAKSHLmwEHZ8nr72_WAdN99QYxNTbU4CN0"/>
+<div class="absolute -bottom-1 -right-1 bg-primary w-4 h-4 rounded-full border-2 border-white dark:border-slate-800 flex items-center justify-center">
+<span class="material-icons text-[8px] text-white">mail</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
+<span class="text-slate-900 dark:text-white font-bold">Sarah Jenkins</span> invited you to:
+                </p>
+</div>
+<!-- Trip Highlight -->
+<div class="mb-8">
+<h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-2">Summer in Santorini</h2>
+<div class="flex items-center text-slate-500 dark:text-slate-400 text-sm font-medium">
+<span class="material-icons text-primary text-lg mr-1">location_on</span>
+<span>Santorini, Greece</span>
+</div>
+<div class="flex items-center text-slate-500 dark:text-slate-400 text-sm font-medium mt-1">
+<span class="material-icons text-primary text-lg mr-1">calendar_today</span>
+<span>July 15 - July 22, 2024</span>
+</div>
+</div>
+<!-- Member Stack -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-700">
+<div class="flex items-center">
+<div class="flex -space-x-3">
+<img alt="Member 1" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="Young man with beard smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdjtY9HIgOdIis78EO2tgiijLGVaj7t22z3Qqyk4t9nvK6wIPpd_rpq7NFHOfSEl5WwOg5iCMnYIvC4NF5PRHxBmL1wrCH-wwldg9qFHWPedmDvXr3NnbArDFkeVGpVJjP4rqpm4dH-uwbmROOGLB6kgOIn3_Ke6a90-PS8IWIhnhoKARTUR1ou-X7Z7a6bSt6SPJQbuZARJlMrOpYUbRCLC3hUGJE8FnW7W2fmOSfPURxUm5FGVLwihS5ImraNy7c7obtAM6LPZM"/>
+<img alt="Member 2" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="Woman with blonde hair posing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3ARm7rwoqat8fvnDnMD6F2LgbyUUkueTfCDR56gX_ev-ybVteJYV8NLELqX9RZZG_C54LNZbK8RWgqo9VQAVrhsmBspdYZAfg3FzNtcziH3KO_pgS0xs9sMjea6T7Nx4RgwXqgdIwiFQEc1ZWkyqo8fURNPfBslaXPLyN5K-xrhh95KzxTpRIoZ4H-nne-M-5kXYp1TxJBI2Cw2Z8dACrfA5x2O4N78RdKe3mzyP_WpjPVvubx_XYM_imvqsIQo7txfpOLSwP47U"/>
+<img alt="Member 3" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="Man wearing glasses smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEfakERNFevY-tJWH7cgBAe48hyFy4YJ7w1RgYuQ0uQQvbcTM1nsGu25RFvvvlzpWq4u_CjEXKdARQQOzaIKOuDXJgsMZBWdUuhimzuJ8T4Hr0Gf3A-yZJHhI0Cm-_QRbV7236bYIFKcstyYYHQfgUieorrPqBcusC9UVp0cTqBvBjocFcVOdW5RLXy7cyiC567D6lcGWChphmSEoRDBeiaBUeOuJtFCtx4J58dEzrcYAJBLpwPS7c_KzucCQCG-tw4Yl1bLcayPA"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-slate-300">
+                            +4
+                        </div>
+</div>
+<span class="ml-4 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">7 going total</span>
+</div>
+</div>
+</div>
+<!-- Map Thumbnail (iOS context detail) -->
+<div class="w-full h-24 rounded-lg overflow-hidden mb-8 border border-slate-100 dark:border-slate-700 ios-shadow relative">
+<div class="absolute inset-0 bg-primary/10"></div>
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="Aerial view of Santorini coastal town" data-location="Santorini" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRQgQRCnllC4cr0U6YYBR8uzwBhvcWhJw64GGbhYXiFnYg2hAkYRYpZBRu9EF8MTcYb833M_k9jwLWGngVnMAZqHWsxp8K2GpNtE9Qkpe_3_wGCSQtn2vwmvgca98zO7AdOc6M7jaXgSOfV5HCZEoIudHFIKFeprMPqI2dnBGopJmVCAYWaBsjldUqBuzMDBOk8MiL-AhbHaoqeFSLWUhnZPq3HfaORgvyScImw5u8GiGBM-QfAhVkmyP2VJiueoUOX6cQk-lqtXE"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/90 dark:bg-slate-800/90 backdrop-blur px-3 py-1 rounded-full border border-primary/20 flex items-center shadow-sm">
+<span class="material-icons text-primary text-sm mr-1">map</span>
+<span class="text-[10px] font-bold text-slate-700 dark:text-slate-200">VIEW DESTINATION</span>
+</div>
+</div>
+</div>
+<!-- Action Section -->
+<div class="w-full space-y-4">
+<button class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-4 rounded-xl transition-all shadow-lg active:scale-95 text-lg">
+                Create account to join
+            </button>
+<div class="text-center">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
+                    Already have an account? 
+                    <a class="text-primary font-bold hover:underline" href="#">Sign in</a>
+</p>
+</div>
+</div>
+<!-- Footer Visual -->
+<div class="mt-16 w-1/3 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full opacity-50"></div>
+</div>
+</body></html>

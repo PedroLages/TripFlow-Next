@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Poll Results - No Quorum</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b1dd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                        "destructive": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<!-- iOS Navigation Bar -->
+<nav class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
+<button class="flex items-center text-primary font-medium">
+<span class="material-icons text-2xl">chevron_left</span>
+<span>Polls</span>
+</button>
+<h1 class="text-lg font-bold">Poll Results</h1>
+<button class="text-primary font-medium">Share</button>
+</div>
+</nav>
+<main class="flex-1 max-w-md mx-auto w-full px-4 pt-6 pb-32">
+<!-- Status Header -->
+<div class="mb-6 flex flex-col items-center text-center">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-destructive/10 text-destructive text-sm font-bold mb-3 border border-destructive/20">
+<span class="material-icons text-sm mr-1">error_outline</span>
+                NO QUORUM
+            </span>
+<h2 class="text-2xl font-extrabold tracking-tight mb-1">Hotel Selection</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Approval Poll • Created by Sarah M.</p>
+</div>
+<!-- No Quorum Alert Card -->
+<div class="bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 rounded-xl p-5 mb-8">
+<div class="flex items-center justify-between mb-4">
+<div class="flex flex-col">
+<span class="text-destructive font-bold text-xl leading-tight">Only 3 of 8 voted</span>
+<span class="text-red-700 dark:text-red-300 text-sm">5 more votes needed to validate</span>
+</div>
+<div class="bg-white dark:bg-slate-900 p-2 rounded-lg shadow-sm">
+<span class="text-destructive font-bold">37%</span>
+</div>
+</div>
+<!-- Custom Progress Bar -->
+<div class="w-full h-3 bg-red-200 dark:bg-red-900/50 rounded-full overflow-hidden">
+<div class="h-full bg-destructive rounded-full" style="width: 37%"></div>
+</div>
+<div class="mt-4 flex -space-x-2">
+<img alt="Voter 1" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Female profile picture of a voter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNKzDepHpU1A5JYe8qwaiEJORxV505n1jj0JmzweMPnRWjhzJtZvOUsqRcFfHB__BWOPZn1yysK4kac3vqf4zN3HLvqHPwwh7L_01mxQOaBCwgOONt0ac5w0O2s6vJNtnYCgKYl0Wjd0bx8ahnl5TAdMHfSlBp5ca5obOiRq3CbXKiJ7pW7KXs_ahlfmaLoDM7fqSwVqcwH_q0DRm4h0mmYReqqdMfOhl3ioC_lB1QbH7uST0HNAOQUYmp0rISNUvyJe67UBr-95Y"/>
+<img alt="Voter 2" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Male profile picture of a voter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfVU_nagK7084LPzUEo_VmBtade0rJchLUf8d39FO9mWQh9v28eHwMkmCeU87zXYRFBMq2HviHRtda4pBHes_9q2gXe9G09ACgGQJ5iFG53OL0yOiBvX2DPlJS-blL4W3pZUFsGayF60pO3UwejaJjyKkR179IG_q5A9oapHzdluw_wUlsfRFN5GxJEbZIc1rZclMyawYcAMg-aGDedUkhLhtJ7JQrXspYSUmdTTMOwKwF2meT5DFVbKes-XzDsIe_GK4vGc3_kd0"/>
+<img alt="Voter 3" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Female profile picture of a voter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSx1TF1y65_chm-jrwj6i78akJQi9g6iYwQ6FrHS-owfgHb5FsOIvox3h03TWJyZhljQVHPNiPeVabmdd5YnfzbMQfMe9ox2oyKS1JtEbHaYh8staucn9UGQGtIKZ-NPn3WevoCuqOiVnzdhnTFuKSgOLeKhY2sT0Ftn9GTQgaZc_f3bbDvhIJnM8ywuTQKHNzIxtk7kF58yPKhy5s7OFw176EvYwdnfvEtDWPYVE8qeqojbmlm9SIp46dSEXzzwBEbCkR11D1F6s"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold text-slate-500">+5</div>
+</div>
+</div>
+<!-- Results Section -->
+<div class="space-y-6">
+<h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest px-1">Preliminary Results (Void)</h3>
+<!-- Option 1 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end px-1">
+<div>
+<span class="font-bold text-lg block">Hilton Garden Inn</span>
+<span class="text-sm text-slate-500">2 Approvals</span>
+</div>
+<span class="text-sm font-semibold text-slate-400">66% of votes</span>
+</div>
+<div class="relative w-full h-10 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
+<div class="absolute inset-y-0 left-0 bg-primary/20 border-r-2 border-primary/40 h-full transition-all" style="width: 66%"></div>
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-icons text-primary/60 text-lg mr-2">check_circle</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 italic">No quorum reached</span>
+</div>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end px-1">
+<div>
+<span class="font-bold text-lg block">The Standard High Line</span>
+<span class="text-sm text-slate-500">1 Approval</span>
+</div>
+<span class="text-sm font-semibold text-slate-400">33% of votes</span>
+</div>
+<div class="relative w-full h-10 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
+<div class="absolute inset-y-0 left-0 bg-primary/20 border-r-2 border-primary/40 h-full transition-all" style="width: 33%"></div>
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-icons text-primary/60 text-lg mr-2">check_circle_outline</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 italic">No quorum reached</span>
+</div>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="space-y-2">
+<div class="flex justify-between items-end px-1">
+<div>
+<span class="font-bold text-lg block">Airbnb: SoHo Loft</span>
+<span class="text-sm text-slate-500">0 Approvals</span>
+</div>
+<span class="text-sm font-semibold text-slate-400">0% of votes</span>
+</div>
+<div class="relative w-full h-10 bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
+<div class="absolute inset-0 flex items-center px-4">
+<span class="material-icons text-slate-300 dark:text-slate-600 text-lg mr-2">radio_button_unchecked</span>
+<span class="text-sm font-medium text-slate-400 italic">No votes</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Info Box -->
+<div class="mt-10 p-4 rounded-xl bg-slate-100 dark:bg-slate-800/50 flex items-start gap-3">
+<span class="material-icons text-slate-400">info</span>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                This group requires at least <span class="font-bold">8 participants (quorum)</span> for a poll to be finalized. Since the deadline passed without enough votes, the results are currently invalid.
+            </p>
+</div>
+</main>
+<!-- Sticky Bottom Actions -->
+<div class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 ios-blur border-t border-slate-200 dark:border-slate-800 pb-10 pt-4 px-4">
+<div class="max-w-md mx-auto flex flex-col gap-3">
+<button class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform">
+                Re-open Poll
+            </button>
+<button class="w-full text-primary font-bold py-2 active:opacity-70 transition-opacity">
+                Extend Deadline
+            </button>
+</div>
+</div>
+</body></html>

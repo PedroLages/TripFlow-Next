@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - My Trips</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7", // Adjusted to match theme requirement while staying close to requested #365CF5
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "accent": "#F97316",
+                        "vote": "#9333EA",
+                        "privacy": "#10B981",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen pb-24">
+<!-- Top Navigation Bar (iOS Style) -->
+<nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-primary/10">
+<div class="px-6 py-4 flex justify-between items-center">
+<h1 class="text-2xl font-800 tracking-tight text-primary">TripOS</h1>
+<button class="relative p-2 rounded-full bg-primary/5 hover:bg-primary/10 transition-colors">
+<span class="material-icons-round text-primary">notifications</span>
+<span class="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 border-2 border-background-light dark:border-background-dark rounded-full"></span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="max-w-md mx-auto px-6 py-4">
+<!-- Filter Pills -->
+<div class="flex overflow-x-auto hide-scrollbar gap-2 mb-8 py-1">
+<button class="px-5 py-2 rounded-full bg-primary text-white font-semibold text-sm shadow-lg shadow-primary/20 shrink-0">
+                All
+            </button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700 shrink-0">
+                Upcoming
+            </button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700 shrink-0">
+                Planning
+            </button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-200 dark:border-slate-700 shrink-0">
+                Past
+            </button>
+</div>
+<!-- Trip Cards List -->
+<div class="space-y-6">
+<!-- Trip Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="relative h-40">
+<img alt="Santorini Coast" class="w-full h-full object-cover" data-alt="Stunning white buildings and blue domes of Santorini" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgnL4U6EXcI9ACv8lEDYx1IKk-1mH8lPAUsLOqnWRM4oYakD7zW2Au89ligrUcFtJcIR9HZuuXMV0QpjbMKGfs42q--NuiJW8bCtePRV_UdeQ5OAD4fHofr0mq169s7lVfjOFtueGXWsuGeQq7LTsF_YTHBvvupcAzDm25OMXDNF9RvTiMWrf-mDJCNaa8f5Zn_v_T97NHGGFczH-2oyqgM14SiN-lGpdHziWuGXYOWewHnrr8MrwBU9GGXAMhTuSADlm0Dgq0ApQ"/>
+<div class="absolute top-3 right-3">
+<span class="bg-vote/10 text-vote text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">
+                            2 polls
+                        </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold">Summer in Santorini</h3>
+<p class="text-sm text-slate-500 flex items-center gap-1">
+<span class="material-icons-round text-sm">location_on</span>
+                                Greece • July 12 - 20, 2024
+                            </p>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex -space-x-2">
+<img alt="User 1" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Portrait of a young smiling woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7poaFkQQPHjvIkPg5n7cjmwSYf9iWVPwl9tBdgV8ZRB04NCZF-j36CBn9KXtJOGLlo0B09KDflotfPAWudSqoTdkDnXo4T-6Sp42XcNZd4Kspqzuys8BMZ6PIjK-w8RPZkZXLIwOypLthD2BWfz2pHovclJPHtVcdQc8jqb75NgG9yZj1JBZqoxn18VhWegUSG41eHd8xjJkQb7uiV0TpqSMsPTJove8zaWnJM2MSSC4eRzzX5JAH-JpT1Bi2wMqUjCO-_sokpuU"/>
+<img alt="User 2" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Portrait of a friendly bearded man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAaJAZJ_KhW-IMHbM-rHmJOAt5dzKyzYHhzm5VgOFqYxNeOjgdjfwNwcy-R52HOS2s_C6LO4v6H0OF-HDT4YvHwYwMxEhNkP5rkrP3x1Kj6pm5jTeS8vyAQB5pQxJVdN_26nLAd5VqmmGgGkK-fitCKJX1UlcX4aSxrxtA3SfB9xM0JSTlM0FhF2wqpvekQ-VZKuJ4kIoUSGzeuajp9TMWFR_rAajkagDNRKXne42jlEBUmSgZA10mriFd2dFd1XM6jtZwyOwSVj8"/>
+<img alt="User 3" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Portrait of a fashionable young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTwukZxPTWpJdvYvQ-KRWdDLK2GQMB3i7d3DRWUMS8PDjB_V9Zv4d8DEoR6ZdF0br1JrdFNw9g-OEUVGmYzwPkisboS63IYojI2mluX0HV4jypHk-6piS3I8BeWzHvXCOCBk9bIO66Mkq2stOp3yey5j4du1-9FFX2DmwyulygC1M07GDkYHbj4VkGa0215Z7oGhjiJz4MiwJA15pIksh401sqvS53kwON40_bNEvJhHzxQLMN8jzqylhd8jv0OXqXbOAolG-kASc"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-500">
+                                +2
+                            </div>
+</div>
+<button class="text-primary font-bold text-sm">View Details</button>
+</div>
+</div>
+</div>
+<!-- Trip Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="relative h-40">
+<img alt="Tokyo Neon" class="w-full h-full object-cover" data-alt="Night cityscape of Tokyo with neon lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUdHsPVf2NnHY_k1WrctimhvXknN70-xtoTjEHvpdBtyE7aLjjoRou91i3I08T7CQ2bbJ1uDJ-T4GAGh3-mGn4pWXi3plHr6EJAaRJDoNusXSidM3SA2kPsL3QMEhlIlpWxQYKBDWyxHGjrpxytWlzuH3nmrrQdGoYqIqWIE9pHJpccQN8YvK3xz82x1hMqlBdMOf8a7eU0QHgvKF5m_eUI-l-XhqXbn93KgQeAlOo--P5MlIdOxxdWygH-qU3M0aSpa7obPi3JSE"/>
+<div class="absolute top-3 right-3">
+<span class="bg-privacy/10 text-privacy text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md">
+                            Budget set
+                        </span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Tokyo Food Tour</h3>
+<p class="text-sm text-slate-500 flex items-center gap-1">
+<span class="material-icons-round text-sm">location_on</span>
+                                Japan • Sept 05 - 15, 2024
+                            </p>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex -space-x-2">
+<img alt="User 4" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Portrait of a man with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMt3bk8qqjKx947hrH3lojOYWDqgcgDZtGpX96xw87lSFGwmlHZBPa6I6WpmtUCFbogJ5YKD3dlrgld9UXVNqdngxNCJhrH3SsMfWC9WeGMRWhjthFFUxiPDCFBLXFyqSg40URvwHeNOpL2XXYn-0f74bxv2I8yfzB_U253fdHNvbqoUlBswtuq_nvOSSEYJs33oH0a38mz9k0E7h5BnbqSXQyku5pDXIRVJxVcuUvyKXLe8rI4sSYFbFiMiUpgN9-ARw3gFoAWkA"/>
+<img alt="User 5" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Close up portrait of a woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_9an1zZM3nZyxCI6ex1Y8dtxlMxFxR7XkIwZTQRoCLfvvJc1jrOs7czmlk4fe8XkBI7yC6i9G1d8wQBwvILcr9WTzS11sSqNy0cOMaxGAVQkXiYJqTizk_n3sqJ9xa3t4tm7c3G6cEstSgih_oCJqf9eHws8dSjL_Zj8XVFD0kblWFtUVfM-F4KhAqsXRUO2PCPx-WCRG3mTvWr6mRS_YQJlW93BzuYlTnFX1kmESUsDfToZcNFYueQVmI_P8VTCdJ3KHeextzjE"/>
+</div>
+<button class="text-primary font-bold text-sm">View Details</button>
+</div>
+</div>
+</div>
+<!-- Trip Card 3 (Planning) -->
+<div class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+<div class="relative h-40">
+<img alt="Paris Eiffel Tower" class="w-full h-full object-cover opacity-60" data-alt="Iconic Eiffel Tower in Paris during sunrise" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6w5CmAqfR8BYIPz7zvcqI1Pw9QnOotXvPTDQEC35Ws6YpWnlFd5PlJgSQo2dPdltLKSzkTzQT3uTSttXdcrGgen_h-k1hiq68et2XK3n2xzqmW-MuLgr3HL0uvrja-XZLPYYlV-GpC99xH1i9Aqbxn2nnBX9J3tbIT251X7oo2Db_WERmLcxZ9Kt_N4IGhaAbqQpBV9ibITcWPyKTl91SLe6FJcW2g0D-FbFtRhCb4mDdcIgqtFN8fNO0dF_mlGmZJciU0jTSviM"/>
+<div class="absolute inset-0 flex items-center justify-center bg-slate-900/20">
+<span class="bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white px-4 py-1.5 rounded-lg font-bold text-sm">PLANNING PHASE</span>
+</div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Paris Weekend</h3>
+<p class="text-sm text-slate-500 flex items-center gap-1">
+<span class="material-icons-round text-sm">location_on</span>
+                                France • Oct 12 - 14, 2024
+                            </p>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<div class="flex -space-x-2">
+<img alt="User 6" class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 object-cover" data-alt="Portrait of a serene looking woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHjJW0OqawtTedKPYPq5S7zUZgtGuWKqoZG7BdG2ju7kCtohcQsI4Y-OzltXIDXFNLnAQcXFe0oKuypX0hzwNhl7O_gai9XYq_OXsubF8h638NhuMzbHqSpd4QeExZLfpA2UVDCuh1d6RAD0WNk6W3J_0G7dZ_fik4gGcN3FmcCkE3h4zEhuRQf3XCH7VpUq6lIjEGgKgnhAR2KSQ6Jm3SbQHVBdT2gpKEDjYMDZzWK-RKREwPxuy4S_2v8xgK1EQ1tMdv7053uGQ"/>
+</div>
+<button class="text-primary font-bold text-sm">Resume Planning</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center z-40">
+<span class="material-icons-round text-3xl">add</span>
+</button>
+<!-- iOS Bottom Navigation Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 ios-blur border-t border-slate-200 dark:border-slate-800 pb-safe z-50">
+<div class="max-w-md mx-auto flex justify-around items-center pt-3 pb-8 px-12">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons-round text-primary">explore</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-wider">My Trips</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-icons-round text-slate-400 group-hover:text-primary transition-colors">person_outline</span>
+<span class="text-[10px] font-bold text-slate-400 group-hover:text-primary uppercase tracking-wider transition-colors">Profile</span>
+</a>
+</div>
+<!-- iPhone Home Indicator Area -->
+<div class="h-6 w-full flex justify-center items-end pb-2">
+<div class="w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+</body></html>

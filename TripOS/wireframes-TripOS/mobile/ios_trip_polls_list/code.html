@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1919e6",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>TripOS - Trip Votes</title>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-shadow {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .poll-card {
+            border-left: 4px solid #1919e6;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<!-- Mobile Container (iPhone Pro Size Simulation) -->
+<div class="w-full max-w-[430px] bg-background-light dark:bg-background-dark min-h-screen flex flex-col relative shadow-2xl">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-12 w-full flex items-center justify-between px-8 pt-4">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-icons text-[18px]">signal_cellular_alt</span>
+<span class="material-icons text-[18px]">wifi</span>
+<span class="material-icons text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Navigation Bar -->
+<header class="sticky top-0 z-30 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 py-3 flex items-center justify-between">
+<button class="p-2 text-primary">
+<span class="material-icons">arrow_back_ios</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">Summer in Kyoto</h1>
+<button class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg shadow-primary/30">
+<span class="material-icons">add</span>
+</button>
+</header>
+<!-- Segmented Control Tabs -->
+<div class="px-4 py-4">
+<div class="bg-primary/5 dark:bg-primary/10 p-1 rounded-xl flex items-center">
+<button class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white dark:bg-primary shadow-sm text-primary dark:text-white transition-all">
+                    Active (3)
+                </button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+                    Completed
+                </button>
+<button class="flex-1 py-2 text-sm font-medium text-slate-500 dark:text-slate-400">
+                    All
+                </button>
+</div>
+</div>
+<!-- Scrollable Content Area -->
+<main class="flex-1 px-4 space-y-4 pb-32">
+<!-- Poll Card 1: Yes/No -->
+<div class="poll-card bg-primary/5 dark:bg-primary/10 rounded-xl p-4 ios-shadow border-l-primary transition-transform active:scale-[0.98]">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary/70 mb-1 block">Binary Vote</span>
+<h3 class="text-base font-bold leading-tight">Which hotel should we book?</h3>
+</div>
+<div class="bg-white/80 dark:bg-background-dark/50 px-2 py-1 rounded-md border border-primary/10">
+<span class="text-[11px] font-semibold text-slate-600 dark:text-slate-300">2d 5h left</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="flex-1 h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[62.5%]" style="width: 62.5%;"></div>
+</div>
+<span class="text-xs font-bold text-primary">5/8 Quorum</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 border-2 border-primary/20 rounded-lg text-sm font-semibold text-primary bg-white/50 dark:bg-white/5">Yes</button>
+<button class="flex-1 py-2 border-2 border-primary/20 rounded-lg text-sm font-semibold text-primary bg-white/50 dark:bg-white/5">No</button>
+</div>
+</div>
+</div>
+<!-- Poll Card 2: Ranked Choice -->
+<div class="poll-card bg-primary/5 dark:bg-primary/10 rounded-xl p-4 ios-shadow border-l-primary">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary/70 mb-1 block">Ranked Choice</span>
+<h3 class="text-base font-bold leading-tight">Choose a dinner spot</h3>
+</div>
+<div class="bg-amber-100 dark:bg-amber-900/30 px-2 py-1 rounded-md border border-amber-200 dark:border-amber-800">
+<span class="text-[11px] font-bold text-amber-600 dark:text-amber-400">18h left</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-4 italic">Rank your top 3 choices from the list.</p>
+<button class="w-full py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-md shadow-primary/20">
+                    Vote Now
+                </button>
+</div>
+<!-- Poll Card 3: Approval (Voted) -->
+<div class="poll-card bg-primary/5 dark:bg-primary/10 rounded-xl p-4 ios-shadow border-l-primary opacity-90">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary/70 mb-1 block">Approval Voting</span>
+<h3 class="text-base font-bold leading-tight">Activities for Day 3</h3>
+</div>
+<div class="bg-emerald-100 dark:bg-emerald-900/30 px-2 py-1 rounded-md flex items-center gap-1 border border-emerald-200 dark:border-emerald-800">
+<span class="material-icons text-[14px] text-emerald-600 dark:text-emerald-400 font-bold">check_circle</span>
+<span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-tighter">Voted</span>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile picture of a female traveler" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVlIFuTGH4hMGpd_KfcxIZ4QjpGlUs9nMX5zL_n0IgbYaTHs_cFgooNMASEVmmFknWlwqpTScJlsbfDRq6pOHw5HgLbJN2mJZV1mXZ09nGGbo6D_69sD2yoaUqqTWckbunV31vpEwvSUr7NvVMGsfGZCiAVbDXUe1bmklJ7LUynK-JrruvL7XoepvPZrXuuRs4vzlxYt7feVkbVlMCVfN0Is2a4C7Er9-E-nugV-DAU3zEtOTfxZd1BCaVdQ2SNrlJzRTSdVF1PjY"/>
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile picture of a male traveler" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmzjHcUNV-4kVjisVTIVsYKG2Q0tucPRdTtdUNTQRw9NHsdL1st9K0A9j1v9QPfHI3QwPMBweHwMWV02DPIMiPcz3hNC8w9727UBPw3BdyIsUjXSjwCzGk2140ejH9oLwSFwo9C-PunHB8PhOiBpKRgPbp4vNA6UzLqBFZzJ6dfp0EhWFFQkPzvqTHTqbzZyVmXXyYsxIH_zaxYpfVuXsap_xV6akHgPMLJsjQGhA2t4CT1eoBEXDzvGXLkoM9JQ17V6f63DGPk3Q"/>
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile picture of a young traveler" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFKJVS2amI5U6kTAoF19CVrC1sSWdvw7lRbHdixkAriT3zel2uxNbNS4VjPOUGKFzJOJVcLcHrompcQJ0yYt5d8be92ozJIGDBBdhizS0SKVacwlx2jr-w-D43O7woPCm_TTiEQmHN78yK53_DXXa3sEIrm0sWKpcyBaTaBCQNaDWlrm9YXYmCawTp7mbIgDP2C_7q2KONNDzaKV3qMBiuD8sa27ST9YcBFFKefisriekSGqmjvVSZ7HaEAxJRLRIiBqHPr5U51s8"/>
+<div class="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 border-2 border-white dark:border-background-dark flex items-center justify-center text-[8px] font-bold">+5</div>
+</div>
+<span class="text-xs text-slate-500 dark:text-slate-400">8 of 8 voted</span>
+</div>
+</div>
+<!-- Illustration for vibe -->
+<div class="pt-6 opacity-30 pointer-events-none">
+<img class="w-full h-32 object-cover rounded-2xl grayscale" data-alt="Abstract Japanese architectural pattern for background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs8yywpXZkk1qgsVFOeGvkt4JaTIT9n1yOJOP1T-dY_dRnVUTyLcFn7D4rvelj-IGi0xqu4yoou0xrvstQCpAiy_jMuy-TlZ-h_QqXHoTtnmm1x8gvVr-VsYX3zFWZaNxklNd1n6m2hFDuSJu0kT-KkorZP742kEqkEaCSnCxmt2moPt9RAM0KIgAMiQ7BnF9YjAKcInRo11DH-lrU_CCoqVAStgZrLfEVHz-QJh3SMkzW7e0eXLHmIqgghnOFmHnjH0WjIHrXPL8"/>
+</div>
+</main>
+<!-- Bottom Navigation Bar (iOS Style) -->
+<nav class="fixed bottom-0 w-full max-w-[430px] bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-4 pt-3 pb-8 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">home</span>
+<span class="text-[10px] font-medium">Overview</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">event_note</span>
+<span class="text-[10px] font-medium">Itinerary</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons text-2xl">how_to_vote</span>
+<span class="text-[10px] font-bold">Votes</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">account_balance_wallet</span>
+<span class="text-[10px] font-medium">Budget</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons text-2xl">group</span>
+<span class="text-[10px] font-medium">Members</span>
+</button>
+</nav>
+<!-- Home Indicator (iOS Bar) -->
+<div class="fixed bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full z-[60]"></div>
+</div>
+</body></html>

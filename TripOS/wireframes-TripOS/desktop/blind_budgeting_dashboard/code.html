@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Blind Budgeting Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13ecda",
+              "background-light": "#f6f8f8",
+              "background-dark": "#102220",
+              "success": "#10b981",
+              "muted-teal": "rgba(19, 236, 218, 0.1)",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden md:flex flex-col">
+<div class="p-6">
+<div class="flex items-center gap-2 text-primary font-bold text-xl tracking-tight">
+<span class="material-icons">travel_explore</span>
+                    TripOS
+                </div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons">dashboard</span> Dashboard
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons">map</span> Itinerary
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-icons">account_balance_wallet</span> Budgeting
+                </a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons">groups</span> Group Chat
+                </a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-icons text-sm">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold truncate">Alex Johnson</p>
+<p class="text-[10px] text-slate-500">Premium Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<!-- Top Nav -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="flex items-center gap-4">
+<h1 class="text-lg font-semibold">Iceland Expedition 2024</h1>
+<span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] uppercase font-bold tracking-wider text-slate-500">Planning Phase</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-icons text-slate-500">notifications</span>
+</button>
+<button class="bg-primary text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm flex items-center gap-2">
+<span class="material-icons text-sm">share</span> Invite
+                    </button>
+</div>
+</header>
+<div class="p-8 max-w-6xl mx-auto space-y-8">
+<!-- Header Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Your Budget Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-sm font-medium text-slate-500 flex items-center gap-2">
+<span class="material-icons text-sm text-primary">lock</span> Your Budget
+                                </h3>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tight">$800</span>
+<span class="text-slate-400 text-sm">Private</span>
+</div>
+</div>
+<div class="bg-success/10 text-success flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium">
+<span class="material-icons text-xs">check_circle</span> Within range
+                            </div>
+</div>
+<p class="text-sm text-slate-500">Only you see this amount. It helps us calculate the group's comfort zone.</p>
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform">
+<span class="material-icons text-9xl">security</span>
+</div>
+</div>
+<!-- Group Budget Card -->
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-sm font-medium text-slate-500 flex items-center gap-2">
+<span class="material-icons text-sm text-primary">groups</span> Group Budget
+                                </h3>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="text-4xl font-bold tracking-tight text-primary">$600</span>
+<span class="text-slate-400 text-sm">per person</span>
+</div>
+</div>
+<a class="text-primary hover:underline text-xs font-medium flex items-center gap-1" href="#">
+                                View options <span class="material-icons text-xs">arrow_forward</span>
+</a>
+</div>
+<p class="text-sm text-slate-500">Consensus based on 8 of 12 members. Everyone sees this calculated target.</p>
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none group-hover:scale-110 transition-transform text-primary">
+<span class="material-icons text-9xl">insights</span>
+</div>
+</div>
+</div>
+<!-- Middle Section: Range Chart -->
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-10">
+<div>
+<h2 class="text-xl font-bold">Group Budget Range</h2>
+<p class="text-sm text-slate-500">The interquartile range (middle 50%) of all private budgets.</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary/30"></span>
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Group Range</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-success"></span>
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Your Position</span>
+</div>
+</div>
+</div>
+<div class="relative pt-8 pb-12">
+<!-- Scale Line -->
+<div class="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full relative">
+<!-- Teal Range (25th-75th percentile) -->
+<div class="absolute left-1/4 right-1/4 top-0 bottom-0 bg-primary/40 rounded-sm"></div>
+<!-- User's position dot -->
+<div class="absolute left-[42%] top-1/2 -translate-y-1/2 w-4 h-4 bg-success border-4 border-white dark:border-slate-900 rounded-full shadow-lg z-10" title="Your budget: $800"></div>
+<!-- Median Line -->
+<div class="absolute left-1/2 top-1/2 -translate-y-1/2 h-6 w-1 bg-primary z-0"></div>
+</div>
+<!-- Labels -->
+<div class="flex justify-between mt-6 text-sm font-medium text-slate-500 px-1">
+<div class="text-center">
+<p>$400</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Min</p>
+</div>
+<div class="text-center absolute left-1/4 -translate-x-1/2">
+<p>$600</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">25th</p>
+</div>
+<div class="text-center text-primary font-bold">
+<p>$900</p>
+<p class="text-[10px] uppercase tracking-tighter">Median</p>
+</div>
+<div class="text-center absolute right-1/4 translate-x-1/2">
+<p>$1,200</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">75th</p>
+</div>
+<div class="text-center">
+<p>$2,500</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Max</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3 text-slate-400">
+<span class="material-icons text-sm">lock</span>
+<p class="text-xs italic">Individual budgets are never revealed to other group members. The data above is aggregated and anonymized to protect your privacy.</p>
+</div>
+</div>
+<!-- Bottom Section: Affordable Options -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-xl font-bold flex items-center gap-2">
+<span class="material-icons text-primary">verified</span>
+                            Affordable Options
+                        </h2>
+<button class="text-primary hover:text-primary/80 font-semibold text-sm flex items-center gap-1 transition-colors">
+                            Browse All Options <span class="material-icons text-sm">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Option 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-40 overflow-hidden relative">
+<img alt="Sunset Kayaking" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Travelers kayaking on a calm lake at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUXgfyjpbw6mL-DQW57VnKVbGKtirpawmTLqycKQkYzQvXOoYKp22MzUqbmFd8hkSQwoza1kzKMtsFaAKg9K6iWotc3IF3gwCtT6QNMmq2sU7pzfDzqyJG7smg-sWo7mxQe9XN3QzXJsAELGOeBfeHkKj2CvifPF8YHr1C4_Hzc0fZcU_q1c-nxhyqge9K5w2GGmTRehtCizkE_Hw1Mz8sez7qaAvKxZlhZcTCHnkGT9EpVkJMgb2WcA2Q0dBi4SnCbq_9YWRXhME"/>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white backdrop-blur">
+                                    $45 / person
+                                </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-slate-800 dark:text-slate-100">Sunset Kayaking</h4>
+<div class="flex items-center text-yellow-500">
+<span class="material-icons text-xs">star</span>
+<span class="text-xs font-bold ml-1">4.9</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 line-clamp-2">Guided evening tour through the blue lagoons with local snacks.</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-success/10 text-success font-bold uppercase">Great Value</span>
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold uppercase italic">Activity</span>
+</div>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-40 overflow-hidden relative">
+<img alt="Boutique Hostel" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern minimal boutique hostel room interior" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHI-o9il0YlVJP_kdRV64iVJx-p74AV6QmAHdhW7vdJ6wpsarycib09oAT7ToBhc_F8BPWFfndElYNlybZnRRhBrqYg_lTFESkYdhfrKLumqeDbImI5SBGx4pcCSpeacZ1SJAZKqoNRtrFGmQV7mWO7AT6pUWEtBoxQTy_it-dcQ3Q4t23mjx6DdeQ-fEZZhuY8zvh00OQ0SjqSs1v42COTcipSxOTWUNGUXAlqhUQONbbkn4BXgP_KDY-nNmapxRkd8FgrqYGvUQ"/>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white backdrop-blur">
+                                    $120 / night
+                                </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-slate-800 dark:text-slate-100">The Base Loft</h4>
+<div class="flex items-center text-yellow-500">
+<span class="material-icons text-xs">star</span>
+<span class="text-xs font-bold ml-1">4.7</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 line-clamp-2">Central boutique accommodation with shared social spaces and bar.</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary font-bold uppercase">Within Budget</span>
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold uppercase italic">Lodging</span>
+</div>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden group cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-40 overflow-hidden relative">
+<img alt="Minibus Tour" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="White minibus driving on a scenic coastal road" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnTZ_xLgYiggJcfxB_QElbCBfT82wj-X9UOyqZLAXki-9ajVdDQZ7GWdalCxe3siKpvfKqViPEz9AovaHa1XLNpZ6Q3W3S7yjnKIBuxfsQo7E0XeyS7SzAjgSrNxAEZqYQOtGPIVDkpV7SCp6Rcjl2Tqbuf4Xd1apKWsizU9G4pZJZxPWVQR43I_GtJj6FbpGZaVzdM2r19HpmBkCjwlC6kECa0s-rb7L1ezx1vzTqiL6nwmhfOfXc819o0oV8vqW1ldrZsY63xsM"/>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded text-xs font-bold text-slate-800 dark:text-white backdrop-blur">
+                                    $85 / person
+                                </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h4 class="font-bold text-slate-800 dark:text-slate-100">South Coast Express</h4>
+<div class="flex items-center text-yellow-500">
+<span class="material-icons text-xs">star</span>
+<span class="text-xs font-bold ml-1">4.8</span>
+</div>
+</div>
+<p class="text-xs text-slate-500 line-clamp-2">Full day minibus excursion to waterfalls and black sand beaches.</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-success/10 text-success font-bold uppercase">Popular Choice</span>
+<span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold uppercase italic">Transport</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

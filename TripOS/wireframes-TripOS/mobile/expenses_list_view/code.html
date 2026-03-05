@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Expenses List View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Top Status Bar Area (iOS Spacer) -->
+<div class="h-12 w-full"></div>
+<!-- Header Section -->
+<header class="px-6 py-4 flex justify-between items-end sticky top-0 z-30 bg-background-light/80 dark:bg-background-dark/80 ios-blur">
+<div>
+<h1 class="text-3xl font-bold tracking-tight">Expenses</h1>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Trip to Tokyo 🇯🇵</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-transform active:scale-90">
+<span class="material-icons">add</span>
+</button>
+</header>
+<!-- Segmented Control -->
+<div class="px-6 py-4">
+<div class="bg-slate-200/50 dark:bg-slate-800/50 p-1 rounded-lg flex items-center">
+<button class="flex-1 py-1.5 text-sm font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm text-primary">
+                Expenses
+            </button>
+<button class="flex-1 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">
+                Settlement
+            </button>
+</div>
+</div>
+<!-- Category Filter Chips -->
+<div class="flex overflow-x-auto px-6 space-x-2 no-scrollbar pb-2">
+<button class="px-5 py-2 bg-primary text-white rounded-full text-xs font-semibold whitespace-nowrap">All</button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-semibold whitespace-nowrap flex items-center gap-1.5">
+<span class="material-icons text-sm">restaurant</span> Food
+        </button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-semibold whitespace-nowrap flex items-center gap-1.5">
+<span class="material-icons text-sm">directions_car</span> Transport
+        </button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-semibold whitespace-nowrap flex items-center gap-1.5">
+<span class="material-icons text-sm">local_activity</span> Activity
+        </button>
+<button class="px-5 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 rounded-full text-xs font-semibold whitespace-nowrap flex items-center gap-1.5">
+<span class="material-icons text-sm">hotel</span> Stay
+        </button>
+</div>
+<!-- Main Content List -->
+<main class="px-6 mt-6 space-y-6">
+<!-- Date Divider -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">Today, Oct 24</h3>
+<div class="space-y-3">
+<!-- Expense Item 1 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600 dark:text-orange-400">
+<span class="material-icons">restaurant</span>
+</div>
+<div>
+<h4 class="font-semibold text-slate-800 dark:text-slate-100">Ichiran Ramen Lunch</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">12:45 PM • Shibuya</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-lg font-bold text-slate-900 dark:text-white">¥4,800</span>
+<p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-tighter">~$32.40 USD</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-slate-200">
+<img alt="Paid by Alex" class="w-full h-full object-cover" data-alt="Profile photo of a smiling person" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvw6l40JPkxx3LBS2aYXMjfTUqnFnl3AWhrKFBapu0QNEegeJf33xnKo4O2XPjAEoKtgqGYuazOHCC3xWKkzESineESDKQrn-ewPyPX_lfxWv7208Z9vjJEh6yR_kQdzG10dqOYzu0xyTxPFh3qXj09IIojKgJ2XPfOW_XaUZapQy6STDK5XUnDGYS6G51uJi9iE0xyJCu7wawL1ryU6kvI1VK-rjBKVEsysfYAf4FxRgdXkFjF8vygf4qGOlKx8yFA5zh6oViAnw"/>
+</div>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Paid by Alex</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 dark:bg-primary/20 rounded-full">
+<span class="material-icons text-[14px] text-primary">groups</span>
+<span class="text-[11px] font-bold text-primary">Split 4 people</span>
+</div>
+</div>
+</div>
+<!-- Expense Item 2 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons">train</span>
+</div>
+<div>
+<h4 class="font-semibold text-slate-800 dark:text-slate-100">Shinkansen Tickets</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">09:15 AM • Tokyo Station</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-lg font-bold text-slate-900 dark:text-white">¥32,000</span>
+<p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-tighter">~$215.80 USD</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-slate-200">
+<img alt="Paid by Sarah" class="w-full h-full object-cover" data-alt="Profile photo of a young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2PbCZPcx82terRcmvHrp5wmevk-OTqEIt1LQCTem7abI3hO_BlexBVBkbt1BGM9OCoef0qg32BOgBPtSM1l6ofea3QP58CnxgEe0dQC9fj1jWLELFJ21Sx7CujIRJNywQoCoxF03Pnx-2mbNGUWXUnD_rGsyfswV5gF5V5quJRzfVCi6ABIihW8yDvVYr0PGAGpFp3OZOKL6EsZ5DEbvXJT7nXQ6LCSIFNKEQ1AGNyro_T2OybSODHvMMl07Vvr7tyAZMNwyPfkg"/>
+</div>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Paid by Sarah</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 dark:bg-primary/20 rounded-full">
+<span class="material-icons text-[14px] text-primary">groups</span>
+<span class="text-[11px] font-bold text-primary">Split 2 people</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Date Divider 2 -->
+<div>
+<h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3">Yesterday, Oct 23</h3>
+<div class="space-y-3">
+<!-- Expense Item 3 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+<span class="material-icons">shopping_bag</span>
+</div>
+<div>
+<h4 class="font-semibold text-slate-800 dark:text-slate-100">Souvenirs at Don Quijote</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">08:30 PM • Akihabara</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-lg font-bold text-slate-900 dark:text-white">¥12,400</span>
+<p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-tighter">~$83.60 USD</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-slate-200">
+<img alt="Paid by Mike" class="w-full h-full object-cover" data-alt="Profile photo of a man with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9iyGu4vSepVkcYlMZl43M0_x2WSQXVNvIt0ZmdPclHLDEJ9os2BtZj0qLvsMuseU8lz5LrxVqO3mEQasq-FbNPoaAeUAIWJw8wykVJUbCQcqnsi8iZeAWTaM0sqzOhYB-YbhOUatdV-lJw9-ZK3vodio4CpEDvQAIF5Ee3rEuOOfridUiT7u9bL_GmTyhzvZeLw5fG62TOiqGvvXBXJtcLIGwUeaEbw9oJzVe9LVyVS8SxHR1PkcP5tVq19inwueW0lNOZmROA2A"/>
+</div>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Paid by Mike</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 dark:bg-slate-700 rounded-full">
+<span class="material-icons text-[14px] text-slate-500">person</span>
+<span class="text-[11px] font-bold text-slate-500">Personal</span>
+</div>
+</div>
+</div>
+<!-- Expense Item 4 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+<span class="material-icons">local_activity</span>
+</div>
+<div>
+<h4 class="font-semibold text-slate-800 dark:text-slate-100">TeamLab Borderless</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">02:00 PM • Odaiba</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-lg font-bold text-slate-900 dark:text-white">¥15,200</span>
+<p class="text-[10px] text-slate-400 dark:text-slate-500 uppercase font-bold tracking-tighter">~$102.50 USD</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-slate-700/50">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-slate-200">
+<img alt="Paid by Alex" class="w-full h-full object-cover" data-alt="Profile photo of Alex" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_S76WHEYqAik_9NOqIkp1ErLM1emfZMb9H49_z7b_wCeq7IWwJPpGJy90HfqTmLF3daaRo5n5tWLRC78yWkalKOUf9uyA1SkINYdMEF43v2oVOYPL7dhTwx5_wz5IH_IwpqZCrNDZNNKQr3K--ecDZxW-zCWFMiVll-KfIeUHf8H8PU_xBUWpKCjWU8xPhWP-WDINKznTzcGJFRiheF2tgj7xwwXZcHvz-r2mvGEqoqq8oHQdJf_LVC_TgyWBdVH6r2diz0suIAo"/>
+</div>
+<span class="text-xs font-medium text-slate-600 dark:text-slate-300">Paid by Alex</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-primary/10 dark:bg-primary/20 rounded-full">
+<span class="material-icons text-[14px] text-primary">groups</span>
+<span class="text-[11px] font-bold text-primary">Split 4 people</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 ios-blur border-t border-slate-200 dark:border-slate-800 px-8 py-3 pb-8 z-50 flex justify-between items-center">
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons">home</span>
+<span class="text-[10px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">account_balance_wallet</span>
+<span class="text-[10px] font-bold">Budget</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons">pie_chart</span>
+<span class="text-[10px] font-medium">Reports</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</button>
+</nav>
+<!-- Floating Action Button Indicator Shadow (iOS specific detail) -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-black/10 dark:bg-white/10 rounded-full mb-2"></div>
+</body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec1313",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221010",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .ios-shadow {
+            box-shadow: 0 -4px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display h-screen overflow-hidden">
+<!-- Profile Screen Background (Dimmed) -->
+<div class="relative h-full w-full max-w-md mx-auto bg-white overflow-hidden shadow-2xl">
+<!-- Profile Header -->
+<div class="p-6 flex items-center justify-between">
+<span class="material-icons text-gray-400">arrow_back</span>
+<h1 class="text-lg font-semibold text-gray-900">Profile Settings</h1>
+<span class="material-icons text-gray-400">more_horiz</span>
+</div>
+<!-- Mock Profile Content -->
+<div class="px-6 space-y-8">
+<div class="flex flex-col items-center py-4">
+<div class="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-white shadow-md">
+<img alt="Profile Image" class="w-full h-full object-cover" data-alt="User profile portrait of a smiling traveler" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC850igVxj25Fu_0eYRDLk8JAj9RpoguGqaJ18p7fQiJXz-P_nQrrrb7yxs4m97jls5yB55Yr492Xibb91n6Vk0lXTBKY5H1rMKt3fhfv0I1iG9xcE1yoQyZ74FhA0R1rmRrTVqao4o_s0HvkRJsBPAJjf4xo-DAES7OMJDRn4hw03BzO2eNecn07EpYjIFl86v6jhxyMlngFNj5t6RRXBFdeqR8F7VlvBCuxLZgp8lxwHk7Vj9yoRiH7so0H-Mu3wmSOBX0uXYCNU"/>
+</div>
+<h2 class="text-xl font-bold text-gray-900">Alex Thompson</h2>
+<p class="text-gray-500">Global Explorer • Gold Member</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+<div class="flex items-center space-x-3">
+<span class="material-icons text-gray-500">person_outline</span>
+<span class="font-medium">Personal Information</span>
+</div>
+<span class="material-icons text-gray-300">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+<div class="flex items-center space-x-3">
+<span class="material-icons text-gray-500">notifications_none</span>
+<span class="font-medium">Notifications</span>
+</div>
+<span class="material-icons text-gray-300">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+<div class="flex items-center space-x-3">
+<span class="material-icons text-gray-500">payment</span>
+<span class="font-medium">Payment Methods</span>
+</div>
+<span class="material-icons text-gray-300">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+<div class="flex items-center space-x-3 text-primary">
+<span class="material-icons">no_accounts</span>
+<span class="font-medium">Delete Account</span>
+</div>
+<span class="material-icons text-primary/30">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Dimming Overlay -->
+<div class="absolute inset-0 bg-black/50 z-10"></div>
+<!-- Delete Account Bottom Sheet -->
+<div class="absolute inset-x-0 bottom-0 z-20 transform translate-y-0 transition-transform duration-300 ease-out">
+<div class="bg-white rounded-t-xl ios-shadow px-6 pt-3 pb-10">
+<!-- Drag Handle -->
+<div class="flex justify-center mb-6">
+<div class="w-12 h-1.5 bg-gray-200 rounded-full"></div>
+</div>
+<!-- Content Header -->
+<div class="text-center mb-6">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-icons text-primary text-3xl">warning</span>
+</div>
+<h2 class="text-2xl font-bold text-primary mb-2">Delete Account</h2>
+<p class="text-gray-600 text-sm leading-relaxed">
+                        Are you sure you want to delete your account? This action is <span class="font-semibold text-gray-900">permanent</span> and will erase all your saved trips, flight history, and earned rewards.
+                    </p>
+</div>
+<!-- Validation Section -->
+<div class="space-y-6">
+<div>
+<label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 text-center" for="validation">
+                            Type <span class="text-gray-900">DELETE</span> to confirm
+                        </label>
+<input class="w-full px-4 py-4 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary text-center font-bold tracking-widest outline-none transition-all placeholder:text-gray-300 placeholder:font-normal placeholder:tracking-normal" id="validation" placeholder="DELETE" type="text"/>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-3">
+<button class="w-full bg-primary/40 text-white font-bold py-4 rounded-lg flex items-center justify-center space-x-2 cursor-not-allowed" disabled="">
+<span class="material-icons text-xl">delete_forever</span>
+<span>Delete My Account</span>
+</button>
+<button class="w-full bg-transparent text-gray-500 font-semibold py-4 rounded-lg hover:bg-gray-50 transition-colors">
+                            Cancel
+                        </button>
+</div>
+</div>
+<!-- iOS Home Indicator Spacing -->
+<div class="mt-4 flex justify-center">
+<div class="w-32 h-1 bg-gray-100 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active State Alternative (Hidden by default, shown for UI demonstration if needed) -->
+<!-- To see active state, one would usually apply bg-primary instead of bg-primary/40 and remove disabled -->
+</body></html>

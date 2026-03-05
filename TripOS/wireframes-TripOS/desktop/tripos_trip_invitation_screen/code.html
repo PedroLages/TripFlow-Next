@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trip Invitation | TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex items-center justify-center p-6 selection:bg-primary/30">
+<!-- Main Container -->
+<div class="max-w-xl w-full">
+<!-- Brand Logo/Header (Optional subtle branding) -->
+<div class="flex justify-center mb-8">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-icons text-2xl">explore</span>
+</div>
+<span class="text-2xl font-bold text-primary dark:text-white tracking-tight">TripOS</span>
+</div>
+</div>
+<!-- Invitation Card -->
+<div class="bg-white dark:bg-background-dark/50 border border-primary/10 dark:border-primary/20 shadow-2xl shadow-primary/5 rounded-xl overflow-hidden backdrop-blur-sm">
+<!-- Trip Hero Image/Pattern -->
+<div class="relative h-48 w-full bg-primary/10">
+<img alt="Amalfi Coast" class="w-full h-full object-cover" data-alt="Stunning aerial view of Amalfi Coast colorful buildings and blue sea" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX0iFXUFU_ElPOr5k4NOWnrqryg6ICs76FPBVtgKQFojwYy1Peo6OSJgw08bx8i0f4R213PxQ089BQBjL7jPzjWXUlaaOUjUD1w1BCqENDFh0bg2A5FYe9m__WKgj82DSDyfAj1YxzphLnVSYqoSBgtn-0RnFPUNmxmAe6iIF-0K18a2aauOLDNDBb3eYk2CZU8szjJ1bT1VMbC1W9NwvWFVOWmnnsoHj2cOCEVfxbBa8t1SmPcJokLVUgHlKdL5WwecKXf6ym-KQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-white dark:from-background-dark via-transparent to-transparent"></div>
+</div>
+<div class="px-8 pb-10 -mt-12 relative z-10">
+<!-- Host Info -->
+<div class="flex flex-col items-center mb-6">
+<div class="w-20 h-20 rounded-full border-4 border-white dark:border-background-dark shadow-lg overflow-hidden mb-3">
+<img alt="Sarah" class="w-full h-full object-cover" data-alt="Portrait of a smiling woman named Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkPAwsQn8T5fQNwOBsD7hBToy-dQfIZ9CRHkoc2306J0F_9YQTlJzVPPIMiqwFYlrPJL4JqgwT9VtmKxjN5tlLm3fQ0bNXkuTJyRN9tu4O_stTkaLq-EOKnII3FJIwjWmMmRhO3jPSlskef-3VCRoryWqZbvmZMNVnzmmQ1bwgZvoSIbkezi_eKEp7bfqJ7t7mJ-2HibMo1GnyOwgWjqiuMDaGHrAPfcjnPRBMFTjyp0uKTzZfCZOE_4JJ3KQ-4GKHnrvA3HKv2c8"/>
+</div>
+<p class="text-primary font-medium text-sm flex items-center gap-1">
+<span class="material-icons text-sm">mail</span>
+                        Sarah invited you to:
+                    </p>
+<h1 class="text-3xl font-bold text-gray-900 dark:text-white mt-1 text-center">
+                        Amalfi Coast Getaway
+                    </h1>
+</div>
+<!-- Trip Meta -->
+<div class="flex flex-wrap items-center justify-center gap-6 py-6 border-y border-gray-100 dark:border-white/10 mb-8">
+<div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+<span class="material-icons text-primary/70">calendar_today</span>
+<span class="text-sm font-medium">Sept 12 - Sept 19, 2024</span>
+</div>
+<div class="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+<span class="material-icons text-primary/70">location_on</span>
+<span class="text-sm font-medium">Positano, Italy</span>
+</div>
+</div>
+<!-- Social Proof -->
+<div class="mb-10 text-center">
+<p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-4">Who's going</p>
+<div class="flex flex-col items-center gap-3">
+<div class="flex -space-x-3">
+<img alt="Alex" class="w-12 h-12 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile of Alex" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGZzSCXC5kI3tekTht1o_N1xfBN-WHvN62-OASkQ0f-T8JzT9_Hy8Dr-iQVOP2Ounaj6RaYo6JoG-Z6d4f5rG0b4zuHjQ0PesMHdJmOqFry6FPelKZoyLBenrw9mEvSDnVGNTxXoEHnU0U32AVrXf6Szv_-iwMC0tYm4KHzey1BRWnyzQwonp9qbzfX0NVAFZsH2GBFkgABEr6ikX6NZX_bqtNTHmVsQ43LUONBkHsuWD99dQ85eBGFl-JO5YSIlIgNeJpUTYrV28"/>
+<img alt="Maria" class="w-12 h-12 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile of Maria" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHxqo1SUJKZHy3ztje24tVEFLTjxstqElhp_INT1Xy60vmu-3huz9akt1WtT776FM2C4DXiZa9g1UyRh3C0K15QMVShZ8Zl1yQnm8BP6E0insznnKQ3w_nBekHNdB4r36jLRX95KKccFAGRrdfuGwJldrs4BTLMohFACYRmzQS_2cZyMWtQujN0ZoOhlS-JKj4k0QMgLf8nwrHdPjmRhTJt5Sg8PkvlB1kQi9et_w4ups4zhAq4yf1g12_3zcDtFdMPT2wByhpsDI"/>
+<img alt="David" class="w-12 h-12 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile of David" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD51BDAP1Bla2QjLDThZN-1GJJk3qc0kHDGlTyRS-Haw9jPWSgzY7BVaCXaazCz-tD_7VNbPxeP5hT_7GEJqqt2VHxJXc96BK5X7PStkoDeY1h_FuCMC_6p_FzYCyLIhwRa39s3pvFV6ZT2TR1CQcgMvxPlQsebXoQIVZ4ODf3LKRKQR-bR3xwZx4WeQu-GxAMyIUe9-QtBlOCU07HyDNazRL4Oc4Ulr1UxaaqiO20sTqrHmVv8FGj2jxO5_Dfz8EwR2LbkFtoZ68s"/>
+<img alt="Chloe" class="w-12 h-12 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Profile of Chloe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvg0nNyqoBpctC6WuiLV2O4q8akrhUrMrUyRMKlP3GrJdF4fNatyzDsU9CYF4jQmqOnmSsMQx5tPKslwCQ9hjty89XZoyi9Vy6IE6mBhbqcBlVc6ZUtVwguBil0PMy7ZlS9nqVPUVGrfgB_jKA1QVm5sT49b5dgPa4Ff8ouMHl8Llym6efSDfKB8p7fel9DDfLktFcFo0LJmMSSFbIYEtqBEYKaFzxBWebY_QBMXbcROAi2uqdG76m-PbinhVFdMxj6-FJgbywbwM"/>
+<div class="w-12 h-12 rounded-full border-2 border-white dark:border-background-dark bg-primary/10 flex items-center justify-center text-primary text-sm font-bold">
+                                +3
+                            </div>
+</div>
+<p class="text-sm text-gray-600 dark:text-gray-400">
+                            Joined by <span class="font-semibold text-gray-900 dark:text-white">Alex, Maria,</span> and <span class="font-semibold text-gray-900 dark:text-white">5 others</span>
+</p>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-8 rounded-lg shadow-xl shadow-primary/20 transition-all flex items-center justify-center gap-2 group">
+<span>Accept Invitation &amp; Join Trip</span>
+<span class="material-icons group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Auth Toggle Footer -->
+<div class="bg-gray-50 dark:bg-white/5 border-t border-gray-100 dark:border-white/10 px-8 py-5 text-center">
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                    Already have a TripOS account? 
+                    <a class="text-primary font-semibold hover:underline" href="#">Log in</a>
+</p>
+<div class="mt-3 flex items-center justify-center gap-4 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase">
+<span class="h-px bg-gray-200 dark:bg-white/10 flex-grow"></span>
+<span>Or continue with</span>
+<span class="h-px bg-gray-200 dark:bg-white/10 flex-grow"></span>
+</div>
+<div class="mt-4 flex justify-center gap-4">
+<button class="p-2 px-6 rounded-lg border border-gray-200 dark:border-white/10 flex items-center gap-2 text-sm font-medium hover:bg-white dark:hover:bg-white/5 transition-colors">
+<img alt="Google Logo" class="w-4 h-4" data-alt="Google colorful icon logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBorcu0RaiOjU1KrgDTs4U0NCA-ksSkVIGBA_6mkBblsFTIbuY1E6Og6jL5OWOv68d8_4ya3YNr30LT4As7v39rceUXKIy3j2UXnf0fFb4JFip0RpihR0FDuryuddE_q5a_99gIJ6qM08c8ckJZVHYaQ6IO9rBzYNQDhr3-o3q4heBp70zI_M9niYyzf1G06QL0vxvvuZtRnSo9i1ZIXuK9mW8beSC3SNLGuXk0PmVt6CPdeoNrtm7SgTqcPJ2kPVoc-s7i0r_ooNM"/>
+                        Google
+                    </button>
+<button class="p-2 px-6 rounded-lg border border-gray-200 dark:border-white/10 flex items-center gap-2 text-sm font-medium hover:bg-white dark:hover:bg-white/5 transition-colors">
+<img alt="Apple Logo" class="w-4 h-4" data-alt="Apple black icon logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHHq-diRhHaKQaxgb1EXaOhtNQbhjkMEDUI196x7sjZJQ9ZdHL0kZyrh1qkiFhuqrgNZjf6UeY3FSKFXth8LdUrCakAkNMDpOj3Ow7A3kD_ms3n5GOQPBFR1N3rXVPdXPr95y-YraDxDQ56Ho4UG4mQKhZ6XgnNuUwKIf_LSGFv1ujZ2X3n4Nf_AuNZ2pBM4xWhsKnhwYsBz6pEaE6ulAqfU5pidfoz04blawkGmab5-SXUgfX2flapVPaoHDFNWAtO3Lq4Ijg47E"/>
+                        Apple
+                    </button>
+</div>
+</div>
+</div>
+<!-- Secondary Links -->
+<div class="mt-8 flex justify-center gap-8 text-sm text-gray-400 dark:text-gray-500">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</body></html>

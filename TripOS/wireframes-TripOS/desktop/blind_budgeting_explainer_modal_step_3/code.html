@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13daec",
+              "background-light": "#f6f8f8",
+              "background-dark": "#102022",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<title>TripOS - Blind Budgeting Explainer</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased">
+<!-- Main Background Placeholder (Simulating the Budgeting Screen behind modal) -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none opacity-40">
+<div class="p-10 max-w-7xl mx-auto space-y-8">
+<div class="h-12 w-48 bg-primary/20 rounded-lg"></div>
+<div class="grid grid-cols-3 gap-6">
+<div class="h-64 bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
+<div class="h-64 bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
+<div class="h-64 bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
+</div>
+<div class="h-96 bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
+</div>
+</div>
+<!-- Backdrop Blur Overlay -->
+<div class="fixed inset-0 bg-background-dark/30 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+<!-- Modal Container -->
+<div class="bg-white dark:bg-background-dark max-w-md w-full rounded-xl shadow-2xl overflow-hidden p-8 flex flex-col items-center text-center border border-slate-100 dark:border-slate-800">
+<!-- Hero Icon Section -->
+<div class="mb-8 p-4 bg-primary/10 rounded-full">
+<svg class="text-primary" fill="none" height="64" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="64" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+<polyline points="22 4 12 14.01 9 11.01"></polyline>
+</svg>
+</div>
+<!-- Content -->
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                Everyone Sees What's Affordable
+            </h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
+                Search results show only options within your group's limit. No budget shame, no awkward conversations.
+            </p>
+<!-- Progress Indicators -->
+<div class="flex items-center justify-center space-x-2 mb-10">
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+<div class="w-2 h-2 rounded-full bg-primary/30"></div>
+<div class="w-6 h-2 rounded-full bg-primary"></div>
+</div>
+<!-- Footer Actions -->
+<div class="w-full space-y-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-background-dark font-bold py-4 px-6 rounded-lg transition-all duration-200 transform active:scale-[0.98] shadow-lg shadow-primary/20">
+                    Get Started
+                </button>
+<button class="w-full text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 font-medium py-3 px-6 rounded-lg transition-colors duration-200">
+                    Skip
+                </button>
+</div>
+<!-- Step Preview Card (Visual Aid) -->
+<div class="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800 w-full">
+<div class="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+<div class="w-16 h-12 bg-slate-200 dark:bg-slate-700 rounded-md overflow-hidden relative">
+<img alt="" class="w-full h-full object-cover opacity-60" data-alt="Boutique hotel exterior with pool" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQX4IyqRFvPIn2mO1h_nq5vMA4ydf2X1eTjWsROrH4y2EEU7iwjSKHObWsy-LO0xn3tKG8VBXm5wKBL6M9geEuwOjUeC1_I7bW37UrXYjZE53yd7B_ZOM1u2-EgiSiEGo_v1Jin4V3DO6hMFL9rggnbVZMubybcykWotS6r30S0ph2dYsKzRRCUC8AzqnwlSSunK8xRy3F4mFg7zHGxif6ojdDUv_IfIFUW9pHDK-BxUrWTLGAijewVz1xzmfTlDgwpT5YyKTVmik"/>
+</div>
+<div class="flex-1 text-left">
+<div class="h-3 w-24 bg-primary/20 rounded-full mb-2"></div>
+<div class="flex items-center gap-1">
+<span class="text-primary text-xs font-bold">MATCHED</span>
+<div class="h-2 w-12 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+<div class="text-primary">
+<span class="material-icons text-xl">verified_user</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

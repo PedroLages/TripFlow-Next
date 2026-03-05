@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Poll Results - TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#5b1dd7",
+                "background-light": "#f6f6f8",
+                "background-dark": "#161121",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<!-- Mobile Device Mockup Container -->
+<div class="w-full max-w-md bg-white dark:bg-background-dark min-h-screen flex flex-col relative shadow-2xl overflow-hidden">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-12 w-full flex justify-between items-end px-8 pb-2">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-icons text-xs">signal_cellular_alt</span>
+<span class="material-icons text-xs">wifi</span>
+<span class="material-icons text-xs">battery_full</span>
+</div>
+</div>
+<!-- iOS Navigation Bar -->
+<nav class="h-11 flex items-center justify-between px-4 border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 ios-blur sticky top-0 z-10">
+<button class="flex items-center text-primary font-medium">
+<span class="material-icons text-[28px]">chevron_left</span>
+<span class="text-lg -ml-1">Polls</span>
+</button>
+<h1 class="text-lg font-bold">Poll Results</h1>
+<button class="text-primary">
+<span class="material-icons">more_horiz</span>
+</button>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto px-5 pt-6 pb-32">
+<!-- Status Badge -->
+<div class="flex justify-center mb-4">
+<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 dark:bg-primary/20 text-primary text-xs font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-2"></span>
+                    Decided
+                </span>
+</div>
+<!-- Question Header -->
+<div class="text-center mb-8">
+<h2 class="text-2xl font-bold leading-tight px-4">Should Kyoto be our main destination?</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-2">Started by Sarah • Dec 12, 2023</p>
+</div>
+<!-- Winner Card -->
+<div class="relative mb-10">
+<div class="bg-primary rounded-xl p-6 text-white shadow-lg shadow-primary/30 flex flex-col items-center overflow-hidden">
+<!-- Abstract Background Pattern -->
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.1,-69.2,69.2,-58.1,77.3,-44.7C85.4,-31.3,90.5,-15.7,90.5,0C90.5,15.7,85.4,31.3,77.3,44.7C69.2,58.1,58.1,69.2,44.7,77.3C31.3,85.4,15.7,90.5,0,90.5C-15.7,90.5,-31.3,85.4,-44.7,77.3C-58.1,69.2,-69.2,58.1,-77.3,44.7C-85.4,31.3,-90.5,15.7,-90.5,0C-90.5,-15.7,-85.4,-31.3,-77.3,-44.7C-69.2,-58.1,-58.1,-69.2,-44.7,-77.3C-31.3,-85.4,-15.7,-90.5,0,-90.5C15.7,-90.5,31.3,-85.4,44.7,-77.3Z" fill="#FFFFFF" transform="translate(100 100)"></path>
+</svg>
+</div>
+<div class="bg-white/20 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+<span class="material-icons text-4xl">emoji_events</span>
+</div>
+<span class="text-sm font-bold opacity-80 uppercase tracking-widest mb-1">Winning Destination</span>
+<h3 class="text-4xl font-extrabold mb-1">Kyoto</h3>
+<div class="flex items-center gap-2">
+<span class="text-2xl font-bold">78%</span>
+<span class="opacity-80 text-sm font-medium">Agreement</span>
+</div>
+</div>
+</div>
+<!-- Results Section -->
+<div class="space-y-6">
+<!-- Yes Option -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="text-lg font-bold">Yes</span>
+<span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase">You voted</span>
+</div>
+<span class="text-primary font-bold">78% <span class="text-slate-400 font-normal text-sm ml-1">(18 votes)</span></span>
+</div>
+<div class="h-4 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[78%]"></div>
+</div>
+</div>
+<!-- No Option -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-lg font-bold text-slate-400">No</span>
+<span class="text-slate-400 font-bold">22% <span class="text-slate-400 font-normal text-sm ml-1">(5 votes)</span></span>
+</div>
+<div class="h-4 w-full bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-slate-300 dark:bg-slate-700 rounded-full w-[22%]"></div>
+</div>
+</div>
+</div>
+<!-- Metadata Info -->
+<div class="mt-12 flex flex-col items-center text-slate-400 dark:text-slate-500 space-y-3">
+<div class="flex items-center gap-2 text-sm">
+<span class="material-icons text-sm">groups</span>
+<span>23 total participants</span>
+</div>
+<div class="flex items-center gap-2 text-sm">
+<span class="material-icons text-sm">verified_user</span>
+<span>Quorum reached (75%)</span>
+</div>
+<!-- Avatar Stack of Voters -->
+<div class="flex -space-x-2 mt-2">
+<img alt="" class="w-8 h-8 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Portrait of a female group member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBonmXj5-6bqce9QoDVTzo5iW1sJ3XrlKiU0GPjMmm624fAmQ1nlKd4p82wtaAUTQ-n7mf8y4_I1zQdraATc3SCQHB8rzKctAmtU6Vcrw6d0RvbKSGmFfSuBk52v4hjU07DWirV5Bc42oJLrXHZxjU8edPsq3B36JDI4uAo4md_dKbgOHjIWXZWL4VULn4hktRJLpKzymAkkoGwei1e2nxELFryggDOL-w9diFxmWAQlEpjxnTS7wqIn3gm2gH9eUV2hreOV-WKMnc"/>
+<img alt="" class="w-8 h-8 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Portrait of a male group member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOC5eehj3mltTyPK14_8if5uptvN9PgwDcGdD0SGGAOP8JTmF1yTqNPLxqRlLW4KQmeD-N16WS-UQOaORYdOkexChaTCxgHQptn0hcAkRUl3s4HD_T07GfWGy8l-lgtRN4bW-l2l0_Fevqybcba3L89AuDcprTWOShbmJfr1CaKuwecIPWGb2gsAPm5Lz2HQDwJbnivJksvFMlrQUhoDyJWkUg-l0-gWFVA2k8-C6ZO9V7_l0rq4BPfz2eK0XOWQMORXhtRSEon0o"/>
+<img alt="" class="w-8 h-8 rounded-full border-2 border-white dark:border-background-dark object-cover" data-alt="Portrait of a male team member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwJ8kV0-eA_ORUvJkbXeYLPxROj_SgM1lmS8VrhRwdqkBmuIqI5HaB5zUoCxcodCMeCi5dTZSRqnMKNsmZwAyBnUKycig7HQGyoK_JEVnZa1qPGVszTg_DJzydRHDx7MGWSA_ZO1jsoeQRBYArLKqVIJRq8Oa_ar301Ygu8EmAJTkHQK4k0S6cHnnWclc0FxRLJ7kYwIp8ikO4miYgqV_8mdOFe_7No8-KH9AdYLS-Ue0koy--OIseMG2rBW8Ob-Ltw__jS5mDYTs"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-background-dark bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-600 dark:text-slate-400">
+                        +20
+                    </div>
+</div>
+</div>
+</main>
+<!-- Fixed Action Button Footer -->
+<div class="absolute bottom-0 left-0 w-full p-6 pb-10 bg-gradient-to-t from-white via-white/95 to-transparent dark:from-background-dark dark:via-background-dark/95 dark:to-transparent">
+<button class="w-full bg-primary text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-primary/30 active:scale-[0.98] transition-transform">
+<span class="material-icons">ios_share</span>
+                Share Results
+            </button>
+</div>
+<!-- iOS Home Indicator -->
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</body></html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Features | Plan Your Group Travel Better</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "vote-subtle": "#f3e8ff",
+                        "privacy-subtle": "#ccfbf1",
+                        "primary-subtle": "#e0e7ff",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Sticky Navigation -->
+<nav class="sticky top-0 z-50 w-full bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-icons text-white text-xl">travel_explore</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-primary">TripOS</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1 transition-all" href="#">Features</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Pricing</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Sign In</a>
+<button class="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm">Get Started</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative pt-20 pb-16 lg:pt-32 lg:pb-24 overflow-hidden">
+<div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(29,79,215,0.05),transparent_50%)]"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<span class="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4 tracking-wide uppercase">Core Features</span>
+<h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight mb-6 text-slate-900 dark:text-white leading-tight">
+                Everything Your <span class="text-primary">Group</span> Needs
+            </h1>
+<p class="max-w-2xl mx-auto text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                Stop the endless scrolling in group chats. Centralize your plans, votes, and budgets in one place designed for collaborative travel.
+            </p>
+</div>
+</section>
+<!-- Section 2: Itinerary -->
+<section class="py-20 bg-white dark:bg-slate-900/50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+<div class="order-2 lg:order-1">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6">
+<span class="material-icons">event_note</span>
+</div>
+<h2 class="text-3xl lg:text-4xl font-bold mb-6 text-slate-900 dark:text-white">Plan Together in Real Time</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                        Say goodbye to outdated PDFs and messy spreadsheets. Our dynamic itinerary keeps everyone on the same page with instant updates.
+                    </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-icons text-primary mt-0.5">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">Live syncing across all devices for every member.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-icons text-primary mt-0.5">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">Drag-and-drop activities to reorder days easily.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-icons text-primary mt-0.5">check_circle</span>
+<span class="text-slate-700 dark:text-slate-300">Integrated map view to optimize your travel routes.</span>
+</li>
+</ul>
+</div>
+<div class="order-1 lg:order-2">
+<div class="relative rounded-xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+<img alt="Itinerary Dashboard" class="w-full h-auto aspect-[16/10] object-cover" data-alt="Screenshot of a clean modern travel itinerary dashboard with timeline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbjSxzCnbZ4RJkx4ZDwdEMC0sYxCdXy58rJrysz80ePtgl9noSSeApjiG30ISGrGL5eAzifOk6o_rt-r_vtI_L1YSi4o6mCWOjd3QhPDT4SHh5n1sFaMQMjUZVP6YvYn1aaZQO26fBw_1pk3gzDRN6sUQFiy7yFf5VI50l9KcqjT-gimwGIkJsyP_Ow7O_rYqKcxiJDNYY3TrGQxZY7PkNzHzJMflEDGrtF7kkwm0hiTDFfgV9XO5jWimUCcPA1Vgr7wZE46uZjnQ"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Voting -->
+<section class="py-20 bg-vote-subtle dark:bg-purple-900/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+<div class="relative rounded-xl overflow-hidden shadow-2xl border border-purple-200 dark:border-purple-800/30">
+<div class="absolute inset-0 bg-purple-600/10 mix-blend-multiply"></div>
+<img alt="Voting Feature" class="w-full h-auto aspect-[16/10] object-cover" data-alt="Friends looking at a tablet together laughing in a cafe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlXYcBFjsxWyPnI_T0h1gdbukZaRnWKuLotEHjH_yHJD-FeHf7_AIqtWg83V4Uw7k3HW5mMR5nAYBGDqy8xmUkdugEVHP3J7geL8qB49XLAJ9iy1VUW_RRRLgxacaUTU66wrdUy5Gm3EBqGBTO1eWIFcY12BsQd3rBPV5P7889skxi-sCW8dpOjnstKBCsBmBDV7zvhOJR_uu77k5RQnSRiN4GjQ5UGAu-ng_DUS3ipnHCgDTY94IZo9iM7XmTqVqJqXoU1zYXORE"/>
+</div>
+<div>
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-600/10 text-purple-600 mb-6">
+<span class="material-icons">how_to_vote</span>
+</div>
+<h2 class="text-3xl lg:text-4xl font-bold mb-6 text-slate-900 dark:text-white">Make Decisions Democratically</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                        Tired of the "I don't care, you pick" loop? Our built-in voting system makes group decisions transparent and quick.
+                    </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-icons text-purple-600 mt-0.5">verified</span>
+<span class="text-slate-700 dark:text-slate-300">Anonymous polls to ensure everyone votes honestly.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-icons text-purple-600 mt-0.5">verified</span>
+<span class="text-slate-700 dark:text-slate-300">Automated deadline reminders for slow decision-makers.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-icons text-purple-600 mt-0.5">verified</span>
+<span class="text-slate-700 dark:text-slate-300">Preference ranking for dining and activity choices.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Blind Budgeting -->
+<section class="py-20 bg-privacy-subtle dark:bg-teal-900/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+<div class="order-2 lg:order-1">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-teal-600/10 text-teal-600 mb-6">
+<span class="material-icons">payments</span>
+</div>
+<h2 class="text-3xl lg:text-4xl font-bold mb-6 text-slate-900 dark:text-white">Budget Without the Awkwardness</h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                        Financial transparency doesn't have to be uncomfortable. Our "Blind Budget" tool allows everyone to submit their range privately.
+                    </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-start gap-3">
+<span class="material-icons text-teal-600 mt-0.5">shield</span>
+<span class="text-slate-700 dark:text-slate-300">Private price range submissions only you can see.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-icons text-teal-600 mt-0.5">shield</span>
+<span class="text-slate-700 dark:text-slate-300">Automatic median calculation for realistic planning.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-icons text-teal-600 mt-0.5">shield</span>
+<span class="text-slate-700 dark:text-slate-300">No-shame planning based on group comfort levels.</span>
+</li>
+</ul>
+<!-- Callout Card -->
+<div class="bg-white/60 dark:bg-slate-800/60 p-5 rounded-xl border border-teal-200 dark:border-teal-800 flex gap-4 items-center shadow-sm">
+<div class="text-teal-600">
+<span class="material-icons text-3xl">menu_book</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-teal-900 dark:text-teal-100 uppercase tracking-wide">Backed by research</p>
+<p class="text-slate-600 dark:text-slate-400 text-sm">Studies show blind budgeting reduces group conflict by 40%.</p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<div class="relative rounded-xl overflow-hidden shadow-2xl border border-teal-200 dark:border-teal-800/30">
+<div class="absolute inset-0 bg-teal-600/10 mix-blend-multiply"></div>
+<img alt="Budgeting Interface" class="w-full h-auto aspect-[16/10] object-cover" data-alt="A clean financial interface with budget sliders and privacy icons" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDdxkPqRGWdCqo96N7zdlsOdoc92uSrcOnwjX7ZINkxzswMP3KqsI6cm5HaslNxRrobRkaTUxMHFlE0l82YLHzs6yxSizWKRrSn2AnfYTX1H0eRmhfC8B4u2Ti7-6FFwhJBDHy4Bf-Y-siMPyR1ZEOqGjB-ECJhklZOIIB9p4YsJo9JYxD_wavpL3J3HGnMW_WbDmkIithiHY2sawaZhsfcaAREKSM6CveCrrmrCjuNH6z8kA0NSn8vBjQ0eZGsMfceWJjjJD33PY"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Comparison -->
+<section class="py-24 bg-white dark:bg-slate-900">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-16">
+<h2 class="text-3xl lg:text-4xl font-bold mb-4 text-slate-900 dark:text-white">Why Not Just Use a Group Chat?</h2>
+<p class="text-slate-600 dark:text-slate-400">Comparing the friction of traditional methods with the ease of TripOS.</p>
+</div>
+<div class="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 shadow-xl bg-white dark:bg-slate-900">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="p-6 text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Feature</th>
+<th class="p-6 text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Group Chat</th>
+<th class="p-6 text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Spreadsheet</th>
+<th class="p-6 text-sm font-bold text-primary uppercase tracking-wider bg-primary/5">TripOS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="p-6 font-medium">Real-time Sync</td>
+<td class="p-6 text-slate-500">Manual</td>
+<td class="p-6 text-slate-500">Partial</td>
+<td class="p-6 font-bold text-primary bg-primary/5">Instant</td>
+</tr>
+<tr>
+<td class="p-6 font-medium">Decision Making</td>
+<td class="p-6 text-slate-500">Chaotic</td>
+<td class="p-6 text-slate-500">Manual</td>
+<td class="p-6 font-bold text-primary bg-primary/5">Automated Voting</td>
+</tr>
+<tr>
+<td class="p-6 font-medium">Budget Tracking</td>
+<td class="p-6 text-slate-500">Awkward</td>
+<td class="p-6 text-slate-500">Complex</td>
+<td class="p-6 font-bold text-primary bg-primary/5">Blind Privacy</td>
+</tr>
+<tr>
+<td class="p-6 font-medium">Organization</td>
+<td class="p-6 text-slate-500">Buried in messages</td>
+<td class="p-6 text-slate-500">Tedious Rows</td>
+<td class="p-6 font-bold text-primary bg-primary/5">Structured</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Section 6: CTA -->
+<section class="py-20">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-primary rounded-3xl p-12 lg:p-20 text-center text-white relative overflow-hidden shadow-2xl">
+<!-- Abstract background pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+</svg>
+</div>
+<h2 class="text-4xl lg:text-5xl font-extrabold mb-6 relative z-10">Ready to Plan Without the Drama?</h2>
+<p class="text-xl text-primary-subtle mb-10 max-w-2xl mx-auto relative z-10 opacity-90">
+                    Join over 50,000 groups who have upgraded their travel experience with TripOS. Your next adventure starts here.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-4 relative z-10">
+<button class="bg-white text-primary hover:bg-slate-100 px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg hover:-translate-y-1">Start Planning Now</button>
+<button class="bg-primary/20 hover:bg-primary/30 border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all backdrop-blur-sm">View Demo</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-16">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12">
+<div class="col-span-2 lg:col-span-2">
+<div class="flex items-center gap-2 mb-6">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-icons text-white text-xl">travel_explore</span>
+</div>
+<span class="text-xl font-extrabold tracking-tight text-primary">TripOS</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 max-w-xs mb-6">
+                        The modern standard for group travel planning. Built for friends, families, and solo adventurers who want to share the journey.
+                    </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-icons">facebook</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-icons">alternate_email</span></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6">Product</h4>
+<ul class="space-y-4 text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Features</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Integrations</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Pricing</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Changelog</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6">Support</h4>
+<ul class="space-y-4 text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Guides</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Community</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 dark:text-white mb-6">Legal</h4>
+<ul class="space-y-4 text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cookie Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-16 pt-8 border-t border-slate-200 dark:border-slate-800 text-center text-slate-500 dark:text-slate-400 text-sm">
+                © 2024 TripOS App. All rights reserved. Designed for the modern traveler.
+            </div>
+</div>
+</footer>
+</body></html>

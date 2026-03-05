@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* Semantic Colors */
+  --color-primary: oklch(53% 0.18 262);
+  --color-primary-foreground: oklch(98% 0.02 262);
+
+  --color-privacy: oklch(58% 0.14 174);      /* Teal - budget/privacy ONLY */
+  --color-privacy-foreground: oklch(98% 0.02 174);
+
+  --color-vote: oklch(61% 0.24 293);         /* Purple - voting ONLY */
+  --color-vote-foreground: oklch(98% 0.02 293);
+
+  /* Typography */
+  --font-sans: "DM Sans", system-ui, sans-serif;
+
+  /* Spacing */
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+
+  /* Border Radius */
+  --radius-lg: 0.75rem;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  @theme {
+    --color-background: oklch(15% 0.01 262);
+    --color-foreground: oklch(98% 0.01 262);
+  }
+}

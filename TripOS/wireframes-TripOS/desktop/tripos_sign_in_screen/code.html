@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In | TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#1d4fd7",
+                "background-light": "#f6f6f8",
+                "background-dark": "#111521",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex items-center justify-center p-6">
+<!-- Auth Container -->
+<div class="w-full max-w-[450px]">
+<!-- Brand Identity -->
+<div class="flex flex-col items-center mb-8">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-icons text-2xl">flight_takeoff</span>
+</div>
+<h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">TripOS</h1>
+</div>
+<p class="text-slate-500 dark:text-slate-400 font-medium text-center">Plan group trips without the awkwardness</p>
+</div>
+<!-- Main Card -->
+<div class="bg-white dark:bg-slate-900 shadow-xl shadow-primary/5 rounded-xl border border-slate-200/60 dark:border-slate-800 p-8 md:p-10">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-1">Welcome back</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Please enter your details to sign in.</p>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-1 gap-3 mb-8">
+<button class="flex items-center justify-center gap-3 w-full py-3 px-4 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors duration-200 font-semibold text-slate-700 dark:text-slate-200 text-sm">
+<img alt="Google Logo" class="w-5 h-5" data-alt="Official colorful Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTemaiRoKDatGRyeGfBDR044BoRxH9jacWlE6ernMk3MEbVHIKrE1r9qX5inWBaae3xLIwd1YGuMXvJJCkbaTRIeX0FO4idbdC41IfbW22N_Mxck1Ec2OUSHz8we8xLYXaZOH2k4cU9CAmDEPxcNTum7jshxQVVft06zFsROIajMy0bFDGrOTBpAy7D7LlRJMbyTnSHWUqBP09zHAI-l6OeArnl506zy564ky5GVAehPesDD5CaUdDJaWdSgXQohbPvEw817bBK00"/>
+                    Continue with Google
+                </button>
+<button class="flex items-center justify-center gap-3 w-full py-3 px-4 border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors duration-200 font-semibold text-slate-700 dark:text-slate-200 text-sm">
+<span class="material-icons text-xl text-slate-900 dark:text-white">apple</span>
+                    Continue with Apple
+                </button>
+</div>
+<!-- Divider -->
+<div class="relative mb-8">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-slate-800"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-4 bg-white dark:bg-slate-900 text-slate-400 dark:text-slate-500 font-medium uppercase tracking-wider text-[10px]">or</span>
+</div>
+</div>
+<!-- Sign In Form -->
+<form action="#" class="space-y-5">
+<div>
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2" for="email">Email address</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<span class="material-icons text-lg">mail_outline</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-slate-900 dark:text-white text-sm" id="email" name="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-center mb-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300" for="password">Password</label>
+<a class="text-xs font-bold text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<span class="material-icons text-lg">lock_open</span>
+</div>
+<input class="block w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none text-slate-900 dark:text-white text-sm" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center">
+<input class="h-4 w-4 text-primary focus:ring-primary border-slate-300 dark:border-slate-700 rounded" id="remember-me" name="remember-me" type="checkbox"/>
+<label class="ml-2 block text-sm text-slate-600 dark:text-slate-400" for="remember-me">
+                        Stay signed in for 30 days
+                    </label>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-4 rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2" type="submit">
+                    Sign In
+                    <span class="material-icons text-lg">arrow_forward</span>
+</button>
+</form>
+</div>
+<!-- Footer Link -->
+<p class="mt-8 text-center text-sm text-slate-600 dark:text-slate-400 font-medium">
+            New to TripOS? 
+            <a class="text-primary font-bold hover:underline transition-all" href="#">Create an account</a>
+</p>
+<!-- Aesthetic Decoration (Optional for Desktop) -->
+<div class="mt-12 flex justify-center gap-4 opacity-30 grayscale pointer-events-none overflow-hidden">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small avatar of scenic mountain landscape" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD90aAmYIeKfArQwCViSchptGlhdXTnLaUgvn0TFZJ0GN-XGOJR_-Ba2N2N1xqecm0v-rhzRChNkZAqi-4Lh-ZkGWe9ChTGDnL4w7qHFIlfM_6bgoFn8lVS967SrvOnjww0kQ1NnmtOuEDCBvEn-IIe6f3tUKHUes33IsX9EiMcE8VlACvSFqxlh4vs6StmgCUEM8XJML9vCZWV3-MQTRorHPIt-z5NQ8muj4a4geC2zr5IpzI6QmsyagERq6eUih-b4H6FgRGXX8M"/>
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small avatar of lush forest valley" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjZy0qkErg9g6ZJ8QhEmtHeUhg4MsfD1GQhOznstbdNCz0ms8xJ4BDydIYPgcl8pkc0U96tdB3Ys1dkFbWTCVcrouQz4f0d3zrQMNGZzaNSxDiKCD3cvsDNbyCjI4mTlYxhBDIjTD6RL_jjh7_aQJBB90uzw8V12OrHKMTVG2GXefGOpQNiRQ4-VVlcmexK_9gwxd7Pddq2IdIVtbCnEpGjK0QyTNVNLGB0w69jfHBXyeIDqQoUekYg-93Z2YEVh7-sMmEEUIU2IE"/>
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small avatar of sunlight through trees" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArKjM_xw0cPzypYmmXEhEGvdfjvi3AQeB2k05OoGYldbDrFde99PBIyqtOA6lPpu_2C0WKd_crKocgTVbSHp2cjggOk37-Q6eTYTBt_lWWbF9bsCb-X3MJFB16h6s2gPIAltB5soZmnqe_prT_Otm_iN8YDNRVNBLl3vAbQZsSFjWKmVV3UwMhYE3ed9LBFBF5sbowOWbki50181FF_1hpOz6Nk4w0978VNkeVrzhw6ANgZfx67QwCVxHMbVJ9ZYoalbyQMCamLnc"/>
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Small avatar of clear blue lake" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxRG5u1WMRQ_XcwCQ2KTS75G_iAQk9e3uQ-mW9CyP08HBMmbdVhRFG1aIMQo5ny7numzyqwxHpSib6lOu7CZghF-4V3_eVnnm9GpH_XFnrAeDPuwk6GZeIIdWVAcwO5RpsYcfOJA6LDS_j5XJGjVWSDVz1rSAc9c7E42qZN_AkzpZJiKA7ALhOVwYWpzQo_dtqvgnbKmVAtAZa2Nd8m6M-MBL8mASwk-9nKB5oD7pONh292qL8wfNIfP8xYbZ0bUBQPvY2mXg4UeU"/>
+</div>
+</div>
+</body></html>

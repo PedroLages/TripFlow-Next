@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Poll Results Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "vote-winner": "#8b5cf6",
+                        "success": "#10b981",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<!-- Global Desktop Navigation -->
+<nav class="sticky top-0 z-50 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 h-16">
+<div class="max-w-[1280px] mx-auto px-6 h-full flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-icons text-white text-lg">travel_explore</span>
+</div>
+<span class="text-xl font-bold tracking-tight">TripOS</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" href="#">Itinerary</a>
+<a class="text-primary border-b-2 border-primary py-5 font-medium" href="#">Polls</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" href="#">Expenses</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary transition-colors font-medium" href="#">Chat</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-icons">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden border border-slate-300">
+<img alt="User Profile" data-alt="User profile portrait photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHnkTMxxW67I2rKrehLO5c7iix8-gqV4-U4JBO0ESyQjdu3zj_V8i8cAGaL_58SFChFvR7XFyu6HT7A-IbyzgzhXCuDXCx44eNbZoypF9Wzs_W4D57aaZEhv590GLhT4jj5T5usF83qdiiE0YA6hE_jsjtj6qERS_ywy4eqstvci1qwPCQWmUclsOsYutRXW-PTDDHc-Drwyz9fw87zg23xwSNl3yGzwGTIQI-Eg-5LSGNc0rbY2LY09JWTOsAr-6Uv6sh68Xw1OU"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-[1280px] mx-auto px-6 py-8">
+<!-- Header Section -->
+<div class="mb-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="px-3 py-1 bg-success/10 text-success text-xs font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
+<span class="material-icons text-sm">check_circle</span> Decided
+                </span>
+<span class="text-slate-500 text-sm">9 of 12 members voted • Decided Feb 8, 2026</span>
+</div>
+<h2 class="text-3xl font-bold mb-4">Where should we have our final sunset dinner?</h2>
+<div class="bg-success/5 border border-success/20 p-6 rounded-xl flex items-center justify-between">
+<div>
+<div class="text-success text-sm font-semibold uppercase tracking-wide mb-1">Winning Choice</div>
+<h3 class="text-2xl font-bold flex items-center gap-2">
+                        Ammoudi Bay Fish Tavern
+                        <span class="material-icons text-success">verified</span>
+</h3>
+</div>
+<div class="hidden md:block">
+<span class="material-icons text-success text-5xl">celebration</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Main Content: Approval Results -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<h4 class="text-lg font-semibold mb-6 flex items-center gap-2">
+<span class="material-icons text-slate-400">bar_chart</span>
+                        Voting Breakdown
+                    </h4>
+<div class="space-y-8">
+<!-- Option 1: Winner -->
+<div class="space-y-3">
+<div class="flex justify-between items-end mb-1">
+<span class="font-bold text-slate-800 dark:text-slate-100">Ammoudi Bay Fish Tavern</span>
+<span class="font-semibold text-vote-winner">78% (7 votes)</span>
+</div>
+<div class="h-12 w-full bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden relative">
+<div class="h-full bg-vote-winner w-[78%] flex items-center px-4 relative">
+<span class="material-icons text-white text-sm absolute right-4">check_circle</span>
+</div>
+</div>
+<div class="flex -space-x-2 items-center pt-1">
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvLU_VFr4xvF2VO98hkBq7T7ripBqx-hGleEKrQT6qgAG9hTY1rwCzcToffx1STOrww4QqR2xAmp0cfTSvoZ0kW31IJiRxijSQH3gjzzrez6CWn-6HRlH_ZBHveRtpEl6bIR-92LQKNvr6GhRhzPMXWCi4IxIl7od9bYZEWZcbJmFJ1-HyGchEY-2qtH1YDmmhINEx5S-jf6W8IFb1m3bAUzFHa70VBpe8f3olS7Z3MgnbVPq9lDrxiU01OAyGvMmBCvVAAxrTBNA"/>
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYQsYvaCVGfliIe4QnzmFhz3SPXhmS-EY6K77JYOEIM8-Kbj7ES6kPP_StZhf24kgOfOynvDQzlD4xEwRGeEjTgzOCXG-KIn-0doEQnQYbnOn-kBNdtDiZugOFI5xv1aDaVx8DXmWEgDVufz55ZdzAeCFa4J9knSy5-3dnIIRDSEMg-5s7vnK3Re3jYgCxPJHkyYqV3Q77QplEde4MLdZ6cNEvu_x2whmBZfA4dWv5_UVy9gvWQWJ_r_KZdVNT3ELf2vKRfqLZ_rA"/>
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZcL0dhoPGf55u6Ep297JDKrUKrxaqEJcwiRiu-QJ6LdLV7lqbj9oJaTorgsUWa9UMSpcCDyDgRrV7ycLWLGZWXfFzthdEbFtHzrXuWS2yldyIgikG_AF1Upth7xiPSiBS6wqTDx0Zn_pcioRs32Ll52mcLmawPpE0jpeWvJmEFCkO_SndDommlk2p8CbUfgA8bfJz90v1BJF0DTo3piDJqF5c8-r8efnwK_b7Jyw1N3fr4BB1uT5_tSG_2QBkcZEiSFwEXn_PO6Q"/>
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfMm3iilWrNMJF9lOSr9jf4gL-tY7qau_tx9blC17oKhIH0NfsUKdcMom_hyMkn60FqoKWThYAW1PTy4ONFe5kbUpgH7scBfH2Lr4PVWgOX_FZ_L58_oe7KLJTflOYoxQaXbI4alhhW16Fx5p5IctaTvMDETuav5MpvZUkbUw0HqDvfSUqUxdGS5tX2bn2C-R8vLjUAXEEDirQ9nSIiYmirC9pORkCHbGEKOc-iwh17rbJUQpeqVrDKKkmd-pGqoVYodHeJzeV0i4"/>
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcVe9J4NbzLbljME7PJlmpPXyZMYiyQhKR79wbNKMqGUfxKQWYVyxpvtRIrFaZOQxnjzCZSZgHP9JHKWea9bPuBuGjucKMKntfgzF6EBDku0GSYrGL7LkbLHmM4NZGXA8BGll_AzHF5AZC0mss8Sb0p25Q6ESHKnJzWgzo59-oZcRElZN9E1LZ86wKZaRwzBDSvF3uFybf5F04hHLLooSIqJL2UsuZnAxEst-6Ad4iSBcalJY5LCw5lc5iFm1-_TrdVcTy4cMOj9Y"/>
+<div class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] font-bold">+2</div>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="space-y-3">
+<div class="flex justify-between items-end mb-1">
+<span class="font-medium text-slate-700 dark:text-slate-300">Metaxi Mas</span>
+<span class="font-medium text-slate-500">22% (2 votes)</span>
+</div>
+<div class="h-12 w-full bg-slate-100 dark:bg-slate-800 rounded-lg overflow-hidden">
+<div class="h-full bg-slate-300 dark:bg-slate-600 w-[22%]"></div>
+</div>
+<div class="flex -space-x-2 items-center pt-1">
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUQSV3V0OhQChJfZIn110E7e7unffI68J855j8Rq0uEQGTEKxB66-3HpnJd6_koO5kqcN2HFiTTPiSJi69cOndsbEyIXjQ8WNIh0ESY6KKcox5doq6Gd4lj7bUpG1UDclPnvIbsdqMb3BKgdclGraASIN2tVWAemTF1bXvNWDLpL5Ka0EAhvuw720VMDcG-78Js08VKcWEy8zcI_OMM4wxiwAAmPaI-PL4dk2h9vsqe2YvUtZtM_6ePTz-EwFrqEnRy4UIdiaYhpk"/>
+<img alt="Voter" class="w-7 h-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar small circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8YkZq1FfJb3l6cyiow4Wf4pORyoHp8BcmgH71nTCIOUc4uSwARXVi410ssKCKzqxLuIclN2Mh9g3DsOnHoWiZJFfowOwTrfGmkaAZQRjTWhcWZe0-5rwzWX5kwHuF6pq85c2EB0Ur5tRDHEfwyJrzxVCKL5mQCCaPeGNh4BQ0X7qqk6SCVcznvQcyen-1HPOp2EMyuK2v57_InuFaLjQZplv1O_i1LpPKcDi3oXK2McAGkvHu5MdwaqKtxERS8rXeXDMtKgCssMk"/>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="space-y-3 opacity-60">
+<div class="flex justify-between items-end mb-1">
+<span class="font-medium text-slate-700 dark:text-slate-300">Sunset Ammoudi</span>
+<span class="font-medium text-slate-500">0% (0 votes)</span>
+</div>
+<div class="h-12 w-full bg-slate-100/50 dark:bg-slate-800/50 rounded-lg border-2 border-dashed border-slate-200 dark:border-slate-700 overflow-hidden">
+</div>
+<div class="text-xs text-slate-400 italic">No votes recorded</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Content: Secondary Polls & Details -->
+<div class="space-y-6">
+<!-- Ranked Choice Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="p-6">
+<h4 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Other Results</h4>
+<div class="flex items-start gap-4 mb-4">
+<div class="p-3 bg-primary/10 rounded-lg">
+<span class="material-icons text-primary">emoji_events</span>
+</div>
+<div>
+<h5 class="font-bold">Activity: Boat Tour vs Hike</h5>
+<p class="text-sm text-slate-600 dark:text-slate-400">Winner: <span class="font-semibold text-slate-900 dark:text-white">Full Day Boat Tour</span></p>
+</div>
+</div>
+<!-- Accordion Style Item -->
+<div class="border-t border-slate-100 dark:border-slate-800 pt-4">
+<button class="w-full flex items-center justify-between text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+                                View elimination rounds
+                                <span class="material-icons">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Organizer Section -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<h4 class="text-sm font-bold mb-4 flex items-center gap-2">
+<span class="material-icons text-slate-400 text-sm">settings</span>
+                        Organizer Controls
+                    </h4>
+<p class="text-xs text-slate-500 mb-4 leading-relaxed">As an organizer, you can modify the poll status if plans have changed.</p>
+<a class="text-rose-600 dark:text-rose-400 text-sm font-semibold hover:underline flex items-center gap-1" href="#">
+<span class="material-icons text-sm">history</span> Re-open Poll
+                    </a>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Actions -->
+<div class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 py-4 px-6 z-40">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row gap-4 items-center justify-between">
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-2.5 bg-primary/10 hover:bg-primary/20 text-primary font-semibold rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-icons text-lg">add_task</span>
+                        Create Follow-up Poll
+                    </button>
+<button class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-lg transition-all flex items-center justify-center gap-2">
+<span class="material-icons text-lg">share</span>
+                        Share Results
+                    </button>
+</div>
+<p class="text-xs text-slate-500 hidden lg:block">Shared with 12 group members • Public Poll</p>
+</div>
+</div>
+<!-- Bottom Spacer for Footer -->
+<div class="h-24"></div>
+</main>
+</body></html>

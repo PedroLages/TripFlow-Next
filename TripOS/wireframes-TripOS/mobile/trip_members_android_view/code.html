@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Members - Android View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .m3-ripple:active {
+            background-color: rgba(29, 79, 215, 0.12);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<!-- Mobile Device Container -->
+<div class="max-w-[412px] mx-auto min-h-screen bg-white dark:bg-slate-950 shadow-2xl relative flex flex-col">
+<!-- Status Bar Placeholder (Android Style) -->
+<div class="h-6 w-full flex justify-between items-center px-6 text-[12px] font-medium text-slate-500">
+<span>12:45</span>
+<div class="flex gap-1 items-center">
+<span class="material-icons-outlined text-[14px]">signal_cellular_alt</span>
+<span class="material-icons-outlined text-[14px]">wifi</span>
+<span class="material-icons-outlined text-[14px]">battery_full</span>
+</div>
+</div>
+<!-- Top App Bar -->
+<header class="h-16 flex items-center px-4 gap-4 sticky top-0 bg-white dark:bg-slate-950 z-10">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h1 class="text-xl font-semibold">Summer in Amalfi</h1>
+</div>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 overflow-y-auto hide-scrollbar pb-32">
+<!-- Section Header -->
+<div class="px-6 py-4 flex items-center gap-3">
+<h2 class="text-2xl font-bold">Members</h2>
+<span class="bg-primary/10 dark:bg-primary/20 text-primary px-3 py-0.5 rounded-full text-sm font-bold tracking-tight">8</span>
+</div>
+<!-- Group: OWNER -->
+<section class="mt-2">
+<div class="px-6 py-2 text-xs font-bold tracking-wider text-slate-500 uppercase">Owner</div>
+<div class="m3-ripple flex items-center px-6 py-3 gap-4 cursor-pointer transition-colors duration-200">
+<div class="relative">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a young man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiYEtBmVPhYZmU4z6hsqMSZTKfAlY1mSUWQ4E-lPorRgZvxKBFG_Ws2zkw0EOe8NmGPhn9lLsesC-9Bz7x31Yaheey5e2Qf_YOUG2qzW5f49kRSrnCqvQ21YYcFEj4Qoar9aPJLYWJglp2_57sWZ4H25nvDKLiAplvF9t9MKZp5WWWYeu15Na8B8IxhvpyHNztrn7MT0mOLEt7HlP3VHBJsAHU33eJZIlf3bkAym-RaRLzpXF9npMzTNmWHhkU29wMPENZVTiwtRA"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-slate-950 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-[16px]">Marco Rossi</span>
+<span class="text-[10px] font-bold bg-primary text-white px-2 py-0.5 rounded">OWNER</span>
+</div>
+<p class="text-sm text-slate-500">marco.rossi@tripos.com</p>
+</div>
+</div>
+</section>
+<!-- Group: ORGANIZERS -->
+<section class="mt-4">
+<div class="px-6 py-2 text-xs font-bold tracking-wider text-slate-500 uppercase">Organizers</div>
+<div class="m3-ripple flex items-center px-6 py-3 gap-4 cursor-pointer transition-colors">
+<div class="relative">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a woman with long hair" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz2jrFZGLQ-AHXCBZKaLWpN2oS00HNiu_JOfT-FNUWPCyCnLgxzmW3S7GLtuO6sKmp7-LqVQQrldcZMtIw0yFWmXRC_An8vvIcacrFNDBWjfUdmqv01rsIISTD0Qn66eCD86swhlDNGGIlb76SilgMRjlFiy-CHM50nNG1m95Zf7ccO3gwM_3uWBzdduZ5799f0PI1l6njDpZpn4CDTvUksXjUyRcxrNiWlkoWyF1q4HKtCmFWTNJBS_rLASSDb41O9dFY1SHpKtU"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-slate-950 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-[16px]">Sarah Jenkins</span>
+<span class="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded">ADMIN</span>
+</div>
+<p class="text-sm text-slate-500">sarah.j@travel.net</p>
+</div>
+</div>
+<div class="m3-ripple flex items-center px-6 py-3 gap-4 cursor-pointer transition-colors">
+<div class="relative">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a man wearing glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbNL-BgoLTrvC6kFqcOFfq5XK2n0vz3MGhDbcVWJx5mTOp9R5hfEqxpZWv8VPcx4qGlNA0hA_UiTBGr0ScupyJJdBuy8cUGh58ENT5zkqneld-DB-q19lDA52vnHV6vSdmj8070KQHibel71jLBAV8oIYRaZtUc2F_J8UY-tTU-6ZVGp3hJ2snvGYb7z1r03X0WFDVlML-eV4sYL1ZwMWMKujvWmg1I2RI8oE28NGALzAcGCVRpZtVxPUIKiXzAEm4OmTkJn_EYnM"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-yellow-500 border-2 border-white dark:border-slate-950 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-[16px]">David Chen</span>
+<span class="text-[10px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded">ADMIN</span>
+</div>
+<p class="text-sm text-slate-500">d.chen@designstudio.io</p>
+</div>
+</div>
+</section>
+<!-- Group: MEMBERS -->
+<section class="mt-4">
+<div class="px-6 py-2 text-xs font-bold tracking-wider text-slate-500 uppercase">Members</div>
+<div class="m3-ripple flex items-center px-6 py-3 gap-4 cursor-pointer transition-colors">
+<div class="relative">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGPaqZdHVzrbTerNQlCOHf299ATOSKP8gqbTJwjSV9O3FnSFxJrPEnuGFFhwhnEBC5F5YQjrM3JIsRqMIgyxgIC1l4tg9sRpyk2Db3UwTp8CITl968L0YgxxrXSlWvj2XROBfHtvD84svbab_GpW0brgnSdyeYpuAkSk6QjoCqPK0c4dRlT17XQiRuD4J9yp34ydA8TlRn0b4p0_thuQynHNnDlnHvoSe_YoRq9hgEUQLXqs3vl-_R0KOnLjV01-zcPlVRDC4pW1g"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-slate-950 rounded-full"></div>
+</div>
+<div class="flex-1">
+<span class="font-semibold text-[16px]">Elena Rodriguez</span>
+<p class="text-sm text-slate-500">elena.rod@gmail.com</p>
+</div>
+</div>
+<div class="m3-ripple flex items-center px-6 py-3 gap-4 cursor-pointer transition-colors">
+<div class="relative">
+<img alt="Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a bearded man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPQvRD4CEcxAGKfrkodPZaONCYgF2uTQQ5WEljr9NntgMCxMcBB2wah-t_37Ijq4ru8goE0YZBfGpebCqo8nw2A-H6dfk4NB1Zr1uCFxQZPejjw1w4-CV7koIDafNG3qNqUqn51WJG_-CMGjoMtpjrh4k1JhwNJ_uMkpa5ssh_KMZtAEd-RfTlVvMl9H9ayIkZ-6_KevszYA5_fQUOoGCJcIoqTTZczi97Pzd1zT0-sUB_9oCeM3boELP6UJk1Z14FX1NOHvb8KQA"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-slate-300 border-2 border-white dark:border-slate-950 rounded-full"></div>
+</div>
+<div class="flex-1">
+<span class="font-semibold text-[16px]">Thomas Wright</span>
+<p class="text-sm text-slate-500">twright@outlook.com</p>
+</div>
+</div>
+</section>
+<!-- Group: PENDING -->
+<section class="mt-4 mb-8">
+<div class="px-6 py-2 text-xs font-bold tracking-wider text-slate-500 uppercase">Pending</div>
+<div class="m3-ripple flex items-center px-6 py-3 gap-4 cursor-pointer transition-colors">
+<div class="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-icons-outlined text-slate-400">person_add_alt_1</span>
+</div>
+<div class="flex-1">
+<span class="font-semibold text-[16px] italic text-slate-400">Waiting for response...</span>
+<p class="text-sm text-slate-400">alex.m@company.com</p>
+</div>
+</div>
+</section>
+<!-- Action Button -->
+<div class="px-6 pb-12">
+<button class="w-full flex items-center justify-center gap-2 py-3 border-2 border-primary text-primary rounded-xl font-bold transition-all hover:bg-primary/5 active:bg-primary/10">
+<span class="material-icons-outlined text-[20px]">share</span>
+                    Invite your crew
+                </button>
+</div>
+</main>
+<!-- Material 3 Bottom Navigation (80dp) -->
+<nav class="absolute bottom-0 left-0 right-0 h-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-around px-2 z-20">
+<!-- Tab 1 -->
+<button class="flex flex-col items-center gap-1 flex-1">
+<div class="px-5 py-1 rounded-full text-slate-500">
+<span class="material-icons-outlined">home</span>
+</div>
+<span class="text-[12px] font-medium text-slate-500">Home</span>
+</button>
+<!-- Tab 2 -->
+<button class="flex flex-col items-center gap-1 flex-1">
+<div class="px-5 py-1 rounded-full text-slate-500">
+<span class="material-icons-outlined">explore</span>
+</div>
+<span class="text-[12px] font-medium text-slate-500">Explore</span>
+</button>
+<!-- Tab 3: Active -->
+<button class="flex flex-col items-center gap-1 flex-1">
+<div class="px-5 py-1 rounded-full bg-primary/10 text-primary">
+<span class="material-icons-outlined">group</span>
+</div>
+<span class="text-[12px] font-bold text-slate-900 dark:text-white">Members</span>
+</button>
+<!-- Tab 4 -->
+<button class="flex flex-col items-center gap-1 flex-1">
+<div class="px-5 py-1 rounded-full text-slate-500">
+<span class="material-icons-outlined">calendar_today</span>
+</div>
+<span class="text-[12px] font-medium text-slate-500">Itinerary</span>
+</button>
+<!-- Tab 5 -->
+<button class="flex flex-col items-center gap-1 flex-1">
+<div class="px-5 py-1 rounded-full text-slate-500">
+<span class="material-icons-outlined">settings</span>
+</div>
+<span class="text-[12px] font-medium text-slate-500">Settings</span>
+</button>
+</nav>
+<!-- Floating Action Button (M3 Style) -->
+<button class="absolute bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-2xl shadow-xl flex items-center justify-center z-30 active:scale-95 transition-transform">
+<span class="material-icons-outlined">person_add</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Votes Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "brand-purple": "#8b5cf6",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-width { width: 280px; }
+        .header-height { height: 64px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200">
+<div class="flex min-h-screen">
+<!-- Sidebar Shell (280px) -->
+<aside class="sidebar-width bg-white dark:bg-slate-900 border-r border-primary/10 hidden lg:flex flex-col fixed inset-y-0">
+<div class="header-height flex items-center px-6 border-b border-primary/10">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-icons text-white text-xl">travel_explore</span>
+</div>
+<span class="ml-3 font-bold text-xl tracking-tight text-primary">TripOS</span>
+</div>
+<nav class="flex-1 p-4 space-y-1">
+<div class="flex items-center px-3 py-2 text-slate-500 dark:text-slate-400">
+<span class="text-xs font-semibold uppercase tracking-wider">Santorini Trip</span>
+</div>
+<a class="flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-primary/10" href="#">
+<span class="material-icons text-lg mr-3">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-primary/10" href="#">
+<span class="material-icons text-lg mr-3">calendar_month</span>
+<span>Itinerary</span>
+</a>
+<a class="flex items-center px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-icons text-lg mr-3">how_to_vote</span>
+<span>Votes</span>
+</a>
+<a class="flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-primary/10" href="#">
+<span class="material-icons text-lg mr-3">group</span>
+<span>Collaborators</span>
+</a>
+<a class="flex items-center px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-primary/10" href="#">
+<span class="material-icons text-lg mr-3">payments</span>
+<span>Expenses</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 px-2">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">JD</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium truncate">Jane Doe</p>
+<p class="text-xs text-slate-500 truncate">Organizer</p>
+</div>
+<span class="material-icons text-slate-400 cursor-pointer">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="flex-1 lg:ml-[280px]">
+<!-- Header (64px) -->
+<header class="header-height bg-white dark:bg-slate-900 border-b border-primary/10 sticky top-0 z-10 px-8 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-icons lg:hidden mr-2">menu</span>
+<nav class="flex items-center space-x-2 text-sm text-slate-500">
+<span>Santorini Trip</span>
+<span class="material-icons text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-200 font-medium">Votes</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-slate-200">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Portrait of a young woman traveler" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0crY5N3h_TZCqMMyr_4t1fegWHCL1d2w1idch_9Zs3Jo6qxgF6Ch84vB1BzS-TAHhbxRL4wxZGmke6cZDozij8xm10JrXm6MI1NrZBnZKKK_-SaCyyNx3MigvJny1zMWvPl-AM5OxjPCOctNqRZ-S_JGCEM9b6xLGZh28rhv5iOHDkvFjpD2r-NDW3D3lWRkb5xHP1qu0EYrz_ILXc5t-WD0GWZL1pCGtlC48bYQ9JQPH8AhKfFYj_uIqA0lE5imE4Okqr3eR3sI"/>
+</div>
+</div>
+</header>
+<!-- Page Body -->
+<div class="p-8 max-w-4xl mx-auto">
+<!-- Top Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Votes</h2>
+<button class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+<span class="material-icons text-xl">how_to_vote</span>
+                        Create Poll
+                    </button>
+</div>
+<!-- Tabs -->
+<div class="flex border-b border-primary/10 mb-8 overflow-x-auto">
+<button class="px-6 py-3 border-b-2 border-primary text-primary font-semibold whitespace-nowrap">
+                        Active (3)
+                    </button>
+<button class="px-6 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 font-medium whitespace-nowrap">
+                        Completed
+                    </button>
+<button class="px-6 py-3 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 font-medium whitespace-nowrap">
+                        All
+                    </button>
+</div>
+<!-- Poll List -->
+<div class="space-y-6">
+<!-- Active Poll Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border-l-4 border-brand-purple overflow-hidden">
+<div class="p-6">
+<div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-brand-purple/10 text-brand-purple text-xs font-bold uppercase tracking-wider">Ranked Choice</span>
+<span class="flex items-center gap-1 text-slate-500 text-xs">
+<span class="material-icons text-sm">lock</span>
+                                            Anonymous
+                                        </span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">What dates for Santorini?</h3>
+</div>
+<div class="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
+<span class="material-icons text-lg">schedule</span>
+                                    Closes in 2 days
+                                </div>
+</div>
+<div class="mb-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">5 of 8 members voted</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">62%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-purple h-full rounded-full" style="width: 62%"></div>
+</div>
+</div>
+<div class="flex items-center justify-end border-t border-slate-50 dark:border-slate-800 pt-4">
+<button class="px-6 py-2 bg-brand-purple text-white font-semibold rounded-lg hover:bg-brand-purple/90 transition-colors">
+                                    Vote Now
+                                </button>
+</div>
+</div>
+</div>
+<!-- Active Poll Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border-l-4 border-brand-purple overflow-hidden">
+<div class="p-6">
+<div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider">Yes / No</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Should we book the private catamaran?</h3>
+</div>
+<div class="flex items-center gap-1.5 text-amber-500 text-sm font-bold">
+<span class="material-icons text-lg">priority_high</span>
+                                    Closes in 4 hours
+                                </div>
+</div>
+<div class="mb-6">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-400">7 of 8 members voted</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">88%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full overflow-hidden">
+<div class="bg-brand-purple h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div class="flex items-center justify-end border-t border-slate-50 dark:border-slate-800 pt-4">
+<div class="flex items-center gap-2 px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-lg font-semibold">
+<span class="material-icons text-lg">check_circle</span>
+                                    Voted
+                                </div>
+</div>
+</div>
+</div>
+<!-- Completed Poll Card -->
+<div class="bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 opacity-80 overflow-hidden grayscale-[0.2]">
+<div class="p-6">
+<div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2.5 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Multiple Choice</span>
+</div>
+<h3 class="text-lg font-bold text-slate-700 dark:text-slate-300 leading-tight">Dinner choice for first night</h3>
+</div>
+<div class="px-3 py-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-500 text-xs font-medium">
+                                    Ended 2 days ago
+                                </div>
+</div>
+<div class="p-4 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-lg border border-emerald-100 dark:border-emerald-900/30 flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600">
+<span class="material-icons">emoji_events</span>
+</div>
+<div>
+<p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-tight">Winner</p>
+<p class="font-bold text-slate-900 dark:text-white">Oia Sunset Tavern</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-slate-900 dark:text-white">9 votes</p>
+<p class="text-xs text-slate-500">Decided by majority</p>
+</div>
+</div>
+<div class="flex items-center justify-end border-t border-slate-200/50 dark:border-slate-800 pt-4">
+<button class="px-4 py-2 text-primary font-semibold hover:bg-primary/5 rounded-lg transition-colors">
+                                    View Results
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Suggestion (Hidden) -->
+<div class="hidden flex-col items-center justify-center py-20 text-center">
+<div class="w-20 h-20 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center text-slate-400 mb-4">
+<span class="material-icons text-4xl">how_to_vote</span>
+</div>
+<h4 class="text-xl font-bold mb-2">No active polls</h4>
+<p class="text-slate-500 max-w-xs mx-auto mb-6">Want to make a group decision? Create a poll to get everyone's input!</p>
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-medium">Start First Poll</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

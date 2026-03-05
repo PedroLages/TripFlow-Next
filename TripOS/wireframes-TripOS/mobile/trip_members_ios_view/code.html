@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TripOS - Members</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "ios-divider": "#e5e5ea",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .safe-top {
+            padding-top: env(safe-area-inset-top);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- iOS Top Navigation Bar -->
+<nav class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-ios-divider dark:border-slate-800 safe-top">
+<div class="h-11 flex items-center justify-between px-4">
+<button class="flex items-center text-primary space-x-1">
+<span class="material-icons text-2xl">chevron_left</span>
+<span class="text-[17px]">Trips</span>
+</button>
+<h1 class="absolute left-1/2 -translate-x-1/2 text-[17px] font-semibold">Amalfi Coast 2024</h1>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</div>
+</nav>
+<main class="pb-32">
+<!-- Content Header -->
+<div class="px-4 py-6 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<h2 class="text-3xl font-bold">Members</h2>
+<span class="bg-primary text-white text-sm font-bold px-2.5 py-0.5 rounded-full">8</span>
+</div>
+</div>
+<!-- Member List Container -->
+<div class="space-y-8">
+<!-- Group: OWNER -->
+<section>
+<div class="px-4 mb-2">
+<h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase">Owner</h3>
+</div>
+<div class="bg-white dark:bg-slate-900/50 border-y border-ios-divider dark:border-slate-800">
+<div class="flex items-center p-4 gap-4">
+<div class="relative">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a male trip owner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5LkMtUCjITMn6zZJoHRSl7wsDiTiHZhKMK-5yPqcG_nwev0n10-bRhsPmxbYKYDQYl2gFNHMhosm5BRXzGycsaEg7Bl6PkqlBIVLzshFSmX1YbdGC_EZMkRYmPzUOT6xMCbmlAxiSYszkbxfclrGC84OZiNjCIBPEeeCM3kKUvd1IZarmXdKgzbOp43xClSsFzUAmtIPVGXyfEtzrkboNDUPDYmFxexAqAwC5GvdKD503pKwDculsASGtQ4pR4ZY9CS6Fx00SZ0U"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">Alex Sterling</p>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">Owner</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">alex.s@tripos.com</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Group: ORGANIZERS -->
+<section>
+<div class="px-4 mb-2">
+<h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase">Organizers</h3>
+</div>
+<div class="bg-white dark:bg-slate-900/50 border-y border-ios-divider dark:border-slate-800 divide-y divide-ios-divider dark:divide-slate-800">
+<!-- Row 1 -->
+<div class="flex items-center p-4 gap-4">
+<div class="relative">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a female trip organizer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB142qTMmf0F5amrtmy5YWjaaTcbYgRvtgbfECJjrMjUNbyHR7sRhenk8guqrDgluG4H5fClAs8qUOQ_cxmuNYNto2ckuHP_oNQN7viuhvaWQBFU4s77Q1gaAn0x5fYYChaXyGTPU6TdnCmIFDMkabhK8CeKWv-O9bHR53tUvsC-iQfl8GVGZZkh1SWF-SHAG7pfMHWGpfoPHpUR959xJsKLfBgaFh9gJD5CJzcjAOnapmp-GuH3ICc74Q3CowDBwkpN25zG7Iecg"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">Sarah Jenkins</p>
+<span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">Organizer</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">sarah.j@travel.me</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center p-4 gap-4">
+<div class="relative">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a male trip organizer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3UadD3con1NF6Gh0BdXKchczn0B1pPoheS3GYSNBUzrWj1OEsbFmohIuin1Ip-szk2x3UEjFqw4YfQ5gTeJpm6oEAYtfUzmZ4uaQUx6_snloQdRHveywGdZ-kMg5yrwyWwN4wgfGKv1LThW7gTIPmrnyxiGvHmLKI8K7sakgaMMMpK8midQrc1sQWeFJRzsrnUw_AAuzWK7SkfiKJzq0p0lEFb0Tw5YXSkV_YxNyPokpBamLDjRs4-Uk1DXxwTCFyhm0DigPWnAY"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-yellow-400 border-2 border-white dark:border-slate-900 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">Marcus Chen</p>
+<span class="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">Organizer</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">m.chen@outlook.com</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Group: MEMBERS -->
+<section>
+<div class="px-4 mb-2">
+<h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase">Members</h3>
+</div>
+<div class="bg-white dark:bg-slate-900/50 border-y border-ios-divider dark:border-slate-800 divide-y divide-ios-divider dark:divide-slate-800">
+<!-- Row 1 -->
+<div class="flex items-center p-4 gap-4">
+<div class="relative">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a group member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7QU77Qe_PO4Ld-6iGgF17s0s00nCCb92GMM0yTQy2zISKQtoWhJC4yQe18aCq-U0jU2Y8un4Wr4I7WmOa5qu3KBhU85RS6bHzfRzIhwG9Q91A7KSQ7k3FyZ2G8-DROrgasSPLRPvtu3VA_6UjgNJnMV_BI5Ed2jpdS_NPsaKWBZxpoL2lG1L1W9uNTZ9jgOTH8WWBBHdtCQAfg56z1lJwrcrOymtF9k2NlUlkyMSx-gUBTudw6Gad3VaQWRCQOgutlO1ooahn574"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">Elena Rossi</p>
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">Member</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">elena.rossi@gmail.com</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center p-4 gap-4">
+<div class="relative">
+<img alt="Avatar" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a smiling male member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4JcPxiIblmKSeLeXBuslhIz412vRvf3XjNhvSjDXWABefaH_cK2w2cVSBHvLxTMrttLj1vXcFG67-bsizbOIb46UW1bSEFmY8SeqqZJ_ZmD5Jurr3rNeMjGs3Yv1D7wzrYPAI358A8IcbtfYHA-kPtYkMTj9LBGA0e3pMkG2DkavdckZzNGrHH1TfkPddIWTZNKQ-4BlHv_4EzLXiMh3fmUgHWL1PO2rb6jEstBbE_yjvlKz1NoukGcZE87_XVkvRaXNI3SnnW5I"/>
+<div class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">David Miller</p>
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase">Member</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">miller.d@provider.net</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Group: PENDING -->
+<section>
+<div class="px-4 mb-2">
+<h3 class="text-xs font-semibold text-slate-500 dark:text-slate-400 tracking-wider uppercase">Pending</h3>
+</div>
+<div class="bg-white dark:bg-slate-900/50 border-y border-ios-divider dark:border-slate-800 divide-y divide-ios-divider dark:divide-slate-800">
+<div class="flex items-center p-4 gap-4 opacity-70">
+<div class="w-12 h-12 rounded-full border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center bg-slate-50 dark:bg-slate-800/50">
+<span class="material-icons text-slate-300 dark:text-slate-600">person_add</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">Jasmine Lee</p>
+<span class="bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase italic">Pending</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">jasmine.lee@work.com</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+<div class="flex items-center p-4 gap-4 opacity-70">
+<div class="w-12 h-12 rounded-full border-2 border-dashed border-slate-300 dark:border-slate-600 flex items-center justify-center bg-slate-50 dark:bg-slate-800/50">
+<span class="material-icons text-slate-300 dark:text-slate-600">person_add</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-semibold text-base leading-tight">Tom Richards</p>
+<span class="bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-bold px-1.5 py-0.5 rounded tracking-wide uppercase italic">Pending</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">trichards@mail.org</p>
+</div>
+<button class="text-slate-400">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Invite Button Section -->
+<div class="px-4 pt-4">
+<button class="w-full flex items-center justify-center gap-2 py-4 border-2 border-primary text-primary font-bold rounded-xl active:bg-primary active:text-white transition-colors">
+<span class="material-icons">share</span>
+                    Invite your crew
+                </button>
+</div>
+</div>
+</main>
+<!-- iOS Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-background-light/95 dark:bg-background-dark/95 ios-blur border-t border-ios-divider dark:border-slate-800 safe-bottom">
+<div class="flex justify-around items-center h-16 pt-1">
+<button class="flex flex-col items-center gap-0.5 flex-1">
+<span class="material-icons text-slate-400">home</span>
+<span class="text-[10px] font-medium text-slate-400">Home</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 flex-1">
+<span class="material-icons text-slate-400">calendar_today</span>
+<span class="text-[10px] font-medium text-slate-400">Itinerary</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 flex-1 relative">
+<span class="material-icons text-primary">group</span>
+<span class="text-[10px] font-bold text-primary">Members</span>
+<div class="absolute -bottom-1 w-6 h-0.5 bg-primary rounded-full"></div>
+</button>
+<button class="flex flex-col items-center gap-0.5 flex-1">
+<span class="material-icons text-slate-400">chat_bubble_outline</span>
+<span class="text-[10px] font-medium text-slate-400">Chat</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 flex-1">
+<span class="material-icons text-slate-400">person_outline</span>
+<span class="text-[10px] font-medium text-slate-400">Profile</span>
+</button>
+</div>
+</nav>
+</body></html>

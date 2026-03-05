@@ -1,0 +1,802 @@
+# TripOS Wireframe Story Map
+# Maps all 85 screens to prompts (D1-D19, M1-M16), epics, and cross-platform counterparts
+# Generated: 2026-02-12
+
+metadata:
+  generated: "2026-02-12"
+  desktop_count: 34
+  mobile_count: 51
+  total: 85
+  desktop_prompts: 19  # D1-D19
+  mobile_prompts: 16   # M1-M16
+  epics: 13
+
+# ─── PROMPT DEFINITIONS ───────────────────────────────────────────────
+
+prompts:
+  # Desktop Prompts (D1-D19)
+  D1:
+    title: "Foundation — Design Tokens & Desktop Layout Shell"
+    epic: null  # cross-cutting
+    screens: [tripos_main_layout_shell]
+  D2:
+    title: "Authentication — Sign Up, Sign In, Invite Accept"
+    epic: epic-1
+    screens: [tripos_sign_up_screen, tripos_sign_in_screen, tripos_trip_invitation_screen, tripos_forgot_password_screen]
+  D3:
+    title: "Dashboard — My Trips"
+    epic: epic-2
+    screens: [my_trips_dashboard_grid, create_trip_modal_overlay]
+  D4:
+    title: "Trip Overview"
+    epic: epic-8
+    screens: ["trip_overview:_summer_in_santorini"]
+  D5:
+    title: "Members & Invitations"
+    epic: epic-3
+    screens: [trip_members_management_view, invite_members_modal_overlay]
+  D6:
+    title: "Itinerary — Day Timeline & Activity Cards"
+    epic: epic-4
+    screens: [tripos_day_itinerary_timeline, add_activity_modal]
+  D7:
+    title: "Map View"
+    epic: epic-4
+    screens: [tripos_interactive_map_view]
+  D8:
+    title: "Voting — Poll List & Create Poll"
+    epic: epic-5
+    screens: [tripos_votes_dashboard, tripos_create_poll_modal]
+  D9:
+    title: "Voting — Cast Vote Interface (All Types)"
+    epic: epic-5
+    screens: [ranked_choice_voting_interface, approval_voting_interface, "yes"]
+  D10:
+    title: "Voting — Poll Results"
+    epic: epic-5
+    screens: [tripos_poll_results_dashboard]
+  D11:
+    title: "Blind Budgeting — Private Input & Explainer"
+    epic: epic-6
+    screens: ["blind_budgeting_input_&_privacy_details", blind_budgeting_explainer_modal_step_3]
+  D12:
+    title: "Blind Budgeting — Group Range Display"
+    epic: epic-6
+    screens: [blind_budgeting_dashboard, blind_budgeting_saved_state]
+  D13:
+    title: "Expense Management"
+    epic: epic-7
+    screens: [tripos_expense_dashboard, add_expense_modal_view]
+  D14:
+    title: "Activity Feed & Notifications"
+    epic: epic-8
+    screens: [tripos_activity_feed_timeline, "tripos_activity_&_notifications", notification_preferences]
+  D15:
+    title: "Marketing — Landing Page"
+    epic: epic-12
+    screens: [tripos_marketing_landing_page]
+  D16:
+    title: "States & Feedback — Empty, Loading, Error, Confirmation"
+    epic: epic-13
+    screens: [tripos_global_ui_state_patterns]
+  D17:
+    title: "Profile & Settings"
+    epic: epic-10
+    screens: [user_profile_settings, "account_management_&_security"]
+  D18:
+    title: "Marketing — Features Page"
+    epic: epic-12
+    screens: [tripos_features_marketing_page]
+  D19:
+    title: "Marketing — Pricing Page"
+    epic: epic-12
+    screens: [tripos_pricing_page]
+
+  # Mobile Prompts (M1-M16)
+  M1:
+    title: "Foundation — Nav Shell, Tab Bar, Bottom Sheets"
+    epic: null  # cross-cutting
+    screens: [dashboard_ios_foundation, dashboard_android_foundation, trip_workspace_ios_foundation, trip_workspace_android_foundation, ios_bottom_sheet_pattern, android_bottom_sheet_pattern]
+  M2:
+    title: "Authentication — Sign In, Sign Up, Invite Accept"
+    epic: epic-1
+    screens: ["sign_in_(ios)", "sign_in_(android)", "sign_up_(ios)", "sign_up_(android)", "invite_accept_(ios)", "forgot_password_(android)"]
+  M3:
+    title: "Dashboard — My Trips"
+    epic: epic-2
+    screens: [ios_my_trips_dashboard, android_my_trips_dashboard, ios_create_trip_sheet, android_empty_state_dashboard, trips_empty_state]
+  M4:
+    title: "Trip Overview"
+    epic: epic-8
+    screens: [ios_trip_overview, android_trip_overview]
+  M5:
+    title: "Members & Invitations"
+    epic: epic-3
+    screens: [trip_members_ios_view, trip_members_android_view]
+  M6:
+    title: "Itinerary — Day Cards & Swipe Actions"
+    epic: epic-4
+    screens: [trip_itinerary_ios_view, add_activity_bottom_sheet, empty_itinerary_day_android, itinerary_reorder_android_view, itinerary_loading_state]
+  M7:
+    title: "Map View — Full Screen"
+    epic: epic-4
+    screens: ["tripos_map_view_(ios)", "tripos_map_view_(android)"]
+  M8:
+    title: "Voting — Poll List & Create"
+    epic: epic-5
+    screens: [ios_trip_polls_list, android_create_poll_sheet, "ios_yes"]
+  M9:
+    title: "Voting — Cast Vote (All Types)"
+    epic: epic-5
+    screens: [android_ranked_choice_vote_screen, ios_approval_vote_screen]
+  M10:
+    title: "Voting — Poll Results"
+    epic: epic-5
+    screens: [ios_poll_results_decided_yes, ios_poll_results_no_quorum_approval, android_poll_results_tie_state]
+  M11:
+    title: "Blind Budgeting — Input & Explainer"
+    epic: epic-6
+    screens: [ios_blind_budgeting_setup, android_blind_budgeting_setup]
+  M12:
+    title: "Blind Budgeting — Group Display"
+    epic: epic-6
+    screens: [blind_budgeting_group_view_ios, blind_budgeting_group_view_android]
+  M13:
+    title: "Expense Management"
+    epic: epic-7
+    screens: [expenses_list_view, "expenses_list_(android)", add_new_expense_sheet, expense_settlement_summary, expenses_offline_state]
+  M14:
+    title: "Activity Feed & Notifications"
+    epic: epic-8
+    screens: [trip_activity_feed_and_toasts, notification_center_sheet]
+  M15:
+    title: "States & Feedback — Mobile"
+    epic: epic-13
+    screens: []  # Cross-cutting patterns represented by state screens in other prompts
+  M16:
+    title: "Profile & Settings"
+    epic: epic-10
+    screens: ["tripos_profile_&_settings", change_password_sheet, delete_account_confirmation, polls_delete_confirmation]
+
+# ─── SCREEN DEFINITIONS ───────────────────────────────────────────────
+
+screens:
+  # === D1: Foundation ===
+  tripos_main_layout_shell:
+    platform: desktop
+    prompt: D1
+    path: assets/wireframes/desktop/tripos_main_layout_shell
+    mobile_counterparts: [dashboard_ios_foundation, dashboard_android_foundation, trip_workspace_ios_foundation, trip_workspace_android_foundation]
+
+  # === D2 / M2: Authentication ===
+  tripos_sign_up_screen:
+    platform: desktop
+    prompt: D2
+    path: assets/wireframes/desktop/tripos_sign_up_screen
+    mobile_counterparts: ["sign_up_(ios)", "sign_up_(android)"]
+
+  tripos_sign_in_screen:
+    platform: desktop
+    prompt: D2
+    path: assets/wireframes/desktop/tripos_sign_in_screen
+    mobile_counterparts: ["sign_in_(ios)", "sign_in_(android)"]
+
+  tripos_trip_invitation_screen:
+    platform: desktop
+    prompt: D2
+    path: assets/wireframes/desktop/tripos_trip_invitation_screen
+    mobile_counterparts: ["invite_accept_(ios)"]
+
+  tripos_forgot_password_screen:
+    platform: desktop
+    prompt: D2
+    path: assets/wireframes/desktop/tripos_forgot_password_screen
+    mobile_counterparts: ["forgot_password_(android)"]
+
+  "sign_in_(ios)":
+    platform: mobile
+    variant: ios
+    prompt: M2
+    path: "assets/wireframes/mobile/sign_in_(ios)"
+    desktop_counterpart: tripos_sign_in_screen
+
+  "sign_in_(android)":
+    platform: mobile
+    variant: android
+    prompt: M2
+    path: "assets/wireframes/mobile/sign_in_(android)"
+    desktop_counterpart: tripos_sign_in_screen
+
+  "sign_up_(ios)":
+    platform: mobile
+    variant: ios
+    prompt: M2
+    path: "assets/wireframes/mobile/sign_up_(ios)"
+    desktop_counterpart: tripos_sign_up_screen
+
+  "sign_up_(android)":
+    platform: mobile
+    variant: android
+    prompt: M2
+    path: "assets/wireframes/mobile/sign_up_(android)"
+    desktop_counterpart: tripos_sign_up_screen
+
+  "invite_accept_(ios)":
+    platform: mobile
+    variant: ios
+    prompt: M2
+    path: "assets/wireframes/mobile/invite_accept_(ios)"
+    desktop_counterpart: tripos_trip_invitation_screen
+
+  "forgot_password_(android)":
+    platform: mobile
+    variant: android
+    prompt: M2
+    path: "assets/wireframes/mobile/forgot_password_(android)"
+    desktop_counterpart: tripos_forgot_password_screen
+
+  # === D3 / M3: Dashboard ===
+  my_trips_dashboard_grid:
+    platform: desktop
+    prompt: D3
+    path: assets/wireframes/desktop/my_trips_dashboard_grid
+    mobile_counterparts: [ios_my_trips_dashboard, android_my_trips_dashboard]
+
+  create_trip_modal_overlay:
+    platform: desktop
+    prompt: D3
+    path: assets/wireframes/desktop/create_trip_modal_overlay
+    mobile_counterparts: [ios_create_trip_sheet]
+
+  ios_my_trips_dashboard:
+    platform: mobile
+    variant: ios
+    prompt: M3
+    path: assets/wireframes/mobile/ios_my_trips_dashboard
+    desktop_counterpart: my_trips_dashboard_grid
+
+  android_my_trips_dashboard:
+    platform: mobile
+    variant: android
+    prompt: M3
+    path: assets/wireframes/mobile/android_my_trips_dashboard
+    desktop_counterpart: my_trips_dashboard_grid
+
+  ios_create_trip_sheet:
+    platform: mobile
+    variant: ios
+    prompt: M3
+    path: assets/wireframes/mobile/ios_create_trip_sheet
+    desktop_counterpart: create_trip_modal_overlay
+
+  android_empty_state_dashboard:
+    platform: mobile
+    variant: android
+    prompt: M3
+    path: assets/wireframes/mobile/android_empty_state_dashboard
+    desktop_counterpart: null  # embedded in D3
+
+  trips_empty_state:
+    platform: mobile
+    variant: shared
+    prompt: M3
+    path: assets/wireframes/mobile/trips_empty_state
+    desktop_counterpart: null  # embedded in D3
+
+  # === D4 / M4: Trip Overview ===
+  "trip_overview:_summer_in_santorini":
+    platform: desktop
+    prompt: D4
+    path: "assets/wireframes/desktop/trip_overview:_summer_in_santorini"
+    mobile_counterparts: [ios_trip_overview, android_trip_overview]
+
+  ios_trip_overview:
+    platform: mobile
+    variant: ios
+    prompt: M4
+    path: assets/wireframes/mobile/ios_trip_overview
+    desktop_counterpart: "trip_overview:_summer_in_santorini"
+
+  android_trip_overview:
+    platform: mobile
+    variant: android
+    prompt: M4
+    path: assets/wireframes/mobile/android_trip_overview
+    desktop_counterpart: "trip_overview:_summer_in_santorini"
+
+  # === D5 / M5: Members ===
+  trip_members_management_view:
+    platform: desktop
+    prompt: D5
+    path: assets/wireframes/desktop/trip_members_management_view
+    mobile_counterparts: [trip_members_ios_view, trip_members_android_view]
+
+  invite_members_modal_overlay:
+    platform: desktop
+    prompt: D5
+    path: assets/wireframes/desktop/invite_members_modal_overlay
+    mobile_counterparts: []  # inline in M5
+
+  trip_members_ios_view:
+    platform: mobile
+    variant: ios
+    prompt: M5
+    path: assets/wireframes/mobile/trip_members_ios_view
+    desktop_counterpart: trip_members_management_view
+
+  trip_members_android_view:
+    platform: mobile
+    variant: android
+    prompt: M5
+    path: assets/wireframes/mobile/trip_members_android_view
+    desktop_counterpart: trip_members_management_view
+
+  # === D6 / M6: Itinerary ===
+  tripos_day_itinerary_timeline:
+    platform: desktop
+    prompt: D6
+    path: assets/wireframes/desktop/tripos_day_itinerary_timeline
+    mobile_counterparts: [trip_itinerary_ios_view]
+
+  add_activity_modal:
+    platform: desktop
+    prompt: D6
+    path: assets/wireframes/desktop/add_activity_modal
+    mobile_counterparts: [add_activity_bottom_sheet]
+
+  trip_itinerary_ios_view:
+    platform: mobile
+    variant: ios
+    prompt: M6
+    path: assets/wireframes/mobile/trip_itinerary_ios_view
+    desktop_counterpart: tripos_day_itinerary_timeline
+
+  add_activity_bottom_sheet:
+    platform: mobile
+    variant: shared
+    prompt: M6
+    path: assets/wireframes/mobile/add_activity_bottom_sheet
+    desktop_counterpart: add_activity_modal
+
+  empty_itinerary_day_android:
+    platform: mobile
+    variant: android
+    prompt: M6
+    path: assets/wireframes/mobile/empty_itinerary_day_android
+    desktop_counterpart: null  # inline state in D6
+
+  itinerary_reorder_android_view:
+    platform: mobile
+    variant: android
+    prompt: M6
+    path: assets/wireframes/mobile/itinerary_reorder_android_view
+    desktop_counterpart: null  # mobile-specific interaction
+
+  itinerary_loading_state:
+    platform: mobile
+    variant: shared
+    prompt: M6
+    path: assets/wireframes/mobile/itinerary_loading_state
+    desktop_counterpart: null  # inline in D16
+
+  # === D7 / M7: Map View ===
+  tripos_interactive_map_view:
+    platform: desktop
+    prompt: D7
+    path: assets/wireframes/desktop/tripos_interactive_map_view
+    mobile_counterparts: ["tripos_map_view_(ios)", "tripos_map_view_(android)"]
+
+  "tripos_map_view_(ios)":
+    platform: mobile
+    variant: ios
+    prompt: M7
+    path: "assets/wireframes/mobile/tripos_map_view_(ios)"
+    desktop_counterpart: tripos_interactive_map_view
+
+  "tripos_map_view_(android)":
+    platform: mobile
+    variant: android
+    prompt: M7
+    path: "assets/wireframes/mobile/tripos_map_view_(android)"
+    desktop_counterpart: tripos_interactive_map_view
+
+  # === D8-D10 / M8-M10: Voting ===
+  tripos_votes_dashboard:
+    platform: desktop
+    prompt: D8
+    path: assets/wireframes/desktop/tripos_votes_dashboard
+    mobile_counterparts: [ios_trip_polls_list]
+
+  tripos_create_poll_modal:
+    platform: desktop
+    prompt: D8
+    path: assets/wireframes/desktop/tripos_create_poll_modal
+    mobile_counterparts: [android_create_poll_sheet]
+
+  ranked_choice_voting_interface:
+    platform: desktop
+    prompt: D9
+    path: assets/wireframes/desktop/ranked_choice_voting_interface
+    mobile_counterparts: [android_ranked_choice_vote_screen]
+
+  approval_voting_interface:
+    platform: desktop
+    prompt: D9
+    path: assets/wireframes/desktop/approval_voting_interface
+    mobile_counterparts: [ios_approval_vote_screen]
+
+  "yes":
+    platform: desktop
+    prompt: D9
+    path: assets/wireframes/desktop/yes
+    mobile_counterparts: ["ios_yes"]
+
+  tripos_poll_results_dashboard:
+    platform: desktop
+    prompt: D10
+    path: assets/wireframes/desktop/tripos_poll_results_dashboard
+    mobile_counterparts: [ios_poll_results_decided_yes, ios_poll_results_no_quorum_approval, android_poll_results_tie_state]
+
+  ios_trip_polls_list:
+    platform: mobile
+    variant: ios
+    prompt: M8
+    path: assets/wireframes/mobile/ios_trip_polls_list
+    desktop_counterpart: tripos_votes_dashboard
+
+  android_create_poll_sheet:
+    platform: mobile
+    variant: android
+    prompt: M8
+    path: assets/wireframes/mobile/android_create_poll_sheet
+    desktop_counterpart: tripos_create_poll_modal
+
+  "ios_yes":
+    platform: mobile
+    variant: ios
+    prompt: M8
+    path: "assets/wireframes/mobile/ios_yes"
+    desktop_counterpart: "yes"
+
+  android_ranked_choice_vote_screen:
+    platform: mobile
+    variant: android
+    prompt: M9
+    path: assets/wireframes/mobile/android_ranked_choice_vote_screen
+    desktop_counterpart: ranked_choice_voting_interface
+
+  ios_approval_vote_screen:
+    platform: mobile
+    variant: ios
+    prompt: M9
+    path: assets/wireframes/mobile/ios_approval_vote_screen
+    desktop_counterpart: approval_voting_interface
+
+  ios_poll_results_decided_yes:
+    platform: mobile
+    variant: ios
+    prompt: M10
+    path: assets/wireframes/mobile/ios_poll_results_decided_yes
+    desktop_counterpart: tripos_poll_results_dashboard
+
+  ios_poll_results_no_quorum_approval:
+    platform: mobile
+    variant: ios
+    prompt: M10
+    path: assets/wireframes/mobile/ios_poll_results_no_quorum_approval
+    desktop_counterpart: tripos_poll_results_dashboard
+
+  android_poll_results_tie_state:
+    platform: mobile
+    variant: android
+    prompt: M10
+    path: assets/wireframes/mobile/android_poll_results_tie_state
+    desktop_counterpart: tripos_poll_results_dashboard
+
+  # === D11-D12 / M11-M12: Blind Budgeting ===
+  "blind_budgeting_input_&_privacy_details":
+    platform: desktop
+    prompt: D11
+    path: "assets/wireframes/desktop/blind_budgeting_input_&_privacy_details"
+    mobile_counterparts: [ios_blind_budgeting_setup, android_blind_budgeting_setup]
+
+  blind_budgeting_explainer_modal_step_3:
+    platform: desktop
+    prompt: D11
+    path: assets/wireframes/desktop/blind_budgeting_explainer_modal_step_3
+    mobile_counterparts: []  # inline carousel in M11
+
+  blind_budgeting_dashboard:
+    platform: desktop
+    prompt: D12
+    path: assets/wireframes/desktop/blind_budgeting_dashboard
+    mobile_counterparts: [blind_budgeting_group_view_ios, blind_budgeting_group_view_android]
+
+  blind_budgeting_saved_state:
+    platform: desktop
+    prompt: D12
+    path: assets/wireframes/desktop/blind_budgeting_saved_state
+    mobile_counterparts: []  # inline in M11
+
+  ios_blind_budgeting_setup:
+    platform: mobile
+    variant: ios
+    prompt: M11
+    path: assets/wireframes/mobile/ios_blind_budgeting_setup
+    desktop_counterpart: "blind_budgeting_input_&_privacy_details"
+
+  android_blind_budgeting_setup:
+    platform: mobile
+    variant: android
+    prompt: M11
+    path: assets/wireframes/mobile/android_blind_budgeting_setup
+    desktop_counterpart: "blind_budgeting_input_&_privacy_details"
+
+  blind_budgeting_group_view_ios:
+    platform: mobile
+    variant: ios
+    prompt: M12
+    path: assets/wireframes/mobile/blind_budgeting_group_view_ios
+    desktop_counterpart: blind_budgeting_dashboard
+
+  blind_budgeting_group_view_android:
+    platform: mobile
+    variant: android
+    prompt: M12
+    path: assets/wireframes/mobile/blind_budgeting_group_view_android
+    desktop_counterpart: blind_budgeting_dashboard
+
+  # === D13 / M13: Expenses ===
+  tripos_expense_dashboard:
+    platform: desktop
+    prompt: D13
+    path: assets/wireframes/desktop/tripos_expense_dashboard
+    mobile_counterparts: [expenses_list_view, "expenses_list_(android)"]
+
+  add_expense_modal_view:
+    platform: desktop
+    prompt: D13
+    path: assets/wireframes/desktop/add_expense_modal_view
+    mobile_counterparts: [add_new_expense_sheet]
+
+  expenses_list_view:
+    platform: mobile
+    variant: ios
+    prompt: M13
+    path: assets/wireframes/mobile/expenses_list_view
+    desktop_counterpart: tripos_expense_dashboard
+
+  "expenses_list_(android)":
+    platform: mobile
+    variant: android
+    prompt: M13
+    path: "assets/wireframes/mobile/expenses_list_(android)"
+    desktop_counterpart: tripos_expense_dashboard
+
+  add_new_expense_sheet:
+    platform: mobile
+    variant: shared
+    prompt: M13
+    path: assets/wireframes/mobile/add_new_expense_sheet
+    desktop_counterpart: add_expense_modal_view
+
+  expense_settlement_summary:
+    platform: mobile
+    variant: shared
+    prompt: M13
+    path: assets/wireframes/mobile/expense_settlement_summary
+    desktop_counterpart: null  # inline in D13
+
+  expenses_offline_state:
+    platform: mobile
+    variant: shared
+    prompt: M13
+    path: assets/wireframes/mobile/expenses_offline_state
+    desktop_counterpart: null  # mobile-specific
+
+  # === D14 / M14: Activity Feed ===
+  tripos_activity_feed_timeline:
+    platform: desktop
+    prompt: D14
+    path: assets/wireframes/desktop/tripos_activity_feed_timeline
+    mobile_counterparts: [trip_activity_feed_and_toasts]
+
+  "tripos_activity_&_notifications":
+    platform: desktop
+    prompt: D14
+    path: "assets/wireframes/desktop/tripos_activity_&_notifications"
+    mobile_counterparts: [notification_center_sheet]
+
+  notification_preferences:
+    platform: desktop
+    prompt: D14
+    path: assets/wireframes/desktop/notification_preferences
+    mobile_counterparts: []  # inline in M16
+
+  trip_activity_feed_and_toasts:
+    platform: mobile
+    variant: shared
+    prompt: M14
+    path: assets/wireframes/mobile/trip_activity_feed_and_toasts
+    desktop_counterpart: tripos_activity_feed_timeline
+
+  notification_center_sheet:
+    platform: mobile
+    variant: shared
+    prompt: M14
+    path: assets/wireframes/mobile/notification_center_sheet
+    desktop_counterpart: "tripos_activity_&_notifications"
+
+  # === D15, D18, D19: Marketing (Desktop Only) ===
+  tripos_marketing_landing_page:
+    platform: desktop
+    prompt: D15
+    path: assets/wireframes/desktop/tripos_marketing_landing_page
+    mobile_counterparts: []  # responsive web, not native mobile
+
+  tripos_features_marketing_page:
+    platform: desktop
+    prompt: D18
+    path: assets/wireframes/desktop/tripos_features_marketing_page
+    mobile_counterparts: []  # responsive web
+
+  tripos_pricing_page:
+    platform: desktop
+    prompt: D19
+    path: assets/wireframes/desktop/tripos_pricing_page
+    mobile_counterparts: []  # responsive web
+
+  # === D16 / M15: States & Feedback ===
+  tripos_global_ui_state_patterns:
+    platform: desktop
+    prompt: D16
+    path: assets/wireframes/desktop/tripos_global_ui_state_patterns
+    mobile_counterparts: []  # distributed across mobile state screens
+
+  # === D17 / M16: Profile & Settings ===
+  user_profile_settings:
+    platform: desktop
+    prompt: D17
+    path: assets/wireframes/desktop/user_profile_settings
+    mobile_counterparts: ["tripos_profile_&_settings"]
+
+  "account_management_&_security":
+    platform: desktop
+    prompt: D17
+    path: "assets/wireframes/desktop/account_management_&_security"
+    mobile_counterparts: [change_password_sheet, delete_account_confirmation]
+
+  "tripos_profile_&_settings":
+    platform: mobile
+    variant: shared
+    prompt: M16
+    path: "assets/wireframes/mobile/tripos_profile_&_settings"
+    desktop_counterpart: user_profile_settings
+
+  change_password_sheet:
+    platform: mobile
+    variant: shared
+    prompt: M16
+    path: assets/wireframes/mobile/change_password_sheet
+    desktop_counterpart: "account_management_&_security"
+
+  delete_account_confirmation:
+    platform: mobile
+    variant: shared
+    prompt: M16
+    path: assets/wireframes/mobile/delete_account_confirmation
+    desktop_counterpart: "account_management_&_security"
+
+  polls_delete_confirmation:
+    platform: mobile
+    variant: shared
+    prompt: M16
+    path: assets/wireframes/mobile/polls_delete_confirmation
+    desktop_counterpart: null  # mobile-specific confirmation sheet
+
+  # === M1: Foundation (Mobile Only) ===
+  dashboard_ios_foundation:
+    platform: mobile
+    variant: ios
+    prompt: M1
+    path: assets/wireframes/mobile/dashboard_ios_foundation
+    desktop_counterpart: tripos_main_layout_shell
+
+  dashboard_android_foundation:
+    platform: mobile
+    variant: android
+    prompt: M1
+    path: assets/wireframes/mobile/dashboard_android_foundation
+    desktop_counterpart: tripos_main_layout_shell
+
+  trip_workspace_ios_foundation:
+    platform: mobile
+    variant: ios
+    prompt: M1
+    path: assets/wireframes/mobile/trip_workspace_ios_foundation
+    desktop_counterpart: tripos_main_layout_shell
+
+  trip_workspace_android_foundation:
+    platform: mobile
+    variant: android
+    prompt: M1
+    path: assets/wireframes/mobile/trip_workspace_android_foundation
+    desktop_counterpart: tripos_main_layout_shell
+
+  ios_bottom_sheet_pattern:
+    platform: mobile
+    variant: ios
+    prompt: M1
+    path: assets/wireframes/mobile/ios_bottom_sheet_pattern
+    desktop_counterpart: null  # mobile-only UI pattern
+
+  android_bottom_sheet_pattern:
+    platform: mobile
+    variant: android
+    prompt: M1
+    path: assets/wireframes/mobile/android_bottom_sheet_pattern
+    desktop_counterpart: null  # mobile-only UI pattern
+
+# ─── COVERAGE ANALYSIS ────────────────────────────────────────────────
+
+coverage:
+  # Desktop screens with no dedicated mobile counterpart
+  desktop_only:
+    - tripos_marketing_landing_page     # responsive web
+    - tripos_features_marketing_page    # responsive web
+    - tripos_pricing_page               # responsive web
+    - blind_budgeting_explainer_modal_step_3  # carousel slide in M11
+    - blind_budgeting_saved_state       # inline state in M11
+    - notification_preferences          # integrated into M16
+
+  # Mobile screens with no desktop counterpart
+  mobile_only:
+    - dashboard_ios_foundation          # mobile shell (tab bar)
+    - dashboard_android_foundation      # mobile shell (tab bar)
+    - trip_workspace_ios_foundation     # mobile shell (tab bar)
+    - trip_workspace_android_foundation # mobile shell (tab bar)
+    - ios_bottom_sheet_pattern          # mobile-only UI pattern
+    - android_bottom_sheet_pattern      # mobile-only UI pattern
+    - trips_empty_state                 # standalone on mobile
+    - android_empty_state_dashboard     # standalone on mobile
+    - itinerary_loading_state           # standalone on mobile
+    - itinerary_reorder_android_view    # mobile-specific interaction
+    - empty_itinerary_day_android       # standalone on mobile
+    - expenses_offline_state            # mobile-specific
+    - expense_settlement_summary        # standalone on mobile
+    - polls_delete_confirmation         # mobile confirmation sheet
+    - change_password_sheet             # mobile bottom sheet
+    - delete_account_confirmation       # mobile bottom sheet
+
+  # Mobile screens missing a platform variant
+  missing_variant:
+    # iOS exists, no Android:
+    - screen: "invite_accept_(ios)"
+      missing: android
+    - screen: ios_create_trip_sheet
+      missing: android
+    - screen: trip_itinerary_ios_view
+      missing: android
+    - screen: ios_trip_polls_list
+      missing: android
+    - screen: "ios_yes"
+      missing: android
+    - screen: ios_approval_vote_screen
+      missing: android
+    - screen: ios_poll_results_decided_yes
+      missing: android
+    - screen: ios_poll_results_no_quorum_approval
+      missing: android
+    # Android exists, no iOS:
+    - screen: "forgot_password_(android)"
+      missing: ios
+    - screen: android_ranked_choice_vote_screen
+      missing: ios
+    - screen: android_poll_results_tie_state
+      missing: ios
+    - screen: android_create_poll_sheet
+      missing: ios
+    - screen: empty_itinerary_day_android
+      missing: ios
+    - screen: itinerary_reorder_android_view
+      missing: ios

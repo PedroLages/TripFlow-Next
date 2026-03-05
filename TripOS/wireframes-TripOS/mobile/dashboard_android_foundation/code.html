@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>TripOS Dashboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-0 md:p-8">
+<!-- Mobile Device Frame Simulator (Centering the Phone Layout) -->
+<div class="relative w-full max-w-[412px] h-[892px] bg-white dark:bg-slate-900 shadow-2xl overflow-hidden rounded-[3rem] border-[8px] border-slate-800 dark:border-slate-700 flex flex-col">
+<!-- Status Bar (24dp equivalent) -->
+<div class="h-6 w-full flex justify-between items-center px-6 pt-2 z-50">
+<span class="text-xs font-semibold">9:41</span>
+<div class="flex items-center gap-1">
+<span class="material-icons-outlined text-xs">signal_cellular_alt</span>
+<span class="material-icons-outlined text-xs">wifi</span>
+<span class="material-icons-outlined text-xs">battery_full</span>
+</div>
+</div>
+<!-- Top App Bar (64dp equivalent) -->
+<header class="h-16 flex items-center justify-between px-6 bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 shrink-0">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons-outlined text-white text-xl">flight_takeoff</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary dark:text-white">TripOS</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors relative">
+<span class="material-icons-outlined text-slate-600 dark:text-slate-300">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</header>
+<!-- Main Content Area (Scrollable) -->
+<main class="flex-1 overflow-y-auto px-6 py-4 space-y-6">
+<div class="flex flex-col space-y-1">
+<h2 class="text-2xl font-bold">Upcoming Trips</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">You have 3 collaborative trips planned</p>
+</div>
+<!-- Trip Card 1 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
+<div class="h-32 bg-slate-200 relative">
+<img alt="Tropical Beach" class="w-full h-full object-cover" data-alt="Beautiful tropical beach with turquoise water" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTITir3w2SimvbPhUc2OaBqHwRNYqF4esnokcFR_oQFO-ov2w46B6A2pfNDR5QsMVtXkXbg1IeeSIebCGLeNqA5e_UkWDAkm6cHON3CBvAxgYHlAkXeRr8QrMgEnf2XakYgBkQG8PLub1CfbDeD2HkbFlWe4FwuwAqXtBRdj9k13ZYtfRd1Ma2PtlupT17YQgFCiIq_RH7brOE3-KJi86CR6C8N3L2Uz0eh1dCbfhfJ0W9LsPAiyiyjp81ykzNr4fAucUGREQY2n8"/>
+<div class="absolute top-3 right-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">
+                        Active
+                    </div>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg">Bali Getaway 2024</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+                                Oct 12 - Oct 20
+                            </p>
+</div>
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="User avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaWz5yQBTYb9CbmtHLORAIqiyXMhzvZBKpTtUgYKdqHGug2YuEHyT87Nna46IlA9MoUnhr62wdAz6BKs4tSYS71FTZBSHctliHAT0f-RE8Dt2LsmdwrifqnfIsMGu0dn4twmyZIFuPjiNRAQUYa8PfWk114FhSVYKIA3lz8HdQ_Jni3QzEzSOHbF3-QPe5retKnDV1xLnd1LK3ZdVNq0BAy8TBwtKWkZiM4rmhiSgzMV3lhPTu9mM36YrctjQrmboYdskczhMV3Cs"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="User avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxu1KKBdHUhiP-O__o0I-2-cCrWnBqGGcuVgbZIV7tRWae1QPdgwC-cy3rAwmGmWMZHsV5Y1-h01vKJ6YajQhb9wTP8H-OxmUs10QnyNfdXNyVtiX-8Uo9fiXPvraRhC7P9cCWCvkysTpllmjGjvcob4P1U77iEmH1zeoXmXOp9PtskJcxt4h3iCaNjne-HAEnOGoeL6KD3UE6YqoKZuCulXo7B5UzldWUwuFFGUtfnvPKLO2Jf0ErEt_l9amY252LhvAA7Na3cW8"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">+3</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trip Card 2 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm opacity-90">
+<div class="h-32 bg-slate-200 relative">
+<img alt="Cityscape" class="w-full h-full object-cover grayscale" data-alt="Modern European city architecture and streets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnpaRACx9nfzt1c5W3gGMlAVvVOIH1ROjLEOIKFQj2R_J6V3kHxQR3IENvEQOUqJ_S8Si4xluNCT3yZSWcWjNCfWNfVuTESsIwnP9XOfs8jqNcf-2ZMYPwZnxHRjlostTBAOG-c1bYcBFkY0h0UcPBhyEKUzZLXog8-f5kjXFVZtPsBmbNbXWPjMp5sWaWGi2rk6xRr2sBMepc1Lvx249LP6HhJL1k7CfRtfzM3Jzk6L10uuRzvLygpulRs16k31GNZYyrFfduE_U"/>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="font-bold text-lg">Berlin Techno Tour</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+<span class="material-icons-outlined text-sm">calendar_today</span>
+                                Dec 01 - Dec 05
+                            </p>
+</div>
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="User avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv0l_dWnTNMdAWVBDwOonYDPxBJ_O5Ov2ZnOF6HjDzgPab2s3CkhV_nuTphbSbw3Jlkao7PTZZy4CuF1VNnNObr1Utsn6niEuqzlwRi7HF9ykuYYdSC2KzwebygYgD5N3UvbgBQUJ7E3fpKvV_E12q8yInIW3AoYnhq2jhHQXpic1bODotQSlJ7fWwxOkd2H4zBYRqkC1qf-7A9oH7uKgRnyE7KaohJ0MClakvu7-KBXp1LPPaHyUyLl1jXbaKYpHO_o0lbpTJF-c"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">+1</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggestion Section -->
+<div class="p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20">
+<h4 class="text-sm font-bold text-primary mb-1">Planning Tip</h4>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                    Collaborative groups of 4+ save an average of 15% on accommodation when booking 3 months in advance.
+                </p>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<!-- Positioned 16dp/px from bottom (nav bar starts at 80px) and 16dp from right -->
+<button class="absolute bottom-[144px] right-4 w-14 h-14 bg-primary rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center text-white z-50 hover:scale-105 active:scale-95 transition-transform">
+<span class="material-icons-outlined text-3xl">add</span>
+</button>
+<!-- Material 3 Bottom Navigation Bar (80dp equivalent) -->
+<nav class="h-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-around px-10 relative z-40 shrink-0">
+<!-- My Trips Tab (Active) -->
+<div class="flex flex-col items-center gap-1">
+<div class="relative w-16 h-8 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/20 dark:bg-primary/30 rounded-full"></div>
+<span class="material-icons-outlined text-primary relative z-10">explore</span>
+</div>
+<span class="text-[11px] font-bold text-primary">My Trips</span>
+</div>
+<!-- Profile Tab (Inactive) -->
+<div class="flex flex-col items-center gap-1 cursor-pointer">
+<div class="w-16 h-8 flex items-center justify-center">
+<span class="material-icons-outlined text-slate-500 dark:text-slate-400">person_outline</span>
+</div>
+<span class="text-[11px] font-medium text-slate-500 dark:text-slate-400">Profile</span>
+</div>
+</nav>
+<!-- System Navigation Bar Safe Area (48dp equivalent) -->
+<div class="h-12 bg-white dark:bg-slate-900 flex items-center justify-center shrink-0">
+<div class="w-32 h-1.5 bg-slate-800 dark:bg-slate-600 rounded-full"></div>
+</div>
+</div>
+</body></html>
