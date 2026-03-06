@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Activity Feed Timeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#19e6c4",
+                "background-light": "#f6f8f8",
+                "background-dark": "#11211e",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #2d3748; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased h-screen overflow-hidden">
+<!-- Top Navigation (64px) -->
+<nav class="fixed top-0 left-0 right-0 h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-6 z-30">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons-outlined text-white">explore</span>
+</div>
+<span class="text-xl font-bold tracking-tight">TripOS</span>
+</div>
+<div class="flex-1 max-w-xl px-12">
+<div class="relative">
+<span class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary" placeholder="Search activities, trips, or members..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full border-2 border-white dark:border-slate-900">3</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="User profile avatar close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBec8-xjJJmLOy1abzG6Sy60MCCl5j1lrwqxrJoCqsBboDnPr53CLWlGsYbuXGZtC7kSMGpLIVLTCQkh8Q8wGrzr7xZzKQDUgCocyPv08aXUqgpleJB99RkiizsQYwO1qbHFIpdmP_bP-qo240bIQk0pW64JkI5sj8DTvbpg9WTKFjHgbRJi_BV5FaJOUV4MDnulE_jLO3HI0vfiiJifSFTfOByTLS9Sih46yncOQhipoPs2X23oTJoR5Hj-WPLX0GXQKZOU1H7Clw"/>
+</div>
+</div>
+</nav>
+<div class="flex h-full pt-16">
+<!-- Sidebar (280px) -->
+<aside class="w-[280px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 hidden lg:flex flex-col">
+<div class="p-6 flex flex-col gap-6 overflow-y-auto custom-scrollbar">
+<div class="space-y-1">
+<label class="px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Main</label>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-icons-outlined text-[20px]">feed</span> Activity Feed
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">map</span> My Trips
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons-outlined text-[20px]">explore</span> Discover
+                    </a>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between px-3">
+<label class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Recent Trips</label>
+<button class="text-primary hover:bg-primary/10 rounded p-1 transition-colors">
+<span class="material-icons-outlined text-sm">add</span>
+</button>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<div class="w-2 h-2 rounded-full bg-blue-400"></div> Tokyo Adventure
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<div class="w-2 h-2 rounded-full bg-orange-400"></div> Bali Beach Bliss
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<div class="w-2 h-2 rounded-full bg-green-400"></div> Swiss Alps Hike
+                    </a>
+</div>
+<div class="mt-auto pt-6 space-y-1 border-t border-slate-100 dark:border-slate-800">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-icons-outlined text-[20px]">settings</span> Settings
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-icons-outlined text-[20px]">archive</span> Archive
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Timeline Content -->
+<main class="flex-1 h-full overflow-y-auto custom-scrollbar">
+<div class="max-w-4xl mx-auto py-8 px-6 lg:px-12">
+<div class="mb-8">
+<h1 class="text-2xl font-bold">Activity Feed</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Stay updated with your group's latest travel plans.</p>
+</div>
+<!-- Timeline Today -->
+<div class="mb-10 relative">
+<div class="sticky top-0 z-10 py-3 bg-background-light dark:bg-background-dark">
+<h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest bg-white/10 backdrop-blur-sm inline-block px-3 py-1 rounded-full">Today</h2>
+</div>
+<div class="mt-6 space-y-0 relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 pl-8">
+<!-- Activity Item 1 -->
+<div class="relative mb-8 group">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-primary z-10"></div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-white dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800 group-hover:shadow-sm">
+<div class="flex items-center gap-4">
+<img alt="Sarah Jenkins avatar" class="w-8 h-8 rounded-full border border-slate-200" data-alt="Portrait of Sarah Jenkins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuOqgfBXE8jH-hbEs_q5OjpW_wrSy2E7qV5MwAxl8k-7byE_YVgT_Ep8M_wBqlEiVk5QJZkb-_4tP6yEc-Edg6n_EP05cu_WC5MjoJC9eOeVCRvTMS4IXR-HwmaNtJwai_0HO5hP-27IIuqKcYEdANkrOURy5I99CYcynbVSxCaO2wbxTHEChRHB_IAzofdbyAS-OeMNK2uVd-F0n3t8JqUCWNMD53dUp1Aaq7JKAXIzFn7IdimHNxZvf1O61bIlT8oaqdboaNWR4"/>
+<div>
+<p class="text-sm"><span class="font-bold">Sarah Jenkins</span> <span class="text-slate-500">added a new activity:</span> <span class="font-medium text-slate-800 dark:text-slate-200 italic">Snorkeling at Blue Bay</span></p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-icons-outlined text-[14px] text-primary">lock</span>
+<span class="text-xs text-slate-400">12:45 PM • Privacy: Group Only</span>
+</div>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-slate-400 hover:text-primary transition-all">
+<span class="material-icons-outlined text-xl">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="relative mb-8 group">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-purple-500 z-10"></div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-white dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800 group-hover:shadow-sm">
+<div class="flex items-center gap-4">
+<img alt="Mark Thompson avatar" class="w-8 h-8 rounded-full border border-slate-200" data-alt="Portrait of Mark Thompson" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJ3dNQ7a1cAAOSeOHxqmRXFKUaTAPWCBMIuHiy0liYp9bIVJYknss83Ks9PfAnulg2jyVPuNy5rGXeZuPv4YSp5SODdVS2ovSusNg_R6wS54RyNeMGX_bDrboIKUO-R1ehl0G5q0UwZzDjMCmPglKxfA0ED9iEgHRHmMj6bkmsDOQhVxRVXh1tPcJH3Yxxk71NSeh6MMICsWUbN0yBqorgUFjPupaRTW8VjZk5_oJtXWzpCCGC9ub6Cl_l-fZFAa5GeEW2bygxqnk"/>
+<div>
+<p class="text-sm"><span class="font-bold">Mark Thompson</span> <span class="text-slate-500">started a vote:</span> <span class="font-medium text-slate-800 dark:text-slate-200">Best time for Dinner?</span></p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-icons-outlined text-[14px] text-purple-500">how_to_vote</span>
+<span class="text-xs text-slate-400">10:30 AM • 4 votes received</span>
+</div>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-slate-400 hover:text-primary transition-all">
+<span class="material-icons-outlined text-xl">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="relative mb-8 group">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-primary z-10"></div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-white dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800 group-hover:shadow-sm">
+<div class="flex items-center gap-4">
+<img alt="Alex Rivera avatar" class="w-8 h-8 rounded-full border border-slate-200" data-alt="Portrait of Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzXjszt-iapFbujpHwmjKuzSS8id0nx4HmqYLIhKw-jb5FJyj1a-lOLO1VpewqFP9lmWzQZ0bl5qXFD4KlmcXSaDKY3yTqEOGqQc4ZsWZAFecTvcFC0GBPp2C22fJuRNDaI2_ZypEjMzEg4hOYvd7S7VySBC77iInnAG1G3bj-xzYxRC35xF0N1BDl-XLkW_STsnyE5iVRN5IsIUFF2eitNpmlkSxP9YxUfA-FaKp9-vU0oj0gVvKAlQJh0IYi4MFKupKrHDdq0VA"/>
+<div>
+<p class="text-sm"><span class="font-bold">Alex Rivera</span> <span class="text-slate-500">updated the budget for</span> <span class="font-medium text-slate-800 dark:text-slate-200">Flight Tickets</span></p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-icons-outlined text-[14px] text-primary">payments</span>
+<span class="text-xs text-slate-400">09:15 AM • Budget increased by $45</span>
+</div>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-slate-400 hover:text-primary transition-all">
+<span class="material-icons-outlined text-xl">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline Yesterday -->
+<div class="mb-10 relative">
+<div class="sticky top-0 z-10 py-3 bg-background-light dark:bg-background-dark">
+<h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest bg-white/10 backdrop-blur-sm inline-block px-3 py-1 rounded-full">Yesterday</h2>
+</div>
+<div class="mt-6 space-y-0 relative border-l-2 border-slate-200 dark:border-slate-800 ml-4 pl-8">
+<!-- Activity Item 4 -->
+<div class="relative mb-8 group">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-300 z-10"></div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-white dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800 group-hover:shadow-sm">
+<div class="flex items-center gap-4">
+<img alt="Elena Martinez avatar" class="w-8 h-8 rounded-full border border-slate-200" data-alt="Portrait of Elena Martinez" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC-5RguT4pmVFr33rCleIelxkRKDaQ3tEwDIPLLxgJvRf0aeNfOzmEXp6FjYsPesjH2iPWlP5dLzQGMRZGSZqjwIO8ueTy8ZPtGsprGNItRwXnD0QQJSPFy3DOzr23ia_hH-ATX89dAqwo8Bbud22H8NduHh5H4v4QNQo5zV7GUMVKnvbZg7yp-FPYjU3BCOLQSrLrnKdZZPwXrI7_q_FraqmhH0bpBifezS5hIbOZXwhRJw3VBl3GYbH8Tv216WP68KCg6x2A6-M"/>
+<div>
+<p class="text-sm"><span class="font-bold">Elena Martinez</span> <span class="text-slate-500">uploaded 12 photos to</span> <span class="font-medium text-slate-800 dark:text-slate-200">Tokyo Trip Gallery</span></p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-icons-outlined text-[14px] text-slate-400">photo_library</span>
+<span class="text-xs text-slate-400">Yesterday, 6:30 PM</span>
+</div>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-slate-400 hover:text-primary transition-all">
+<span class="material-icons-outlined text-xl">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Activity Item 5 -->
+<div class="relative mb-8 group">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-white dark:bg-slate-900 border-2 border-primary z-10"></div>
+<div class="flex items-center justify-between p-4 rounded-xl hover:bg-white dark:hover:bg-slate-800/50 transition-all border border-transparent hover:border-slate-100 dark:hover:border-slate-800 group-hover:shadow-sm">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-icons-outlined text-primary text-sm">person_add</span>
+</div>
+<div>
+<p class="text-sm"><span class="font-bold">System</span> <span class="text-slate-500">invited</span> <span class="font-bold">David Wilson</span> <span class="text-slate-500">to the workspace</span></p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-icons-outlined text-[14px] text-primary">security</span>
+<span class="text-xs text-slate-400">Yesterday, 11:15 AM</span>
+</div>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 p-2 text-slate-400 hover:text-primary transition-all">
+<span class="material-icons-outlined text-xl">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Success Toast Notification -->
+<div class="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-4">
+<div class="bg-white dark:bg-slate-900 border-l-4 border-green-500 rounded-lg shadow-xl px-4 py-3 pr-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+<span class="material-icons-outlined text-green-600 text-[20px]">check_circle</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-slate-900 dark:text-white">Trip details updated successfully.</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">The changes have been synced with the group.</p>
+</div>
+<button class="absolute top-2 right-2 text-slate-400 hover:text-slate-600">
+<span class="material-icons-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+
+```</body></html>

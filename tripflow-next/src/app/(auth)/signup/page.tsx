@@ -4,18 +4,17 @@ import { SignupForm } from '@/components/auth/SignupForm'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import './page.css'
 
 export default function SignupPage() {
   return (
-    <div className="signup-page-container">
+    <div className="flex min-h-screen bg-bg-surface">
       {/* Left Panel - Hero Image */}
-      <div className="hero-panel">
+      <div className="relative hidden w-[45%] lg:block xl:w-1/2 overflow-hidden">
         <motion.div
           initial={{ scale: 1.05, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
-          className="hero-image-wrapper"
+          className="absolute inset-0"
         >
           <Image
             src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=2940&auto=format&fit=crop"
@@ -23,10 +22,10 @@ export default function SignupPage() {
             fill
             priority
             sizes="(max-width: 1024px) 0vw, 45vw"
-            className="hero-image"
+            className="object-cover object-center"
           />
         </motion.div>
-        <div className="hero-gradient" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
 
         {/* Overlay Content */}
         <div className="absolute inset-0 flex flex-col justify-between p-12 text-white z-10">

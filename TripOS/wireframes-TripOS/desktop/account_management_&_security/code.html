@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Account Management | TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+<!-- Navigation Bar -->
+<nav class="sticky top-0 z-40 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-icons text-xl">flight_takeoff</span>
+</div>
+<span class="text-xl font-bold tracking-tight">TripOS</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApfHOkawc3v6QFAf-GJQ9PquSHubnLMY4pRVXn5UpeVXKszRI4PUujLA6MFJl7b9akMNtHxCsC467_H11oX65TGfsYz5g16fEx9aFnpxwe-p2u50cGVNm1t_UmEVP_kZDR_p2dwuZJnoC5i-FfeUK4nZ-xY2wakS7ggHtR-0fVVtXAW3nixAonB4Uhfz3_b9YyhmRWEIY3cog19kUxEISmQcNjIzPoX-1laEz-YpNBj42CTUnXF32v_y7ZRHyL0ry_bNTpW6Z1_dA"/>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col lg:flex-row gap-8">
+<!-- Sidebar Navigation -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary font-medium rounded-lg transition-all" href="#">
+<span class="material-icons">person</span>
+                        Account
+                    </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-icons">notifications_none</span>
+                        Notifications
+                    </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-icons">security</span>
+                        Privacy &amp; Safety
+                    </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-icons">payments</span>
+                        Billing
+                    </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all" href="#">
+<span class="material-icons">group</span>
+                        Travel Groups
+                    </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 space-y-8">
+<!-- Account Section -->
+<section class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800">
+<h3 class="text-xl font-bold">Account</h3>
+<p class="text-sm text-slate-500 mt-1">Manage your personal information and login methods.</p>
+</div>
+<div class="p-6 space-y-8">
+<!-- Connected Accounts -->
+<div>
+<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Connected accounts</h4>
+<div class="space-y-3">
+<!-- Google -->
+<div class="flex items-center justify-between p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-icons text-slate-600">account_circle</span>
+</div>
+<div>
+<p class="font-medium">Google</p>
+<p class="text-xs text-green-600 flex items-center gap-1">
+<span class="material-icons text-[14px]">check_circle</span>
+                                                Connected
+                                            </p>
+</div>
+</div>
+<button class="text-sm font-medium text-slate-500 hover:text-slate-700">Disconnect</button>
+</div>
+<!-- Apple -->
+<div class="flex items-center justify-between p-4 rounded-lg border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-slate-50 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-icons text-slate-600">apple</span>
+</div>
+<div>
+<p class="font-medium">Apple</p>
+<p class="text-xs text-slate-400">Not connected</p>
+</div>
+</div>
+<button class="px-4 py-2 bg-primary/10 text-primary text-sm font-semibold rounded-lg hover:bg-primary/20 transition-colors">
+                                        Connect
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Change Password Form -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+<h4 class="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Change password</h4>
+<form class="max-w-md space-y-4">
+<div class="space-y-1">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Current Password</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-800 dark:bg-slate-950 focus:ring-primary focus:border-primary" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">New Password</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-800 dark:bg-slate-950 focus:ring-primary focus:border-primary" placeholder="••••••••" type="password"/>
+</div>
+<div class="space-y-1">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Confirm New Password</label>
+<input class="w-full rounded-lg border-slate-200 dark:border-slate-800 dark:bg-slate-950 focus:ring-primary focus:border-primary" placeholder="••••••••" type="password"/>
+</div>
+<div class="pt-2">
+<button class="px-6 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-all shadow-md shadow-primary/20" type="submit">
+                                        Update Password
+                                    </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="mt-4 border-t-[3px] border-red-500 bg-red-50/50 dark:bg-red-900/10 p-6">
+<div class="flex items-start justify-between">
+<div class="space-y-1">
+<h4 class="text-red-600 dark:text-red-400 font-bold uppercase tracking-tight">Danger Zone</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400">Permanently delete your account and all associated trip data. This action cannot be undone.</p>
+</div>
+<button class="px-6 py-2 border-2 border-red-600 text-red-600 dark:border-red-500 dark:text-red-500 font-bold rounded-lg hover:bg-red-600 hover:text-white transition-all">
+                                Delete Account
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Confirmation Dialog Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto px-4 py-6 sm:px-0">
+<!-- Backdrop -->
+<div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+<!-- Modal Content -->
+<div class="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800">
+<div class="p-6 text-center">
+<div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+<span class="material-icons text-3xl text-red-600">warning</span>
+</div>
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Are you absolutely sure?</h2>
+<p class="text-slate-500 dark:text-slate-400 mb-6">
+                    Deleting your account is permanent. This will erase all your trip history, collaborative plans, and saved preferences.
+                </p>
+<div class="space-y-4">
+<div class="text-left">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300 mb-1 block">
+                            Please type <span class="font-bold text-red-600">DELETE</span> to confirm
+                        </label>
+<input class="w-full rounded-lg border-slate-300 dark:border-slate-700 dark:bg-slate-950 focus:ring-red-500 focus:border-red-500" placeholder="Type DELETE here" type="text"/>
+</div>
+<div class="flex flex-col sm:flex-row gap-3">
+<button class="flex-1 px-4 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-750 transition-colors">
+                            Cancel
+                        </button>
+<button class="flex-1 px-4 py-2.5 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-all shadow-lg shadow-red-600/20">
+                            Confirm Deletion
+                        </button>
+</div>
+</div>
+</div>
+<button class="absolute top-4 right-4 text-slate-400 hover:text-slate-600">
+<span class="material-icons">close</span>
+</button>
+</div>
+</div>
+</body></html>

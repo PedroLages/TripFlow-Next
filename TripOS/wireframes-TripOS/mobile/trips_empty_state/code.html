@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - No Trips Yet</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 flex items-center justify-center min-h-screen">
+<!-- iOS Phone Mockup Wrapper -->
+<div class="w-full max-w-[390px] h-[844px] bg-white dark:bg-slate-950 rounded-[3rem] shadow-2xl overflow-hidden border-[8px] border-slate-900 dark:border-slate-800 relative flex flex-col">
+<!-- Status Bar (Simulated) -->
+<div class="h-11 flex justify-between items-center px-8 w-full">
+<span class="text-[15px] font-semibold">9:41</span>
+<div class="flex items-center space-x-1.5">
+<span class="material-icons-outlined text-[18px]">signal_cellular_alt</span>
+<span class="material-icons-outlined text-[18px]">wifi</span>
+<span class="material-icons-outlined text-[20px] rotate-90">battery_full</span>
+</div>
+</div>
+<!-- Top Bar -->
+<header class="px-6 py-4 flex justify-between items-center">
+<h1 class="text-3xl font-bold tracking-tight">Trips</h1>
+<button class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons-outlined text-primary">add</span>
+</button>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center justify-center px-10 text-center">
+<!-- Empty State Illustration Container -->
+<div class="mb-6 relative">
+<!-- Decorative Background Circle -->
+<div class="absolute inset-0 bg-primary/5 rounded-full scale-[2.2] -z-10"></div>
+<!-- MapPin Icon (48px equivalent) -->
+<div class="flex items-center justify-center w-[48px] h-[48px]">
+<span class="material-icons-outlined text-[48px] text-slate-400 dark:text-slate-500">
+                        map
+                    </span>
+</div>
+</div>
+<!-- Typography Block -->
+<h2 class="text-[18px] font-semibold text-slate-900 dark:text-white mb-2">
+                No trips yet
+            </h2>
+<p class="text-[14px] leading-relaxed text-slate-500 dark:text-slate-400 max-w-[240px]">
+                Create your first trip and invite friends to start planning.
+            </p>
+<!-- CTA Button (48dp height) -->
+<button class="mt-8 w-full h-[48px] bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg shadow-sm shadow-primary/20 transition-all active:scale-[0.98]">
+                Create Trip
+            </button>
+</main>
+<!-- Tab Bar -->
+<nav class="h-[84px] border-t border-slate-100 dark:border-slate-800 flex justify-around items-start pt-3 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md">
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-icons-outlined text-[26px]">home</span>
+<span class="text-[10px] mt-1 font-medium">Home</span>
+</div>
+<div class="flex flex-col items-center text-primary">
+<span class="material-icons-outlined text-[26px]">luggage</span>
+<span class="text-[10px] mt-1 font-medium">Trips</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-icons-outlined text-[26px]">explore</span>
+<span class="text-[10px] mt-1 font-medium">Explore</span>
+</div>
+<div class="flex flex-col items-center text-slate-400">
+<span class="material-icons-outlined text-[26px]">person</span>
+<span class="text-[10px] mt-1 font-medium">Profile</span>
+</div>
+</nav>
+<!-- Home Indicator (iOS) -->
+<div class="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-slate-900 dark:bg-slate-400 rounded-full"></div>
+</div>
+<script>
+/**
+* This design follows the TripOS brand guidelines for mobile state patterns.
+* 1. Uses the 'Inter' display font for clarity and modern aesthetic.
+* 2. Primary color #137fec is used for the main action button and active tab state.
+* 3. Muted slate-500/400 used for secondary information to create hierarchy.
+* 4. iOS-specific proportions including a 48dp height for the main CTA.
+*/
+</script></body></html>

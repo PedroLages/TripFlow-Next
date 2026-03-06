@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Create Trip</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .bottom-sheet-shadow {
+            box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.1), 0 -8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .ios-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display h-screen w-full overflow-hidden flex flex-col justify-end">
+<!-- Mocked Dashboard Background (Dimmed) -->
+<div class="fixed inset-0 z-0 bg-black/50 overflow-hidden">
+<!-- Mock Content Behind Sheet -->
+<div class="p-6 opacity-30 pointer-events-none">
+<header class="flex justify-between items-center mb-8">
+<div>
+<h1 class="text-2xl font-bold text-white">Your Trips</h1>
+<p class="text-white/70">Plan your next adventure</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-icons text-white">person</span>
+</div>
+</header>
+<div class="space-y-4">
+<div class="bg-white/10 h-32 rounded-xl"></div>
+<div class="bg-white/10 h-32 rounded-xl"></div>
+<div class="bg-white/10 h-32 rounded-xl"></div>
+</div>
+</div>
+</div>
+<!-- iOS Bottom Sheet -->
+<div class="relative z-10 w-full max-w-md mx-auto h-1/2 flex flex-col bg-white dark:bg-[#1c1c1e] rounded-t-[16px] bottom-sheet-shadow overflow-hidden">
+<!-- Drag Handle Indicator -->
+<div class="w-full flex justify-center pt-3 pb-2">
+<div class="w-8 h-1 bg-neutral-300 dark:bg-neutral-600 rounded-full"></div>
+</div>
+<!-- Sheet Header -->
+<div class="px-6 py-4 flex justify-between items-center">
+<h2 class="text-xl font-bold text-neutral-900 dark:text-white">Create New Trip</h2>
+<button class="text-primary font-semibold hover:opacity-75">Cancel</button>
+</div>
+<!-- Sheet Content / Form -->
+<div class="flex-1 overflow-y-auto px-6 pb-12">
+<form class="space-y-6">
+<!-- Trip Name Input -->
+<div class="space-y-1.5">
+<label class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 px-1" for="trip-name">
+                        Trip Name
+                    </label>
+<div class="relative">
+<input class="w-full bg-neutral-100 dark:bg-neutral-800 border-none focus:ring-2 focus:ring-primary rounded-lg px-4 py-3.5 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500" id="trip-name" placeholder="e.g., Summer in Tokyo" type="text"/>
+</div>
+</div>
+<!-- Dates Input -->
+<div class="space-y-1.5">
+<label class="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 px-1" for="trip-dates">
+                        Dates
+                    </label>
+<div class="relative group">
+<input class="w-full bg-neutral-100 dark:bg-neutral-800 border-none focus:ring-2 focus:ring-primary rounded-lg pl-10 pr-4 py-3.5 text-neutral-900 dark:text-white placeholder-neutral-400 dark:placeholder-neutral-500 cursor-pointer" id="trip-dates" placeholder="Select dates..." readonly="" type="text"/>
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">calendar_today</span>
+<span class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-neutral-400 text-sm">expand_more</span>
+</div>
+</div>
+<!-- Collaboration Setting (Toggle Style) -->
+<div class="flex items-center justify-between p-4 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-icons text-primary text-sm">group_add</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-neutral-900 dark:text-white">Collaborative Trip</p>
+<p class="text-xs text-neutral-500 dark:text-neutral-400">Invite friends to plan with you</p>
+</div>
+</div>
+<div class="w-12 h-6 bg-primary rounded-full relative flex items-center px-1">
+<div class="w-4 h-4 bg-white rounded-full ml-auto"></div>
+</div>
+</div>
+<!-- Privacy Disclaimer -->
+<p class="text-[10px] text-center text-neutral-400 dark:text-neutral-500 px-4">
+                    By creating this trip, you agree to our Travel Policy and Sharing Terms. Trips are private by default.
+                </p>
+</form>
+</div>
+<!-- Sticky Footer Action -->
+<div class="px-6 pt-4 pb-8 bg-white dark:bg-[#1c1c1e] border-t border-neutral-100 dark:border-neutral-800">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+                Start Planning
+            </button>
+<!-- iOS Home Indicator Spacing -->
+<div class="mt-4 flex justify-center">
+<div class="w-32 h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Hidden Mock Background Image for context -->
+<div class="hidden">
+<img alt="Travel Background" data-alt="Vibrant mountain landscape at sunrise for travel inspiration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9G3PD9CzXa3dfqehEDsidlAPR0qMCEQPWDAw8gsQcDuy0uuFeYMe0fzD5pHyshJATb-ePAtmVbO_tA26ETHcfwpVHiZ-vAIgA87Q6HIsRYxY0bxKV_TqMq9VyfPvDSG1RDMfC_IghCp_-E4KJfyI2hjTNU1oN1QTy3OuaiuBZQeXL9O3PJESWXEmZ46bLIOAboXYGNzlfOlbzUuuUrujf75OWPBr18l1Wr7O0_yisJQZjvRQ7WGE8oAD0oAOsQ0-E5GbYfXaLAMA"/>
+</div>
+</body></html>

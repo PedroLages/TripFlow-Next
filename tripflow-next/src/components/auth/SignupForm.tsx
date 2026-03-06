@@ -3,11 +3,13 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
+import { Label } from '@/components/ui/label'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Mail, Lock, Loader2, ArrowRight, User } from 'lucide-react'
 import { signupSchema } from '@/lib/schemas/signup-schema'
 import { signupAction } from '@/app/actions/auth'
-import './SignupForm.css'
 
 export function SignupForm() {
   const router = useRouter()
@@ -98,17 +100,17 @@ export function SignupForm() {
       initial="hidden"
       animate="visible"
       onSubmit={handleSubmit}
-      className="signup-form"
+      className="space-y-6"
     >
       {/* Name Field */}
-      <motion.div variants={itemVariants} className="field-container">
-        <label htmlFor="name" className="field-label">Full Name</label>
-        <div className="input-wrapper">
-          <div className="input-icon">
-            <User aria-hidden="true" />
+      <motion.div variants={itemVariants} className="space-y-2.5 text-left">
+        <Label htmlFor="name" className="text-text-primary font-medium text-sm">Full Name</Label>
+        <div className="relative mt-2 isolate">
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none z-10">
+            <User className="w-5 h-5" aria-hidden="true" />
           </div>
-          <input
-            className="auth-input"
+          <Input
+            variant="auth"
             id="name"
             type="text"
             name="name"
@@ -122,27 +124,21 @@ export function SignupForm() {
           />
         </div>
         {errors.name && (
-          <motion.p
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            id="name-error"
-            className="error-message"
-            role="alert"
-          >
+          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} id="name-error" className="text-xs text-destructive font-medium mt-1.5" role="alert">
             {errors.name}
           </motion.p>
         )}
       </motion.div>
 
       {/* Email Field */}
-      <motion.div variants={itemVariants} className="field-container">
-        <label htmlFor="email" className="field-label">Email Address</label>
-        <div className="input-wrapper">
-          <div className="input-icon">
-            <Mail aria-hidden="true" />
+      <motion.div variants={itemVariants} className="space-y-2.5 text-left">
+        <Label htmlFor="email" className="text-text-primary font-medium text-sm">Email Address</Label>
+        <div className="relative mt-2 isolate">
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none z-10">
+            <Mail className="w-5 h-5" aria-hidden="true" />
           </div>
-          <input
-            className="auth-input"
+          <Input
+            variant="auth"
             id="email"
             type="email"
             name="email"
@@ -158,27 +154,21 @@ export function SignupForm() {
           />
         </div>
         {errors.email && (
-          <motion.p
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            id="email-error"
-            className="error-message"
-            role="alert"
-          >
+          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} id="email-error" className="text-xs text-destructive font-medium mt-1.5" role="alert">
             {errors.email}
           </motion.p>
         )}
       </motion.div>
 
       {/* Password Field */}
-      <motion.div variants={itemVariants} className="field-container">
-        <label htmlFor="password" className="field-label">Password</label>
-        <div className="input-wrapper">
-          <div className="input-icon">
-            <Lock aria-hidden="true" />
+      <motion.div variants={itemVariants} className="space-y-2.5 text-left">
+        <Label htmlFor="password" className="text-text-primary font-medium text-sm">Password</Label>
+        <div className="relative mt-2 isolate">
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none z-10">
+            <Lock className="w-5 h-5" aria-hidden="true" />
           </div>
-          <input
-            className="auth-input"
+          <Input
+            variant="auth"
             id="password"
             type="password"
             name="password"
@@ -192,27 +182,21 @@ export function SignupForm() {
           />
         </div>
         {errors.password && (
-          <motion.p
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            id="password-error"
-            className="error-message"
-            role="alert"
-          >
+          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} id="password-error" className="text-xs text-destructive font-medium mt-1.5" role="alert">
             {errors.password}
           </motion.p>
         )}
       </motion.div>
 
       {/* Confirm Password Field */}
-      <motion.div variants={itemVariants} className="field-container">
-        <label htmlFor="confirmPassword" className="field-label">Confirm Password</label>
-        <div className="input-wrapper">
-          <div className="input-icon">
-            <Lock aria-hidden="true" />
+      <motion.div variants={itemVariants} className="space-y-2.5 text-left">
+        <Label htmlFor="confirmPassword" className="text-text-primary font-medium text-sm">Confirm Password</Label>
+        <div className="relative mt-2 isolate">
+          <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-text-secondary pointer-events-none z-10">
+            <Lock className="w-5 h-5" aria-hidden="true" />
           </div>
-          <input
-            className="auth-input"
+          <Input
+            variant="auth"
             id="confirmPassword"
             type="password"
             name="confirmPassword"
@@ -226,13 +210,7 @@ export function SignupForm() {
           />
         </div>
         {errors.confirmPassword && (
-          <motion.p
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            id="confirmPassword-error"
-            className="error-message"
-            role="alert"
-          >
+          <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} id="confirmPassword-error" className="text-xs text-destructive font-medium mt-1.5" role="alert">
             {errors.confirmPassword}
           </motion.p>
         )}
@@ -243,7 +221,7 @@ export function SignupForm() {
         <motion.div
            initial={{ opacity: 0, scale: 0.95 }}
            animate={{ opacity: 1, scale: 1 }}
-          className="server-error"
+          className="rounded-lg bg-destructive/10 p-3.5 text-sm font-medium text-destructive text-center border border-destructive/20"
           role="alert"
         >
           {errors.submit}
@@ -251,32 +229,35 @@ export function SignupForm() {
       )}
 
       {/* Submit Button */}
-      <motion.div variants={itemVariants} className="submit-button-container">
-        <button
+      <motion.div variants={itemVariants} className="pt-6">
+        <Button
           type="submit"
-          className="submit-button"
+          className="w-full min-h-12 bg-accent-primary hover:bg-accent-primary/90 active:bg-accent-primary/80 text-white text-lg rounded-3xl font-semibold group relative overflow-hidden transition-[background-color,box-shadow] duration-200 shadow-[0_2px_4px_rgba(13,148,136,0.2)] hover:shadow-[0_4px_8px_rgba(13,148,136,0.3)] mt-2 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-surface focus-visible:ring-accent-primary focus-visible:outline-none"
           disabled={isPending}
         >
-          <span className="button-content">
+          <span className="flex items-center justify-center gap-2">
             {isPending ? (
               <>
-                <Loader2 className="button-icon spinning" />
+                <Loader2 className="w-5 h-5 animate-spin" />
                 Creating account…
               </>
             ) : (
               <>
                 Create Account
-                <ArrowRight className="button-icon arrow" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </>
             )}
           </span>
-        </button>
+        </Button>
       </motion.div>
 
       {/* Link to Login */}
-      <motion.p variants={itemVariants} className="login-link-container">
+      <motion.p variants={itemVariants} className="text-center text-sm text-text-secondary pt-4">
         Already have an account?{' '}
-        <Link href="/login" className="login-link">
+        <Link
+          href="/login"
+          className="font-medium text-accent-primary hover:text-accent-primary/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-surface focus-visible:ring-accent-primary rounded transition-[color,box-shadow] duration-200"
+        >
           Log in
         </Link>
       </motion.p>

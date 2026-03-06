@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Itinerary Loading State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .animate-pulse-custom {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .ios-notch {
+            height: 44px;
+        }
+        .ios-home-indicator {
+            height: 34px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden">
+<!-- Mobile Screen Wrapper (iPhone Pro Max dimensions) -->
+<div class="relative mx-auto max-w-[430px] min-h-screen bg-white dark:bg-background-dark shadow-2xl overflow-hidden flex flex-col">
+<!-- Status Bar -->
+<div class="ios-notch flex justify-between items-center px-8 pt-4 w-full">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center space-x-2">
+<span class="material-icons text-sm">signal_cellular_alt</span>
+<span class="material-icons text-sm">wifi</span>
+<span class="material-icons text-sm">battery_full</span>
+</div>
+</div>
+<!-- M1 Shell Navigation Header -->
+<header class="px-6 py-4 flex flex-col space-y-4">
+<div class="flex justify-between items-center">
+<div class="h-8 w-8 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
+<span class="material-icons text-slate-400 text-lg">arrow_back_ios_new</span>
+</div>
+<!-- Title Skeleton -->
+<div class="h-5 w-24 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<div class="h-8 w-8 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
+<span class="material-icons text-slate-400 text-lg">more_horiz</span>
+</div>
+</div>
+<!-- Context Switcher Skeleton -->
+<div class="flex space-x-3 overflow-x-hidden pb-2">
+<div class="h-10 w-28 bg-primary/10 dark:bg-primary/20 border border-primary/20 rounded-full animate-pulse-custom flex-shrink-0"></div>
+<div class="h-10 w-32 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom flex-shrink-0"></div>
+<div class="h-10 w-24 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom flex-shrink-0"></div>
+</div>
+</header>
+<!-- Itinerary List (3 Skeleton Cards) -->
+<main class="flex-1 px-6 space-y-6 overflow-y-auto">
+<!-- Skeleton Card 1 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-start space-x-4">
+<!-- Avatar Skeleton -->
+<div class="w-12 h-12 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom shrink-0"></div>
+<div class="flex-1 space-y-2">
+<!-- Title line (60%) -->
+<div class="h-4 w-3/5 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<!-- Subtitle (40%) -->
+<div class="h-3 w-2/5 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+</div>
+</div>
+<!-- Body (80%) -->
+<div class="space-y-2">
+<div class="h-3 w-4/5 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<div class="h-3 w-1/2 bg-slate-50 dark:bg-slate-800/50 rounded-full animate-pulse-custom"></div>
+</div>
+<div class="pt-2">
+<div class="h-24 w-full bg-slate-100 dark:bg-slate-800 rounded-lg animate-pulse-custom"></div>
+</div>
+</div>
+<!-- Skeleton Card 2 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-start space-x-4">
+<!-- Avatar Skeleton -->
+<div class="w-12 h-12 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom shrink-0"></div>
+<div class="flex-1 space-y-2">
+<!-- Title line (60%) -->
+<div class="h-4 w-3/5 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<!-- Subtitle (40%) -->
+<div class="h-3 w-2/5 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+</div>
+</div>
+<!-- Body (80%) -->
+<div class="h-3 w-4/5 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+</div>
+<!-- Skeleton Card 3 -->
+<div class="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
+<div class="flex items-start space-x-4">
+<!-- Avatar Skeleton -->
+<div class="w-12 h-12 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom shrink-0"></div>
+<div class="flex-1 space-y-2">
+<!-- Title line (60%) -->
+<div class="h-4 w-3/5 bg-slate-200 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<!-- Subtitle (40%) -->
+<div class="h-3 w-2/5 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+</div>
+</div>
+<!-- Body (80%) -->
+<div class="h-3 w-4/5 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<div class="pt-2 flex space-x-2">
+<div class="h-8 w-20 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+<div class="h-8 w-20 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse-custom"></div>
+</div>
+</div>
+</main>
+<!-- Bottom Tab Bar -->
+<nav class="bg-white/80 dark:bg-background-dark/80 backdrop-blur-lg border-t border-slate-100 dark:border-slate-800 px-6 pt-3 pb-2">
+<div class="flex justify-between items-center mb-1">
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons text-slate-400">explore</span>
+<span class="text-[10px] text-slate-400 font-medium">Explore</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons text-slate-400">search</span>
+<span class="text-[10px] text-slate-400 font-medium">Search</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons text-primary">event_note</span>
+<span class="text-[10px] text-primary font-bold">Itinerary</span>
+<div class="w-1 h-1 bg-primary rounded-full mt-0.5"></div>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons text-slate-400">favorite_border</span>
+<span class="text-[10px] text-slate-400 font-medium">Saved</span>
+</div>
+<div class="flex flex-col items-center space-y-1">
+<span class="material-icons text-slate-400">person_outline</span>
+<span class="text-[10px] text-slate-400 font-medium">Profile</span>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="ios-home-indicator flex justify-center items-center">
+<div class="w-32 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
+</div>
+</nav>
+<!-- Floating Action Button Skeleton -->
+<div class="absolute bottom-28 right-6">
+<div class="w-14 h-14 bg-primary shadow-lg shadow-primary/30 rounded-full flex items-center justify-center text-white animate-pulse-custom">
+<span class="material-icons">add</span>
+</div>
+</div>
+</div>
+</body></html>

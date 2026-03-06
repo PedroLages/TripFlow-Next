@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>TripOS Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .safe-top {
+            padding-top: env(safe-area-inset-top);
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .dynamic-island-spacer {
+            height: 44px; /* Default height for modern iOS status bar area */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col">
+<!-- iOS Status Bar & Dynamic Island Placeholder Area -->
+<div class="fixed top-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 ios-blur z-50">
+<div class="safe-top"></div>
+<div class="flex items-center justify-between px-6 h-14">
+<!-- Logo -->
+<div class="flex items-center">
+<span class="text-primary font-extrabold text-2xl tracking-tight">TripOS</span>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-4">
+<button class="text-primary hover:opacity-70 transition-opacity">
+<span class="material-icons-round text-[28px]">add_circle_outline</span>
+</button>
+<div class="relative">
+<button class="text-slate-400 dark:text-slate-500 hover:opacity-70 transition-opacity flex items-center">
+<span class="material-icons-round text-[26px]">notifications</span>
+</button>
+<!-- Notification Badge -->
+<span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full border-2 border-white dark:border-background-dark">3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 px-4 safe-top mt-14 pb-32">
+<div class="py-6">
+<h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6">My Trips</h1>
+<!-- Trip Cards Placeholder (Empty State or List) -->
+<div class="space-y-4">
+<!-- Sample Trip Card -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="h-32 w-full rounded-lg overflow-hidden mb-4 bg-slate-200 dark:bg-slate-700">
+<img alt="Swiss Alps Trip" class="w-full h-full object-cover" data-alt="Beautiful scenic mountain landscape with lake" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWilb0VWygNGz8akBhi7Cfl7adYGHEHzwrmHU5a_e6mQiph1y4acQ7FdgPGXEQBB_qsP5OOghKItS9zAznilpqfjH_vkiJB5yDwPc22Mr6GC6XfoxtaRU8vaggnMPbZ3k8vD-OJI1edLmHo9fuTXUUpsi2Ff00M_6s9XvxyqqHJhdiBdLT-4442ob9tXxUOZQrogJYnUru-YsjVYkpTtuDQSCFpDO0Ub3B0XMb_K3_Hp4I8PbR_Dq5moj5QEXLfEhS03f_wcDd3wM"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white">Swiss Alps Explorer</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">July 15 - July 22, 2024</p>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Female traveler portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyCq8jBpXvN_Tb4R9RfXAB6pwgYqumwmbKgPJYM0nPwY6CXRNRE4LmEUZ4ufHNXW4qnGMI9Ghe1-UutkCY_a5dC3dXsw_5pa9xjBhGevO9DOBoK1Lz4U8A_u_A04zZ3Cs5bViVatGaF_rv3pn6hGfDDjWuSmevD96i1LjGm8ExkG-m7Vtc2mvpvkSi58h7R1TUSRAXDl00Fjam450R855rQc1WB2_XDZJvu05LBr8G6LAjUtTuyG_3fEcnW6rW3GaRMPHJD_driSE"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Male traveler portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd5oNyUygwaHtgLGaohOo4D30hsiiFhfzuCUaUt4B09QzyW427eOp7tnWfgMM_kwxnvajXt2E6c9yi33tc1m3YDBiUu7MPS8R6BHZHf46fvh2xIBhFNFTNF6AB7BeC9zL7VDbg-FxSsCUlA9lpjDjh5PQOcCsJ4TrQiqj_p24X8YNQ_3CW56l4EEGktgAuZMr9msLBak31lPCuo7dijTn3vFIy9qKA2MTRWs_D_TdwCtn0zSaiTEp-FwDJh0243wPZht6090_dHwg"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-primary flex items-center justify-center text-[10px] text-white font-bold">
+                                +3
+                            </div>
+</div>
+</div>
+</div>
+<!-- Another Trip Card -->
+<div class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="h-32 w-full rounded-lg overflow-hidden mb-4 bg-slate-200 dark:bg-slate-700">
+<img alt="Paris Weekend" class="w-full h-full object-cover" data-alt="Eiffel Tower during sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtCJ7YoMcsAaQpeYemDjy_3JgQR4-6KSYeNaMNmtvxXljtE0p5sQacMR0DMk5RjpKd0jCqIriaGvS-TAXw1pFXU4HBjuMAeRIbWC6UTBXBrPnBiGCvFxrM2uzJbaC3s-9h1EOrsbGm6Opw66CjmGVfAm4pGl6xv5dzn6aoe_7pqfS8xOW4ZZRppMQ564D1CDw4Jmar1IDfrbX-9INnmc-TFTfbHBiFKGI5Erj9LftGwNI8Y_o9NzoG4aZ_n2YvenIQvmWi7qsZCvA"/>
+</div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-white">Paris Weekend</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">August 04 - August 07, 2024</p>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Profile photo of woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD-ily6n5-lTxiG1TS70ECMkfCErrAAB5qO3HpQ2LZaMlaLZuBZRqoJzW3mgR_SX3FrxSOZltmlgPImUuIBnoxeupdRjrLxxUv8BhAOC0p6NkG2GorNJljJloDnNb165B2c0Hg5qH7rnRlKqUh4TbSpPKDphyh945NEhXQeuz92w14_MBcyZTfI6j4GZ2l704iO-ErQzq3IrT5GyniePsKNq_20basmmPqLkcoPNqX_yu5rdnphalBPkwwRVYDoTDYJudlKoBgKGg"/>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-primary flex items-center justify-center text-[10px] text-white font-bold">
+                                +1
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Tab Bar Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/90 ios-blur border-t border-slate-200 dark:border-slate-800 z-50">
+<div class="flex justify-around items-center pt-3 pb-2 px-6">
+<!-- Active Tab: My Trips -->
+<button class="flex flex-col items-center group relative pb-3">
+<span class="material-icons-round text-primary text-[28px]">flight_takeoff</span>
+<span class="text-[11px] font-semibold text-primary mt-1">My Trips</span>
+<!-- Active Indicator (2pt underline) -->
+<div class="absolute bottom-0 w-8 h-[2px] bg-primary rounded-full"></div>
+</button>
+<!-- Inactive Tab: Profile -->
+<button class="flex flex-col items-center group pb-3">
+<span class="material-icons-round text-slate-400 dark:text-slate-500 text-[28px] group-active:text-primary transition-colors">person_outline</span>
+<span class="text-[11px] font-semibold text-slate-400 dark:text-slate-500 mt-1 group-active:text-primary transition-colors">Profile</span>
+</button>
+</div>
+<!-- iOS Home Indicator Safe Area -->
+<div class="safe-bottom h-5"></div>
+</nav>
+<!-- Floating Action Hint (Optional iOS flair) -->
+<div class="fixed bottom-24 right-6 pointer-events-none">
+<div class="flex items-center justify-center w-14 h-14 rounded-full bg-primary shadow-xl shadow-primary/30 text-white pointer-events-auto active:scale-95 transition-transform">
+<span class="material-icons-round text-3xl">add</span>
+</div>
+</div>
+</body></html>

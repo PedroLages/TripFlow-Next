@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification Center Sheet - TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .sheet-shadow {
+            box-shadow: 0 -4px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-slate-200 dark:bg-slate-950 font-display flex items-end justify-center min-h-screen">
+<!-- Screen Mockup Wrapper (Phone Simulation) -->
+<div class="relative w-full max-w-[430px] h-[932px] bg-background-light dark:bg-background-dark overflow-hidden shadow-2xl md:rounded-[3rem] border-[8px] border-slate-900 flex flex-col">
+<!-- Status Bar -->
+<div class="px-8 pt-4 pb-2 flex justify-between items-center text-sm font-semibold">
+<span>9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-icons-round text-base">signal_cellular_alt</span>
+<span class="material-icons-round text-base">wifi</span>
+<span class="material-icons-round text-base rotate-90">battery_full</span>
+</div>
+</div>
+<!-- Background Content (Simulated Activity Feed) -->
+<div class="px-6 pt-4 flex-1 opacity-40">
+<div class="flex justify-between items-center mb-8">
+<h1 class="text-3xl font-bold">Activity</h1>
+<div class="w-10 h-10 rounded-full bg-slate-300"></div>
+</div>
+<div class="space-y-6">
+<div class="h-32 w-full bg-white dark:bg-slate-800 rounded-2xl"></div>
+<div class="h-32 w-full bg-white dark:bg-slate-800 rounded-2xl"></div>
+<div class="h-32 w-full bg-white dark:bg-slate-800 rounded-2xl"></div>
+</div>
+</div>
+<!-- Dimming Overlay -->
+<div class="absolute inset-0 bg-black/30 z-10"></div>
+<!-- Bottom Sheet -->
+<div class="absolute inset-x-0 bottom-0 top-12 bg-white dark:bg-slate-900 z-20 rounded-t-xl sheet-shadow flex flex-col">
+<!-- Sheet Handle -->
+<div class="flex justify-center pt-3 pb-2">
+<div class="w-10 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+<!-- Sheet Header -->
+<div class="px-6 pt-4 pb-4 flex justify-between items-end">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Notifications</h2>
+<button class="text-primary font-semibold text-sm hover:opacity-80 transition-opacity">
+                    Mark all as read
+                </button>
+</div>
+<!-- Notification List -->
+<div class="flex-1 overflow-y-auto px-4 space-y-2 pb-10">
+<!-- Section Header -->
+<p class="px-2 pt-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Recent</p>
+<!-- Unread Notification: Poll -->
+<div class="group relative flex gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 transition-all hover:bg-slate-50 dark:hover:bg-slate-750">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 flex items-center justify-center rounded-full">
+<span class="material-icons-round text-primary">poll</span>
+</div>
+<div class="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary border-2 border-white dark:border-slate-800 rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-semibold text-slate-900 dark:text-white truncate">New poll: Dinner at Gusto</h3>
+<span class="text-xs text-slate-400 ml-2 whitespace-nowrap">2m ago</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Sienna created a new poll for Friday night's group dinner.</p>
+<div class="mt-3 flex gap-2">
+<button class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm shadow-primary/30">
+                                Vote Now
+                            </button>
+<button class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-1.5 rounded-full text-xs font-bold">
+                                View Details
+                            </button>
+</div>
+</div>
+</div>
+<!-- Unread Notification: Warning -->
+<div class="group relative flex gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 transition-all hover:bg-slate-50 dark:hover:bg-slate-750">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center rounded-full">
+<span class="material-icons-round text-orange-500">warning</span>
+</div>
+<div class="absolute -top-0.5 -right-0.5 w-3 h-3 bg-primary border-2 border-white dark:border-slate-800 rounded-full"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-semibold text-slate-900 dark:text-white truncate">Deadline approaching</h3>
+<span class="text-xs text-slate-400 ml-2 whitespace-nowrap">45m ago</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-300 mt-1">Final payment for Japan 2026 is due in 48 hours to secure bookings.</p>
+</div>
+</div>
+<!-- Section Header -->
+<p class="px-2 pt-6 pb-2 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Earlier</p>
+<!-- Read Notification: Social -->
+<div class="group flex gap-4 p-4 bg-slate-50/50 dark:bg-slate-800/40 rounded-xl transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
+<div class="relative flex-shrink-0">
+<img alt="User" class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of Alex for social activity profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3eqsr596ZBUOTBUVoNEdPnH5dVfnv5prnCW-Zk6vxkrPfSOTMGmLmBA3LH0j-ZZTcpUQDCjdMI6zhZPQ7keuzxVKPwme8GT8HrVHgo2u_N-UxYTtFg72oFmamlNG74veen6rdB9H0O8DK2sqJForVo_pfZi-CdHuaY6KjUhI-hxZmOXrLNmYJ0YOJcUDaWI0ZN7lW1iAT5j_mnpHs9PAJIoOcRK5tGFSJNkuNJRxXxcIaHolja_D2_sLDkFbw7hFjtkNr5Fbei1k"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-medium text-slate-700 dark:text-slate-300 truncate">Alex joined Japan 2026</h3>
+<span class="text-xs text-slate-400 ml-2 whitespace-nowrap">3h ago</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Your group is growing! Say hi to Alex in the group chat.</p>
+</div>
+</div>
+<!-- Read Notification: Confirmation -->
+<div class="group flex gap-4 p-4 bg-slate-50/50 dark:bg-slate-800/40 rounded-xl transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 bg-slate-200 dark:bg-slate-700 flex items-center justify-center rounded-full">
+<span class="material-icons-round text-slate-500">task_alt</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-medium text-slate-700 dark:text-slate-300 truncate">Flight RSVP confirmed</h3>
+<span class="text-xs text-slate-400 ml-2 whitespace-nowrap">Yesterday</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">All members have confirmed their flight details for Tokyo.</p>
+</div>
+</div>
+<!-- Read Notification: New Message -->
+<div class="group flex gap-4 p-4 bg-slate-50/50 dark:bg-slate-800/40 rounded-xl transition-all hover:bg-slate-100 dark:hover:bg-slate-800">
+<div class="relative flex-shrink-0">
+<div class="w-12 h-12 bg-slate-200 dark:bg-slate-700 flex items-center justify-center rounded-full">
+<span class="material-icons-round text-slate-500">forum</span>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start">
+<h3 class="font-medium text-slate-700 dark:text-slate-300 truncate">12 New Messages</h3>
+<span class="text-xs text-slate-400 ml-2 whitespace-nowrap">Yesterday</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">In "Japan 2026 Strategy" group chat.</p>
+</div>
+</div>
+</div>
+<!-- Home Indicator -->
+<div class="pb-2 pt-4 flex justify-center">
+<div class="w-32 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
+</div>
+</div>
+<!-- Notification Dot Overlay (Simulated App Header UI) -->
+<div class="absolute top-16 right-6 z-0">
+<div class="relative">
+<span class="material-icons-round text-slate-300 text-3xl">notifications</span>
+<div class="absolute top-1 right-1 w-2.5 h-2.5 bg-primary rounded-full ring-2 ring-background-light dark:ring-background-dark"></div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Poll Results Tie State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Icons&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5b1dd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#161121",
+                        "warning": "#f59e0b",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .ios-status-bar {
+            height: 44px;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-display">
+<!-- Phone Container -->
+<div class="max-w-[430px] mx-auto min-h-screen bg-background-light dark:bg-background-dark relative flex flex-col shadow-2xl">
+<!-- iOS Status Bar Mockup -->
+<div class="ios-status-bar flex justify-between items-center px-8 w-full">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-icons text-[14px]">signal_cellular_alt</span>
+<span class="material-icons text-[14px]">wifi</span>
+<span class="material-icons text-[18px]">battery_full</span>
+</div>
+</div>
+<!-- Navigation Header -->
+<nav class="flex items-center justify-between px-6 py-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm">
+<span class="material-icons text-primary">chevron_left</span>
+</button>
+<div class="text-center">
+<h1 class="text-sm font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">TripOS Poll</h1>
+<p class="text-lg font-extrabold">Summer Destination</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm">
+<span class="material-icons text-primary">share</span>
+</button>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 px-6 pb-32 overflow-y-auto no-scrollbar">
+<!-- Tie Status Badge -->
+<div class="flex justify-center mt-4">
+<div class="bg-warning/10 border border-warning/20 px-4 py-1.5 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+<span class="text-xs font-bold text-warning uppercase tracking-wider">Status: Tie State</span>
+</div>
+</div>
+<!-- Tie Highlight Card -->
+<div class="mt-6 bg-warning rounded-xl p-5 text-white shadow-lg shadow-warning/20">
+<div class="flex items-start justify-between mb-4">
+<div class="p-2 bg-white/20 rounded-lg">
+<span class="material-icons">balance</span>
+</div>
+<span class="text-[10px] font-bold bg-black/10 px-2 py-1 rounded-full uppercase">Instant Runoff</span>
+</div>
+<h2 class="text-xl font-extrabold leading-tight">It's a Deadlock!</h2>
+<p class="text-sm text-white/90 mt-1 mb-4">Beach Resort and Mountain Cabin are tied after 3 elimination rounds.</p>
+<div class="flex items-center gap-3 bg-white/10 p-3 rounded-lg border border-white/10">
+<div class="flex-1 text-center">
+<p class="text-[10px] uppercase font-bold text-white/70">Beach Resort</p>
+<p class="text-2xl font-black">5.0</p>
+</div>
+<div class="w-px h-8 bg-white/20"></div>
+<div class="flex-1 text-center">
+<p class="text-[10px] uppercase font-bold text-white/70">Mountain Cabin</p>
+<p class="text-2xl font-black">5.0</p>
+</div>
+</div>
+</div>
+<!-- Quorum & Stats -->
+<div class="mt-8 flex justify-between items-center text-slate-500 dark:text-slate-400 px-1">
+<div class="flex items-center gap-2">
+<span class="material-icons text-sm">groups</span>
+<span class="text-xs font-medium">10/12 members voted (Quorum met)</span>
+</div>
+<span class="text-xs font-medium">Ranked Choice</span>
+</div>
+<!-- Ranked Choice Results List -->
+<div class="mt-4 space-y-4">
+<!-- Option 1 -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-primary/10">
+<div class="flex justify-between items-end mb-2">
+<div>
+<span class="text-[10px] font-bold text-primary uppercase">Candidate A</span>
+<h3 class="font-bold">Beach Resort</h3>
+</div>
+<span class="text-lg font-black text-primary">50%</span>
+</div>
+<div class="w-full h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2 rounded-full"></div>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="bg-white dark:bg-slate-800/50 p-4 rounded-xl border border-primary/10">
+<div class="flex justify-between items-end mb-2">
+<div>
+<span class="text-[10px] font-bold text-primary uppercase">Candidate B</span>
+<h3 class="font-bold">Mountain Cabin</h3>
+</div>
+<span class="text-lg font-black text-primary">50%</span>
+</div>
+<div class="w-full h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2 rounded-full"></div>
+</div>
+</div>
+<!-- Eliminated Option -->
+<div class="bg-slate-100/50 dark:bg-slate-900/40 p-4 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 opacity-60">
+<div class="flex justify-between items-end mb-2">
+<div>
+<span class="text-[10px] font-bold text-slate-400 uppercase">Eliminated Round 2</span>
+<h3 class="font-bold text-slate-400">City Boutique Hotel</h3>
+</div>
+<span class="text-lg font-black text-slate-400">0%</span>
+</div>
+<div class="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full"></div>
+</div>
+</div>
+<!-- Elimination Rounds Accordion (Collapsed State) -->
+<div class="mt-8">
+<button class="w-full flex items-center justify-between p-4 bg-slate-100 dark:bg-slate-800/50 rounded-xl">
+<div class="flex items-center gap-3">
+<span class="material-icons text-slate-400">history</span>
+<span class="font-semibold text-sm">View elimination rounds</span>
+</div>
+<span class="material-icons text-slate-400">expand_more</span>
+</button>
+</div>
+<!-- Footer Spacing -->
+<div class="h-10"></div>
+</div>
+<!-- Sticky Bottom Action Area -->
+<div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background-light via-background-light to-transparent dark:from-background-dark dark:via-background-dark">
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-xl shadow-primary/30 flex items-center justify-center gap-2">
+<span class="material-icons">bolt</span>
+                Create Tiebreaker Vote
+            </button>
+</div>
+<!-- Bottom Tab Bar Mockup -->
+<div class="mt-auto h-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 flex items-center justify-around px-4 pb-4">
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">explore</span>
+<span class="text-[10px] font-bold">Trips</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">poll</span>
+<span class="text-[10px] font-bold">Polls</span>
+</div>
+<div class="w-12 h-12 bg-primary rounded-full -mt-10 flex items-center justify-center text-white shadow-lg border-4 border-background-light dark:border-background-dark">
+<span class="material-icons">add</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">chat_bubble</span>
+<span class="text-[10px] font-bold">Chat</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</div>
+</div>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 left-0 -z-10 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+<div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[100px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-warning/20 rounded-full blur-[100px]"></div>
+</div>
+</body></html>

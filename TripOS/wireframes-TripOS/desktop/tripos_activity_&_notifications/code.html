@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Activity &amp; Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#19e6c4",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#11211e",
+                        "accent-purple": "#a855f7",
+                        "accent-amber": "#f59e0b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-800 dark:text-slate-200 min-h-screen">
+<!-- Global Navigation -->
+<nav class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-6 py-3 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons text-white text-xl">map</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">TripOS</span>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Trips</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary pb-1" href="#">Activity</a>
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Budget</a>
+</div>
+</div>
+<div class="flex items-center gap-4 relative">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 transition-colors text-slate-600 dark:text-slate-300 relative">
+<span class="material-icons">search</span>
+</button>
+<div class="relative">
+<button class="p-2 rounded-full bg-primary/10 text-primary border border-primary/20 transition-colors">
+<span class="material-icons">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<!-- Notification Dropdown -->
+<div class="absolute right-0 mt-3 w-80 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden z-50">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-semibold">Notifications</h3>
+<button class="text-xs text-primary font-medium">Mark all read</button>
+</div>
+<div class="max-h-96 overflow-y-auto">
+<!-- Notification Item 1 -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer flex gap-3 border-b border-slate-50 dark:border-slate-800/50">
+<div class="w-10 h-10 rounded-full bg-accent-purple/10 flex items-center justify-center shrink-0">
+<span class="material-icons text-accent-purple text-lg">how_to_vote</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-slate-900 dark:text-white">New poll: Sunset Cruise</p>
+<p class="text-xs text-slate-500 mt-0.5">Alex started a new vote for Saturday night.</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">2 minutes ago</p>
+</div>
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+</div>
+<!-- Notification Item 2 -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer flex gap-3 border-b border-slate-50 dark:border-slate-800/50">
+<div class="w-10 h-10 rounded-full bg-accent-amber/10 flex items-center justify-center shrink-0">
+<span class="material-icons text-accent-amber text-lg">schedule</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-bold text-slate-900 dark:text-white">Deadline approaching</p>
+<p class="text-xs text-slate-500 mt-0.5">Flight booking details must be finalized by 5 PM.</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">1 hour ago</p>
+</div>
+<div class="w-2 h-2 bg-primary rounded-full mt-2"></div>
+</div>
+<!-- Notification Item 3 -->
+<div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer flex gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+<span class="material-icons text-primary text-lg">lock</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-slate-700 dark:text-slate-300">Group budget updated</p>
+<p class="text-xs text-slate-500 mt-0.5">Sarah locked the accommodation expenses.</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase tracking-wider">Yesterday</p>
+</div>
+</div>
+</div>
+<div class="p-3 bg-slate-50 dark:bg-slate-800/50 text-center">
+<button class="text-xs font-semibold text-slate-500 hover:text-primary transition-colors">View all activity</button>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-primary">
+<img class="w-full h-full object-cover" data-alt="User profile avatar male portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8LqMErrEnRCEplHU6kZ_wJYo5Ldem95YehyyP4ehJhu2sUS2fRAZcCN90vBZbMDxdySi79lJx6cQcWyXIzOcnInVg2DFhaPaj0VuJ5ja_KP_WTV4n5N6oF3hzTgUh2kpYeq2m5M8tDeTHxHwePQZ2zRZtkrx7F2ADqgdBe7Nw4uoURAa-kFA7rEaVja0S9cGOFy_3_xo5hlCDVtK5V2UgKVosRVPwN23qStdanUCWzZJr3J9FqLh9OwRstxHTuYBqz4msT5wPan8"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="max-w-3xl mx-auto py-12 px-6">
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<nav class="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-2 uppercase tracking-widest">
+<span>Trips</span>
+<span class="material-icons text-[10px]">chevron_right</span>
+<span class="text-primary">Greece 2024</span>
+</nav>
+<h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Summer in Santorini</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Real-time collaborative trip feed</p>
+</div>
+<div class="flex -space-x-2">
+<img class="w-10 h-10 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="Avatar of Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3C3Rdf_upwuOpa3MUpLQHkK3AxROz_-IMYu9hsSrHtNJ8duVnxEU1cnz0VX3SYlJyPpdUkmqNobkzQL4o3Iv3pgkZ42oabwTABq9diyT-QzpHlTLe5EuL5SfHHbz6w7zMeuh3zHgPIiD4YOOnRoKfQrgq5p7TFx4Ba1ip5_y40mFz6bYi9ANyfwJ2adPwt2cz28IJnyx4ebDouKTK-1RbIJ--Y_tBtnX7aibvPdi6ipN9EyaFq6x1elgf2jJAQYgIyOseHlz8yEY"/>
+<img class="w-10 h-10 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="Avatar of Alex" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBbMtOpeDKXrpPQ6Y1MnQre2-wrxUCo4lCB6Wv_xdoyFe2y-bM_Fp9wKm4QUyTgXFmAFGMlGDs7Zr_8yNI3LMM37FY7mwkUhtHj0DlcFOB1upO8bCfr7xcovh1POO9UnDDOqVOMuOMjQdbK6w79nuB5LCwOZ41myK4Djerkw-mMUaONz5TfMw_ZWsQdwMMv8MV_O3lxlp0FAfiyLexyGF8eoOs9ZdCKVe-wSCNcn5aKWoleDp8L93_JQCI-t_a99mxetUFOAiQn_s"/>
+<img class="w-10 h-10 rounded-full border-4 border-background-light dark:border-background-dark object-cover" data-alt="Avatar of Jamie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZbBPrQrdjGuh5-vtBXj0nMJkhctPOaniwUXDgevqrP8G_K3lYhu9EL7b47SXOW3Ut9IgM5WH7URBPgPzwPr07jtSU2ncyyywKRHSkjxRnUyvNJIgmsVSriwBlvS1EqQT0iG54pcXunK7c3QuVuMQCSurCc2dlhEExn3nmyWkJzt2WY0sSikBW3NQe4PRE3vfNLmn_fyGYyvrF4agLBdIUps4xIGL6BUmEpNhY0OikIiJXAYkmDcaUwGVcapwtgUkEgl_JhZ_PUlo"/>
+<div class="w-10 h-10 rounded-full border-4 border-background-light dark:border-background-dark bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-600 dark:text-slate-300">
+                    +2
+                </div>
+</div>
+</header>
+<!-- Activity Feed Section -->
+<div class="space-y-12">
+<!-- Day Group: Today -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<h2 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest shrink-0">Today</h2>
+<div class="h-px bg-slate-200 dark:bg-slate-800 w-full"></div>
+</div>
+<div class="space-y-4">
+<!-- Activity Item 1 -->
+<div class="group flex gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all shadow-sm">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Alex profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1BrjOViK91QjeQuxM3OIgbno6GzCsvrbQyraODQ8VuiIK4ofIHkv-YNNyFz81nkc4UB4xWqPtSe6RTYKvyhpdNlSnDZmZJ8STvjxJLcAon1hrMZwHkW-3Z49eylraxUEgnDpQK-P7JCkfkyVlgyxMhc4jyPwIvWSva1pfzgpQ8k4zkJDgN5eDVhCKtHF2VZnbKocjIKu2RZdDME9DvSUwRVyov547eRfC1olKNc7On2mBKcZJcC4BbJMpetIU86XGg7Gy4GTff-c"/>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-accent-purple flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-icons text-[14px] text-white">how_to_vote</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="text-slate-600 dark:text-slate-300 leading-snug">
+<span class="font-bold text-slate-900 dark:text-white">Alex</span> voted on <span class="font-medium text-accent-purple underline decoration-accent-purple/30 underline-offset-4">Dinner Spots</span>
+</p>
+<span class="text-xs text-slate-400 font-medium">14m ago</span>
+</div>
+<div class="mt-3 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg flex items-center gap-3">
+<div class="w-2 h-10 bg-accent-purple rounded-full"></div>
+<p class="text-sm font-medium italic text-slate-500 dark:text-slate-400">"The rooftop tavern looks incredible for the first night!"</p>
+</div>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="group flex gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all shadow-sm">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Sarah profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQgIdyHP8LrQp-0NsU4qPBVZilvcQmK1aCoo-dCWZJlYkvBrjlhHtF0tD0zqaBvyvjoxCNZvswWUkldc3cI7AfnZUT-WupMOt-T5zrKmupx1o-YkUwybnVufnYZTZALNbUkCOLCWsfBwa2CaNY6KadAosKsYRZLwZnQkgl1sJjnOZmKG1asY3fHkoSlHSS3pNR0LW-TUxsJssDF3mae6GSVyHWR8feyfnAxNR0dXvdOBwVQ-yMTg-_OdJZtabJjHKn8kmoyMWRntA"/>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center border-2 border-white dark:border-slate-900">
+<span class="material-icons text-[14px] text-white">map</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="text-slate-600 dark:text-slate-300 leading-snug">
+<span class="font-bold text-slate-900 dark:text-white">Sarah</span> added a location to <span class="font-bold text-slate-900 dark:text-white">Day 2</span>
+</p>
+<span class="text-xs text-slate-400 font-medium">2h ago</span>
+</div>
+<div class="mt-3 flex items-center gap-3 text-slate-500 dark:text-slate-400">
+<span class="material-icons text-primary/60">location_on</span>
+<span class="text-sm">Oia Castle Viewpoint, Santorini</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Day Group: Yesterday -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<h2 class="text-sm font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest shrink-0">Yesterday</h2>
+<div class="h-px bg-slate-200 dark:bg-slate-800 w-full"></div>
+</div>
+<div class="space-y-4">
+<!-- Activity Item 3 -->
+<div class="group flex gap-4 p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all shadow-sm opacity-80">
+<div class="relative shrink-0">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+<span class="material-icons text-primary text-2xl">lock</span>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="text-slate-600 dark:text-slate-300 leading-snug">
+<span class="font-bold text-slate-900 dark:text-white">System</span> locked the <span class="font-bold text-slate-900 dark:text-white">Group Budget</span>
+</p>
+<span class="text-xs text-slate-400 font-medium">1d ago</span>
+</div>
+<p class="mt-2 text-xs text-slate-500">All member contributions have been confirmed. Edits are now restricted to Admin only.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-12 flex justify-center">
+<button class="px-6 py-3 rounded-full border-2 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 font-bold text-sm hover:border-primary hover:text-primary transition-all">
+                Load older activity
+            </button>
+</div>
+</main>
+<!-- Toast Notification -->
+<div class="fixed bottom-6 right-6 z-[100] animate-bounce-in">
+<div class="bg-white dark:bg-slate-900 border-l-4 border-primary rounded-lg shadow-2xl p-4 flex items-center gap-4 min-w-[300px]">
+<div class="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-icons text-primary">check_circle</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white text-sm">Vote submitted!</p>
+<p class="text-xs text-slate-500">Your choice for "Sunset Cruise" was saved.</p>
+</div>
+<button class="ml-auto p-1 text-slate-400 hover:text-slate-600">
+<span class="material-icons text-sm">close</span>
+</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS Settlement Summary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "success": "#34c759",
+                        "destructive": "#ff3b30",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<!-- iOS Status Bar Spacer -->
+<div class="h-12 w-full bg-background-light dark:bg-background-dark"></div>
+<main class="max-w-md mx-auto min-h-screen pb-24">
+<!-- Header -->
+<header class="px-5 pt-2 pb-4 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md z-30">
+<div class="flex items-center justify-between mb-4">
+<button class="text-primary flex items-center gap-1">
+<span class="material-icons text-2xl">chevron_left</span>
+<span class="font-medium">Trips</span>
+</button>
+<h1 class="text-lg font-semibold">Summer in Ibiza</h1>
+<button class="text-primary">
+<span class="material-icons text-2xl">more_horiz</span>
+</button>
+</div>
+<!-- iOS Segmented Control -->
+<div class="bg-slate-200 dark:bg-slate-800 p-1 rounded-lg flex relative">
+<button class="flex-1 py-1.5 text-sm font-medium text-slate-500 dark:text-slate-400 rounded-md">
+                    Expenses
+                </button>
+<button class="flex-1 py-1.5 text-sm font-semibold text-slate-900 dark:text-white bg-white dark:bg-slate-700 shadow-sm rounded-md">
+                    Settlement
+                </button>
+</div>
+</header>
+<div class="px-5 space-y-6">
+<!-- Settlement Card Section -->
+<section>
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Who Owes Whom</h2>
+<span class="text-xs font-medium text-primary">Multi-currency (EUR/USD)</span>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm overflow-hidden border border-slate-200/50 dark:border-slate-800">
+<!-- Settlement Row 1 -->
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center">
+<img alt="John's profile photo" class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" data-alt="Profile photo of a young man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu4bKHsPZ2Pr6IJUDuqQViymN_qHaOo5BJ3VoR3TfxcU1KDRTTygpG2TyrysZVoAI5jgDecZUFBRgpTmg_b0iDYMomrrlo86E_R2BiU1Kl3Ni5qvzAd5gSLV-pxoNA8b3AxK6ztKK9qoT9D9jKff_xbNM5FZROtSF0T8bTifbl2KxUeldsvu8eLoF7SjWmI9_N_5psm-h79pNII1u6N9lkypIZrQY30Aqj9lXnWgl3e_oogk3rp1ryWn4IPGjgcClqUjlGhbA_AfY"/>
+<div class="mx-1 text-slate-400 flex items-center">
+<span class="material-icons text-lg">trending_flat</span>
+</div>
+<img alt="Sarah's profile photo" class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" data-alt="Profile photo of a young woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPbSME3Ni59vZudJm0UApeOS7lcUdU-wbLSU7RCPev9V7qBmy6GuvNMDaIfQyoQWaOfcoKeweO33VqSg6ZBPhPChB_KwMbFjmKQfYsdEtv5GPZ4MLTsSuBgL4B-VW70UKYGGsIXKPAYCs0cmA83D0b5RvjhMJfMr2Pk4hAP4w8FD8TRhAreDzEwGuIrDNAlqeU7vIKpMIOIbreLTXvNtSYN4PbIT6-uQ8Q40UY3SVG4WeHsDfP9me7p-P6DmyQXlrClwzIDjlltts"/>
+</div>
+<div>
+<p class="text-sm font-medium">John owes Sarah</p>
+<p class="text-xl font-bold text-slate-900 dark:text-white">€142.50</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                Settle Up
+                            </button>
+</div>
+</div>
+<!-- Settlement Row 2 -->
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center">
+<img alt="Mark's profile photo" class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" data-alt="Profile photo of a man in his 30s" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7esvyBVNIbFaNhoYEUxdlrRPN_wEbq8_ZMSiWJo2RPijzVCGn2_3aDRkYIfpYtIJN9vLjbf7CLD0YsSug4pqXSTAjOEb23vdkgKzZQH3qB1JqsCJGiJ6SfO2Rc5UvNax47uDeNB1jF8S8LzbrRzSD5o_GPqzkdYgyrOomNCbBH05iw-t349H6RsHYINlVGwBo9gwBo8OgW-tgnIZA0sT-NXeBj0O1qB3VDx2V7BZIMVHUk0GiupN4eB_9FKmJw17KyCrwLBdNhr8"/>
+<div class="mx-1 text-slate-400 flex items-center">
+<span class="material-icons text-lg">trending_flat</span>
+</div>
+<img alt="John's profile photo" class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" data-alt="Profile photo of a young man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZCHzCMGlTqDBjvV82DVrimp4puHwXDNfeRo22PIU2G9Y0U9v7HJSOKobLHBqAh3JD0qKQd4wti_Q6TihV_7BuuaTzOdaczVNAwC87n2JASxkxah1hp6JLR2CEOL1uKiDfKDhpt_TxrR8SRGxmfNW7B8LQLg1gvQtxeAmXAijcHuUBxumDbFQeRFWCzB-Y3Z3hRGtcGz4P2e0BiZsE4ClP_zXD18U2U0mvo0Hh9gsPqrnnm-E158y5onYZmccyDmLpWWTKnRxz8uc"/>
+</div>
+<div>
+<p class="text-sm font-medium">Mark owes John</p>
+<p class="text-xl font-bold text-slate-900 dark:text-white">$85.00</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                Settle Up
+                            </button>
+</div>
+</div>
+<!-- Settlement Row 3 -->
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 last:border-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative flex items-center">
+<img alt="Elena's profile photo" class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" data-alt="Profile photo of a young blonde woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrNS9vdACFyuaWVcfdcvimewUXSjECxk0fb6r-auZauAmD-eo9OsLHNPMzPVXfW-WgZKzb6oY13WU3qhkSCCklSNWUIFIkNiZFr55ogkjUaOdPJICgS4JEf0YtoGjEyZ3eUIph51Nj4i5WjxTEwtyzSi7KFIOJoOsa4CSkpdM5VSf0skNcWTB456oxvTnVPxtXvIFQhISxmGuH4hIU6ErHxoGmWi48Dh9u4q58WUahoESsLi70aBgk-IhbbtDqhho-lY1Wt31TG6w"/>
+<div class="mx-1 text-slate-400 flex items-center">
+<span class="material-icons text-lg">trending_flat</span>
+</div>
+<img alt="Sarah's profile photo" class="w-10 h-10 rounded-full border-2 border-white dark:border-slate-900" data-alt="Profile photo of a young woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs-zQw-6Z2gKZPhotJWT9Zpf3FMHL8bmfBwrTpk82iDIPvnmKlv62h2MTMfTzxwFTt9ds8q-aZZ6z5yPDMFaw-A4jIJHBItAYr0e-PpnoKtoqzALuhN165pgLYmvMOdqsXB2RVuv8Qr-hRB5tgxCf8g9bJKXuvi0I3HXr0KKnIvyG3N5k1Eob2One7RUIQ_LWE62ExSYA7YaAHcui2J2Uw-TMxbU2tipzr4k-HOT9yz9VjAsVVpMJMo-WMb-pfqx_87-45rcpwMOQ"/>
+</div>
+<div>
+<p class="text-sm font-medium">Elena owes Sarah</p>
+<p class="text-xl font-bold text-slate-900 dark:text-white">€12.00</p>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
+                                Settle Up
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Balance List Section -->
+<section>
+<h2 class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">Net Balances</h2>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm overflow-hidden border border-slate-200/50 dark:border-slate-800">
+<!-- Balance Item: Sarah (To Receive) -->
+<div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="Sarah avatar" class="w-8 h-8 rounded-full" data-alt="Avatar of Sarah" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuasGOh1o4DijsObaUJFTR_xPQglPx56Gtvl8ySsNr-ssoGLavnBJS_k1JUchT-ZQAjgIdkUkAAAcjTF882nr22VFZQt5-vzl22KkTBF_mpf0mQvw61qni5Z1e5-mxSvstsdjfbQtt2O5o4ED9PmxfyzHNABJo2OZF2Waw55L9S5PT8i2brRz72pUn295bqILVaTUAMBfv9f87gZKzLpE_gQrNhnSvCpkRj9aUj0PMHaVZi8VwvzJZOgml4m9pH4fupapj2bEMMyg"/>
+<div>
+<p class="text-sm font-medium">Sarah</p>
+<p class="text-[10px] text-slate-500">Net total across all currencies</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-success">+€154.50</p>
+<p class="text-[10px] text-slate-400 uppercase font-semibold">To receive</p>
+</div>
+</div>
+<!-- Balance Item: John (Neutral/Mixed) -->
+<div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="John avatar" class="w-8 h-8 rounded-full" data-alt="Avatar of John" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDq7p81mcDsdMkoM-FKKAO146zxL1zy1f5l0ZBnzlk5TYIszo87VQd9N0cIto1q_HtUlo6l_YCX46CMZ5LiLjDPozPjEuNw4UOEShGSFhD27obb4Q-XH4CPkSiXq-kSgsFYLJdBO8vBqEHvPI4vfs5Dcqeo8rkcnzsOKRTV-0TV-jHhQMSik7WS1mpnOFLF4SYdUTFvTtKjzf-HUsEDYh6MAXgMAzX3QZOhJrG5b2v2jFGYZt8C-6rzJFPYRgP_ACq4LnYWv6NRkhE"/>
+<div>
+<p class="text-sm font-medium">John</p>
+<p class="text-[10px] text-slate-500">Net total across all currencies</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-destructive">-€57.50</p>
+<p class="text-[10px] text-slate-400 uppercase font-semibold">Owed</p>
+</div>
+</div>
+<!-- Balance Item: Mark (Owed) -->
+<div class="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="Mark avatar" class="w-8 h-8 rounded-full" data-alt="Avatar of Mark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDYHVitnS3JA9etMjhPd_DP_9-WE12po-mIj5wmSkoTMJO1x46jpH8brMrI5xv9b8k1EpvjIUylE-BQvyurZWJ9x2SIFLjgc7bRaic3d2Gs0kjuuukdf4Qm6YrmeL2xd9e7KEh1YrNZ4jzOokKvo9T-Rcd33vfMqKDmDgrlrWNVDXe95YCZFXH1wnxHmJfglPz2ZyGBye9u3pKF1EYUipwwyCIoeUk9bBR79PiRX3Za9PMCI6epzMBBNYPF3_qcJLv2VEGQQFRQK8"/>
+<div>
+<p class="text-sm font-medium">Mark</p>
+<p class="text-[10px] text-slate-500">Net total across all currencies</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-destructive">-$85.00</p>
+<p class="text-[10px] text-slate-400 uppercase font-semibold">Owed</p>
+</div>
+</div>
+<!-- Balance Item: Elena (Owed) -->
+<div class="flex items-center justify-between p-4">
+<div class="flex items-center gap-3">
+<img alt="Elena avatar" class="w-8 h-8 rounded-full" data-alt="Avatar of Elena" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIcIT5OPzC5HkQLMoWnGaR6FLUOHZZVbY4-RvlRrA4gbuXasbSkk82PpX_PaFis9KziEc3o070w22ZXg74-4W_9jUiCgWp6lyGZxrbXCYGqHDXDNcTXwYAu-Um_QLH03YWwpcOHNorGQIRyT63PgLKxiy3Bw5U-jfSBsOy46OsOV2fSvhDwqBcfg1f_K6nm4mxgMfuwSpopsTZ6xhPJ7dTvnH_iG4cVaizEAXPua-DWJkgjlGTWpmKmZeLKUn5rVomWl3nNcwtm68"/>
+<div>
+<p class="text-sm font-medium">Elena</p>
+<p class="text-[10px] text-slate-500">Net total across all currencies</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-destructive">-€12.00</p>
+<p class="text-[10px] text-slate-400 uppercase font-semibold">Owed</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Sticky Bottom Summary for the User (Assuming User is Sarah) -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto px-5 pb-8 pt-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 z-40">
+<div class="bg-primary rounded-2xl p-4 shadow-lg shadow-primary/20 flex items-center justify-between">
+<div>
+<p class="text-xs text-white/70 font-medium uppercase">Your total balance</p>
+<p class="text-2xl font-bold text-white">+€154.50</p>
+</div>
+<button class="bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-colors">
+<span class="material-icons">info_outline</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Navigation Bar (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto h-20 bg-white/95 dark:bg-slate-900/95 border-t border-slate-200 dark:border-slate-800 px-6 flex items-start justify-between z-50 pt-2">
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-icons">explore</span>
+<span class="text-[10px] font-medium">Explore</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">receipt_long</span>
+<span class="text-[10px] font-medium">Trips</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-icons">group</span>
+<span class="text-[10px] font-medium">Friends</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-icons">person_outline</span>
+<span class="text-[10px] font-medium">Profile</span>
+</div>
+</nav>
+</body></html>

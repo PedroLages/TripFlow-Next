@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Trip Workspace iOS Foundation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: none;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .safe-area-top {
+            padding-top: env(safe-area-inset-top);
+        }
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 2px;
+            background-color: #1d4fd7;
+            border-radius: 9999px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-12 w-full bg-white/80 dark:bg-background-dark/80 ios-blur sticky top-0 z-50 flex items-center justify-between px-6">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-icons-round text-base">signal_cellular_4_bar</span>
+<span class="material-icons-round text-base">wifi</span>
+<span class="material-icons-round text-base">battery_full</span>
+</div>
+</div>
+<!-- Navigation Bar -->
+<header class="sticky top-12 z-40 bg-white/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-slate-800 px-4 h-14 flex items-center justify-between">
+<button class="flex items-center text-primary font-medium hover:opacity-70 transition-opacity">
+<span class="material-icons-round">chevron_left</span>
+<span class="text-[17px]">My Trips</span>
+</button>
+<h1 class="text-[17px] font-semibold truncate max-w-[150px] text-center">
+            Summer in Tokyo
+        </h1>
+<div class="flex items-center gap-3">
+<button class="text-primary hover:opacity-70 transition-opacity">
+<span class="material-icons-round text-2xl">add</span>
+</button>
+<button class="text-slate-500 dark:text-slate-400 hover:opacity-70 transition-opacity">
+<span class="material-icons-round text-2xl">notifications_none</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto px-4 py-6 pb-32">
+<!-- Overview Content (Active Tab) -->
+<div class="space-y-6">
+<!-- Hero Card -->
+<div class="relative h-48 w-full rounded-xl overflow-hidden shadow-sm">
+<img alt="Tokyo Cityscape" class="w-full h-full object-cover" data-alt="Modern Tokyo skyline with Tokyo Tower" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADCEM4pzHsERWM6mKmar1-lIIObVeBMmJ32jS7ohmZIIX1v3IAzfOsIPFx8-ux-yRKffp9DISfA1EHGpQqmcATjI0fp1vD6Ls2rUNoRMlZO_uXU4nKdZKcninxw2unx_Fx4cMBR0gJuatdzR93_DxZ_LBTDozFoAD0bQybbv7PMou0gtsDQGjn5I0ACfm_D_reXeo7Wh44PhrR-7UA7U73iD-IzdIV3VG_0s5cuW6OJhpFdeA2XTAkqqsqTAjo1bx8wBwCiPy8N4A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-end items-end p-4">
+<div>
+<p class="text-white/80 text-sm font-medium">July 15 - July 24, 2024</p>
+<h2 class="text-white text-2xl font-bold">12 Days to Go</h2>
+</div>
+</div>
+</div>
+<!-- Quick Stats -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Activities</p>
+<p class="text-2xl font-bold mt-1">14</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Members</p>
+<p class="text-2xl font-bold mt-1">6</p>
+</div>
+</div>
+<!-- Recent Activity/Up Next -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Up Next</h3>
+<button class="text-primary text-sm font-semibold">See All</button>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden divide-y divide-slate-100 dark:divide-slate-800 shadow-sm">
+<div class="p-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round">flight_land</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-[15px]">Arrive at Narita Int'l</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Jul 15 • 3:30 PM</p>
+</div>
+<span class="material-icons-round text-slate-300">chevron_right</span>
+</div>
+<div class="p-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-icons-round">hotel</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold text-[15px]">Park Hyatt Tokyo Check-in</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Jul 15 • 5:00 PM</p>
+</div>
+<span class="material-icons-round text-slate-300">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Map Snippet -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold">Trip Map</h3>
+<button class="text-primary text-sm font-semibold">Expand</button>
+</div>
+<div class="h-40 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm relative">
+<img class="w-full h-full object-cover" data-alt="Map showing markers in Tokyo area" data-location="Tokyo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ9SnPkZ9vyqTVfjgky0ZfRXIL9QjOUFPojqG4mnOSrzIQi6y3KVT76xqQatSj_LtKRKFLQeyDUojZ9a406_ZuI_LCUMYQM00iEV1su5xirjwelUGpFn9YQF_9N-UHXf032a5A29cf4uuGLOzHRhzn7DDRD9Ii4hLNUwUOm0xJyvkqS2kTAk5089KS0XVtGQIM3-yvLPwvT2mYUrNIB2xLHdKO1DQYJAE0Ft-6EZsYH3hIMzlmtword_n_IpHNy6fSw-TqdPCd4LA"/>
+<div class="absolute inset-0 bg-primary/5"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+<div class="bg-primary text-white p-2 rounded-full shadow-lg ring-4 ring-white/30">
+<span class="material-icons-round block">location_on</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- iOS Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-background-dark/90 ios-blur border-t border-slate-200 dark:border-slate-800 safe-area-bottom z-50">
+<div class="flex justify-around items-center h-[64px]">
+<!-- Overview (Active) -->
+<button class="flex flex-col items-center justify-center gap-0.5 relative group">
+<div class="relative tab-active pb-1">
+<span class="material-icons-round text-[26px] text-primary">explore</span>
+</div>
+<span class="text-[10px] font-medium text-primary">Overview</span>
+</button>
+<!-- Itinerary -->
+<button class="flex flex-col items-center justify-center gap-0.5 group">
+<div class="pb-1">
+<span class="material-icons-round text-[26px] text-slate-400 dark:text-slate-500 group-active:text-primary transition-colors">calendar_today</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Itinerary</span>
+</button>
+<!-- Votes -->
+<button class="flex flex-col items-center justify-center gap-0.5 group">
+<div class="pb-1">
+<span class="material-icons-round text-[26px] text-slate-400 dark:text-slate-500 group-active:text-primary transition-colors">how_to_vote</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Votes</span>
+</button>
+<!-- Budget -->
+<button class="flex flex-col items-center justify-center gap-0.5 group">
+<div class="pb-1">
+<span class="material-icons-round text-[26px] text-slate-400 dark:text-slate-500 group-active:text-primary transition-colors">account_balance_wallet</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Budget</span>
+</button>
+<!-- Members -->
+<button class="flex flex-col items-center justify-center gap-0.5 group">
+<div class="pb-1">
+<span class="material-icons-round text-[26px] text-slate-400 dark:text-slate-500 group-active:text-primary transition-colors">group</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">Members</span>
+</button>
+</div>
+<!-- iOS Home Indicator Space -->
+<div class="h-6 flex justify-center items-end pb-2">
+<div class="w-32 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full opacity-50"></div>
+</div>
+</nav>
+</body></html>

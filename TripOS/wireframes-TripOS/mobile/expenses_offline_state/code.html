@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Expenses Offline State</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-11 w-full bg-white/80 dark:bg-background-dark/80 ios-blur flex items-center justify-between px-6 shrink-0">
+<span class="text-xs font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-icons-round text-[14px]">signal_cellular_alt</span>
+<span class="material-icons-round text-[14px]">wifi_off</span>
+<span class="material-icons-round text-[14px]">battery_full</span>
+</div>
+</div>
+<!-- Top Navigation Bar -->
+<header class="h-14 w-full bg-white/80 dark:bg-background-dark/80 ios-blur flex items-center justify-between px-4 border-b border-slate-200/50 dark:border-slate-800/50 shrink-0">
+<button class="text-primary p-2">
+<span class="material-icons-round">chevron_left</span>
+</button>
+<h1 class="text-lg font-semibold">Expenses</h1>
+<button class="text-primary p-2">
+<span class="material-icons-round">add</span>
+</button>
+</header>
+<!-- Full-width Offline Banner -->
+<div class="w-full bg-amber-500/10 border-b border-amber-500/20 py-2.5 px-4 flex items-center justify-center gap-2 shrink-0">
+<span class="material-icons-round text-amber-600 dark:text-amber-400 text-sm">wifi_off</span>
+<span class="text-sm font-medium text-amber-700 dark:text-amber-400">You're offline</span>
+</div>
+<!-- Main Content Area (Dimmed 70%) -->
+<main class="flex-1 overflow-y-auto opacity-70">
+<!-- Date Group -->
+<div class="px-4 py-4">
+<h2 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Today, Oct 24</h2>
+<div class="space-y-3">
+<!-- Expense Item -->
+<div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl flex items-center justify-between shadow-sm border border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons-round text-primary text-xl">restaurant</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-100">Starbucks Coffee</p>
+<p class="text-xs text-slate-500">Food &amp; Drink • 8:15 AM</p>
+</div>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-100">-$5.50</span>
+</div>
+<!-- Expense Item -->
+<div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl flex items-center justify-between shadow-sm border border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons-round text-primary text-xl">directions_car</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-100">Uber to JFK</p>
+<p class="text-xs text-slate-500">Transport • 7:30 AM</p>
+</div>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-100">-$65.00</span>
+</div>
+</div>
+</div>
+<!-- Date Group -->
+<div class="px-4 py-2">
+<h2 class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Yesterday, Oct 23</h2>
+<div class="space-y-3">
+<!-- Expense Item -->
+<div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl flex items-center justify-between shadow-sm border border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons-round text-primary text-xl">hotel</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-100">The Plaza Hotel</p>
+<p class="text-xs text-slate-500">Lodging • 11:45 PM</p>
+</div>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-100">-$410.00</span>
+</div>
+<!-- Expense Item -->
+<div class="bg-white dark:bg-slate-900/50 p-4 rounded-xl flex items-center justify-between shadow-sm border border-slate-200/50 dark:border-slate-800/50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-icons-round text-primary text-xl">shopping_bag</span>
+</div>
+<div>
+<p class="font-semibold text-slate-800 dark:text-slate-100">Apple Store</p>
+<p class="text-xs text-slate-500">Electronics • 4:20 PM</p>
+</div>
+</div>
+<span class="font-bold text-slate-800 dark:text-slate-100">-$129.00</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Toast (Syncing) -->
+<div class="fixed bottom-24 left-0 right-0 px-4 flex justify-center z-50 pointer-events-none">
+<div class="bg-slate-900/90 dark:bg-slate-100/90 text-white dark:text-slate-900 px-5 py-3 rounded-xl flex items-center gap-3 shadow-xl backdrop-blur-md pointer-events-auto border border-white/10 dark:border-black/10">
+<span class="material-icons-round text-primary text-lg">sync</span>
+<span class="text-sm font-medium">Expense added! Syncing when online...</span>
+</div>
+</div>
+<!-- Bottom Tab Bar -->
+<nav class="h-20 bg-white/90 dark:bg-background-dark/90 border-t border-slate-200/50 dark:border-slate-800/50 ios-blur px-6 flex items-center justify-between shrink-0 safe-area-bottom">
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-icons-round text-[26px]">home</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Home</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-icons-round text-[26px]">explore</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Trips</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons-round text-[26px]">payments</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Expenses</span>
+</div>
+<div class="flex flex-col items-center gap-1 opacity-40">
+<span class="material-icons-round text-[26px]">account_circle</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Profile</span>
+</div>
+</nav>
+<!-- iOS Home Indicator -->
+<div class="h-1.5 w-32 bg-slate-300 dark:bg-slate-700 rounded-full mx-auto mb-2 shrink-0"></div>
+
+```</body></html>

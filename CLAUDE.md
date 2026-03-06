@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This repo contains two distinct areas:
 
 1. **Asia Trip Planning** (`docs/`) -- A 22-night trip (Aug 27 - Sep 18, 2026) across 6 cities: Shanghai, Hong Kong, Osaka, Kyoto, Tokyo, and Beijing. All trip content is in Markdown files.
-2. **TripFlow Web App** (`tripflow-next/`) -- A Next.js travel planning app. Software docs, BMAD output, and design documents live inside `tripflow-next/docs/`.
+2. **TripOS Web App** (`TripOS/`) -- A collaborative group trip planning platform (Next.js 16 + Supabase monorepo). All app documentation, architecture, design, and code live in `TripOS/`.
 
 ---
 
@@ -18,11 +18,12 @@ This repo contains two distinct areas:
 | Folder | Purpose | What goes here |
 |---|---|---|
 | `docs/` | Trip planning only | Itineraries, research, budgets, bookings, packing, maps |
-| `tripflow-next/docs/` | App development docs | PRDs, architecture, epics, stories, specs, plans, design, BMAD output |
+| `TripOS/docs/` | App development docs | Architecture, design, epics, stories, specs, research, BMAD output |
 
 **Rules:**
 - **NEVER** place app/software documentation in `docs/`. That folder is exclusively for trip planning.
-- **NEVER** place trip planning content in `tripflow-next/docs/`.
+- **NEVER** place trip planning content in `TripOS/docs/`.
+- **Legacy:** `tripflow-next/` is the old app structure being phased out. All new work goes in `TripOS/`.
 - Every new `.md` file must go into an appropriate **subfolder** — never loose at the top level of either docs directory (except index/overview files).
 - If no suitable subfolder exists, create one with a clear, descriptive name.
 
@@ -88,35 +89,87 @@ The **master itinerary** is the top-level summary. The **day-by-day planner** pu
 
 ---
 
-## TripFlow Web App Docs (`tripflow-next/docs/`)
+## TripOS Web App (`TripOS/`)
 
-### File Structure
+### Primary References
+
+**⚠️ IMPORTANT: For all TripOS development, refer to the comprehensive documentation in `TripOS/`:**
+
+- **[TripOS/CLAUDE.md](TripOS/CLAUDE.md)** - Primary developer guide (non-negotiable rules, commands, patterns)
+- **[TripOS/README.md](TripOS/README.md)** - Complete project overview, architecture, folder structure
+- **[TripOS/docs/](TripOS/docs/)** - All app documentation (architecture, design, epics, stories, research)
+
+### Quick Reference Structure
 
 ```text
-tripflow-next/docs/
-  TRIPFLOW-OVERVIEW.md       -- App overview and vision
-  specs/                     -- Feature specifications, requirements
-    app-features-specification.md
-  plans/                     -- Implementation plans, design decisions
-    dashboard-improvement-plan.md
-    2026-02-24-blind-budgeting-implementation.md
-    2026-02-24-nextjs-blind-budgeting-implementation.md
-    2026-02-24-tripos-feature-integration-design.md
-    2026-02-25-tripos-to-tripflow-analysis.md
-  architecture/              -- System architecture, technical decisions
-  epics/                     -- BMAD epics
-  stories/                   -- BMAD user stories
-  research/                  -- Technical research, library evaluations
-  design/                    -- UX/UI design docs, wireframes
+TripOS/
+├── CLAUDE.md                   -- Primary developer guide (READ FIRST)
+├── README.md                   -- Complete project overview
+├── TRIPOS_DESCRIPTION.md       -- Product overview
+│
+├── apps/web/                   -- Next.js 16 web application
+│   ├── src/app/                -- Route groups: (marketing), (auth), (app), (public)
+│   ├── src/features/           -- Feature modules (trips, voting, budget, etc.)
+│   └── e2e/                    -- Playwright E2E tests
+│
+├── packages/
+│   ├── types/                  -- @repo/types (Supabase DB types)
+│   ├── schemas/                -- @repo/schemas (Zod validation)
+│   └── tsconfig/               -- @repo/tsconfig (shared TS configs)
+│
+├── supabase/
+│   ├── migrations/             -- 29+ SQL migrations
+│   └── functions/              -- Edge Functions (Deno)
+│
+├── docs/
+│   ├── architecture/           -- Technical architecture
+│   ├── design/                 -- Design system, UX specs, wireframes
+│   ├── stories/                -- 98 user stories across 13 epics
+│   ├── strategy/               -- Deep dives (blind budgeting, voting, RBAC)
+│   ├── research/               -- 40+ technology research reports
+│   └── database/               -- Schema, migrations, RLS policies
+│
+└── wireframes-TripOS/          -- 51 wireframe screens (desktop + mobile)
 ```
+
+### Development Commands (from TripOS/)
+
+```bash
+pnpm dev                    # Start Next.js with Turbopack
+pnpm build                  # Production build
+pnpm lint                   # ESLint
+pnpm typecheck              # TypeScript check
+pnpm test                   # Vitest unit tests
+pnpm test:e2e               # Playwright E2E tests
+
+pnpm db:start               # Start local Supabase (Docker)
+pnpm db:reset               # Reset DB + re-run migrations
+pnpm db:types               # Regenerate TypeScript types from schema
+```
+
+### Non-Negotiable Rules (from TripOS/CLAUDE.md)
+
+1. **Blind budgeting privacy:** Individual budget values NEVER appear in client bundles/API/logs
+2. **RLS enforced on ALL tables:** Never bypass via service_role key in client code
+3. **Semantic colors are exclusive:** teal = privacy/budget, purple = voting, indigo = primary, amber = CTAs
+4. **Server Components by default:** Add `'use client'` only when needed
+5. **Design tokens only:** Use CSS variables from `TripOS/docs/design/style-guide.md`
+6. **React Query for all async state:** Zustand only for UI state (modals, sidebars)
+7. **Zod 3.x required:** Zod 4 breaks with Turbopack
+8. **useWatch() not watch():** React 19 compatibility
 
 ### App Docs Organization Rules
 
-- **Every new doc must go in a subfolder** — pick the most appropriate one from the structure above.
-- If a doc doesn't fit any existing subfolder, **create a new one** with a descriptive kebab-case name.
-- **Naming convention**: kebab-case, lowercase. Date-prefix for time-sensitive docs (e.g., `2026-02-24-feature-design.md`).
-- **BMAD output**: PRDs go in `specs/`, architecture docs in `architecture/`, epics in `epics/`, stories in `stories/`.
-- After creating any new doc, check if `TRIPFLOW-OVERVIEW.md` or a relevant index needs updating.
+- **All app documentation goes in `TripOS/docs/`** with appropriate subfolders
+- **Naming convention:** kebab-case, lowercase, no spaces or underscores
+- **BMAD output:** Stories go in `docs/stories/`, architecture in `docs/architecture/`, design in `docs/design/`
+- After creating any new doc, check if `TripOS/README.md` or `TripOS/docs/index.md` needs updating
+
+### Legacy Code
+
+- **`tripflow-next/`** is the old app structure being phased out
+- All new development, documentation, and features go in `TripOS/`
+- Do not add new files to `tripflow-next/` unless explicitly instructed
 
 ## Key Data Points
 
@@ -152,119 +205,55 @@ tripflow-next/docs/
 
 ---
 
-## TripFlow Development Standards
+## TripOS Development Standards
 
-**⚠️ CRITICAL: All TripFlow code MUST follow the comprehensive style guide.**
+**⚠️ CRITICAL: All TripOS code follows comprehensive standards defined in the TripOS documentation.**
 
-### Style Guide Location
+### Primary Standards Reference
 
-**Primary Reference:** `tripflow-next/docs/TRIPFLOW-STYLE-GUIDE.md`
+**[TripOS/CLAUDE.md](TripOS/CLAUDE.md)** contains all development standards, including:
+- Non-negotiable rules (blind budgeting privacy, RLS, semantic colors, etc.)
+- Tech stack and version constraints (Zod 3.x, React 19 patterns, etc.)
+- Project structure and feature module patterns
+- Testing conventions (Vitest + Playwright)
+- Commands and workflows
 
-This 38-section guide covers:
-- Design system (colors, typography, spacing, components)
-- Code standards (TypeScript, React, testing, performance)
-- Accessibility (WCAG 2.1 AA compliance)
-- Cross-functional collaboration
+### Design System Reference
 
-### Mandatory Requirements
+**[TripOS/docs/design/style-guide.md](TripOS/docs/design/style-guide.md)** contains:
+- 28 design tokens (CSS variables)
+- Color palette (semantic colors: teal=privacy, purple=voting, etc.)
+- Typography, spacing, component library
+- Responsive design standards (390px mobile, 1440px desktop)
+- WCAG 2.1 AA accessibility requirements
 
-**Before Writing ANY Code:**
+### Key Standards Summary
 
-1. **Read the relevant style guide sections** for your task:
-   - New component? → Read [Component Library](#iii-component-library) sections
-   - Styling changes? → Read [Styling Conventions](#23-styling-conventions)
-   - New feature? → Read [Component API Patterns](#12-component-api-patterns)
+**Privacy & Security:**
+- Individual budget values NEVER in client code/bundles/logs
+- RLS enforced on ALL database tables
+- Server Components by default; `'use client'` only when necessary
 
-2. **Use the Component Checklist** (Section 37):
-   - [ ] TypeScript with strict types
-   - [ ] Follows shadcn/ui composable pattern
-   - [ ] Uses design tokens (no hardcoded colors)
-   - [ ] Responsive (mobile-first)
-   - [ ] Dark mode support
-   - [ ] Accessible (keyboard, ARIA, screen reader)
-   - [ ] Tested (unit + E2E if critical)
-   - [ ] Documented with usage examples
+**Code Quality:**
+- TypeScript strict mode
+- React Query for server state, Zustand for UI state only
+- shadcn/ui components (no reimplementation)
+- Design tokens only (no hardcoded colors)
+- Tests co-located with source files
 
-3. **Reference Quick Reference** (Section 36) while coding:
-   - Design tokens (colors, spacing, typography)
-   - Common patterns
-   - Component API conventions
+**Version Requirements:**
+- Zod 3.x (Zod 4 breaks with Turbopack)
+- React Hook Form: use `useWatch()` not `watch()`
+- React Query v5: use `isPending` not `isLoading`
 
-### Code Review Standards
+### When Working on TripOS
 
-**Every PR MUST meet these criteria** (Section 32.2):
+1. **Always `cd TripOS/` first** before running commands
+2. **Read [TripOS/CLAUDE.md](TripOS/CLAUDE.md)** for comprehensive developer guide
+3. **Check [TripOS/README.md](TripOS/README.md)** for project overview and architecture
+4. **Reference [TripOS/docs/design/style-guide.md](TripOS/docs/design/style-guide.md)** when building UI
+5. **Use pnpm** (not npm/yarn) for all package management
 
-✅ **Functionality:**
-- All tests pass (`npm run test`)
-- TypeScript compiles without errors (`npm run build`)
-- ESLint passes (`npm run lint`)
+### Legacy Note
 
-✅ **Accessibility:**
-- Keyboard navigation works (tab through all interactive elements)
-- Screen reader tested (VoiceOver on macOS or NVDA on Windows)
-- Color contrast meets WCAG 2.1 AA (4.5:1 for text, 3:1 for UI)
-- Focus indicators visible on all interactive elements
-
-✅ **Quality:**
-- Follows TypeScript conventions (Section 19)
-- Follows React patterns (Section 20)
-- Uses design tokens from `globals.css`
-- Responsive (test mobile, tablet, desktop)
-- Dark mode works
-
-✅ **Testing:**
-- Unit tests for component logic
-- E2E tests for critical user flows
-- Edge cases covered (empty, error, loading states)
-
-### Common Patterns (Reference Section 38)
-
-**Conditional Rendering:**
-```tsx
-{isLoading ? <Spinner /> : <Content />}
-{items.length === 0 && <EmptyState />}
-```
-
-**Component Structure:**
-```tsx
-interface Props {
-  // Props with clear types
-}
-
-export const Component = ({ ...props }: Props) => {
-  // 1. Hooks
-  // 2. Effects
-  // 3. Event handlers
-  // 4. Render
-}
-```
-
-**Styling:**
-```tsx
-// ✅ Use design tokens
-<div className="bg-bg-surface text-text-primary p-lg rounded-lg">
-
-// ❌ Don't hardcode colors
-<div className="bg-white text-black p-6 rounded-lg">
-```
-
-### When Uncertain
-
-1. Check the style guide section relevant to your task
-2. Look at existing components for patterns (e.g., `Button.tsx`, `Card.tsx`)
-3. Ask for clarification if trade-offs exist
-4. Default to shadcn/ui patterns and Tailwind utilities
-
-### Enforcement
-
-**AI Assistants (Claude Code, Gemini, etc.):**
-- MUST read relevant style guide sections before writing code
-- MUST use the Component Checklist for new components
-- MUST reference design tokens (Section 36) while coding
-- MUST follow code review standards (Section 32.2) before completing work
-
-**Human Developers:**
-- Review style guide quarterly
-- Update guide when establishing new patterns
-- Reference guide during code reviews
-- Maintain guide as living document
+**`tripflow-next/`** contains the old app structure. Do not reference its documentation or add new code there. All TripOS standards supersede any tripflow-next conventions.

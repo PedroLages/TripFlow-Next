@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#7f13ec",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<title>TripOS - Cast Vote</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- TripOS Shell Wrapper -->
+<div class="max-w-4xl mx-auto px-4 py-12">
+<!-- Main Voting Container -->
+<main class="bg-white dark:bg-slate-900/50 rounded-xl shadow-xl border border-primary/10 overflow-hidden">
+<!-- Header Section -->
+<div class="p-8 border-b border-slate-100 dark:border-slate-800">
+<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+<div class="flex items-center space-x-2">
+<span class="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Ranked Choice</span>
+<div class="flex items-center text-primary bg-primary/10 px-3 py-1 rounded-full">
+<span class="material-icons text-sm mr-1">lock</span>
+<span class="text-xs font-medium uppercase tracking-wider">Anonymous</span>
+</div>
+</div>
+<div class="flex items-center text-slate-500 dark:text-slate-400 text-sm font-medium">
+<span class="material-icons text-base mr-2">schedule</span>
+<span>Closes in 1 day 14:32</span>
+</div>
+</div>
+<h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Where should we go for our group dinner?</h1>
+<!-- Quorum Progress Bar -->
+<div class="space-y-2">
+<div class="flex justify-between text-sm font-semibold">
+<span class="text-primary">Quorum Progress</span>
+<span class="text-slate-600 dark:text-slate-300">5 of 8 voted (63%)</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5">
+<div class="bg-primary h-2.5 rounded-full" style="width: 63%"></div>
+</div>
+</div>
+</div>
+<!-- Voting Interaction Area -->
+<div class="p-8 bg-slate-50/50 dark:bg-slate-900/20">
+<div class="mb-6 flex items-center">
+<span class="material-icons text-primary/60 mr-2">info</span>
+<p class="text-slate-600 dark:text-slate-400 font-medium">Drag to rank your preferences (1 = most preferred)</p>
+</div>
+<!-- Draggable Cards List -->
+<div class="space-y-4">
+<!-- Option 1 -->
+<div class="group flex items-center bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary transition-colors cursor-move">
+<div class="flex items-center space-x-4 flex-grow">
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white font-bold text-lg">1</div>
+<span class="text-lg font-semibold text-slate-800 dark:text-white">Mama's Pasta</span>
+</div>
+<div class="flex flex-col space-y-1">
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_less</button>
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_more</button>
+</div>
+</div>
+<!-- Option 2 -->
+<div class="group flex items-center bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary transition-colors cursor-move">
+<div class="flex items-center space-x-4 flex-grow">
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 text-primary font-bold text-lg">2</div>
+<span class="text-lg font-semibold text-slate-800 dark:text-white">Seaside Grill</span>
+</div>
+<div class="flex flex-col space-y-1">
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_less</button>
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_more</button>
+</div>
+</div>
+<!-- Option 3 -->
+<div class="group flex items-center bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary transition-colors cursor-move">
+<div class="flex items-center space-x-4 flex-grow">
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 text-primary font-bold text-lg">3</div>
+<span class="text-lg font-semibold text-slate-800 dark:text-white">The Sunset Lounge</span>
+</div>
+<div class="flex flex-col space-y-1">
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_less</button>
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_more</button>
+</div>
+</div>
+<!-- Option 4 -->
+<div class="group flex items-center bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm hover:border-primary transition-colors cursor-move">
+<div class="flex items-center space-x-4 flex-grow">
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors">drag_indicator</span>
+<div class="w-10 h-10 flex items-center justify-center rounded-full bg-primary/20 text-primary font-bold text-lg">4</div>
+<span class="text-lg font-semibold text-slate-800 dark:text-white">Local Tavern</span>
+</div>
+<div class="flex flex-col space-y-1">
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_less</button>
+<button class="material-icons text-slate-400 hover:text-primary transition-colors">expand_more</button>
+</div>
+</div>
+</div>
+<!-- Summary & CTA -->
+<div class="mt-10 pt-8 border-t border-slate-200 dark:border-slate-800">
+<div class="mb-6">
+<h3 class="text-xs uppercase font-bold text-slate-400 dark:text-slate-500 tracking-widest mb-3">Your Current Ranking</h3>
+<div class="flex flex-wrap items-center gap-2 text-slate-700 dark:text-slate-200 font-medium">
+<span class="bg-primary/5 px-3 py-1 rounded border border-primary/10">Mama's Pasta</span>
+<span class="material-icons text-slate-400 text-sm leading-none">chevron_right</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded border border-slate-200 dark:border-slate-700">Seaside Grill</span>
+<span class="material-icons text-slate-400 text-sm leading-none">chevron_right</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded border border-slate-200 dark:border-slate-700">The Sunset Lounge</span>
+<span class="material-icons text-slate-400 text-sm leading-none">chevron_right</span>
+<span class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded border border-slate-200 dark:border-slate-700">Local Tavern</span>
+</div>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center text-lg">
+<span class="material-icons mr-2">how_to_vote</span>
+                        Cast Vote
+                    </button>
+<p class="text-center mt-4 text-xs text-slate-400 dark:text-slate-500">
+                        You can change your vote at any time before the poll closes.
+                    </p>
+</div>
+</div>
+</main>
+<!-- Footer / Navigation Context -->
+<footer class="mt-8 flex justify-between items-center text-slate-500 dark:text-slate-400 text-sm">
+<div class="flex items-center space-x-1">
+<span class="material-icons text-base">arrow_back</span>
+<a class="hover:text-primary transition-colors font-medium underline underline-offset-4" href="#">Return to Trip Dashboard</a>
+</div>
+<div class="flex items-center space-x-4">
+<span>Trip: <strong class="text-slate-700 dark:text-slate-200">Amalfi Coast 2024</strong></span>
+<span class="w-1 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></span>
+<span>Created by @marco</span>
+</div>
+</footer>
+</div>
+<!-- Decorative Elements (Theme-based) -->
+<div class="fixed top-0 right-0 -z-10 w-1/3 h-1/3 bg-primary/5 blur-[120px] rounded-full opacity-50"></div>
+<div class="fixed bottom-0 left-0 -z-10 w-1/4 h-1/4 bg-primary/10 blur-[100px] rounded-full opacity-40"></div>
+</body></html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trip Members Management - TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-white dark:bg-background-dark/50 flex flex-col">
+<div class="p-6">
+<div class="flex items-center gap-2 text-primary font-bold text-xl">
+<span class="material-icons">flight_takeoff</span>
+<span>TripOS</span>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">dashboard</span>
+<span class="font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">calendar_today</span>
+<span class="font-medium">Itinerary</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary text-white rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">group</span>
+<span class="font-medium">Members</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">account_balance_wallet</span>
+<span class="font-medium">Expenses</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">map</span>
+<span class="font-medium">Places</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-primary/5 rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl p-4">
+<h4 class="text-sm font-semibold text-primary mb-1">Summer in Santorini</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">June 12 - June 24, 2024</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Top Utility Bar -->
+<header class="h-16 border-b border-primary/10 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="flex items-center gap-2 text-slate-500 text-sm">
+<span>Trips</span>
+<span class="material-icons text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-200 font-medium">Summer in Santorini</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-icons">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/10 border border-primary/20 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Avatar of the current logged in user" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoYrusa0pdMyVYZYnFkD-c6_-5iBqEPWAqPLjefO00zn0j-VCGXgDrpubTrhkWxy1aZLoPqOEvTv3dbkSoo2Xr-nh-EO1Tx-GDLDFAfDg9aMnWHp-dRVjoXoY8tY79rVLk2TrT_zpT8Pd2ZXYE9PvGUFuPKzB8KWkar7z1CfN_eGCeTbFacAICcXJ4ZzgV8tiGNeuIZAskyO18zo1gmEdeJj2CyvJjU_6QBKvn3VW_MduO8giE9qMI9AVBf-HqE8p8OdLTARIqthk"/>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-4xl mx-auto w-full">
+<!-- Section Header -->
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white">Members</h2>
+<span class="px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">8 members</span>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg font-medium transition-all shadow-lg shadow-primary/20">
+<span class="material-icons text-sm">add</span>
+<span>Invite Member</span>
+</button>
+</div>
+<!-- Member List -->
+<div class="space-y-4">
+<!-- Role: Owner -->
+<div class="space-y-3">
+<div class="flex items-center gap-2 px-2">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Trip Owner</span>
+<div class="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
+</div>
+<div class="group flex items-center justify-between p-4 bg-white dark:bg-background-dark border border-primary/10 rounded-xl hover:shadow-md transition-all">
+<div class="flex items-center gap-4">
+<div class="relative h-12 w-12">
+<img alt="Alex Johnson" class="h-full w-full rounded-full object-cover" data-alt="Alex Johnson profile portrait with green online status" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4uvMa8It2XiOpOOUsBPMuL8uipeUypd5K56c5ENAP1-ksYZKVe6iI1iZxsYFrOZCqslWm_u_q9GCQ5qdqxPHECDLsdKbi0_3dM0NGxSSeNKqagzv5_l4zYGU58htZSDg3lUP29j4Cdp7LgA8JrYJ_NOiQaqyLfIFGk1hNu0YksVCnu8DTizrtO8qT8L7Pekspkk7sRBnbRgHfxTS4B-TLUnFjVlv9qRlo81-K7pA1O9jSESJMTDXyZPaCZ6vwrYONGunAtNBqOho"/>
+<span class="absolute bottom-0 right-0 h-3.5 w-3.5 bg-green-500 border-2 border-white dark:border-background-dark rounded-full"></span>
+</div>
+<div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Alex Johnson</h3>
+<p class="text-sm text-slate-500">alex.j@travel.com</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-full">Owner</span>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Role: Organizer -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center gap-2 px-2">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Organizers</span>
+<div class="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
+</div>
+<div class="group flex items-center justify-between p-4 bg-white dark:bg-background-dark border border-primary/10 rounded-xl hover:shadow-md transition-all">
+<div class="flex items-center gap-4">
+<div class="relative h-12 w-12">
+<img alt="Sarah Chen" class="h-full w-full rounded-full object-cover" data-alt="Sarah Chen profile portrait with yellow away status" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk8GXjKhpAm7EJ5pDsw08go19rQcr8ucXvf2np0R8KoTCKe-IfLWlww9_d_8rz4i0CZ7V8lF0X5qswc1Mb4j4O6ZRAhEO1nXESZJKxTbqUFHNPAuFvuXl_msVzKPpJzJlcEb6jhjxTJAIA7MLhN6760NO-llCY9XZN92sN3PmRCOgo0MaccMX8W8p4V0xQNxdXiTA2sgKH_pEAG-lsfFo9qWCr-z4rShFong05O4HPcUilZEWZeiOvHAr6zk542kkA2aElnjWVZNM"/>
+<span class="absolute bottom-0 right-0 h-3.5 w-3.5 bg-yellow-500 border-2 border-white dark:border-background-dark rounded-full"></span>
+</div>
+<div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Sarah Chen</h3>
+<p class="text-sm text-slate-500">schen@design.io</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full">Organizer</span>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Role: Members -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center gap-2 px-2">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Members</span>
+<div class="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
+</div>
+<div class="group flex items-center justify-between p-4 bg-white dark:bg-background-dark border border-primary/10 rounded-xl hover:shadow-md transition-all">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+<img alt="Mike Ross" class="h-full w-full object-cover" data-alt="Mike Ross professional profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqgczZe4lneLRCC-hulLiAfR_NlbAfAN-fbleY6aMOUTtY9xAiTFI1NS9sKkE4YHl521Aj-UOTUgJHmi3nqdUdDvyLsddCg33Cm9pZ8oNJyeRKYkhHoMvXfiVoekofMS_QVRqKAaJLH0hhb3aKD5YgxsNNAD06KZQX8khoIpHAXqoOtiL5LgMIYtVywSC2YVXC6_bs-iz0dX1Sl5yKGbhQHhP97qxFRsvu0DUzdD0rFe8ADSsI-QPIHu5Xrc6DszlutMnrGtp8JTk"/>
+</div>
+<div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Mike Ross</h3>
+<p class="text-sm text-slate-500">mike.ross@pearson.com</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-full border border-slate-200 dark:border-slate-700">Member</span>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Role: Pending -->
+<div class="space-y-3 pt-2">
+<div class="flex items-center gap-2 px-2">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Invitations</span>
+<div class="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
+</div>
+<div class="group flex items-center justify-between p-4 bg-white dark:bg-background-dark border-2 border-dashed border-primary/20 rounded-xl">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-full border-2 border-dashed border-slate-300 dark:border-slate-700 flex items-center justify-center bg-slate-50 dark:bg-slate-800/50">
+<span class="material-icons text-slate-400">mail_outline</span>
+</div>
+<div>
+<h3 class="font-semibold text-slate-900 dark:text-white">traveler@example.com</h3>
+<p class="text-sm text-yellow-600 dark:text-yellow-500 italic">Invite sent 2 days ago</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 bg-yellow-500/10 text-yellow-600 dark:text-yellow-500 text-xs font-bold rounded-full border border-yellow-500/20 mr-2">Pending</span>
+<button class="px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors border border-primary/20">Resend</button>
+<button class="px-3 py-1.5 text-xs font-medium text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">Cancel</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Summary -->
+<div class="mt-12 p-6 bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/10 flex items-center gap-6">
+<div class="flex -space-x-3 overflow-hidden">
+<img alt="" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-background-dark" data-alt="Stacked avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDse6Cs7WaDhIo8AwqayEf_ButtssMsFD0l9CAt6OvwV7dgEYP4oh8fJc02LY8XkF-C10uUGnztc0hFQlMMKLwNEunI26sgmEB4XSUL4KORCOJR45jf0CeFboyEFlX9H2U1IbNIGHMSZj-y7kTCymw6XcsF4VrOtKUVU-atyKi9NLJU9h1B00ywkDLYsuhyVdXW1PWQGwIvJK12-UD_yoCBMYkNKS9sKZNUN5Irt7f605ktjBzKvY3rn6oh7tJfl3pdiG-3ZgRjyAI"/>
+<img alt="" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-background-dark" data-alt="Stacked avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBoYp0LchfIUMeEkNW5uaO13uNdtAmDSR3Iz3fzxL9PDvfxTGnOtlzJJBsZWUB2ZdPAX0lqOsOaJRDj4rhHycjjzfHI4fFyQ7evYHULVzvFi-ohlxN8UAWCrgP0dPQUceMJCN6uX5beu3YfYQKb-UhRNrcqjXGHlK1ahBT39M1-CuOIi6GXDrRpduGQfCKUc257RrmFfZy64g-rbuuZJwV349TAAK3RE1a09ckfBYAt6tTo36BuSV3Utn8gjC_p0ikTUiNeiim6Pg"/>
+<img alt="" class="inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-background-dark" data-alt="Stacked avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX-L5OKZ9aoOJzrc08ZI-BaJWbOWQC2ik0JgYW4V9kabGoWGkBGBzPvmVx9rZvZB0Gf-YTr3licqEI3AyIaGoiP_17KLt5beh9gw6aZkMo0Z_TlO0iDd76qcsQ5JQdyHCFsCkdR77Pln6EHwGq-AiomT9q2ZdRVlLhyQuK4mnELpksCkXolZTODncg8TutDyBKCXYyfVk2UP93Xi40B_Qg65_QBi77mQ7mh3i2JRVuNVleI5OWL-SYQWAN7tTD6ev7r4_QZJUu3z0"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-xs font-medium text-slate-600 dark:text-slate-300 ring-2 ring-white dark:ring-background-dark">+5</div>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-900 dark:text-white">Collaborative Travel</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">All members can suggest places and activities in the shared itinerary.</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

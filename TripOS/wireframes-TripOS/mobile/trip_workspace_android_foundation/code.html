@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trip Workspace Android Foundation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav-pill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-0 md:p-8">
+<!-- Phone Container (Android Form Factor on iOS platform feel) -->
+<div class="relative w-full max-w-[412px] h-[892px] bg-white dark:bg-slate-950 shadow-2xl overflow-hidden md:rounded-[3rem] border-[8px] border-slate-900 dark:border-slate-800 flex flex-col">
+<!-- Status Bar Mock -->
+<div class="h-10 flex items-center justify-between px-6 pt-2">
+<span class="text-xs font-semibold">9:41</span>
+<div class="flex gap-1.5 items-center">
+<span class="material-symbols-outlined text-[16px]">signal_cellular_4_bar</span>
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="material-symbols-outlined text-[16px]">battery_full</span>
+</div>
+</div>
+<!-- Material 3 Top App Bar -->
+<header class="flex items-center px-4 py-4 gap-4 bg-white dark:bg-slate-950 sticky top-0 z-10">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">arrow_back</span>
+</button>
+<div class="flex-1">
+<h1 class="text-xl font-semibold text-slate-900 dark:text-white">Summer in Tokyo</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400">July 12 — July 24, 2024</p>
+</div>
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined text-slate-700 dark:text-slate-300">more_vert</span>
+</button>
+</header>
+<!-- Main Content (Overview Tab Active) -->
+<main class="flex-1 overflow-y-auto px-4 pb-32">
+<!-- Hero Card -->
+<div class="relative w-full h-48 rounded-xl overflow-hidden mb-6 mt-2">
+<img alt="Tokyo Cityscape" class="w-full h-full object-cover" data-alt="Cinematic neon cityscape of Tokyo Japan at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV1AvAp8_wgRDZRFBu4jb9oWAM7XNyKqMScywVrY0gw-rE6fatkbUA_7UgjYiKIqCCgY6HFsw8CZgDVLto47pUkx8tWFji9JhhTiieSpu8la8xMijZejinDT74Hd4Lij95lKmwMyNSCRn6zk-1s3CKad71_R8dhv58JISYHr9OJGICU_j3BYK2mRAM0-ryf98SotkAqlEI7aykGMVhBvJGKunhRcM24tgLr8JqRDTx7htpuVh2awl8yesz2s7V9j0G1xeFtL3Vpa4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-end items-end p-4">
+<div class="flex -space-x-2">
+<img alt="Member 1" class="w-8 h-8 rounded-full border-2 border-white" data-alt="User profile avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmd2lEZBPdTmqLQYVHvhxlcskhDaE_q1Tv-SALyV2UpnKe-X_rm7A16IKggotPyIuSO1qc4sSK6OxoHe5-O2lA20-o00zuGiK99qu7l03uQQ9DnjahrekKgz-RuuSdXka2Rezeo3fgfYEFfJaZ-kNOZqndxE4nOQBitiCsYyoVSVDFCZdLX61zD4FroYxaYFAyF2WHk9L_Cus5VbCkJpoJF0SAzuwMm3K_wcD24Ays1JW-HcSVl3skgJmnkwVvIE9pxYbekpDoPg4"/>
+<img alt="Member 2" class="w-8 h-8 rounded-full border-2 border-white" data-alt="User profile avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgcQvqt6KnriwMNuKhkNt_aeyyCRQT-6Z9xy8DS5Cocy5OlkYhml8HsLKGQpSsL-NRA4HT_n3BP7J0tkfUB86_3u9EqLJX_0y1AnRlHy9Oet1BS95-YhWNYMebb-PcP1L26rFiuKPoB2LRvozE6hQa43_T82grzi_7PDoh5iANiEJTXMf9Q5uiJmxi5A9ZAETXR9EU__d9SN5qXt9IGMMnZZcIDuu_KpfzGNYmIrTHQWTqfPtWZkSC9L3bSzCX-2Fzbp8lVpN-05M"/>
+<img alt="Member 3" class="w-8 h-8 rounded-full border-2 border-white" data-alt="User profile avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGsgSepvV56uFvE76D5XsXT3cCAd8je_TFvFBt-D5HFhwbKVbbI9zQAf1syFn9zmM3-mbJvK40KK3xf3qBYU6uEoxHQDWpX465IDqml78PXxWBrubmrr9M-vYI79imMmqoZau8ZU6gIaz-fM4ncvyUQCxQi4HfD9gaxev0ucE_5FMef1jlzWyuRCXZrPGlEFEPB8PAkbPEHrm6IOCv292BwxoIWrKP2lwcFse3DAnzXZgfQIlLjFEt3seStkpJfw5Nr2dRW_5rWjs"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary text-white flex items-center justify-center text-[10px] font-bold">+2</div>
+</div>
+</div>
+</div>
+<!-- Overview Modules -->
+<div class="space-y-4">
+<!-- Next Up -->
+<section>
+<h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3 px-1">Next Up</h2>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex gap-4">
+<div class="w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div class="flex-1">
+<h3 class="font-medium text-slate-900 dark:text-white">Sushi Dinner @ Sukiyabashi</h3>
+<p class="text-sm text-slate-500">Starts in 2 hours • Ginza District</p>
+</div>
+</div>
+</section>
+<!-- Quick Glance Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Votes Preview -->
+<div class="bg-purple-50 dark:bg-purple-900/10 border border-purple-100 dark:border-purple-900/30 p-4 rounded-xl">
+<div class="flex items-center gap-2 mb-2 text-purple-700 dark:text-purple-400">
+<span class="material-symbols-outlined text-sm">how_to_vote</span>
+<span class="text-xs font-bold uppercase">Votes</span>
+</div>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">3</p>
+<p class="text-xs text-slate-500">Pending decisions</p>
+</div>
+<!-- Budget Preview -->
+<div class="bg-teal-50 dark:bg-teal-900/10 border border-teal-100 dark:border-teal-900/30 p-4 rounded-xl">
+<div class="flex items-center gap-2 mb-2 text-teal-700 dark:text-teal-400">
+<span class="material-symbols-outlined text-sm">account_balance_wallet</span>
+<span class="text-xs font-bold uppercase">Budget</span>
+</div>
+<p class="text-2xl font-bold text-slate-900 dark:text-white">¥12.4k</p>
+<p class="text-xs text-slate-500">Remaining / person</p>
+</div>
+</div>
+<!-- Itinerary Preview -->
+<section>
+<div class="flex items-center justify-between mb-3 px-1">
+<h2 class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Itinerary Highlights</h2>
+<button class="text-primary text-xs font-semibold">View All</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-4 py-2">
+<div class="text-center w-10">
+<span class="block text-xs text-slate-400">JUL</span>
+<span class="block text-lg font-bold">14</span>
+</div>
+<div class="flex-1 border-l-2 border-slate-100 dark:border-slate-800 pl-4">
+<h4 class="text-sm font-medium">Team Lab Borderless</h4>
+<p class="text-xs text-slate-500 italic">Confirmed • 10:00 AM</p>
+</div>
+</div>
+<div class="flex items-center gap-4 py-2 opacity-60">
+<div class="text-center w-10">
+<span class="block text-xs text-slate-400">JUL</span>
+<span class="block text-lg font-bold">15</span>
+</div>
+<div class="flex-1 border-l-2 border-slate-100 dark:border-slate-800 pl-4">
+<h4 class="text-sm font-medium">Shibuya Sky Tour</h4>
+<p class="text-xs text-slate-500 italic">Voting in progress</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-4 md:absolute md:bottom-24 md:right-8 bg-primary text-white w-14 h-14 rounded-xl shadow-lg shadow-primary/30 flex items-center justify-center active:scale-95 transition-transform z-20">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- M3 Bottom Navigation Bar -->
+<nav class="absolute bottom-0 left-0 right-0 bg-slate-50/80 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-800 pb-8 pt-3 px-2 flex justify-around items-center z-10">
+<!-- Overview (Active) -->
+<button class="flex flex-col items-center gap-1 flex-1 group">
+<div class="bg-primary px-5 py-1 rounded-full text-white mb-1">
+<span class="material-symbols-outlined active-nav-pill">home</span>
+</div>
+<span class="text-[10px] font-bold text-slate-900 dark:text-white">Overview</span>
+</button>
+<!-- Itinerary -->
+<button class="flex flex-col items-center gap-1 flex-1 text-slate-600 dark:text-slate-400 group">
+<div class="px-5 py-1 rounded-full group-hover:bg-slate-200/50 dark:group-hover:bg-slate-800 transition-colors mb-1">
+<span class="material-symbols-outlined">map</span>
+</div>
+<span class="text-[10px] font-medium">Itinerary</span>
+</button>
+<!-- Votes -->
+<button class="flex flex-col items-center gap-1 flex-1 text-slate-600 dark:text-slate-400 group">
+<div class="px-5 py-1 rounded-full group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 transition-colors mb-1">
+<span class="material-symbols-outlined">how_to_vote</span>
+</div>
+<span class="text-[10px] font-medium">Votes</span>
+</button>
+<!-- Budget -->
+<button class="flex flex-col items-center gap-1 flex-1 text-slate-600 dark:text-slate-400 group">
+<div class="px-5 py-1 rounded-full group-hover:bg-teal-100 dark:group-hover:bg-teal-900/30 transition-colors mb-1">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="text-[10px] font-medium">Budget</span>
+</button>
+<!-- Members -->
+<button class="flex flex-col items-center gap-1 flex-1 text-slate-600 dark:text-slate-400 group">
+<div class="px-5 py-1 rounded-full group-hover:bg-slate-200/50 dark:group-hover:bg-slate-800 transition-colors mb-1">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-[10px] font-medium">Members</span>
+</button>
+</nav>
+<!-- Home Indicator (iOS style) -->
+<div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full z-20"></div>
+</div>
+</body></html>

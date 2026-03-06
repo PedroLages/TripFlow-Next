@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1d4fd7",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111521",
+            },
+            fontFamily: {
+              "display": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-12 w-full flex items-center justify-between px-8 sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-icons-round text-sm">signal_cellular_alt</span>
+<span class="material-icons-round text-sm">wifi</span>
+<span class="material-icons-round text-sm rotate-90">battery_full</span>
+</div>
+</div>
+<!-- Header Navigation -->
+<header class="px-4 py-2 sticky top-12 z-40 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center justify-between mb-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700">
+<span class="material-icons-round text-primary">arrow_back_ios_new</span>
+</button>
+<div class="text-center">
+<h1 class="text-lg font-bold">Summer in Tokyo</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-slate-400 font-bold">Trip Planning</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-icons-round">add</span>
+</button>
+</div>
+<!-- Sticky Day Selector -->
+<div class="flex gap-3 overflow-x-auto pb-4 hide-scrollbar">
+<button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-primary text-white font-semibold text-sm shadow-md shadow-primary/30">
+                Day 1
+            </button>
+<button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-100 dark:border-slate-700">
+                Day 2
+            </button>
+<button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-100 dark:border-slate-700">
+                Day 3
+            </button>
+<button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-100 dark:border-slate-700">
+                Day 4
+            </button>
+<button class="flex-shrink-0 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-semibold text-sm border border-slate-100 dark:border-slate-700">
+                Day 5
+            </button>
+</div>
+</header>
+<!-- Main Content: Itinerary List -->
+<main class="px-4 py-6 pb-32 space-y-4">
+<!-- Activity Card 1 -->
+<div class="relative group">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Stalls at Tsukiji Fish Market Tokyo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl6PzzVRawEZKmFC1visG7Oab3wKqBkcWr4WO8ENRMHtM78Sf09bfeiQK8opCKdDFKEAfTsSdXwmmbsbF5qNFdlb0mz0SId7YTlog_xQ6VJP4fG-kHd7KHAXDB3PAGcQdvQhwtpFK5WTZtsTfZw3JmofV4Y66m68YefLIIzLV7jKZrC_RDn9DWvyup5guIUy6lhBmS2Df7FeUwSaKuvovU5GDsKH3vGFv7_Qb-HWdgJ9ifxhu4CcDarcHXDkH9MYiMwESa65X2D-Q"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-slate-900 dark:text-white">Tsukiji Fish Market</h3>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">08:00 AM</span>
+</div>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons-round text-sm">location_on</span>
+<span class="text-xs">Chuo City</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons-round text-sm">payments</span>
+<span class="text-xs">$25.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 2: Swiped State -->
+<div class="relative overflow-hidden rounded-xl">
+<!-- Swipe Action Buttons (Revealed) -->
+<div class="absolute inset-0 flex justify-end">
+<div class="flex h-full">
+<button class="w-20 bg-primary flex flex-col items-center justify-center text-white gap-1">
+<span class="material-icons-round text-xl">edit</span>
+<span class="text-[10px] font-bold uppercase">Edit</span>
+</button>
+<button class="w-20 bg-red-500 flex flex-col items-center justify-center text-white gap-1">
+<span class="material-icons-round text-xl">delete_outline</span>
+<span class="text-[10px] font-bold uppercase">Delete</span>
+</button>
+</div>
+</div>
+<!-- Foreground Card (Positioned left to simulate swipe) -->
+<div class="relative bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex gap-4 translate-x-[-160px] transition-transform duration-300">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Traditional red Senso-ji Temple gate" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqlq-AwIf6oRD-cbtQ6TwZjUT30bEMLgVgFKuzAIQpW_27sXe2vGqUNNOaZCE_eLquzUzJmKC5GpoNYbppwzJU7lt8D_jstDESQhUnLVwP30a8agTtOc7scz1rBLLgEnYlm38aOsOzdZQdWU83ZnupSxOjwnKMVJa5UGmU1i9UHhmcyki3b5O46F4jmFhLdVOXH7atER1-H6Yh6_GTOLl8AVAytKYgF4USf824iMyPjbj5VVbB9z2M4lwCRzgHCTduIEJ7tEVjxcg"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-slate-900 dark:text-white">Senso-ji Temple</h3>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">10:30 AM</span>
+</div>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons-round text-sm">location_on</span>
+<span class="text-xs">Asakusa</span>
+</div>
+<div class="flex items-center gap-1 text-green-600 dark:text-green-400">
+<span class="material-icons-round text-sm">payments</span>
+<span class="text-xs font-bold">Free</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 3 -->
+<div class="relative">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Busy Shibuya Crossing at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoMSAGHn1B-Xfz7lGkFVYt7CMmzcVSISBRYKnXdNJ-iUHfHI_1CssjnBC7xNMYqDUAQDrtW6XLaWwzy8NyKGwRGal5AqbuH4qxCgaYnFJOm6_jBIvYbfPe-18wXSzo7wscbPNFzN_EcpGYLkac3tZ5KRTxNKcFZOkODTkhooZsIR1XPQVX4N1YNocAgsnhueBKy_-EJyCgQhJXgS3qnhi8QYVxHZuF6gfeAhcYRSFzgKY-udD608cPn4npo7VVMRHqJdj760ursKE"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-slate-900 dark:text-white">Shibuya Crossing</h3>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">01:00 PM</span>
+</div>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons-round text-sm">location_on</span>
+<span class="text-xs">Shibuya</span>
+</div>
+<div class="flex items-center gap-1 text-green-600 dark:text-green-400">
+<span class="material-icons-round text-sm">payments</span>
+<span class="text-xs font-bold">Free</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 4 -->
+<div class="relative">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex gap-4">
+<div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Modern architecture in Shinjuku Gyoen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5BbX1LcF44urfTU_OjmFRsD6wsSB684gwPTRbZ_O_rY3z9M2AQbZy2_8mOdYETPnb3VwJD4Dp7NxTyIIHhY15y5W8RC5j98Yz6vTmZCwsvaX036vCgZPn6GRaq3KPKhs9qpzdrKMulGG_Xn-gUUYbUXo25zRIXJAlfHrdfOZcbmua04zJ6yD2LJKo8VGunFxMGjmwF5ZVGFrUYn41o0k6sIYTwSbzWA2bHY3GxqDLIIhn4upBeym_L2I5fUt3Rj4LOiqJesbMStE"/>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-bold text-slate-900 dark:text-white">Shinjuku Gyoen</h3>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">03:30 PM</span>
+</div>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons-round text-sm">location_on</span>
+<span class="text-xs">Shinjuku</span>
+</div>
+<div class="flex items-center gap-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons-round text-sm">payments</span>
+<span class="text-xs">$4.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Map Quick Preview -->
+<div class="mt-8">
+<h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider">Route Preview</h4>
+<div class="rounded-xl overflow-hidden h-40 relative group">
+<img class="w-full h-full object-cover grayscale brightness-90" data-alt="Stylized map of Tokyo city center" data-location="Tokyo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANaRYXjlAMvzVZJEJ3WlLXiN3hFtFPx7rqqvMY_rFq3u7T-mY2FHaAUjzLDjmpoLdnAF7d31yanqCDR-hIUVDMpJptUdbems9Y4YDrFbmJBoNIEUg3PZTpbhqA4XThwuKLLkK5s3TcUMz_12dms-6np4e5KjIGFO3RoAONEyQdQCnBzkLj1CelbxGJUUp9XxZ86gm7VSy0g7SzOiaVa3ujRv3DJEXm4LZ7VebBcSxnSIRztHaD0S4CipFWpY05N_sX2eThwyBCA1s"/>
+<div class="absolute inset-0 bg-primary/10 pointer-events-none"></div>
+<div class="absolute bottom-3 left-3 bg-white/90 dark:bg-slate-900/90 ios-blur px-3 py-1.5 rounded-full flex items-center gap-2 shadow-lg">
+<span class="material-icons-round text-primary text-sm">directions_car</span>
+<span class="text-xs font-bold">4.2 miles total today</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-background-dark/80 ios-blur border-t border-slate-200 dark:border-slate-800 px-6 pt-3 pb-8 flex justify-between items-center z-50">
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons-round">explore</span>
+<span class="text-[10px] font-bold">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons-round">calendar_today</span>
+<span class="text-[10px] font-bold">Itinerary</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons-round">group</span>
+<span class="text-[10px] font-bold">Groups</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons-round">chat_bubble_outline</span>
+<span class="text-[10px] font-bold">Chat</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500">
+<span class="material-icons-round">person_outline</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<!-- iOS Home Indicator -->
+<div class="fixed bottom-1.5 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-300 dark:bg-slate-700 rounded-full z-50"></div>
+</body></html>

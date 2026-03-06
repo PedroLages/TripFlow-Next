@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "warning": "#e11d48",
+                        "warning-bg": "#fff1f2"
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header Section -->
+<header class="bg-white dark:bg-slate-900 pt-12 pb-6 px-6 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+<div class="flex justify-between items-start mb-4">
+<h1 class="text-2xl font-bold leading-tight max-w-[70%]">Rank our preferred dinner spots</h1>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Ranked Choice</span>
+</div>
+<div class="flex items-center gap-2 mb-4 text-warning">
+<span class="material-icons text-sm">schedule</span>
+<span class="text-sm font-medium">Closes in 5h 20m</span>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs font-medium text-slate-500 dark:text-slate-400">
+<span>Quorum Status</span>
+<span>3 of 8 voted</span>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[37.5%]"></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-6 py-6 pb-40">
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Tap options to rank them or use arrows to adjust order.</p>
+<!-- Ranked Section -->
+<div class="space-y-4 mb-10">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Your Rankings</h2>
+<!-- Rank 1 Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-1 flex items-center gap-4">
+<div class="flex items-center justify-center w-10 h-10 ml-3 bg-primary text-white rounded-full font-bold">1</div>
+<div class="flex-1 font-semibold text-slate-800 dark:text-white py-4">Trattoria</div>
+<div class="flex items-center gap-1">
+<button class="w-11 h-11 flex items-center justify-center text-slate-300 pointer-events-none">
+<span class="material-icons">keyboard_arrow_up</span>
+</button>
+<button class="w-11 h-11 flex items-center justify-center text-slate-500 active:bg-slate-100 dark:active:bg-slate-800 rounded-lg">
+<span class="material-icons">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- Rank 2 Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-1 flex items-center gap-4">
+<div class="flex items-center justify-center w-10 h-10 ml-3 bg-primary text-white rounded-full font-bold">2</div>
+<div class="flex-1 font-semibold text-slate-800 dark:text-white py-4">Sky Lounge</div>
+<div class="flex items-center gap-1">
+<button class="w-11 h-11 flex items-center justify-center text-slate-500 active:bg-slate-100 dark:active:bg-slate-800 rounded-lg">
+<span class="material-icons">keyboard_arrow_up</span>
+</button>
+<button class="w-11 h-11 flex items-center justify-center text-slate-500 active:bg-slate-100 dark:active:bg-slate-800 rounded-lg">
+<span class="material-icons">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<!-- Rank 3 Card -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 p-1 flex items-center gap-4">
+<div class="flex items-center justify-center w-10 h-10 ml-3 bg-primary text-white rounded-full font-bold">3</div>
+<div class="flex-1 font-semibold text-slate-800 dark:text-white py-4">Burger Bar</div>
+<div class="flex items-center gap-1">
+<button class="w-11 h-11 flex items-center justify-center text-slate-500 active:bg-slate-100 dark:active:bg-slate-800 rounded-lg">
+<span class="material-icons">keyboard_arrow_up</span>
+</button>
+<button class="w-11 h-11 flex items-center justify-center text-slate-300 pointer-events-none">
+<span class="material-icons">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Unranked Section -->
+<div class="space-y-4">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-3">Unranked</h2>
+<div class="bg-slate-100 dark:bg-slate-800/50 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 p-1 flex items-center gap-4">
+<div class="flex items-center justify-center w-10 h-10 ml-3 border-2 border-slate-300 dark:border-slate-600 rounded-full font-bold text-slate-400">
+<span class="material-icons text-sm">add</span>
+</div>
+<div class="flex-1 font-semibold text-slate-500 dark:text-slate-400 py-4">Sushi House</div>
+<div class="w-11 h-11 flex items-center justify-center mr-1">
+<span class="material-icons text-slate-300">drag_indicator</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation & Action -->
+<div class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
+<!-- Sticky Action Button -->
+<div class="px-6 pt-4 pb-2">
+<button class="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-colors">
+                Save Rankings
+            </button>
+</div>
+<!-- Tab Bar -->
+<nav class="flex justify-between items-center px-6 pb-6 pt-2">
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">explore</span>
+<span class="text-[10px] font-medium">Explore</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">calendar_today</span>
+<span class="text-[10px] font-medium">Itinerary</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">how_to_vote</span>
+<span class="text-[10px] font-bold">Polls</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">chat_bubble_outline</span>
+<span class="text-[10px] font-medium">Chat</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">person_outline</span>
+<span class="text-[10px] font-medium">Profile</span>
+</button>
+</nav>
+<!-- iOS Home Indicator Safe Area -->
+<div class="h-4"></div>
+</div>
+</body></html>

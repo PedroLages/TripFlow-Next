@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1d4fd7",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111521",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<title>TripOS - My Trips Dashboard</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-white dark:bg-background-dark/50 hidden lg:flex flex-col sticky top-0 h-screen">
+<div class="p-6">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-icons text-3xl">explore</span>
+<span class="text-xl font-bold tracking-tight">TripOS</span>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-white rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">dashboard</span>
+<span class="font-medium">My Trips</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">search</span>
+<span class="font-medium">Explore</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">favorite</span>
+<span class="font-medium">Saved</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary rounded-lg transition-colors" href="#">
+<span class="material-icons text-xl">notifications</span>
+<span class="font-medium">Notifications</span>
+</a>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 px-2">
+<img alt="Profile" class="w-10 h-10 rounded-full object-cover" data-alt="Professional male portrait for profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZoGZh0pUXvVKNIyu59uCs87yx51A617cxahRCXQBs_H2EoWY3wIQMqtjDpbuBdjOQFgZWuoqAwocoMwYOpUC4PcEte18OGdzsC4JgaCQOjBC4A8GjhqEI4ZkwsTGObNpfVFdpkOk21EV6vQTNUBVrnfPQqAOWXNhxJ8UgNRp9vD8ttSAQVXLtFYqTDPOdFJ3xqZ7ujymZnR2ZhuQPQtmC2-pI8se5NzpWKF1sgL6Eq8O1gDF_408L5AeY2DbrvgSc7pKLeqxNq4o"/>
+<div class="flex flex-col">
+<span class="text-sm font-semibold">Alex River</span>
+<span class="text-xs text-slate-500">Premium Member</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-8 overflow-y-auto">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-bold tracking-tight">My Trips</h1>
+<p class="text-slate-500 mt-1">Organize and collaborate on your next adventures.</p>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-95">
+<span class="material-icons">add</span>
+<span>Create Trip</span>
+</button>
+</header>
+<!-- Filters Tabs -->
+<div class="border-b border-primary/10 mb-8">
+<div class="flex gap-8">
+<button class="pb-4 text-primary font-semibold border-b-2 border-primary relative">
+                    All Trips
+                    <span class="ml-2 text-xs bg-primary/10 px-2 py-0.5 rounded-full">3</span>
+</button>
+<button class="pb-4 text-slate-500 dark:text-slate-400 font-medium hover:text-primary transition-colors">Upcoming</button>
+<button class="pb-4 text-slate-500 dark:text-slate-400 font-medium hover:text-primary transition-colors">Planning</button>
+<button class="pb-4 text-slate-500 dark:text-slate-400 font-medium hover:text-primary transition-colors">Past</button>
+</div>
+</div>
+<!-- Trips Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Trip Card 1: Santorini -->
+<div class="group bg-white dark:bg-slate-900 border border-primary/5 rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img alt="Santorini" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Classic blue dome church in Oia Santorini" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8eB2nydWI2F3gY1L_VJ9X-mHFiJ84JA3J0GleCOrkdFZouS4tjHmsSpv3xgU15Wy6MIAZZLCmzfPuFBGdJhbJKI7UwPYhaRPgf-I4gZMIVMM098AYUdkNtQbpYCUoGCdP2EdsWcO9RyQeSyhEaSr3eAlf0MPGlkkbQhGUF5gMoPEyh1eDOXkCmhKFI6vUxKx5y6aZ-LFZo7EVGzSTxlvhtS-WMABVS2KPwGtk6HrqD4lF5cO9T8J62AhqimiisSx7ho6DnjwuIZE"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md dark:bg-slate-900/90 px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                        In 45 days
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-xl font-bold">Summer in Santorini</h3>
+<div class="flex items-center gap-1 text-slate-500 text-sm mt-1">
+<span class="material-icons text-base">location_on</span>
+<span>Oia, Greece</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 mb-4 font-medium">
+<span class="material-icons text-base">calendar_today</span>
+<span>July 12-20, 2024</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+<span class="material-icons text-xs">how_to_vote</span>
+                            2 active polls
+                        </span>
+<span class="bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+<span class="material-icons text-xs">payments</span>
+                            Budget set
+                        </span>
+</div>
+<div class="flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar woman portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEvYiQjcOtq9IVpsY3zN7weDRkI-sqzizTC1sQtPUStUhoB8kia1t9vLbJ-60j3WU9_aU9oA8Kbmc9-W5PHXxQW3RZELhpdkRvQk9mRRNB0FF4L-nCWs-g6KVwhJCaE-LkblRkF986E137Sy5zHO2KIeKLAS5mLR9HucWzr8TUiG52gz_JuKuqIkwIHZD4RXsgPV8Z6FJD9F6wqqPHDLHMalDyh_jLMTmn1smPIECAz9d6CfhBVtK4U1ic_hGWN71cBJkkpMCknuI"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar man with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvBBhQDKMpBE-1nVSt5e_-gRSSZz5GwpraoNupga6G6tmFYXOjYxR2riijgqqGQtRmqmwVOn-CwYNaekC0OaSejxgISrRqOSGtuJRuapMlPIjYrAvLy94wd7yV2UWdsH9gs0j1A-vdzXqgmFmxwaaTMiMU-x6UCLpxeePOhjSqQtXcf8bdsRfG49LGpbrqJvJ9CeRSh6Wk1qqn8YmZxyJScv-_aTXEogAVKr_khNe_Xc4qCFengjOBlpbISmYVv8gqgD6tsURLKdM"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar smiling man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf9ehWys09u7VvyMzsuqwt32BCmwN6VhCF06o8s3rSL1OzIAIz4wf2npN48VGnHjtmY_i7zFcCZLHaoeIPvI4f8yGJLZujtH3fwOJDj37JJATrpOe3tr7zD-TpJ6g8J0_pR7K1rFTKQL7qdxk_b66CFsGm_d6KJ0DziEGattlhqeTICb3W9D9JA4gZ2aLQA6sonpF2xw5egNWAYfmxPaS1aKoB0_LRqAigGJTjqRHzDd-OL1pqT1DoHS7xgXCfZlXJzqn9kHL-qPY"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold">+1</div>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">Manage Trip</button>
+</div>
+</div>
+</div>
+<!-- Trip Card 2: Whistler -->
+<div class="group bg-white dark:bg-slate-900 border border-primary/5 rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img alt="Whistler" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Snowy mountain peaks in Whistler Canada" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoVZ87aD8RXoihH63ZtWVpHqdSKBlbWfYNY7Ayy-CrOl07dUnbmegX0B9XgQqqpb5xiJw8pEON0LRSkzedQm6Towwo0n8ErT9Vski2_mTSzO7DecsMXSC-yI6lyDHyav380V1MEfIedxZx8QmFMu8BR1Sqo1R4AP06qxFAXMe7tt2Gy_ZV1MsHeU9n2YYXG1nKI-78YPYoOlkOZodJGuwsNHeKzFCB-qRUHSR9K-RqEj3BeaFn4YHuR__gYO1UnUMzXsG2jIvA7M8"/>
+<div class="absolute top-4 right-4 bg-orange-100 dark:bg-orange-900/90 px-3 py-1 rounded-full text-xs font-bold text-orange-700 dark:text-orange-300 shadow-sm">
+                        Planning
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-xl font-bold">Ski Weekend</h3>
+<div class="flex items-center gap-1 text-slate-500 text-sm mt-1">
+<span class="material-icons text-base">location_on</span>
+<span>Whistler, BC</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 mb-4 font-medium">
+<span class="material-icons text-base">calendar_today</span>
+<span>Dec 5-8, 2024</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+<span class="material-icons text-xs">group</span>
+                            6 people
+                        </span>
+</div>
+<div class="flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBam6SzgzlhjjQ0JtleexmqDnILMrVN-IF81uNB0zoMwU518pHMN5jRI8cDrJ4vu_vJLH-4pr6ocapNKBvQPsxMZTLHNnYKKfiT8RIoCEDZt-jYFyAEiII8Y-w8oQtewh-4_9i5BEDZIZEu3ePihmUoSTXyod6aja4U4EbGxJmL5R5wRG5d-M85HOzceR_xXV4MZJZNaONOnHIIXYvrujjmM8s9aQKWdL4FIrn6e8W0chtNk40UJ3PEl-GlYyxKOeTk-10X03qa2po"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar man portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB38ax-a_fpzOIlZlWngneKTo7gsZqp5fsxWlLkZxcSOhhHmTNVNd1CLsKMV5KR1EiMYFl8H_7I_82qCPqDE7YtG1wIbGk8bL2avw6VqW6FysWGfgsajE8cG4aVXeP-ZORN6hXia1NSpd7xYlMbL40gMiCvaarNsCkyY-FOMlyyrvilSZK3QwZLZtXlMVphqYPl4vXaTags5nhz97cfce_rFB0qi_ioIpBMwjQLJ8bqCOpaKdBApCKNrY7oS64bB6LH5Vo7Fcsplw4"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar woman profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_-uHt4zLiBPWoG9wkvI-UIz2ZY1SC_54yKarqc8l5PbQAmMK4yM_H4iN0GXBRrTdv30RPAHus4qSGYgPouY1O1hr8ktfp2Pn1qpTfjR0BNfGwVaFcBdKiF6G82yKRxYPvY5ra7qVn-ecMR_KKM3vN3DYpckkOZmRpxKPZSRHYlWt9VukPlIVLk6GsfBMlY3QywWQ1_tsd-pAd_6-ipUXyl6qBOwYt3OSifwOsjFAVBT-gEwj5To3vj-o-xht7Sjrdi8JWhVPz8Xs"/>
+<div class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold">+3</div>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">Continue Draft</button>
+</div>
+</div>
+</div>
+<!-- Trip Card 3: Tokyo -->
+<div class="group bg-white dark:bg-slate-900 border border-primary/5 rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 transition-all duration-300">
+<div class="relative h-48 overflow-hidden">
+<img alt="Tokyo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Neon signs in Tokyo city at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIiZSxmqogs8UKLcWfPgKHbS-ChZ7MfZLKriDyiliedNvNTd2mOQ4RMKYIOYS7BQ24Jd-_66dldQ6EaMRIm6Nrvv1tRRQkiQ0hhHMNcCBlooBrmk6SdQgiqiDUdwv6hMHWyLty4LCasl5lcZ9tjtSNNSsvotueRuG7iCh6quBsu0HPIk-ktGoXME1yeR9dRWYQMtZJy38HrkSRTJjR7pHcMKgEUlJXLkiTDu5qvX78eLteZjbmaVhNJqcfmvKa8iRvS_Yw8Zx4okw"/>
+<div class="absolute top-4 right-4 bg-primary/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-primary shadow-sm">
+                        October
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-2">
+<div>
+<h3 class="text-xl font-bold">Tokyo Food Tour</h3>
+<div class="flex items-center gap-1 text-slate-500 text-sm mt-1">
+<span class="material-icons text-base">location_on</span>
+<span>Tokyo, Japan</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400 mb-4 font-medium">
+<span class="material-icons text-base">calendar_today</span>
+<span>Oct 10-18, 2024</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+<span class="material-icons text-xs">how_to_vote</span>
+                            1 active poll
+                        </span>
+</div>
+<div class="flex items-center justify-between border-t border-primary/5 pt-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar stylish woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQefEyJ38nfL_xOWJriYX8IB_QPYFwUB0LVWR2ul1Uyq9h44RfzSoPU1zCXEZEIFb3IwyIe0rne50e-1cla-EDvzeHcYErGOE4R18lRPDwxwbMpK5StEtmcGTYuFlcVpJFHzZgHXo7rPt5mLnBgH3lzTLBs9B2meEHfoGyEJ5z7lyn6Ug4fC-UhOF1j0fYYMiXcDi0TdBgZPvkEjzHkgj7jg5Md3_wP8k38hHXdOtsWjqP2UE8-yA6s_lFVdrttBeWYKSvhV4_cYo"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar man smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ_gfa-iI7qRs7b_EMjR1yLtRhV3_gTERO__sjoFxdmLDLd1TL2fyFwhlTYJS-UfJRofdZOlAUTc1rQV_3Z5guGR3ZrojW5V2UrR9HRrxcmy4vDdDF0L_ZWd6b8jvGI-9hOs2LpxSlEENYMrxs9umwO81nZpP5htgy27oU9guMC5OS2OsipTPCo8iYQ_dNMGPnBKEomqj1RwHxd6AJjKG8RTujERk82jjZzDxgMAD7N5qpA8TEXWICe-OxRnCDBSQjs2GhW8lo--0"/>
+<img class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-900" data-alt="User avatar young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB83nn53qt1tvLEoZ5id2orGklMB4QfD7-gXkVyI7biDITudTDCSodfhkbbsyBM84w6zFFYBrTR5itrDb1KqPf9q41me1DH5lqZz41dKVCg2P_tHvXXwI-TkpwOjs9hHf1PoFszLlNeWxfxX_SvTRBhmxb5r3B5c-m5bSHwHlTNMZNpFxZLdXVxKCJ-jLw_uZiHrFXjm3tqqUcpyh0SumbQKvOL-bDG-76sa5TWlKKYGspnCiAo5bqttieUdtaIgDNFAWRvo5jjlqA"/>
+</div>
+<button class="text-primary font-bold text-sm hover:underline">View Itinerary</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More (Subtle) -->
+<div class="mt-12 flex justify-center">
+<button class="text-slate-500 hover:text-primary font-medium flex items-center gap-2 transition-colors">
+                View Past Trips
+                <span class="material-icons">expand_more</span>
+</button>
+</div>
+</main>
+</body></html>

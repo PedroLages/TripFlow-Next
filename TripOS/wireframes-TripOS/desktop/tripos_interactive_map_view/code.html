@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Interactive Map View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 overflow-hidden h-screen flex">
+<!-- Global Navigation Sidebar -->
+<aside class="w-20 bg-white dark:bg-slate-900 border-r border-primary/10 flex flex-col items-center py-6 gap-8 z-50">
+<div class="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+<span class="material-icons text-3xl">map</span>
+</div>
+<nav class="flex flex-col gap-6">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-primary bg-primary/10 transition-colors">
+<span class="material-icons">explore</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">event</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">group</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">settings</span>
+</button>
+</nav>
+<div class="mt-auto">
+<img class="w-10 h-10 rounded-full border-2 border-primary/20" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7HBgVq9QZCcoLRCP9n0Vg6oKE7OslWkIm-x2jEmAmeI6VOcuptwHcS1FRAUFbL1b9Y4S2OTd9TqyAynKxlaIMCeVCmaVqit6SwIbTlMXd49zeInfNkajR_JwJ7bFjA9uIW1MxffNKQTZZ4DjUb0rKpB3Hw-PwjwgUpmeuuzr623F0eiVKleF3fI5eVW6-GcbmktId7pU6Jnp9-Nsrguqp5bxNR9B4waL--cIvUQyzi6b2J0MFP4d7j6MCEzSojLOneNYx_vSzFog"/>
+</div>
+</aside>
+<!-- Main Map Content Area -->
+<main class="relative flex-1 bg-slate-200 overflow-hidden">
+<!-- Interactive Map Background -->
+<div class="absolute inset-0 bg-slate-200 dark:bg-slate-800">
+<!-- Simulated Map Image -->
+<img class="w-full h-full object-cover opacity-60 dark:opacity-40 grayscale-[0.3]" data-alt="Light colored minimal map of Santorini Greece" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVdFCI_SciuUNsFOAyQb0BNl0YEyqFw8LYw2ZjyxYq3Kt7lzkuZUq7hrbzYZ2dHlKth9KPKZhEs7s24fz9iHVQR9SfHN7nsyMWCa1frubUICDSDHESscREE9MsppZsSLRajHZH4ijh6dltUh-DWkCAxKFja9-JDcuy-5eUlUB-waC12m6m4C88lfh7aEpjxx2RMXk7vKM7ib4eJePTnhOlQ3puq_cUZFOSOtXORjoxbC1cA5m-Dly57cIq0UQCUhXaEpbhNcn2gkQ"/>
+<!-- Route Lines (SVG Overlay) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" viewbox="0 0 1000 1000">
+<path d="M420 380 Q 480 320, 550 420 T 680 480" fill="none" opacity="0.4" stroke="#1d4fd7" stroke-dasharray="8 6" stroke-width="2"></path>
+<path d="M680 480 Q 720 550, 650 620" fill="none" opacity="0.4" stroke="#1d4fd7" stroke-dasharray="8 6" stroke-width="2"></path>
+</svg>
+<!-- Map Pins -->
+<!-- Pin 1 -->
+<div class="absolute top-[35%] left-[40%] cursor-pointer group">
+<div class="flex flex-col items-center">
+<div class="bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full mb-1 shadow-sm">D1</div>
+<div class="w-8 h-8 bg-primary rounded-full rounded-bl-none rotate-45 border-2 border-white flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+<span class="material-icons text-sm -rotate-45">camera_alt</span>
+</div>
+</div>
+</div>
+<!-- Active Pin & Info Window -->
+<div class="absolute top-[45%] left-[65%] z-20">
+<!-- Info Window -->
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 w-72 bg-white dark:bg-slate-900 rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300">
+<div class="relative h-24">
+<img class="w-full h-full object-cover" data-alt="Beautiful sunset over Oia Santorini" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf3zvczuB0au-Vo6QiXVrw3oVoZPFMxnSGznPGVLIqaiTslsLnCOMvsJVn9Tx-w8sVcXOKER1Lqj4LeAfnDYRJXXfIoVkfIewrkqNcsHTLYt_etfDYk0Avt0cWgVvwu7H890ZUxVZmg5yhREG5RF3zm4a4tNQOcgn3UtTJTqkou4xnnj5-9qs2W0TMda5Ts5H2R05oOjNE3vGIz4HoaDGJ_ohioSla7rfUSC0LAAzcFVRNtkoqYRN6hq2R8k6BvytTMb65aNrRV1I"/>
+<button class="absolute top-2 right-2 w-6 h-6 bg-black/20 backdrop-blur-md rounded-full text-white flex items-center justify-center">
+<span class="material-icons text-sm">close</span>
+</button>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-slate-900 dark:text-white">Oia Sunset Dinner</h3>
+<span class="text-xs font-semibold text-primary">$$$</span>
+</div>
+<div class="flex flex-col gap-1.5 text-xs text-slate-500 dark:text-slate-400 mb-4">
+<div class="flex items-center gap-1.5">
+<span class="material-icons text-sm text-primary">schedule</span>
+                                19:00 - 21:00
+                            </div>
+<div class="flex items-center gap-1.5">
+<span class="material-icons text-sm text-primary">location_on</span>
+                                Oia, Santorini
+                            </div>
+</div>
+<a class="flex items-center justify-center gap-2 w-full py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg font-semibold text-sm transition-colors" href="#">
+                            View Details
+                            <span class="material-icons text-sm">chevron_right</span>
+</a>
+</div>
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white dark:bg-slate-900 rotate-45"></div>
+</div>
+<!-- Pin -->
+<div class="flex flex-col items-center">
+<div class="bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full mb-1 shadow-sm">D1</div>
+<div class="w-10 h-10 bg-primary rounded-full rounded-bl-none rotate-45 border-4 border-white flex items-center justify-center shadow-xl ring-4 ring-primary/20">
+<span class="material-icons text-lg -rotate-45">restaurant</span>
+</div>
+</div>
+</div>
+<!-- Pin 3 -->
+<div class="absolute top-[60%] left-[63%] cursor-pointer group">
+<div class="flex flex-col items-center">
+<div class="bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full mb-1 shadow-sm">D1</div>
+<div class="w-8 h-8 bg-primary rounded-full rounded-bl-none rotate-45 border-2 border-white flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+<span class="material-icons text-sm -rotate-45">hotel</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating UI Overlays -->
+<!-- Top Left: Day Selector -->
+<div class="absolute top-6 left-6 flex items-center gap-2 p-1.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-primary/10 rounded-full shadow-xl">
+<button class="px-5 py-2 text-sm font-semibold rounded-full bg-primary text-white shadow-md">All Days</button>
+<button class="px-5 py-2 text-sm font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all">Day 1</button>
+<button class="px-5 py-2 text-sm font-semibold rounded-full text-slate-600 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-all">Day 2</button>
+</div>
+<!-- Top Right: View Toggle -->
+<div class="absolute top-6 right-6">
+<button class="flex items-center gap-2 px-6 py-2.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border border-primary/10 rounded-full shadow-xl text-slate-900 dark:text-white font-semibold hover:shadow-2xl transition-all">
+<span class="material-icons text-primary">view_list</span>
+                List View
+            </button>
+</div>
+</main>
+<!-- Right Activity Sidebar -->
+<aside class="w-96 bg-background-light dark:bg-background-dark border-l border-primary/10 flex flex-col z-40">
+<div class="p-6 border-b border-primary/5">
+<div class="flex items-center justify-between mb-2">
+<h2 class="text-xl font-bold">Santorini Escape</h2>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors">
+<span class="material-icons">more_horiz</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-icons text-xs">calendar_today</span>
+                    Aug 12 - 14
+                </div>
+<div class="flex items-center gap-1">
+<span class="material-icons text-xs">group</span>
+                    4 Travelers
+                </div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-6">
+<!-- Day Group 1 -->
+<div>
+<div class="flex items-center justify-between mb-4 sticky top-0 bg-background-light dark:bg-background-dark py-2 z-10">
+<h3 class="font-bold flex items-center gap-2 text-slate-400">
+<span class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">12</span>
+                        MONDAY, AUG 12
+                    </h3>
+<span class="text-xs font-semibold px-2 py-1 bg-primary text-white rounded">Day 1</span>
+</div>
+<div class="space-y-3">
+<!-- Activity Card 1 -->
+<div class="group relative p-4 bg-white dark:bg-slate-900 rounded-xl border border-transparent hover:border-primary/40 shadow-sm transition-all cursor-pointer">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-slate-400">14:00</span>
+<div class="w-px h-full bg-slate-200 dark:bg-slate-800 my-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-sm">Check-in at Canaves</h4>
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors text-lg">hotel</span>
+</div>
+<p class="text-xs text-slate-500 mb-2">Oia Main St. 142</p>
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-900" data-alt="Avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB30txdFlHecB3CmXWK-s8_ISgcCN3g7t3FOJYTPTVxfByOwsswA0y_-PrO7Yzrq8HmOA0Nfk__URgj4Vpkm1UT0Wr0iuuUmcIA3NHmOssIfKvjqGJFHtzQwGSuuXk7naOAeGLh-x0L3JpfU0EW3FRc8KWUmzdW_Da2AS8pV9lgfVIqDvCueqg2yIxB_TQ-_tvLMGrPOs0bXEWeBnD4-PjrIotRB2TGm5fpRekPPrQHjT2Ihf2iNTv52f3LPxQVMQhD7OgvzDHFWd8"/>
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-900" data-alt="Avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxYdQLwAGJaNKOLRejykFuwzHldxqoJiM6uzy7xmL4hYh2aecdrecCdRALPq8edlQIL-L30MDR_sPt6cK29AWD3iqQiAzIUpz2JtWyMldza6swcWIXMHhtue8tTaDKthy8RGBemDEr1o_ujTd5ehZtRYIXWsLmUBz1dz7EQ0B6sDBy6QqMuTr4zMzwY0lRdPAnlO-uzTSEHtPMto1HnMt4jjv_Wkvuya4LRpinFk3aZUBKVJesFnqI5LiG_h3FbKbImAKSVZCjBX4"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 2 - Active on Map -->
+<div class="group relative p-4 bg-white dark:bg-slate-900 rounded-xl border-2 border-primary shadow-lg ring-4 ring-primary/5 transition-all cursor-pointer">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-primary">19:00</span>
+<div class="w-px h-full bg-primary/20 my-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-sm text-primary">Oia Sunset Dinner</h4>
+<span class="material-icons text-primary text-lg">restaurant</span>
+</div>
+<p class="text-xs text-slate-500 mb-2">Sunset Serenade Terrace</p>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] bg-emerald-100 text-emerald-700 font-bold uppercase">Confirmed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 3 -->
+<div class="group relative p-4 bg-white dark:bg-slate-900 rounded-xl border border-transparent hover:border-primary/40 shadow-sm transition-all cursor-pointer">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-slate-400">22:00</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-sm">Star Gazing Point</h4>
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors text-lg">explore</span>
+</div>
+<p class="text-xs text-slate-500">Ancient Thera Ridge</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Day Group 2 -->
+<div>
+<div class="flex items-center justify-between mb-4 sticky top-0 bg-background-light dark:bg-background-dark py-2 z-10">
+<h3 class="font-bold flex items-center gap-2 text-slate-400">
+<span class="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs">13</span>
+                        TUESDAY, AUG 13
+                    </h3>
+<span class="text-xs font-semibold px-2 py-1 bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded">Day 2</span>
+</div>
+<div class="space-y-3">
+<div class="group relative p-4 bg-white dark:bg-slate-900 rounded-xl border border-transparent hover:border-primary/40 shadow-sm transition-all cursor-pointer">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<span class="text-xs font-bold text-slate-400">09:00</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h4 class="font-bold text-sm">Volcano Boat Tour</h4>
+<span class="material-icons text-slate-300 group-hover:text-primary transition-colors text-lg">directions_boat</span>
+</div>
+<p class="text-xs text-slate-500">Ammoudi Bay Pier</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-primary/5 bg-white dark:bg-slate-900/50">
+<button class="w-full flex items-center justify-center gap-2 py-3 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+<span class="material-icons text-lg">add</span>
+                Add Activity
+            </button>
+</div>
+</aside>
+</body></html>

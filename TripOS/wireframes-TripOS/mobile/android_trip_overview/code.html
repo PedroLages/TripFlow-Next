@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trip Overview - TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                        "success": "#10b981",
+                        "poll-purple": "#e9d5ff",
+                        "budget-teal": "#ccfbf1",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<!-- Phone Container -->
+<div class="w-full max-w-[430px] bg-white dark:bg-slate-900 min-h-screen relative flex flex-col shadow-2xl overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4 bg-white dark:bg-slate-900 sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
+<button class="p-2 -ml-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors">
+<span class="material-icons text-slate-700 dark:text-slate-300">arrow_back</span>
+</button>
+<h1 class="text-lg font-semibold tracking-tight">Trip Overview</h1>
+<button class="p-2 -mr-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative">
+<span class="material-icons text-slate-700 dark:text-slate-300">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</header>
+<!-- Content Area -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Trip Header -->
+<section class="px-6 py-6">
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Japan 2024</h2>
+<div class="flex items-center mt-1 text-slate-500 dark:text-slate-400">
+<span class="material-icons text-sm mr-1">location_on</span>
+<span class="text-sm font-medium">Tokyo &amp; Kyoto • Oct 12 - Oct 26</span>
+</div>
+</section>
+<!-- Members Section -->
+<section class="px-6 mb-8">
+<div class="flex items-center overflow-x-auto gap-3 hide-scrollbar">
+<div class="flex -space-x-3 items-center">
+<div class="relative inline-block">
+<img class="w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 object-cover" data-alt="Female traveler portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaKgQvIfBOCfBh-7ia49pXm2-Slns9PPd8Zzqlsw7u98SZUxuVPk-F6wZzviy-Gm7DlSMDPg07kX1UEpOQTf_f7AzY0qee4WtOXQ0-r0h1XPAexKPzUwat9PT5l5Ai6h0MpBWJOpfwCiL7oJ7SLc8WR8O7kuddTAMF-dfp5G_vQDkZJSUemaeIUx-mh9fZJ-RijlC3h_F7xTzDreOXiwmwL6Ip8f9cqfeMvBL8x4kfRxK2IsDN5cUJiNAAk0x9X6Dc8mTJjROKL7A"/>
+<div class="absolute bottom-0 right-0.5 w-3.5 h-3.5 bg-success rounded-full border-2 border-white dark:border-slate-900"></div>
+</div>
+<div class="relative inline-block">
+<img class="w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 object-cover" data-alt="Male traveler portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2Lp8X-HjwKPlglpYeAw6BY3PZx9gP7g71GNvHPVzfM2b5VgpxGIfr_tPhZOI0PdCgAeXjiKoh_ihpBJWPOetyajYqz-z-9h6K4NQAMWYTwgWx2hOXUbv11xiIsYSfo7b-iOTShxksOl6tUNWUvvM_BuxTcDHQVphVAvKwuzpILABpnijm0rDAibNlC-2w4xzkwNp5M2HV4bggKIysccVXdjMxcssZtmUfhYOcOjnYmkC78Uy7u6r53ZrjkoaYV0NxDDTpc5klbVg"/>
+<div class="absolute bottom-0 right-0.5 w-3.5 h-3.5 bg-success rounded-full border-2 border-white dark:border-slate-900"></div>
+</div>
+<div class="relative inline-block">
+<img class="w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 object-cover" data-alt="Traveler smiling profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgEUADmMwC1rCE7ydZ7rVcciV9u8lCHX9zNXWcgLFQOqs2qpOd3ZMSxHflHGESkywrMZPp2_EYRq_9kxN9APykkNr3WxcV-I1l15XFuJ9A7NdnScfi0GFfmFJi000jHAYveoUyfL1fUrDzQy_E-PXDAWeNLQxMYmywnPAFBhPQi1G9lv9e8KbjluS30yb7mB3GOfLljuiGrt5il9xbApEhfg3AgIH4Lm0WRZrmiwDSmrSyCW18mk-140JPkvD25Z4Jarz_vtX0K24"/>
+<div class="absolute bottom-0 right-0.5 w-3.5 h-3.5 bg-success rounded-full border-2 border-white dark:border-slate-900"></div>
+</div>
+<div class="relative inline-block">
+<img class="w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 object-cover" data-alt="Man wearing sunglasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxLznPReexpUqV_xDVVetCPoi3bDxaxjwtLMUFY8ZVD1VzDtGq3N17f6tMbZZO-1fav4tuQmyHbgdDEotoxt_H4yZLuG0cFVgl5U3-DqiPlsqGn3aP9u-mXqERv7idh7mMcehWZBUB47f76UQSEwjQfNTRmdvtCiHmVvbKaT4xBKE9xIZCEmCqhLshtULcN1mDzQNKFxQLHE0iRnS8r0V5mUlQCL8lRjbZskeo3unCwWvxcE77kCpVm4HcO-xcDteWAJVoomQzw5g"/>
+</div>
+<div class="flex items-center justify-center w-12 h-12 rounded-full border-4 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 text-slate-500 text-xs font-bold">
+                            +4
+                        </div>
+</div>
+<button class="ml-2 flex items-center px-4 py-2 border-2 border-primary/30 rounded-lg text-primary text-sm font-semibold hover:bg-primary/5 transition-colors">
+<span class="material-icons text-sm mr-1">person_add_alt</span>
+                        Invite
+                    </button>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="px-6 grid grid-cols-2 gap-4 mb-8">
+<!-- Members Card -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<span class="material-icons text-primary mb-2">people</span>
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Members</p>
+<div class="mt-1 flex items-baseline">
+<span class="text-2xl font-bold">8</span>
+<span class="text-xs text-success ml-1.5 font-medium tracking-tight">• 3 Online</span>
+</div>
+</div>
+<!-- Polls Card -->
+<div class="bg-poll-purple/40 dark:bg-purple-900/20 p-4 rounded-xl border border-purple-100 dark:border-purple-900/30">
+<span class="material-icons text-purple-600 dark:text-purple-400 mb-2">how_to_vote</span>
+<p class="text-xs font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wider">Active Polls</p>
+<div class="mt-1 flex items-baseline">
+<span class="text-2xl font-bold">2</span>
+<span class="text-xs text-purple-600/70 dark:text-purple-400/70 ml-1.5 font-medium tracking-tight">Active</span>
+</div>
+</div>
+<!-- Budget Card -->
+<div class="bg-budget-teal/40 dark:bg-teal-900/20 p-4 rounded-xl border border-teal-100 dark:border-teal-900/30">
+<span class="material-icons text-teal-600 dark:text-teal-400 mb-2">payments</span>
+<p class="text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Budget</p>
+<div class="mt-1 flex items-baseline">
+<span class="text-lg font-bold">Set</span>
+<span class="text-xs text-teal-600/70 dark:text-teal-400/70 ml-1.5 font-medium tracking-tight">$4,200 total</span>
+</div>
+</div>
+<!-- Activities Card -->
+<div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+<span class="material-icons text-orange-500 mb-2">explore</span>
+<p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Activities</p>
+<div class="mt-1 flex items-baseline">
+<span class="text-2xl font-bold">12</span>
+<span class="text-xs text-slate-500 ml-1.5 font-medium tracking-tight">Planned</span>
+</div>
+</div>
+</section>
+<!-- Poll Summary Card -->
+<section class="px-6 mb-8">
+<div class="bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm flex">
+<div class="w-1.5 bg-purple-500"></div>
+<div class="p-4 flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-bold text-slate-900 dark:text-white">Active Polls Summary</h3>
+<span class="bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-tighter">Urgent</span>
+</div>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-3">Dinner selection for Shinjuku night and Transport card preference.</p>
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="Avatar summary 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPmVu1876Ue5FE_-iLKLwXzwWRL9SWy3ZmjTl05GlxqZn7TzhcuAMUsIiMXyV9Z9Y3itQlRNM_5JK0uutkOTJi7dGclVuNqlYMjpp84IWYIZmArh0neXOI5xGG-9MZUjb-tAuPZEbM8zSOcUnj8CWrLjIVRWODHCLe_LUaVAreRrEYVjy1lL3d8o0D19rcC7Vg9Bhp7WI2TffHKZrX2VpGZ10n1FZ0goaccvTffsjBhH2jEmaE1rWORWstRUUDJsKoM4SvZ67Bang"/>
+<img class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 object-cover" data-alt="Avatar summary 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFXHJEbWvWpM5EZFDBPkAjUpKOn5IOnRSAe6ARI8DK2I0CqFL-0yD7LFS8yqc1W9NjL0smygEDYgLvQeScPbi0yUyD81ZMGOfP1BMfBX9nN1TzD2vyEstyF0tz_FZ0Sjjr-LkEKVt_ZG59x_NndzIPPFLLFvHXC_WZfUdvIFHjFq6Df5QJyVyCmfFnAaxAbm6Gdn2Vm2-6eaU01M_iYGZ_vola8EfQ9d0nNNEzGf1gxrTmKQc0NGyxDWTiBkxmojPlT-pa76LWzbg"/>
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-[8px] font-bold">5+</div>
+<span class="ml-3 text-xs text-slate-400 self-center">Members haven't voted</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity -->
+<section class="px-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Recent Activity</h3>
+<button class="text-primary text-xs font-bold uppercase tracking-wider hover:underline">View All</button>
+</div>
+<div class="space-y-6">
+<!-- Activity Item 1 -->
+<div class="flex gap-4">
+<div class="relative">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Sarah profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCraef1L3xrM3v4A0-hdb8fbhvKFvOkJqa3h4HLIfOAkc-EC8At1liJqhdVjMJj03IWvStTSGsbvDKrVgzTLTwNowqFr5LpJehIn5A6WHpZdb74QQuRpHQodnLBTabbvVmrNveJVYDPacV-i0BDpwloywSrrMCV0sio-s_8ge1DfbZMFBzwz7PAiAA4bE0N2IFFfaP-No7GI2oBhHt6WJ-Z9MD-wLkw8MOyrWAfbA6Hxzrm2-h1MDZUlq4NpzNwFCtJ2gxCiE5ObVE"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-blue-500 rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-icons text-[10px] text-white">edit</span>
+</div>
+</div>
+<div class="flex-1 border-b border-slate-100 dark:border-slate-800 pb-4">
+<p class="text-sm text-slate-900 dark:text-slate-100">
+<span class="font-bold">Sarah Williams</span> updated the <span class="text-primary font-medium italic">Shibuya Hotel</span> booking.
+                            </p>
+<span class="text-xs text-slate-400 font-medium block mt-1">2 minutes ago</span>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex gap-4">
+<div class="relative">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="Mike profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDY06Tl_P-sPUHE2BQ9U4PHFl9YbzQdM2Z2DyXbhpzubnzmQO7oXTm_qklGgD0ltS2oPn6Ilz-bdSWt5CzwC5xrpljooHOpttuHDUTK9M9uz9sgQqivN3mp9ELajwxdYN8pv4B-TLaOw5re_0s6VwyO3i0VBgvSQP0T6zmyZlR5XHKjzzZLE93hpZ4gxi-SW3v37zMSkB3wFgiHkqPgnJMaPe7PhtxdV6wkdAJP4xaK6lA-Tn4wPlEy66mKYpd8BfWA18P9hFWOrPo"/>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-purple-500 rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-icons text-[10px] text-white">how_to_vote</span>
+</div>
+</div>
+<div class="flex-1 border-b border-slate-100 dark:border-slate-800 pb-4">
+<p class="text-sm text-slate-900 dark:text-slate-100">
+<span class="font-bold">Mike Chen</span> voted in <span class="text-purple-600 font-medium">"Transport Card Choice"</span>
+</p>
+<span class="text-xs text-slate-400 font-medium block mt-1">15 minutes ago</span>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex gap-4">
+<div class="relative">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-icons text-slate-400">add_task</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-success rounded-full border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-icons text-[10px] text-white">check</span>
+</div>
+</div>
+<div class="flex-1 pb-4">
+<p class="text-sm text-slate-900 dark:text-slate-100">
+<span class="font-bold">New task added:</span> Finalize JR Pass orders.
+                            </p>
+<span class="text-xs text-slate-400 font-medium block mt-1">1 hour ago</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Material 3 style bottom navigation -->
+<nav class="absolute bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-4 pb-8 pt-3 flex justify-around">
+<button class="flex flex-col items-center group">
+<div class="bg-primary px-5 py-1 rounded-full mb-1">
+<span class="material-icons text-white">dashboard</span>
+</div>
+<span class="text-[10px] font-bold text-primary">Overview</span>
+</button>
+<button class="flex flex-col items-center group">
+<div class="px-5 py-1 rounded-full mb-1 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">calendar_month</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Itinerary</span>
+</button>
+<button class="flex flex-col items-center group">
+<div class="px-5 py-1 rounded-full mb-1 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">poll</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Polls</span>
+</button>
+<button class="flex flex-col items-center group">
+<div class="px-5 py-1 rounded-full mb-1 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">account_balance_wallet</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Budget</span>
+</button>
+<button class="flex flex-col items-center group">
+<div class="px-5 py-1 rounded-full mb-1 group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-500">settings</span>
+</div>
+<span class="text-[10px] font-medium text-slate-500">Settings</span>
+</button>
+</nav>
+</div>
+</body></html>

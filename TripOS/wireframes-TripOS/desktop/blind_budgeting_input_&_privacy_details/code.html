@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - Blind Budgeting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecec",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102222",
+                        "privacy": "#13ecec",
+                        "privacy-subtle": "rgba(19, 236, 236, 0.05)",
+                        "privacy-border": "rgba(19, 236, 236, 0.2)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-200 min-h-screen">
+<!-- Top Navigation -->
+<nav class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-slate-200 dark:border-slate-800 px-6 py-3 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons text-white">explore</span>
+</div>
+<span class="text-xl font-bold tracking-tight">TripOS</span>
+</div>
+<div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Trips</a>
+<a class="hover:text-primary transition-colors" href="#">Discover</a>
+<a class="hover:text-primary transition-colors" href="#">Community</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons text-slate-600 dark:text-slate-400">notifications</span>
+</button>
+<img alt="Profile" class="w-8 h-8 rounded-full border border-slate-200" data-alt="User profile avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn9KoYcMHI8p0CQKEI7ecDd6DBq265joIe4iKBKWH_zMiZl1nsB0ArOyG53XFLowIYErBRCjKB5aDAebzHrTzNrJB2wkDTwpprBbUZNTdtCabHsmPOM0PqFBQYLPonD9C3hsOoOcpeCYLJfZsLU7SW3Kmy687GySJ9YimsFYu9-iOpbTBG4_yKgZF6Jx_2cd_c2seRvnp19KAjSsEP2Tm3WQ6wsw8E-07wjN-WlVmiOmfSdHjamaiSvXf1XXEdGANezmrdHa21SaM"/>
+</div>
+</nav>
+<div class="flex">
+<!-- Sidebar -->
+<aside class="w-64 fixed h-[calc(100vh-64px)] border-r border-slate-200 dark:border-slate-800 p-4 hidden lg:block">
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-icons text-sm">dashboard</span>
+<span class="font-medium text-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-icons text-sm">map</span>
+<span class="font-medium text-sm">Itinerary</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-icons text-sm">payments</span>
+<span class="font-medium text-sm">Budgeting</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800" href="#">
+<span class="material-icons text-sm">group</span>
+<span class="font-medium text-sm">Group</span>
+</a>
+</div>
+<div class="mt-auto absolute bottom-8 left-4 right-4">
+<div class="p-4 bg-slate-100 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
+<p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Trip Progress</p>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full mb-2">
+<div class="bg-primary h-full w-2/3 rounded-full"></div>
+</div>
+<p class="text-xs text-slate-500">65% Planned</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 p-8 flex flex-col items-center justify-start min-h-[calc(100vh-64px)]">
+<div class="w-full max-w-2xl mt-8">
+<!-- Breadcrumbs/Context -->
+<div class="flex items-center gap-2 mb-8 text-sm text-slate-500">
+<span>Italy Summer Trip 2024</span>
+<span class="material-icons text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">Budget Planning</span>
+</div>
+<!-- Central Blind Budgeting Card -->
+<div class="bg-privacy-subtle border border-privacy-border rounded-xl p-8 shadow-sm">
+<div class="flex flex-col items-center text-center mb-8">
+<div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+<span class="material-icons text-primary text-3xl">lock</span>
+</div>
+<div class="flex items-center gap-3 mb-2">
+<h1 class="text-2xl font-bold">Your Private Budget</h1>
+<span class="bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full border border-primary/30">Private</span>
+</div>
+<p class="text-slate-500 max-w-sm">Determine your comfort zone. This figure remains encrypted and is only used to find the group's common ground.</p>
+</div>
+<div class="max-w-xs mx-auto mb-8">
+<label class="block text-center text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">per person, total trip</label>
+<div class="relative flex items-center">
+<span class="absolute left-6 text-4xl font-bold text-slate-400">$</span>
+<input class="w-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 focus:border-primary focus:ring-0 rounded-xl py-6 pl-14 pr-6 text-5xl font-bold text-center appearance-none" type="number" value="1500"/>
+</div>
+</div>
+<div class="flex flex-col items-center gap-6">
+<div class="flex items-center gap-2 text-sm text-slate-500">
+<span class="material-icons text-sm">lock</span>
+<span>Only you can see this amount</span>
+</div>
+<button class="w-full max-w-xs bg-primary hover:bg-primary/90 text-slate-900 font-bold py-4 px-8 rounded-xl flex items-center justify-center gap-3 transition-all transform hover:scale-[1.02] active:scale-95 shadow-lg shadow-primary/20">
+<span class="material-icons">lock</span>
+                            Save Privately
+                        </button>
+</div>
+</div>
+<!-- Privacy Details Accordion -->
+<div class="mt-6 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden bg-white dark:bg-background-dark shadow-sm">
+<details class="group">
+<summary class="flex items-center justify-between p-5 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors list-none">
+<span class="font-semibold text-sm flex items-center gap-2">
+<span class="material-icons text-primary text-sm">verified_user</span>
+                                Privacy Details
+                            </span>
+<span class="material-icons group-open:rotate-180 transition-transform duration-200 text-slate-400">expand_more</span>
+</summary>
+<div class="p-6 pt-2 border-t border-slate-100 dark:border-slate-800">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Privacy Nutrition Label Item 1 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons text-slate-600 dark:text-slate-400">lock</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Your Budget</h4>
+<p class="text-xs text-slate-500">100% private. Stored with AES-256 encryption. Only viewable by you when logged in.</p>
+</div>
+</div>
+<!-- Privacy Nutrition Label Item 2 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons text-slate-600 dark:text-slate-400">group</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Group Sees</h4>
+<p class="text-xs text-slate-500">Only the calculated group average and range. Individual contributions are never shown.</p>
+</div>
+</div>
+<!-- Privacy Nutrition Label Item 3 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons text-slate-600 dark:text-slate-400">visibility_off</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">We Never Share</h4>
+<p class="text-xs text-slate-500">Your financial data is never sold or shared with third-party advertisers or booking sites.</p>
+</div>
+</div>
+<!-- Privacy Nutrition Label Item 4 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0">
+<span class="material-icons text-slate-600 dark:text-slate-400">shield</span>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-1">Organizer Privacy</h4>
+<p class="text-xs text-slate-500">Even the trip organizer cannot see individual budget inputs. Everyone is anonymous.</p>
+</div>
+</div>
+</div>
+</div>
+</details>
+</div>
+<!-- Extra Context Cards -->
+<div class="grid grid-cols-2 gap-4 mt-8">
+<div class="p-4 bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-icons text-primary text-sm">trending_up</span>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Current Market</span>
+</div>
+<p class="text-lg font-bold">~$1,200 - $1,800</p>
+<p class="text-xs text-slate-500">Typical for 7 days in Rome &amp; Florence</p>
+</div>
+<div class="p-4 bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-icons text-primary text-sm">diversity_3</span>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-400">Group Status</span>
+</div>
+<p class="text-lg font-bold">4 of 6 Submitted</p>
+<p class="text-xs text-slate-500">Average will reveal when all finish</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

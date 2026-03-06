@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TripOS - User Profile Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1d4fd7",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111521",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar (Branding) -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-8 flex items-center justify-between sticky top-0 z-10">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons text-white text-lg">flight_takeoff</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-primary">TripOS</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700">
+<img alt="Profile Thumbnail" class="w-full h-full object-cover" data-alt="Small round user avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtLkradgu-YxYEyJvbLfca_fAyJ1beEdyHWbOqLja7bbpbpSmjgjTuH0iRKoL-m36rP1umyVbBsxFuRzJpB0EVwaEUB2LMh6DwfzjUaEfi4ZrLBnK42QJVxkTSX5XH5YkRODPsxHihKIlwx858VQRLOjyYy8R0tOuKiTMdmJVDsBAmLjevL7gzaQdgcJawr5HRfS16i88289wTvoKy4PZAF0PTUGbk4wbrQHIT2R-7-GzszBaVtmFKuOUT_tbfDxpVOPIPLR_8eGc"/>
+</div>
+</div>
+</header>
+<div class="max-w-6xl mx-auto px-4 py-8 flex gap-8">
+<!-- Left Sidebar Navigation (200px) -->
+<aside class="w-[200px] flex-shrink-0">
+<nav class="space-y-1">
+<a class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-primary bg-primary/10 border-l-4 border-primary" href="#">
+<span class="material-icons text-xl mr-3">person</span>
+                    Profile
+                </a>
+<a class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons text-xl mr-3">notifications_none</span>
+                    Notifications
+                </a>
+<a class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons text-xl mr-3">manage_accounts</span>
+                    Account
+                </a>
+<a class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons text-xl mr-3">security</span>
+                    Security
+                </a>
+<a class="group flex items-center px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-icons text-xl mr-3">extension</span>
+                    Connected Apps
+                </a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-grow">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<!-- Section Header -->
+<div class="p-8 border-b border-slate-100 dark:border-slate-800">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Profile Information</h1>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Update your personal details and how others see you on TripOS.</p>
+</div>
+<div class="p-8 space-y-10">
+<!-- Avatar Section -->
+<div class="flex items-center gap-6">
+<div class="relative group">
+<div class="w-24 h-24 rounded-full overflow-hidden border-4 border-slate-100 dark:border-slate-800 shadow-sm">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a person" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG5S0I-wpQFCudCD68GEokgfvBAQ0cFKjM-FAjXwJbxNS02P6pwoDSRtU_or7VQF7Iz8qFz44TGybzdjo3XA07q_g31PivmfhF--GO1Ndq-xB3B3jjXMF2uPBS3c4Tls3tbCep-hE0OXoIdA8t_24H3r909bu-KAkm181lzMLdqTJa5WznPRLVwVEF7DXHKbC0U-G7ewh3WfYDEWFZr84xWy6J6x2oVUMIOQWwqkbzWI7gxSU-z21YZZvjBzSX7GfzdfWkYv5kppY"/>
+</div>
+<button class="absolute inset-0 w-24 h-24 rounded-full bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
+<span class="material-icons">photo_camera</span>
+</button>
+</div>
+<div>
+<h3 class="font-semibold text-slate-900 dark:text-white">Profile Photo</h3>
+<p class="text-sm text-slate-500 mb-2">JPG, GIF or PNG. Max size of 800K</p>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-lg transition-colors border border-primary/20">Upload New</button>
+<button class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-red-600 rounded-lg transition-colors">Remove</button>
+</div>
+</div>
+</div>
+<!-- Form Fields -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Display Name -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="display-name">Display Name</label>
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="display-name" type="text" value="John Doe"/>
+</div>
+<!-- Email (Read-only) -->
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="email">Email Address</label>
+<div class="relative">
+<input class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-500 dark:text-slate-400 cursor-not-allowed outline-none" id="email" readonly="" type="email" value="john@example.com"/>
+<div class="absolute inset-y-0 right-3 flex items-center">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-semibold">
+<span class="material-icons text-xs">verified</span>
+                                        Verified
+                                    </span>
+</div>
+</div>
+</div>
+<!-- Timezone Dropdown -->
+<div class="space-y-2 md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="timezone">Timezone</label>
+<div class="relative">
+<select class="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all appearance-none" id="timezone">
+<option value="pacific">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+<option value="mountain">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+<option value="central">(GMT-06:00) Central Time (US &amp; Canada)</option>
+<option value="eastern">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+<option value="utc">(GMT+00:00) Coordinated Universal Time</option>
+</select>
+<div class="absolute inset-y-0 right-3 pointer-events-none flex items-center">
+<span class="material-icons text-slate-400">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Bio / Description -->
+<div class="space-y-2 md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="bio">Bio</label>
+<textarea class="w-full px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none" id="bio" placeholder="Tell us about your travel style..." rows="4"></textarea>
+<p class="text-xs text-slate-500">Brief description for your profile. URLs are allowed.</p>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="px-8 py-6 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-end gap-4 border-t border-slate-100 dark:border-slate-800">
+<button class="px-6 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+                        Cancel
+                    </button>
+<button class="px-8 py-2.5 bg-primary hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm shadow-primary/20 transition-all active:scale-95">
+                        Save Changes
+                    </button>
+</div>
+</div>
+<!-- Danger Zone -->
+<div class="mt-12 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-red-100 dark:border-red-900/30 overflow-hidden">
+<div class="p-6 flex items-center justify-between">
+<div>
+<h3 class="text-lg font-bold text-red-600 dark:text-red-500">Delete Account</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Permanently delete your TripOS account and all your travel data.</p>
+</div>
+<button class="px-4 py-2 text-sm font-medium text-red-600 border border-red-200 dark:border-red-900/50 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors">
+                        Delete Account
+                    </button>
+</div>
+</div>
+</main>
+</div>
+<!-- Toast Notification (Hidden by default, shown for concept) -->
+<div class="fixed bottom-8 right-8 flex items-center gap-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-4 rounded-xl shadow-2xl transform transition-transform duration-300 translate-y-24 opacity-0 pointer-events-none">
+<span class="material-icons text-emerald-400">check_circle</span>
+<p class="font-medium">Profile updated successfully!</p>
+</div>
+</body></html>

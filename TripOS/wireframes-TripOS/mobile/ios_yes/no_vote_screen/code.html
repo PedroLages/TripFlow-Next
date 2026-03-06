@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1313ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior-y: contain;
+        }
+        .ios-blur {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .safe-area-top {
+            padding-top: env(safe-area-inset-top);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-hidden h-screen flex flex-col">
+<!-- iOS Status Bar Placeholder -->
+<div class="h-12 w-full flex items-center justify-between px-6 shrink-0">
+<span class="text-sm font-semibold">9:41</span>
+<div class="flex items-center gap-1.5">
+<span class="material-icons-round text-lg">signal_cellular_alt</span>
+<span class="material-icons-round text-lg">wifi</span>
+<span class="material-icons-round text-lg rotate-90">battery_full</span>
+</div>
+</div>
+<!-- Main Content Area (Scrollable) -->
+<main class="flex-1 overflow-y-auto px-5 pt-4 pb-40">
+<!-- Header Info -->
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-3">
+<span class="bg-primary/10 text-primary dark:bg-primary/20 text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded">Yes/No Poll</span>
+</div>
+<h1 class="text-2xl font-bold leading-tight mb-4">Should we extend the trip by one day?</h1>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-icons-round text-base">lock</span>
+<span>Your vote is anonymous</span>
+</div>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-icons-round text-base">schedule</span>
+<span>Closes in 1d 14h</span>
+</div>
+</div>
+</div>
+<!-- Quorum Section -->
+<div class="mb-10 p-5 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200/60 dark:border-slate-800">
+<div class="flex justify-between items-end mb-3">
+<span class="text-sm font-medium text-slate-600 dark:text-slate-300">Participation</span>
+<span class="text-sm font-bold text-primary">5 of 8 voted (63%)</span>
+</div>
+<div class="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 63%"></div>
+</div>
+</div>
+<!-- Voting Options -->
+<div class="space-y-4">
+<!-- Selected Option (Yes) -->
+<button class="w-full flex items-center justify-between p-5 bg-primary text-white rounded-xl shadow-lg shadow-primary/20 border-2 border-primary transition-all active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+<span class="material-icons-round">check</span>
+</div>
+<span class="text-lg font-bold">Yes, let's stay longer</span>
+</div>
+<div class="w-6 h-6 rounded-full bg-white flex items-center justify-center">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+</div>
+</button>
+<!-- Unselected Option (No) -->
+<button class="w-full flex items-center justify-between p-5 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-xl border-2 border-slate-100 dark:border-slate-800 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
+<span class="material-icons-round text-slate-400">close</span>
+</div>
+<span class="text-lg font-bold">No, keep original dates</span>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-slate-200 dark:border-slate-700"></div>
+</button>
+</div>
+<div class="mt-8">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 px-1">Recent Activity</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Profile picture of a group member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnn1L2SzXbjiWPoFVB7323JZMRPknHjTDB_wgEVFKl4j52jBd5NrMZfo788pBJbSMwE3I_kTHoyY_UMg5kqp-A8cYDJVsjGHAwSHMk6H1rksOVmEScfLMRLnd-v6lya6nNFA_6NbMtA0uFJ0IoXc6LDur--HtdzHcGqV0KmSD-_BQ1uNyZ81Py8qlAmdlJdPyg1jB7INHC7bRxggqoWXhlCZXzuurEuA8xNyXOpbk8ZOgE0vMCFSFNXClzmRdXnwO6lqVvfGRveFA"/>
+<p class="text-sm text-slate-600 dark:text-slate-400"><span class="font-semibold text-slate-900 dark:text-slate-200">Alex</span> just casted a vote</p>
+<span class="text-[10px] text-slate-400 ml-auto">2m ago</span>
+</div>
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="Profile picture of a female traveler" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhJvuAqvSXZrb9VWzuFQxrhcFmu6Jk9BzHpearFZbEtqOJ9PG4o-tFYSLA2u8OwGIz8Elx2__GYjHOFzlOS1t9MxiUX_wfOlnaAfpJrevX47GahA1tsEOFu3ghDAiNuRfFHE7ssveb6cq_SeJrgLcQGvcvbGGCFZpamm1bh91JdLC5_5MXzvKYX-AnVY8fL8bRYuvL26XoM0NiL1A0AGPtCX6RN1xQZuj3alNU1iq0lF_8xDzJBXYaPtTGN0VAOVf6OzVcVVdHrnM"/>
+<p class="text-sm text-slate-600 dark:text-slate-400"><span class="font-semibold text-slate-900 dark:text-slate-200">Sarah</span> just casted a vote</p>
+<span class="text-[10px] text-slate-400 ml-auto">15m ago</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Bottom Navigation & Actions -->
+<div class="fixed bottom-0 left-0 right-0 z-50">
+<!-- Main CTA Button -->
+<div class="px-5 pb-4 bg-gradient-to-t from-background-light via-background-light/95 to-transparent dark:from-background-dark dark:via-background-dark/95">
+<button class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-xl shadow-primary/30 flex items-center justify-center gap-2 active:opacity-90 transition-opacity">
+<span>Cast Vote</span>
+</button>
+</div>
+<!-- iOS Tab Bar -->
+<nav class="bg-white/80 dark:bg-slate-950/80 ios-blur border-t border-slate-200 dark:border-slate-800 safe-area-bottom flex items-center justify-around h-16">
+<button class="flex flex-col items-center justify-center flex-1 gap-1 group">
+<span class="material-icons-round text-slate-400 group-active:scale-90 transition-transform">explore</span>
+<span class="text-[10px] font-medium text-slate-400">Overview</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 gap-1 group">
+<span class="material-icons-round text-slate-400 group-active:scale-90 transition-transform">map</span>
+<span class="text-[10px] font-medium text-slate-400">Itinerary</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 gap-1 group">
+<div class="relative">
+<span class="material-icons-round text-primary group-active:scale-90 transition-transform">how_to_vote</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-950"></span>
+</div>
+<span class="text-[10px] font-bold text-primary">Votes</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 gap-1 group">
+<span class="material-icons-round text-slate-400 group-active:scale-90 transition-transform">payments</span>
+<span class="text-[10px] font-medium text-slate-400">Budget</span>
+</button>
+<button class="flex flex-col items-center justify-center flex-1 gap-1 group">
+<span class="material-icons-round text-slate-400 group-active:scale-90 transition-transform">group</span>
+<span class="text-[10px] font-medium text-slate-400">Members</span>
+</button>
+</nav>
+<!-- Home Indicator Area -->
+<div class="bg-white/80 dark:bg-slate-950/80 ios-blur h-6 flex items-center justify-center">
+<div class="w-32 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+</div>
+</div>
+</body></html>

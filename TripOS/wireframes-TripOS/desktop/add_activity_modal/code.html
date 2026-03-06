@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Add Activity Modal - TripOS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1d4fd7",
+              "background-light": "#f6f6f8",
+              "background-dark": "#111521",
+            },
+            fontFamily: {
+              "display": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-4">
+<!-- Modal Overlay Backdrop -->
+<div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-0"></div>
+<!-- Modal Container -->
+<div class="relative z-10 w-full max-w-xl bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200/60 dark:border-slate-800 overflow-hidden">
+<!-- Modal Header -->
+<div class="px-8 pt-8 pb-4 flex justify-between items-center">
+<h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Add Activity</h2>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Modal Body / Form -->
+<div class="px-8 py-4">
+<form class="space-y-6">
+<!-- Activity Name -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Activity Name</label>
+<input class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none" placeholder="e.g. Dinner at Skyline Lounge" type="text"/>
+</div>
+<!-- Category Selector -->
+<div class="space-y-3">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Category</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full text-sm font-medium bg-primary text-white flex items-center gap-1.5 border border-primary" type="button">
+<span class="material-symbols-outlined text-sm">restaurant</span>
+                            Food
+                        </button>
+<button class="px-4 py-2 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-all flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-sm">attractions</span>
+                            Activity
+                        </button>
+<button class="px-4 py-2 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-all flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-sm">directions_bus</span>
+                            Transport
+                        </button>
+<button class="px-4 py-2 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-all flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-sm">hotel</span>
+                            Lodging
+                        </button>
+<button class="px-4 py-2 rounded-full text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-all flex items-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-sm">more_horiz</span>
+                            Other
+                        </button>
+</div>
+</div>
+<!-- Day and Time Group -->
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Day</label>
+<div class="relative">
+<select class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary appearance-none outline-none">
+<option>Day 1: Oct 12</option>
+<option>Day 2: Oct 13</option>
+<option>Day 3: Oct 14</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-slate-400 pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Time</label>
+<input class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none" type="time" value="19:00"/>
+</div>
+</div>
+<!-- Location and Cost -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="md:col-span-2 space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400">location_on</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="Search location..." type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Est. Cost</label>
+<div class="relative">
+<span class="absolute left-4 top-2.5 text-slate-500 font-medium">$</span>
+<input class="w-full pl-8 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none" placeholder="0.00" type="number"/>
+</div>
+</div>
+</div>
+<!-- Notes -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-slate-700 dark:text-slate-300">Notes</label>
+<textarea class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary outline-none resize-none" placeholder="Additional details, booking references, or menu links..." rows="3"></textarea>
+</div>
+</form>
+</div>
+<!-- Modal Footer -->
+<div class="px-8 py-6 bg-slate-50 dark:bg-slate-800/50 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800">
+<button class="flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm transition-colors group" type="button">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+                Create Poll for This Activity
+            </button>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-6 py-2.5 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 font-semibold text-sm rounded-lg transition-colors" type="button">
+                    Cancel
+                </button>
+<button class="flex-1 sm:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white font-semibold text-sm rounded-lg shadow-lg shadow-primary/20 transition-all" type="button">
+                    Save Activity
+                </button>
+</div>
+</div>
+</div>
+<!-- Background Decoration (Optional Contextual Visuals) -->
+<div class="fixed -bottom-20 -left-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+<div class="fixed top-20 -right-20 w-60 h-60 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+</body></html>
